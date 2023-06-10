@@ -93,7 +93,20 @@ fun OnboardingScreen(
         }
     }
 
-    BackHandler(userPrefs.showOnboarding) { }
+    fun backButtonCallback() {
+        try {
+            coroutineScope.launch {
+                pagerState.animateScrollToPage(
+                    maxOf(0, pagerState.currentPage - 1),
+                    animationSpec = tween(400)
+                )
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    BackHandler(userPrefs.showOnboarding, onBack = ::backButtonCallback)
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -113,14 +126,7 @@ fun OnboardingScreen(
                                 exit = shrinkHorizontally()
                             ) {
                                 TextButton(
-                                    onClick = {
-                                        coroutineScope.launch {
-                                            pagerState.animateScrollToPage(
-                                                maxOf(0, pagerState.currentPage - 1),
-                                                animationSpec = tween(400)
-                                            )
-                                        }
-                                    }
+                                    onClick = ::backButtonCallback
                                 ) {
                                     Icon(
                                         imageVector = Icons.Outlined.ChevronLeft,

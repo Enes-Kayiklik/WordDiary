@@ -18,8 +18,8 @@
     <string name="onboarding_text_to_speech_second_desc">Kindly open settings by clicking the button below and choose Google\'s text-to-speech engine to optimize functionality</string>
     <string name="onboarding_text_to_speech_open_play_store">Open Play Store</string>
     <string name="onboarding_text_to_speech_open_settings">Open Settings</string>
-    <string name="onboarding_alarm_title">Setup Alarm</string>
-    <string name="onboarding_alarm_desc">Set alarm to stay consistent, manage your time effectively, and stay motivated on your language learning journey</string>
+    <string name="onboarding_alarm_title">Setup Notification</string>
+    <string name="onboarding_alarm_desc">Get notification to stay consistent, manage your time effectively, and stay motivated on your language learning journey</string>
     <string name="onboarding_alarm_notify_me">Notify me</string>
     <string name="onboarding_alarm_notify_me_at">at %s</string>
 
@@ -95,7 +95,9 @@
     <string name="dialog_save">Save</string>
     <string name="delete_confirm">Delete</string>
     <string name="dialog_ok">OK</string>
+    <string name="dialog_grant_permission">Grant permission</string>
     <string name="dialog_pick">Pick</string>
+    <string name="permission_required">Permission required</string>
     <string name="oops">Oops…</string>
     <string name="empty_folder_desc">You don\'t have any list. You can create list by clicking \'+\' button on bottom right.</string>
     <string name="empty_word_desc">You don\'t have any word in this list. You can add word by clicking \'+\' button on bottom right.</string>
@@ -341,4 +343,8 @@
     <string name="emoji_food">Food &amp; Drink</string>
     <string name="emoji_animals">Animals &amp; Nature</string>
     <string name="emoji_smileys">Smileys &amp; People</string>
+    
+    <!-- Permission -->
+    <string name="notification_permission_declined">To receive important updates and stay connected, our app requires notification permission. Unfortunately, you have permanently declined this permission</string>
+    <string name="notification_permission_rationale">We would like to request your permission to send you notifications. Notifications help us keep you informed about important updates, personalized recommendations, and time-sensitive information</string>
 </resources>

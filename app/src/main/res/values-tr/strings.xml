@@ -17,7 +17,7 @@
     <string name="onboarding_text_to_speech_open_play_store">Mağazayı aç</string>
     <string name="onboarding_text_to_speech_open_settings">Ayarları aç</string>
     <string name="onboarding_alarm_title">Bilidirimleri ayarla</string>
-    <string name="onboarding_alarm_desc">Tutarlı kalmak, zamanınızı etkili bir şekilde yönetmek ve dil öğrenme yolculuğunuzda motivasyonunuzu korumak için alarm kurun</string>
+    <string name="onboarding_alarm_desc">Tutarlı kalmak, zamanınızı etkili bir şekilde yönetmek ve dil öğrenme yolculuğunuzda motivasyonunuzu korumak için bildirim alın</string>
     <string name="onboarding_alarm_notify_me">Beni bilgilendir</string>
     <string name="onboarding_alarm_notify_me_at">%s\'de</string>
 
@@ -93,7 +93,9 @@
     <string name="dialog_save">Kaydet</string>
     <string name="delete_confirm">Sil</string>
     <string name="dialog_ok">TAMAM</string>
+    <string name="dialog_grant_permission">İzin ver</string>
     <string name="dialog_pick">Seç</string>
+    <string name="permission_required">İzin gerekli</string>
     <string name="oops">Oops…</string>
     <string name="empty_folder_desc">Herhangi bir listeniz yok. Sağ alttaki \'+\' butonuna basarak liste oluşturabilirsiniz.</string>
     <string name="empty_word_desc">Bu listede herhangi bir kelime yok. Sağ alttaki \'+\' butonuna tıklayarak kelime ekleyebilirsiniz.</string>
@@ -339,4 +341,8 @@
     <string name="emoji_food">Yiyecek içecek</string>
     <string name="emoji_animals">Hayvanlar ve Doğa</string>
     <string name="emoji_smileys">Suratlar ve İnsanlar</string>
+
+    <!-- Permission -->
+    <string name="notification_permission_declined">Önemli güncellemeleri almak ve bağlantıda kalmak için uygulamamız bildirim izni gerektirir. Ne yazık ki, bu izni kalıcı olarak reddettiniz</string>
+    <string name="notification_permission_rationale">Size bildirim göndermek için izninizi rica ediyoruz. Bildirimler, önemli güncellemeler, kişiselleştirilmiş öneriler ve zamana duyarlı bilgiler hakkında sizi bilgilendirmemize yardımcı olur</string>
 </resources>

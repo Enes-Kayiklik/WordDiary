@@ -16,6 +16,8 @@ object AppDependencies {
     val composeMaterialIcons = "androidx.compose.material:material-icons-extended:${Versions.composeUiVersion}"
     val composeAnimation = "androidx.compose.animation:animation-graphics:${Versions.composeUiVersion}"
 
+    val accompanistPermission = "com.google.accompanist:accompanist-permissions:${Versions.accompanist_version}"
+
     val hiltGradle = "com.google.dagger:hilt-android:${Versions.hiltVersion}"
     val hiltKapt = "com.google.dagger:hilt-compiler:${Versions.hiltVersion}"
     val hiltNavigaitonCompose = "androidx.hilt:hilt-navigation-compose:${Versions.hiltNavigationComposeVersion}"

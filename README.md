@@ -61,6 +61,10 @@ Special thanks to mentioned users and projects.
 ### 🏆 Contributors
 - [Enes Telli](https://github.com/enes-telli): Turkish translation and Telegram admin.
 
-## Contributing to the Repository:
+## Contributing to the Repository
 
-We encourage developers, translators, and language enthusiasts to contribute to the Word Diary application by submitting bug reports, feature requests, and translations. Together, we can create a robust and multilingual word learning experience!
+We greatly appreciate the interest and support from developers, translators, and language enthusiasts in contributing to the Word Diary application. Your bug reports, feature requests, and translations are valuable contributions that help improve the application and create a robust and multilingual word learning experience.
+
+However, please note that currently we are not accepting pull requests for this repository. We apologize for any inconvenience this may cause. Nevertheless, we still encourage you to submit bug reports and feature requests through the appropriate channels, as they are essential for enhancing the application.
+
+Thank you for your understanding and for being a part of our community!

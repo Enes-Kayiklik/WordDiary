@@ -7,6 +7,7 @@ import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
+import android.provider.Settings
 
 fun Context.vibratePhone(time: Long) {
     try {
@@ -64,4 +65,11 @@ fun Context.openTTSSettings() {
     } catch (e: Exception) {
         e.printStackTrace()
     }
+}
+
+fun Context.openAppSettings() {
+    Intent(
+        Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+        Uri.fromParts("package", packageName, null)
+    ).also(::startActivity)
 }

@@ -117,6 +117,9 @@ dependencies {
     implementation(AppDependencies.splashScreen)
     testImplementation("junit:junit:4.+")
 
+    // Accompanist permissions
+    implementation(AppDependencies.accompanistPermission)
+
     // Ads Identifier
     implementation(AppDependencies.adsIdentifier)
 
