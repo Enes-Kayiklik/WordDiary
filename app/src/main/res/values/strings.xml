@@ -1,0 +1,344 @@
+<resources>
+    <string name="empty_string" translatable="false" />
+
+    <string name="app_name">Word Diary</string>
+    <string name="developer_name">Enes Kayıklık</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_previous">Prev</string>
+    <string name="onboarding_next">Next</string>
+    <string name="onboarding_finish">Finish</string>
+    <string name="onboarding_title">Track Progress, Learn Words!</string>
+    <string name="onboarding_desc">Master languages effortlessly with Word Diary. Boost vocabulary, improve pronunciation, and track progress. Start your word learning journey now!</string>
+    <string name="onboarding_text_to_speech_title">Text to speech</string>
+    <string name="onboarding_text_to_speech_desc">To ensure an enhanced text-to-speech experience within our word learning app, we recommend the following settings for selecting the appropriate engine</string>
+    <string name="onboarding_text_to_speech_first_title">1. Install text-to-speech engine</string>
+    <string name="onboarding_text_to_speech_first_desc">To access the latest features and improvements, we strongly advise the Google Text-to-Speech engine. You can install or update by clicking below button</string>
+    <string name="onboarding_text_to_speech_second_title">2. Choose correct engine</string>
+    <string name="onboarding_text_to_speech_second_desc">Kindly open settings by clicking the button below and choose Google\'s text-to-speech engine to optimize functionality</string>
+    <string name="onboarding_text_to_speech_open_play_store">Open Play Store</string>
+    <string name="onboarding_text_to_speech_open_settings">Open Settings</string>
+    <string name="onboarding_alarm_title">Setup Alarm</string>
+    <string name="onboarding_alarm_desc">Set alarm to stay consistent, manage your time effectively, and stay motivated on your language learning journey</string>
+    <string name="onboarding_alarm_notify_me">Notify me</string>
+    <string name="onboarding_alarm_notify_me_at">at %s</string>
+
+    <string name="coming_soon">Coming soon</string>
+
+    <string name="back_button_desc">Navigate back</string>
+    <string name="more_button_desc">More options</string>
+    <string name="uncaught_error">An error occurred</string>
+
+    <string name="destination_lists">Collections</string>
+    <string name="destination_lists_title">Collections</string>
+    <string name="destination_lists_content_desc">Collections</string>
+
+    <string name="list_item_word_count">%d word</string>
+    <string name="list_item_word_counts">%d words</string>
+    <string name="empty_folder">List is empty</string>
+
+    <string name="destination_create_folder_title">Create list</string>
+    <string name="warning_select_proper_language">You have to select list language</string>
+    <string name="warning_field_empty">- You have to input this field</string>
+
+    <string name="destination_create_word_title">Create word</string>
+
+    <string name="destination_settings">Settings</string>
+    <string name="destination_settings_title">Settings</string>
+    <string name="destination_settings_content_desc">Settings</string>
+
+    <string name="destination_about">About</string>
+    <string name="destination_about_title">About</string>
+    <string name="destination_about_content_desc">About</string>
+
+    <!-- Statistics Screen -->
+    <string name="destination_statistics">Statistics</string>
+    <string name="destination_statistics_content_desc">Statistics</string>
+
+    <string name="statistics_today">Today</string>
+    <string name="statistics_new_words">New words</string>
+    <string name="statistics_current_streak">Current streak</string>
+    <string name="statistics_study_time">Study time</string>
+    <string name="statistics_study_sessions">Study sessions</string>
+
+    <string name="statistics_all_time">All time</string>
+    <string name="statistics_all_time_learning">Learning</string>
+    <string name="statistics_all_time_complete">Complete learning</string>
+    <string name="statistics_best_streak">Best streak</string>
+    <string name="statistics_all_time_study_time">Study time</string>
+    <string name="statistics_all_time_study_sessions">Study sessions</string>
+    <string name="statistics_start_of_learning">Start of learning</string>
+
+    <string name="destination_licenses">Open Source Licenses</string>
+    <string name="destination_licenses_title">Licenses</string>
+    <string name="destination_licenses_content_desc">Licenses screen</string>
+
+    <string name="buy_premium_content_desc">Buy Premium Button</string>
+    <string name="add_list_content_desc">Create New List</string>
+
+    <string name="destination_user_language_title">Languages</string>
+    <string name="destination_user_language_desc">Select your mother language. This require for auto translation feature. Do not worry, you can change it later.</string>
+    <string name="user_language_select_button_title">Let me in</string>
+    <string name="error_select_valid_language">Please select a language</string>
+
+    <string name="folder_settings_content_desc">List Settings Button</string>
+
+    <string name="settings_app_language_title">App language</string>
+    <string name="settings_app_language_desc">Choose your preferred language</string>
+
+    <string name="settings_user_language_title">User language</string>
+    <string name="settings_user_language_desc">Change your preferred language</string>
+
+    <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_warning">Warning</string>
+    <string name="dialog_continue">Continue</string>
+    <string name="dialog_save">Save</string>
+    <string name="delete_confirm">Delete</string>
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_pick">Pick</string>
+    <string name="oops">Oops…</string>
+    <string name="empty_folder_desc">You don\'t have any list. You can create list by clicking \'+\' button on bottom right.</string>
+    <string name="empty_word_desc">You don\'t have any word in this list. You can add word by clicking \'+\' button on bottom right.</string>
+    <string name="undo_action">Undo</string>
+    <string name="day_singular">%d day</string>
+    <string name="day_plural">%d days</string>
+    <string name="word_singular">word</string>
+    <string name="word_plural">words</string>
+    <string name="second_format">%s s</string>
+    <string name="minute_format">%s m</string>
+    <string name="hour_format">%s h</string>
+    <string name="day_format">%s d</string>
+
+    <string name="folder_name_label">List name</string>
+    <string name="folder_name_hint">Foods &amp; drinks</string>
+    <string name="select_color_title">Select color</string>
+    <string name="pick_language_title">Pick a language</string>
+    <string name="pick_language_desc">Pick a language that represents the list\'s language. If you pick language you can enable auto translate feature while adding new words to this list</string>
+
+    <string name="synonym_title">Synonyms</string>
+    <string name="add_synonym">Add synonym</string>
+    <string name="sample_title">Samples</string>
+    <string name="add_sample">Add sample</string>
+    <string name="edit_title">Edit inputs</string>
+    <string name="empty_sample_section">There is no sample. You can add by clicking \'Add sample\' button on top right.</string>
+    <string name="empty_synonym_section">There is no synonym. You can add by clicking \'Add synonym\' button on top right.</string>
+
+    <string name="delete_word_title">Delete word</string>
+    <string name="delete_word_desc">Are you sure to delete this word permanently?</string>
+    <string name="delete_word_snackbar_message">Word deleted.</string>
+
+    <string name="delete_sample_dialog_title">Delete sample</string>
+    <string name="delete_sample_dialog_desc">Are you sure to delete this sample sentence permanently?</string>
+    <string name="delete_sample_snackbar_message">Sample sentence deleted.</string>
+    <string name="dialog_edit_sample_title">Edit sample</string>
+
+    <string name="delete_synonym_dialog_title">Delete synonym</string>
+    <string name="delete_synonym_dialog_desc">Are you sure to delete this synonym sentence permanently?</string>
+    <string name="delete_synonym_snackbar_message">Synonym sentence deleted.</string>
+    <string name="dialog_edit_synonym_title">Edit synonym</string>
+
+    <string name="quiz_type_flash_card_title">Flash cards</string>
+    <string name="quiz_type_flash_card_desc">Boost your memory with exercise cards.</string>
+    <string name="quiz_type_write_title">Writing practise</string>
+    <string name="quiz_type_write_desc">Improve your spelling and handwriting with writing practice.</string>
+    <string name="quiz_type_multiple_choice_title">Multiple choice</string>
+    <string name="quiz_type_multiple_choice_desc">Test your knowledge with multiple choice.</string>
+
+    <string name="empty_sentence">There is no sample sentence. Long click to edit this field</string>
+    <!-- Sample: Turkish word-->
+    <string name="word_in_lang_label">%s word</string>
+    <!-- Sample: Word in English language -->
+    <string name="word_in_lang_hint">Word in %s language</string>
+    <string name="synonym_in_lang_hint">Synonym in %s language</string>
+
+    <string name="synonym_word_label">Synonym</string>
+    <string name="synonym_word_hint">Synonym of word</string>
+
+    <!-- Sample: 한국인 sentence-->
+    <string name="sample_sentence_label">%s sentence</string>
+    <!-- Sample: Sample sentence in Español language -->
+    <string name="sample_sentence_hint">Sample sentence in %s language</string>
+
+    <string name="word_translation_empty_error">- Input this field for auto translation</string>
+    <string name="meaning_empty_error">- Add meaning of word</string>
+
+    <string name="word_create_empty_error">- Input word you want to learn in your mother language</string>
+    <string name="meaning_create_empty_error">- Input word you want to learn in your second language</string>
+
+    <string name="edit_sentence_empty_error">- Input sentence or translation you want to learn</string>
+
+    <string name="remove_old_word_state_desc">Old translations are going to delete. Do you want to continue?</string>
+    <string name="remove_old_word_state_title">Delete translations</string>
+
+    <string name="translation_duration_error">You can request only every 10 seconds</string>
+
+    <string name="get_translation">Get translation</string>
+
+    <!-- Word List -->
+    <string name="study_option_title">Study</string>
+    <string name="filter_option_title">Filter</string>
+    <string name="delete_option_title">Delete list</string>
+    <string name="delete_option_desc">Are you sure to delete this list and words in it permanently?</string>
+
+    <string name="word_state_learned">Learned</string>
+    <string name="word_state_learning">Learning</string>
+    <string name="word_state_new_word">New word</string>
+
+    <string name="filter_by">Filter by</string>
+    <string name="filter_by_learned">Learned</string>
+    <string name="filter_by_new_word">New word</string>
+    <string name="filter_by_learning">Learning</string>
+    <string name="filter_by_favorite">Favorite</string>
+
+    <string name="sort_by">Sort by</string>
+    <string name="sort_direction">Sort direction</string>
+    <string name="sort_by_date_added">Date added</string>
+    <string name="sort_by_last_studied">Last studied</string>
+    <string name="sort_by_study_count">Study count</string>
+    <string name="sort_direction_ascending">Ascending</string>
+    <string name="sort_direction_descending">Descending</string>
+
+    <!-- Settings General -->
+    <string name="settings_general_title">General</string>
+    <string name="settings_general_desc">Manage app settings and preferences</string>
+
+    <string name="settings_word_list_section_title">WORD LIST</string>
+    <string name="option_swipe_action_title">Swipe gesture</string>
+
+    <string name="settings_daily_goal_section_title">DAILY GOAL</string>
+    <string name="option_new_word_title">New word</string>
+    <string name="option_new_word_desc">Set a daily goal for creating new words</string>
+    <string name="option_study_session_title">Study session</string>
+    <string name="option_study_session_desc">Determine a daily target for productive study sessions</string>
+    <string name="option_set_reminder_title">Reminder</string>
+    <string name="option_set_reminder_desc">Enable reminders to stay on track with your goals</string>
+
+    <string name="settings_swipe_action_add_favorite">Add / Remove favorite</string>
+    <string name="settings_swipe_action_speech_loud">Speech loud</string>
+    <string name="settings_swipe_action_mark_learned">Mark as learned</string>
+    <string name="settings_swipe_action_edit">Edit word</string>
+    <string name="settings_swipe_action_delete">Delete from list</string>
+
+    <string name="settings_swipe_action_add_favorite_action_title">Add favorite</string>
+    <string name="settings_swipe_action_remove_favorite_action_title">Remove favorite</string>
+    <string name="settings_swipe_action_speech_loud_action_title">Speech</string>
+    <string name="settings_swipe_action_mark_learned_action_title">Learned</string>
+    <string name="settings_swipe_action_edit_action_title">Edit</string>
+    <string name="settings_swipe_action_delete_action_title">Remove</string>
+
+    <!-- Study Screen -->
+    <string name="action_finish_study">Finish</string>
+    <string name="action_start_study">Start</string>
+    <string name="study_settings_title">Study settings</string>
+    <string name="study_statistics_title">Statistics</string>
+    <string name="study_quit_dialog_title">Finish study</string>
+    <string name="study_quit_dialog_description">You are about to finish this study session. Select one of the below options to proceed.</string>
+    <string name="study_quit_dialog_finish_without_save">Finish without saving progress</string>
+    <string name="study_quit_dialog_see_results">See results</string>
+
+    <string name="study_result_kudos_1">Congratulations on your outstanding accuracy! Your commitment to learning is evident. Keep pushing yourself to reach new heights in your language proficiency</string>
+    <string name="study_result_kudos_2">Fantastic performance! Your accuracy shows a commendable level of proficiency. Consider exploring additional vocabulary and grammar exercises to broaden your knowledge</string>
+    <string name="study_result_kudos_3">Great job! You have demonstrated a strong grasp of the concepts. Keep challenging yourself with more advanced exercises to further enhance your skills</string>
+
+    <string name="study_result_kudos_4">Solid performance! Your accuracy score is in a respectable range. Focus on identifying and addressing any areas of weakness to increase your accuracy further</string>
+    <string name="study_result_kudos_5">You\'re making progress! Your accuracy shows improvement. Take time to review and understand your mistakes to continue refining your skills</string>
+    <string name="study_result_kudos_6">Keep pushing forward! Your accuracy score indicates progress, but there is still work to be done. Stay motivated and invest time in targeted practice to improve further</string>
+
+    <string name="study_result_kudos_7">Keep practicing! Your accuracy score indicates room for improvement. Don\'t get discouraged, as practice is the key to progress</string>
+    <string name="study_result_kudos_8">Keep learning! Your accuracy score suggests that you are still developing your understanding. Consistent practice and review will help you improve over time</string>
+    <string name="study_result_kudos_9">Stay persistent! Your accuracy score demonstrates areas where you can build your skills. Dedicate regular time to practice and seek additional resources or guidance if needed</string>
+
+    <string name="study_result_your_performance">Your performance</string>
+    <string name="study_result_study_duration">Study duration</string>
+    <string name="study_result_total_words_studied">Total words studied</string>
+    <string name="study_result_accuracy">Accuracy</string>
+    <string name="study_result_proficiency">Proficiency</string>
+
+    <string name="study_settings_timer_title">Enable timer</string>
+    <string name="study_settings_timer_desc">Set a timer to test your memory against the clock, or turn off the timer to review the cards at your own pace.</string>
+    <string name="study_settings_shuffle_title">Shuffle words</string>
+    <string name="study_settings_shuffle_desc">Shuffle the cards for a randomized learning experience, or turn off shuffling to review the cards in the order they were added.</string>
+    <string name="study_settings_sound_title">Sound transcription</string>
+    <string name="study_settings_sound_desc">Add sound effects or voiceover for an immersive learning experience, or turn off sound to focus on the visual cues of the flashcards.</string>
+    <string name="study_settings_looping_title">Enable looping</string>
+    <string name="study_settings_looping_desc">Review the flashcards continuously without having to manually restart the session.</string>
+
+    <!-- Settings About -->
+    <string name="settings_about_title">About</string>
+    <string name="settings_privacy_policy">Privacy &amp; Policy</string>
+    <string name="settings_about_desc">Learn more about %s</string>
+
+    <string name="settings_developer_info_desc">Developer of Word Diary</string>
+    <string name="settings_developer_info">Development and design</string>
+
+    <string name="settings_about_the_app">About the app</string>
+
+    <string name="settings_support_development">Support development</string>
+    <string name="settings_support_development_title">Help us to make Word Diary better</string>
+    <string name="settings_support_development_desc">Dozens of people helped translate the app and hundreds help improve by reporting problems and errors! A special thanks to those people!</string>
+
+    <!-- Settings Help Translate -->
+    <string name="settings_help_translate_title">Help translate</string>
+    <string name="settings_help_translate_desc">Help us to make translations better</string>
+
+    <!-- Settings Buy Premium -->
+    <string name="settings_buy_premium_title">Word Diary Pro</string>
+    <string name="settings_buy_premium_desc">Black theme, custom theming and more…</string>
+    <string name="settings_restore_premium_button">Restore</string>
+    <string name="settings_buy_premium_button">Buy now</string>
+
+    <!-- Settings Backup -->
+    <string name="settings_backup_title">Backup &amp; Restore</string>
+    <string name="settings_backup_desc">Easily restore your data if you lose or upgrade your device</string>
+
+    <!-- Settings Personalize -->
+    <string name="settings_personalize_title">Personalize</string>
+    <string name="settings_personalize_desc">Design a unique app interface for yourself</string>
+
+    <!-- Settings Appearance -->
+    <string name="settings_theming_title">Theme &amp; Colors</string>
+    <string name="settings_theming_desc">Customize the appearance to suit your style</string>
+
+    <!-- About -->
+    <string name="telegram">Telegram</string>
+    <string name="github">Github</string>
+    <string name="email">Email</string>
+    <string name="twitter">Twitter</string>
+    <string name="linkedin">Linkedin</string>
+    <string name="report_bugs">Report bugs</string>
+    <string name="donate">Donate</string>
+    <string name="share">Share</string>
+    <string name="rate">Rate</string>
+    <string name="translate">Translate</string>
+
+    <string name="settings_theme_section_title">THEME</string>
+    <string name="option_app_theme_title">App theme</string>
+    <string name="theme_dark_title">Darker than night</string>
+    <string name="theme_light_title">Brighter than sun</string>
+    <string name="theme_system_title">Follow system</string>
+    <string name="option_amoled_black_title">Amoled black</string>
+    <string name="option_amoled_black_desc">Use a much darker palette in dark mode</string>
+    <string name="option_colorful_background_title">Colorful background</string>
+    <string name="option_colorful_background_desc">Add a extra color to the background. This won\'t work with Amoled black option</string>
+    <string name="settings_colors_section_title">COLORS</string>
+    <string name="option_primary_color_title">Primary color</string>
+    <string name="option_primary_color_desc">The theme primary color, defaults to purple</string>
+    <string name="option_color_style_title">Palette style</string>
+    <string name="option_wallpaper_color_title">Wallpaper color</string>
+    <string name="option_wallpaper_color_desc">Extract primary color from your wallpaper. You have to restart app when you change the wallpaper to take effect</string>
+    <string name="option_random_color_title">Random color</string>
+    <string name="option_random_color_desc">Use random color that updates every time you open the app</string>
+    <string name="option_font_family_title">Font family</string>
+
+    <!-- Language -->
+    <string name="lang_follow_system">Follow System</string>
+
+    <string name="emoji_symbols">Symbols</string>
+    <string name="emoji_flags">Flags</string>
+    <string name="emoji_objects">Objects</string>
+    <string name="emoji_activity">Activity</string>
+    <string name="emoji_travel">Travel &amp; Places</string>
+    <string name="emoji_food">Food &amp; Drink</string>
+    <string name="emoji_animals">Animals &amp; Nature</string>
+    <string name="emoji_smileys">Smileys &amp; People</string>
+</resources>
