@@ -109,7 +109,6 @@ android {
 }
 
 dependencies {
-
     implementation(project(":swiper"))
 
     implementation(AppDependencies.androidxLibraries)
