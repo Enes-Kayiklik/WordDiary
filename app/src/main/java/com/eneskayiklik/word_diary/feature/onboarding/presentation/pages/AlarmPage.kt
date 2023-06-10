@@ -71,12 +71,9 @@ fun AlarmPage(
             modifier = Modifier
                 .fillMaxWidth()
                 .clip(MaterialTheme.shapes.medium)
-                .background(MaterialTheme.colorScheme.secondaryContainer)
-                .clickable {
-                    isClockPickerVisible = isClockPickerVisible.not()
-                }
-                .padding(16.dp),
-            onCheckedChange = onCheckedChange
+                .background(MaterialTheme.colorScheme.secondaryContainer),
+            onCheckedChange = onCheckedChange,
+            onClick = { isClockPickerVisible = isClockPickerVisible.not() }
         )
     }
 
