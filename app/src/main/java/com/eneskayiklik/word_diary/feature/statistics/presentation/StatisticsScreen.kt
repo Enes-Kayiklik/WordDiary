@@ -1,8 +1,12 @@
 package com.eneskayiklik.word_diary.feature.statistics.presentation
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
@@ -94,7 +98,7 @@ fun StatisticsScreen(
             ) + WindowInsets.navigationBars.asPaddingValues(),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            item {
+            item("today_statistics") {
                 Text(
                     text = stringResource(id = R.string.statistics_today),
                     style = MaterialTheme.typography.titleMedium
@@ -116,19 +120,28 @@ fun StatisticsScreen(
                 )
             }
 
-            item {
-                Text(text = "Progress", style = MaterialTheme.typography.titleMedium)
-                Spacer(modifier = Modifier.height(8.dp))
-                StatisticsChart(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clip(MaterialTheme.shapes.medium)
-                        .background(MaterialTheme.colorScheme.secondaryContainer)
-                        .padding(8.dp)
-                )
+            item(key = "statistics_chart") {
+                AnimatedVisibility(
+                    visible = state.barEntry.isNotEmpty(),
+                    enter = expandVertically(),
+                    exit = shrinkVertically()
+                ) {
+                    Column(modifier = Modifier.fillMaxWidth()) {
+                        Text(text = "Progress", style = MaterialTheme.typography.titleMedium)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        StatisticsChart(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clip(MaterialTheme.shapes.medium)
+                                .background(MaterialTheme.colorScheme.secondaryContainer)
+                                .padding(8.dp),
+                            barEntry = state.barEntry
+                        )
+                    }
+                }
             }
 
-            item {
+            item(key = "general_statistics") {
                 Text(
                     text = stringResource(id = R.string.statistics_all_time),
                     style = MaterialTheme.typography.titleMedium
