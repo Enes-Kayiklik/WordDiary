@@ -36,6 +36,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SearchBarColors
 import androidx.compose.material3.SearchBarDefaults
@@ -55,6 +56,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.input.pointer.PointerEventPass
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.node.Ref
@@ -96,7 +98,7 @@ fun StatusSearchBar(
     val animationProgress: Float by animateFloatAsState(
         targetValue = if (active) 1f else 0f,
         animationSpec = tween(
-            durationMillis = 500,
+            durationMillis = 400,
             easing = CubicBezierEasing(0.4f, 0.0f, 0.2f, 1.0f),
         )
     )
@@ -123,7 +125,7 @@ fun StatusSearchBar(
     // is not suitable. Instead, we convert the insets to a padding applied to the Surface, which
     // gradually becomes padding applied to the input field as the animation proceeds.
     val unconsumedInsets = remember { Ref<WindowInsets>() }
-    val topPadding = 8.dp + WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
+    val topPadding = 24.dp + WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
     val animatedSurfaceTopPadding = lerp(topPadding, 0.dp, animationProgress)
     val animatedInputFieldPadding by remember {
         derivedStateOf {
@@ -278,6 +280,8 @@ private fun SearchBarInputField(
         singleLine = true,
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
         keyboardActions = KeyboardActions(onSearch = { onSearch(query) }),
+        textStyle = LocalTextStyle.current,
+        cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
         interactionSource = interactionSource,
         decorationBox = @Composable { innerTextField ->
             TextFieldDefaults.TextFieldDecorationBox(

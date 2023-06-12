@@ -96,7 +96,7 @@ class CreateFolderViewModel @Inject constructor(
         folderRepo.addNewFolder(
             FolderEntity(
                 title = folderData.folderName.text,
-                emoji = folderData.selectedEmoji,
+                emoji = folderData.selectedEmoji ?: folderData.selectedLanguage.flagUnicode,
                 folderLangCode = folderData.selectedLanguage.isoCode,
                 userLangCode = _userLanguage.isoCode,
                 color = getDefaultColors()[state.value.selectedColorIndex].toArgb()

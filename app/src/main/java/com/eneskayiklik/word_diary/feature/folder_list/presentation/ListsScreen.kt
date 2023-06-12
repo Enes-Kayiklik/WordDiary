@@ -1,14 +1,16 @@
 package com.eneskayiklik.word_diary.feature.folder_list.presentation
 
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
@@ -16,6 +18,7 @@ import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.ArrowBack
+import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material.icons.outlined.Folder
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.ripple.rememberRipple
@@ -23,12 +26,14 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -38,6 +43,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -65,14 +71,20 @@ fun ListsScreen(
 ) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     val state = viewModel.state.collectAsState().value
+
     var query by remember { mutableStateOf("") }
     var isSearchActive by remember { mutableStateOf(false) }
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
 
+    val showSearchTrailingIcon by remember {
+        derivedStateOf { query.isNotEmpty() || isSearchActive.not() }
+    }
+
     LaunchedEffect(key1 = isSearchActive) {
         if (isSearchActive) return@LaunchedEffect
         try {
+            query = ""
             focusManager.clearFocus(true)
             keyboardController?.hide()
         } catch (e: Exception) {
@@ -109,7 +121,7 @@ fun ListsScreen(
                 query = query,
                 onQueryChange = { query = it },
                 onSearch = { },
-                placeholder = { Text(text = "Search items")},
+                placeholder = { Text(text = "Search items") },
                 active = isSearchActive,
                 onActiveChange = { isSearchActive = it },
                 leadingIcon = {
@@ -132,10 +144,15 @@ fun ListsScreen(
                     }
                 },
                 trailingIcon = {
-                    Icon(
-                        imageVector = Icons.Outlined.AccountCircle,
-                        contentDescription = null
-                    )
+                    if (showSearchTrailingIcon) {
+                        val icon = if (query.isNotEmpty() || isSearchActive) Icons.Outlined.Close
+                        else Icons.Outlined.AccountCircle
+
+                        Icon(
+                            imageVector = icon,
+                            contentDescription = null
+                        )
+                    }
                 },
                 content = {
                     LazyColumn(
@@ -177,41 +194,29 @@ fun ListsScreen(
             )
 
             else -> LazyColumn(
-                contentPadding = it + PaddingValues(top = 24.dp, bottom = 64.dp),
+                contentPadding = it + PaddingValues(
+                    bottom = 96.dp,
+                    start = 16.dp,
+                    end = 16.dp,
+                    top = 8.dp
+                ) + WindowInsets.navigationBars.asPaddingValues(),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
                 modifier = Modifier.fillMaxSize()
             ) {
                 state.folders.forEach { folder ->
                     item(key = folder.folder.folderId) {
                         SingleFolderRow(folderWithCount = folder, modifier = Modifier
                             .fillMaxWidth()
+                            .clip(MaterialTheme.shapes.medium)
+                            .background(MaterialTheme.colorScheme.secondaryContainer)
                             .clickable {
                                 navigator.navigate(WordListScreenDestination(folderId = folder.folder.folderId))
                             }
+                            .padding(horizontal = 16.dp, vertical = 8.dp)
                         )
-                        Spacer(modifier = Modifier.height(12495.dp))
                     }
                 }
             }
-
-            /*else -> LazyVerticalStaggeredGrid(
-                columns = StaggeredGridCells.Fixed(2),
-                contentPadding = it + PaddingValues(vertical = 24.dp, horizontal = 16.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                modifier = Modifier.fillMaxSize()
-            ) {
-                state.folders.forEach { folder ->
-                    item(key = folder.folder.folderId) {
-                        SingleFolderItem(folderWithCount = folder, modifier = Modifier
-                            .clip(MaterialTheme.shapes.medium)
-                            .clickable {
-                                navigator.navigate(WordListScreenDestination(folderId = folder.folder.folderId))
-                            }
-                            .background(MaterialTheme.colorScheme.primaryContainer)
-                        )
-                    }
-                }
-            }*/
         }
     }
 }
