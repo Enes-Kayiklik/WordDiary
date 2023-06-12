@@ -47,3 +47,5 @@ fun Long.getTimeShortName(): Int {
         else -> R.string.second_format
     }
 }
+
+fun Long.toEpochDay() = this / 86_400_000

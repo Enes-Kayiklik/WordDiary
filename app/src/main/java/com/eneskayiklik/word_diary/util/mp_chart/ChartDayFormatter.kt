@@ -2,15 +2,19 @@ package com.eneskayiklik.word_diary.util.mp_chart
 
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.formatter.ValueFormatter
-import java.text.SimpleDateFormat
-import java.util.Locale
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class ChartDayFormatter : ValueFormatter() {
 
+    private val formatter = DateTimeFormatter.ofPattern("dd MMMM")
+
     override fun getAxisLabel(value: Float, axis: AxisBase?): String {
-        return SimpleDateFormat(
-            "dd MMMM",
-            Locale.ROOT
-        ).format(System.currentTimeMillis() - (((axis?.labelCount ?: 7) - 1) - value.toInt()) * 86_400_000)
+        /**
+         * BarEntry holds data as reversed so if we subtract from 6 we achieve day from today
+         * and than we can format
+         */
+        return LocalDate.now().minusDays((6F - value).toLong())
+            .format(formatter)
     }
 }

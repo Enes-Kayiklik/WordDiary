@@ -1,8 +1,11 @@
 package com.eneskayiklik.word_diary.feature.statistics.presentation
 
 import androidx.annotation.StringRes
+import androidx.compose.runtime.Stable
 import com.eneskayiklik.word_diary.R
+import com.github.mikephil.charting.data.BarEntry
 
+@Stable
 data class StatisticsState(
     val todayNewWordCount: Int = 0,
     val todayStudyTime: String = "",
@@ -19,7 +22,8 @@ data class StatisticsState(
     val maxStreakCount: Int = 1,
     val currentStreakCount: Int = 1,
     @StringRes val maxStreakFormatter: Int = R.string.day_singular,
-    @StringRes val currentStreakFormatter: Int = R.string.day_singular
+    @StringRes val currentStreakFormatter: Int = R.string.day_singular,
+    val barEntry: List<BarEntry> = emptyList()
 ) {
     val todayNewWords = "${minOf(todayNewWordCount, newWordDailyGoal)} / $newWordDailyGoal"
     val todayStudySessions =
