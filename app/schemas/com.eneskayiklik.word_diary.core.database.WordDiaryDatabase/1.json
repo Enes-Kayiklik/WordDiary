@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "47e7917c50db1399888d45c84b4d5f73",
+    "identityHash": "d69183223823fa2b31cfd1c595d0998b",
     "entities": [
       {
         "tableName": "folder",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`folderId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `folder_lang_code` TEXT NOT NULL, `user_lang_code` TEXT NOT NULL, `title` TEXT NOT NULL, `color` INTEGER NOT NULL, `emoji` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`folderId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `folder_lang_code` TEXT NOT NULL, `user_lang_code` TEXT NOT NULL, `isFavorite` INTEGER NOT NULL, `title` TEXT NOT NULL, `color` INTEGER NOT NULL, `emoji` TEXT)",
         "fields": [
           {
             "fieldPath": "folderId",
@@ -24,6 +24,12 @@
             "fieldPath": "userLangCode",
             "columnName": "user_lang_code",
             "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isFavorite",
+            "columnName": "isFavorite",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -212,7 +218,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '47e7917c50db1399888d45c84b4d5f73')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd69183223823fa2b31cfd1c595d0998b')"
     ]
   }
 }

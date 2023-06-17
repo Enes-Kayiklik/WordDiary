@@ -1,9 +1,8 @@
 package com.eneskayiklik.word_diary
 
 import android.app.Application
-import android.util.Log
-import com.flurry.android.FlurryAgent
-import com.flurry.android.FlurryPerformance
+import com.adapty.Adapty
+import com.google.android.gms.ads.MobileAds
 import com.onesignal.OneSignal
 import dagger.hilt.android.HiltAndroidApp
 
@@ -12,18 +11,9 @@ class WordDiaryApp: Application() {
 
     override fun onCreate() {
         super.onCreate()
-        initFlurry()
+        MobileAds.initialize(this) {}
+        Adapty.activate(this, BuildConfig.ADAPTY_KEY)
         initOneSignal()
-    }
-
-    private fun initFlurry() {
-        FlurryAgent.Builder()
-            .withCaptureUncaughtExceptions(BuildConfig.DEBUG.not())
-            .withIncludeBackgroundSessionsInMetrics(BuildConfig.DEBUG.not())
-            .withReportLocation(BuildConfig.DEBUG.not())
-            .withLogLevel(Log.VERBOSE)
-            .withPerformanceMetrics(FlurryPerformance.ALL)
-            .build(this, BuildConfig.FLURRY_API_KEY)
     }
 
     private fun initOneSignal() {

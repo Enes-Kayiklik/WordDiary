@@ -30,6 +30,9 @@ class FolderRepositoryImpl @Inject constructor(
 
     override fun removeFolder(folderId: Int) = dao.removeFolderWithWords(folderId)
 
+    override fun updateFolderFavoriteState(folderId: Int, isFavorite: Boolean) =
+        dao.updateFolderFavoriteState(folderId, isFavorite)
+
     override fun updateWordFavoriteState(wordId: Int, folderId: Int, isFavorite: Boolean) =
         dao.updateWordFavoriteState(wordId, folderId, isFavorite)
 

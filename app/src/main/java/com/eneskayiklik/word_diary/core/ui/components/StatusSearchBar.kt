@@ -157,15 +157,6 @@ fun StatusSearchBar(
         animationSpec = spring(stiffness = Spring.StiffnessMediumLow)
     )
 
-    /*val searchContainerColor by animateColorAsState(
-        targetValue = androidx.compose.ui.graphics.lerp(
-            MaterialTheme.colorScheme.surfaceVariant,
-            colors.containerColor,
-            FastOutLinearInEasing.transform(if (active) 1F else 0F)
-        ),
-        animationSpec = spring(stiffness = Spring.StiffnessMediumLow)
-    )*/
-
     BoxWithConstraints(
         modifier = modifier
             .background(backgroundColor)
@@ -280,7 +271,7 @@ private fun SearchBarInputField(
         singleLine = true,
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
         keyboardActions = KeyboardActions(onSearch = { onSearch(query) }),
-        textStyle = LocalTextStyle.current,
+        textStyle = LocalTextStyle.current.copy(color = MaterialTheme.colorScheme.onSurface),
         cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
         interactionSource = interactionSource,
         decorationBox = @Composable { innerTextField ->

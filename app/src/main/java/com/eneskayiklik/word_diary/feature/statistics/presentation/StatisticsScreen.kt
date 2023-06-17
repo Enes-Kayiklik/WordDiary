@@ -25,6 +25,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -36,7 +37,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
 import com.eneskayiklik.word_diary.R
+import com.eneskayiklik.word_diary.core.ui.OnLifecycleEvent
+import com.eneskayiklik.word_diary.core.ui.components.ad.MediumNativeAdView
 import com.eneskayiklik.word_diary.core.util.ScreensAnim
 import com.eneskayiklik.word_diary.core.util.UiEvent
 import com.eneskayiklik.word_diary.feature.statistics.presentation.component.CurrentStreakView
@@ -64,6 +68,14 @@ fun StatisticsScreen(
                 is UiEvent.OnNavigate -> navigator.navigate(it.route)
                 else -> Unit
             }
+        }
+    }
+
+    OnLifecycleEvent { _, event ->
+        when (event) {
+            Lifecycle.Event.ON_RESUME -> viewModel.onAdEvent(true)
+            Lifecycle.Event.ON_PAUSE -> viewModel.onAdEvent(false)
+            else -> Unit
         }
     }
 
@@ -108,7 +120,7 @@ fun StatisticsScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .clip(MaterialTheme.shapes.medium)
-                        .background(MaterialTheme.colorScheme.secondaryContainer)
+                        .background(MaterialTheme.colorScheme.surfaceColorAtElevation(12.dp))
                         .padding(8.dp),
                     newWords = state.todayNewWords,
                     studyTime = state.todayStudyTime,
@@ -133,7 +145,7 @@ fun StatisticsScreen(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .clip(MaterialTheme.shapes.medium)
-                                .background(MaterialTheme.colorScheme.secondaryContainer)
+                                .background(MaterialTheme.colorScheme.surfaceColorAtElevation(12.dp))
                                 .padding(8.dp),
                             barEntry = state.barEntry
                         )
@@ -151,7 +163,7 @@ fun StatisticsScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .clip(MaterialTheme.shapes.medium)
-                        .background(MaterialTheme.colorScheme.secondaryContainer)
+                        .background(MaterialTheme.colorScheme.surfaceColorAtElevation(12.dp))
                         .padding(8.dp),
                     learningWord = state.learningWordCount,
                     completeLearned = state.completeLearnedWordCount,
@@ -162,6 +174,21 @@ fun StatisticsScreen(
                     streakCount = state.maxStreakCount,
                     streakFormatter = state.maxStreakFormatter
                 )
+            }
+
+            if (state.nativeAd != null) {
+                item(key = "native_ad") {
+                    MediumNativeAdView(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(MaterialTheme.shapes.medium)
+                            .background(
+                                MaterialTheme.colorScheme
+                                    .surfaceColorAtElevation(12.dp)
+                            ),
+                        nativeAd = state.nativeAd
+                    )
+                }
             }
         }
     }

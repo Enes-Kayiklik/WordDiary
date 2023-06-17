@@ -5,7 +5,9 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -19,8 +21,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
-import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreHoriz
 import androidx.compose.material.icons.outlined.Add
@@ -46,9 +47,11 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -64,8 +67,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
 import com.eneskayiklik.word_diary.R
+import com.eneskayiklik.word_diary.core.ui.OnLifecycleEvent
 import com.eneskayiklik.word_diary.core.ui.components.BasicDialog
+import com.eneskayiklik.word_diary.core.ui.components.ad.SmallNativeAdView
 import com.eneskayiklik.word_diary.core.util.ScreensAnim
 import com.eneskayiklik.word_diary.feature.folder_list.presentation.component.EmptyDataView
 import com.eneskayiklik.word_diary.util.TITLE_LETTER_SPACING
@@ -84,8 +90,8 @@ import eu.wewox.modalsheet.ModalSheet
 import kotlinx.coroutines.flow.collectLatest
 
 @OptIn(
-    ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class,
-    ExperimentalFoundationApi::class, ExperimentalSheetApi::class
+    ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class, ExperimentalSheetApi::class,
+    ExperimentalFoundationApi::class
 )
 @Destination(style = ScreensAnim::class)
 @Composable
@@ -95,6 +101,7 @@ fun WordListScreen(
     viewModel: WordListViewModel = hiltViewModel()
 ) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    val lazyListState = rememberLazyListState()
     val snackbarHostState = remember { SnackbarHostState() }
     val state = viewModel.state.collectAsState().value
     var isFilterMenuVisible by remember { mutableStateOf(false) }
@@ -104,6 +111,10 @@ fun WordListScreen(
     )
     var isMenuExpanded by remember { mutableStateOf(false) }
     var isStudyListVisible by remember { mutableStateOf(false) }
+
+    val firstItemVisible by remember {
+        derivedStateOf { lazyListState.firstVisibleItemIndex == 0 }
+    }
 
     if (state.isDialogActive) {
         when (state.dialogType) {
@@ -131,6 +142,14 @@ fun WordListScreen(
         }
     }
 
+    OnLifecycleEvent { _, event ->
+        when (event) {
+            Lifecycle.Event.ON_RESUME -> viewModel.onEvent(WordListEvent.OnAdEvent(true))
+            Lifecycle.Event.ON_PAUSE -> viewModel.onEvent(WordListEvent.OnAdEvent(false))
+            else -> Unit
+        }
+    }
+
     LaunchedEffect(key1 = Unit) {
         viewModel.event.collectLatest {
             when (it) {
@@ -154,14 +173,20 @@ fun WordListScreen(
             .fillMaxSize()
             .nestedScroll(scrollBehavior.nestedScrollConnection),
         floatingActionButton = {
-            FloatingActionButton(
-                onClick = { viewModel.onEvent(WordListEvent.CreateWord) },
-                modifier = Modifier.scale(itemsScale)
+            AnimatedVisibility(
+                visible = firstItemVisible && state.showEmptyLayout.not(),
+                enter = slideInVertically { it },
+                exit = slideOutVertically { it }
             ) {
-                Icon(
-                    imageVector = Icons.Outlined.Add,
-                    contentDescription = stringResource(id = R.string.add_list_content_desc)
-                )
+                FloatingActionButton(
+                    onClick = { viewModel.onEvent(WordListEvent.CreateWord) },
+                    modifier = Modifier.scale(itemsScale)
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.Add,
+                        contentDescription = stringResource(id = R.string.add_list_content_desc)
+                    )
+                }
             }
         },
         snackbarHost = {
@@ -243,25 +268,25 @@ fun WordListScreen(
                     title = stringResource(id = R.string.oops),
                     subtitle = stringResource(id = R.string.empty_word_desc),
                     icon = Icons.Outlined.FolderOpen,
-                    showArrow = true
+                    actionText = stringResource(id = R.string.destination_create_word_title),
+                    onAction = { viewModel.onEvent(WordListEvent.CreateWord) }
                 )
             }
 
-            else -> LazyVerticalStaggeredGrid(
+            else -> LazyColumn(
                 contentPadding = padding + PaddingValues(vertical = 24.dp, horizontal = 16.dp),
                 modifier = Modifier.fillMaxSize(),
-                columns = StaggeredGridCells.Fixed(2),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                verticalItemSpacing = 8.dp
+                verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                state.words.forEach { word ->
+                state.words.forEachIndexed { index, word ->
                     item(key = word.wordId) {
                         WordListItem(
                             word = word,
                             modifier = Modifier
+                                .animateItemPlacement()
                                 .fillMaxWidth()
-                                .clip(MaterialTheme.shapes.small)
-                                .background(MaterialTheme.colorScheme.surfaceVariant),
+                                .clip(MaterialTheme.shapes.medium)
+                                .background(MaterialTheme.colorScheme.surfaceColorAtElevation(12.dp)),
                             onAction = { action ->
                                 viewModel.onEvent(
                                     WordListEvent.OnWordAction(
@@ -278,6 +303,21 @@ fun WordListScreen(
                                 )
                             }
                         )
+                    }
+
+                    if (index == 0 && state.nativeAd != null) {
+                        item(key = "ad_view") {
+                            SmallNativeAdView(
+                                nativeAd = state.nativeAd,
+                                showActionButton = true,
+                                modifier = Modifier
+                                    .animateItemPlacement()
+                                    .fillMaxWidth()
+                                    .clip(MaterialTheme.shapes.medium)
+                                    .background(MaterialTheme.colorScheme.surfaceColorAtElevation(12.dp))
+                                    .padding(8.dp)
+                            )
+                        }
                     }
                 }
             }

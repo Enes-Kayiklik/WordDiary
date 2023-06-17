@@ -7,14 +7,17 @@ import com.eneskayiklik.word_diary.core.data_store.data.UserPreference
 import com.eneskayiklik.word_diary.core.data_store.domain.UserPreferenceRepository
 import com.eneskayiklik.word_diary.core.database.entity.StudySessionEntity
 import com.eneskayiklik.word_diary.core.database.entity.WordEntity
+import com.eneskayiklik.word_diary.core.helper.ad.AdLoaderHelper
 import com.eneskayiklik.word_diary.core.util.UiEvent
 import com.eneskayiklik.word_diary.feature.folder_list.domain.FolderRepository
+import com.eneskayiklik.word_diary.feature.folder_list.presentation.ListsViewModel
 import com.eneskayiklik.word_diary.util.extensions.formatStatisticsTimer
 import com.eneskayiklik.word_diary.util.extensions.getTimeShortName
 import com.eneskayiklik.word_diary.util.extensions.toEpochDay
 import com.github.mikephil.charting.data.BarEntry
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -34,6 +37,7 @@ import kotlin.math.absoluteValue
 @HiltViewModel
 class StatisticsViewModel @Inject constructor(
     private val folderRepository: FolderRepository,
+    private val adLoader: AdLoaderHelper,
     userPreferenceRepository: UserPreferenceRepository
 ) : ViewModel() {
 
@@ -42,6 +46,10 @@ class StatisticsViewModel @Inject constructor(
 
     private val _event = MutableSharedFlow<UiEvent>()
     val event = _event.asSharedFlow()
+
+    private var _isScreenVisible: Boolean = false
+
+    private var _isAdActive: Boolean = false
 
     val userPrefs = userPreferenceRepository.userData.stateIn(
         viewModelScope,
@@ -58,6 +66,26 @@ class StatisticsViewModel @Inject constructor(
         getStudySessionData()
         getWords()
         collectUserPrefs()
+    }
+
+    fun onAdEvent(isStart: Boolean) = viewModelScope.launch {
+        _isScreenVisible = isStart
+        if (isStart && _isAdActive.not()) startGetAd()
+    }
+
+    private fun startGetAd() = viewModelScope.launch(Dispatchers.IO) {
+        _isAdActive = true
+        while (_isScreenVisible) {
+            val ad = adLoader.getNativeAd(1)
+            _state.value.nativeAd?.destroy()
+            _state.update { it.copy(nativeAd = ad) }
+            if (_state.value.nativeAd != null) {
+                delay(ListsViewModel.AD_RELOAD_INTERVAL)
+            } else {
+                delay(5000)
+            }
+        }
+        _isAdActive = false
     }
 
     private fun setupWordStatistics(words: List<WordEntity>) = viewModelScope.launch {
@@ -186,5 +214,10 @@ class StatisticsViewModel @Inject constructor(
                 )
             }
         }
+    }
+
+    override fun onCleared() {
+        _state.value.nativeAd?.destroy()
+        super.onCleared()
     }
 }

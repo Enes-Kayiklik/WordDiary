@@ -8,6 +8,8 @@ plugins {
     id("com.mikepenz.aboutlibraries.plugin")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
     kotlin("plugin.serialization") version "1.8.0"
 }
 
@@ -42,13 +44,12 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
-        buildConfigField("String", "FLURRY_API_KEY", localProperties.getProperty("flurryApiKey"))
+        buildConfigField("String", "ADAPTY_KEY", localProperties.getProperty("adaptyKey"))
         buildConfigField(
             "String",
             "ONE_SIGNAL_APP_ID",
             localProperties.getProperty("oneSignalAppId")
         )
-
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments["room.schemaLocation"] = "$projectDir/schemas"
@@ -70,9 +71,19 @@ android {
                 "proguard-rules.pro"
             )
             signingConfig = signingConfigs.getByName("debug")
+            buildConfigField(
+                "String",
+                "NATIVE_ADS_KEY",
+                localProperties.getProperty("admobNativeProd")
+            )
         }
         getByName("debug") {
             versionNameSuffix = "-debug"
+            buildConfigField(
+                "String",
+                "NATIVE_ADS_KEY",
+                localProperties.getProperty("admobNativeDebug")
+            )
         }
     }
     compileOptions {
@@ -86,6 +97,7 @@ android {
 
     buildFeatures {
         compose = true
+        viewBinding = true
     }
 
     composeOptions {
@@ -125,8 +137,9 @@ dependencies {
     // One Signal
     implementation(AppDependencies.oneSignal)
 
-    // Flurry Analytics
-    implementation(AppDependencies.flurryAnalytics)
+    // Firebase
+    implementation(platform(AppDependencies.firebaseBom))
+    firebaseThings()
 
     // Hilt
     daggerHilt()
@@ -179,4 +192,13 @@ dependencies {
     implementation(AppDependencies.mpChart)
 
     coreLibraryDesugaring(AppDependencies.coreLibraryDesugaring)
+
+    // Admob
+    implementation("com.google.android.gms:play-services-ads:22.1.0")
+
+    // Material 3
+    implementation("com.google.android.material:material:1.9.0")
+
+    // Adapty
+    implementation(AppDependencies.adapty)
 }

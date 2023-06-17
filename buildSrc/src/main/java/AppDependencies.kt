@@ -15,6 +15,11 @@ object AppDependencies {
     val composeMaterial3 = "androidx.compose.material3:material3:${Versions.composeMaterialVersion}"
     val composeMaterialIcons = "androidx.compose.material:material-icons-extended:${Versions.composeUiVersion}"
     val composeAnimation = "androidx.compose.animation:animation-graphics:${Versions.composeUiVersion}"
+    val composeViewBinding = "androidx.compose.ui:ui-viewbinding:${Versions.composeUiVersion}"
+
+    val firebaseBom = "com.google.firebase:firebase-bom:${Versions.firebaseBom}"
+    val crashlytics = "com.google.firebase:firebase-crashlytics-ktx"
+    val analytics = "com.google.firebase:firebase-analytics-ktx"
 
     val accompanistPermission = "com.google.accompanist:accompanist-permissions:${Versions.accompanist_version}"
 
@@ -51,6 +56,8 @@ object AppDependencies {
 
     val mpChart = "com.github.PhilJay:MPAndroidChart:${Versions.mpChart}"
 
+    val adapty = "com.github.adaptyteam:AdaptySDK-Android:${Versions.adaptyVersion}"
+
     val androidxLibraries = listOf(
         coreKtx,
         lifecycleRuntime
@@ -64,7 +71,8 @@ object AppDependencies {
         composePreview,
         composeMaterial3,
         composeMaterialIcons,
-        composeAnimation
+        composeAnimation,
+        composeViewBinding
     )
 }
 
@@ -109,4 +117,9 @@ fun DependencyHandler.testImplementation(list: List<String>) {
     list.forEach { dependency ->
         add("testImplementation", dependency)
     }
+}
+
+fun DependencyHandler.firebaseThings() {
+    add("implementation", AppDependencies.crashlytics)
+    add("implementation", AppDependencies.analytics)
 }

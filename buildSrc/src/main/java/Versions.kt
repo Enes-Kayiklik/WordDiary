@@ -26,6 +26,7 @@ object Versions {
     const val activityCompose = "1.6.1"
     const val splashScreen = "1.0.0"
     const val composeUiVersion = "1.3.1"
+    const val firebaseBom = "32.1.1"
     const val hiltVersion = "2.44"
     const val roomVersion = "2.4.3"
     const val kotlinSerailization = "1.4.1"
@@ -35,6 +36,7 @@ object Versions {
     const val cascadeDropdown = "2.0.0-rc02"
     const val composeDialogs = "1.1.1"
     const val composeModalSheet = "0.4.0"
+    const val adaptyVersion = "2.4.3"
 
     const val flurry = "14.2.0"
     const val oneSignal = "[4.0.0, 4.99.99]"

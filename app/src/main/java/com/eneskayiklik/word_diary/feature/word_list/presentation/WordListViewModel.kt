@@ -9,13 +9,16 @@ import com.eneskayiklik.word_diary.R
 import com.eneskayiklik.word_diary.core.data_store.data.SwipeAction
 import com.eneskayiklik.word_diary.core.data_store.domain.UserPreferenceRepository
 import com.eneskayiklik.word_diary.core.database.entity.WordEntity
+import com.eneskayiklik.word_diary.core.helper.ad.AdLoaderHelper
 import com.eneskayiklik.word_diary.core.tts.WordToSpeech
 import com.eneskayiklik.word_diary.feature.folder_list.domain.FolderRepository
 import com.eneskayiklik.word_diary.core.util.UiEvent
 import com.eneskayiklik.word_diary.feature.create_word.presentation.DeletedSnackbar
 import com.eneskayiklik.word_diary.feature.destinations.CreateWordScreenDestination
+import com.eneskayiklik.word_diary.feature.folder_list.presentation.ListsViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -32,6 +35,7 @@ class WordListViewModel @Inject constructor(
     private val folderRepo: FolderRepository,
     private val tts: WordToSpeech,
     private val app: Application,
+    private val adLoader: AdLoaderHelper,
     prefsRepo: UserPreferenceRepository,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
@@ -66,6 +70,9 @@ class WordListViewModel @Inject constructor(
     private val _event = MutableSharedFlow<UiEvent>()
     val event = _event.asSharedFlow()
 
+    private var _isAdActive: Boolean = false
+    private var _isScreenVisible = false
+
     init {
         val folderId = savedStateHandle.get<Int>("folderId")
             ?: throw NullPointerException("folderId can not be null")
@@ -91,6 +98,7 @@ class WordListViewModel @Inject constructor(
             is WordListEvent.OnSortDirectionSelected -> _sortDirection.update { event.direction }
             is WordListEvent.OnWordAction -> onWordAction(event.word, event.action)
             is WordListEvent.OnWordClick -> onWordClick(event.word)
+            is WordListEvent.OnAdEvent -> onAdEvent(event.startAd)
             is WordListEvent.OnSpeakEvent -> speakSentence(
                 event.firstSentence,
                 event.firstSource,
@@ -224,5 +232,29 @@ class WordListViewModel @Inject constructor(
         folderRepo.getFolderWithWords(folderId).collectLatest { new ->
             _state.update { it.copy(folder = new) }
         }
+    }
+
+    private fun onAdEvent(isStart: Boolean) = viewModelScope.launch {
+        _isScreenVisible = isStart
+        if (isStart) {
+            if (_isAdActive.not()) startGetAd()
+        }
+    }
+
+    private fun startGetAd() = viewModelScope.launch(Dispatchers.IO) {
+        _isAdActive = true
+        while (_isScreenVisible) {
+            if (_state.value.words.isNotEmpty()) {
+                val ad = adLoader.getNativeAd(1)
+                _state.value.nativeAd?.destroy()
+                _state.update { it.copy(nativeAd = ad) }
+            }
+            if (_state.value.nativeAd != null) {
+                delay(ListsViewModel.AD_RELOAD_INTERVAL)
+            } else {
+                delay(5000)
+            }
+        }
+        _isAdActive = false
     }
 }
