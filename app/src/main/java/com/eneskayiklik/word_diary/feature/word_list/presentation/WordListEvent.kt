@@ -25,6 +25,8 @@ sealed class WordListEvent {
 
     data class OnShowDialog(val type: WordListDialogType) : WordListEvent()
 
+    data class OnAdEvent(val startAd: Boolean) : WordListEvent()
+
     data class OnSpeakEvent(
         val firstSentence: String? = null,
         val firstSource: String? = null,

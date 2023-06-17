@@ -22,6 +22,8 @@ data class CreateFolderState(
     val colors: List<Color> = getDefaultColors(),
     val selectedEmoji: String? = null,
     val selectedColorIndex: Int = 0,
+    val isFavorite: Boolean = false,
+    val showLangSelection: Boolean = true
 ) {
     private val currentLen = folderName.text.length
 

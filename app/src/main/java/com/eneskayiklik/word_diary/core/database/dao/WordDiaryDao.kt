@@ -40,6 +40,9 @@ interface WordDiaryDao {
     @Query("SELECT * FROM folder WHERE folderId = :folderId")
     fun getFolderWithWords(folderId: Int): Flow<FolderWithWords>
 
+    @Query("UPDATE folder SET isFavorite = :isFavorite WHERE folderId = :folderId")
+    fun updateFolderFavoriteState(folderId: Int, isFavorite: Boolean)
+
     @Query("UPDATE word SET isFavorite = :isFavorite WHERE wordId = :wordId AND folderId = :folderId")
     fun updateWordFavoriteState(wordId: Int, folderId: Int, isFavorite: Boolean)
 

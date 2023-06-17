@@ -34,6 +34,9 @@
     <string name="list_item_word_count">%d kelime</string>
     <string name="list_item_word_counts">%d kelime</string>
     <string name="empty_folder">Bu liste boş</string>
+    <string name="add_word">Kelime ekle</string>
+    <string name="practise">Pratik yap</string>
+    <string name="lists_screen_search_bar_placeholder">Kolaksiyonları ara</string>
 
     <string name="destination_create_folder_title">Liste oluştur</string>
     <string name="warning_select_proper_language">Liste dilini seçmelisiniz</string>
@@ -97,8 +100,8 @@
     <string name="dialog_pick">Seç</string>
     <string name="permission_required">İzin gerekli</string>
     <string name="oops">Oops…</string>
-    <string name="empty_folder_desc">Herhangi bir listeniz yok. Sağ alttaki \'+\' butonuna basarak liste oluşturabilirsiniz.</string>
-    <string name="empty_word_desc">Bu listede herhangi bir kelime yok. Sağ alttaki \'+\' butonuna tıklayarak kelime ekleyebilirsiniz.</string>
+    <string name="empty_folder_desc">Herhangi bir listeniz yok. Hemen liste oluştur ve çalışmaya başla.</string>
+    <string name="empty_word_desc">Bu listede herhangi bir kelime yok. Hemen kelime ekle ve çalışmaya başla.</string>
     <string name="undo_action">Geri al</string>
     <string name="day_singular">%d gün</string>
     <string name="day_plural">%d gün</string>
@@ -178,7 +181,7 @@
     <string name="study_option_title">Çalış</string>
     <string name="filter_option_title">Filtrele</string>
     <string name="delete_option_title">Listeyi sil</string>
-    <string name="delete_option_desc">Bu listeyi ve içerisindeki kelimeleri kalıcı olarak silmek istediğinizden emin misiniz?</string>
+    <string name="delete_option_desc">Bu listeyi ve içerisindeki kelimeleri kalıcı olarak silmek istediğinizden emin misiniz?. Bu işlem geri alınamaz!</string>
 
     <string name="word_state_learned">Öğrenildi</string>
     <string name="word_state_learning">Öğreniliyor</string>

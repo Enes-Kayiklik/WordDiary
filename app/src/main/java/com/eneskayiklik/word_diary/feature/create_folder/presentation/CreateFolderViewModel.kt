@@ -1,7 +1,10 @@
 package com.eneskayiklik.word_diary.feature.create_folder.presentation
 
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.eneskayiklik.word_diary.R
@@ -16,6 +19,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -24,7 +28,8 @@ import javax.inject.Inject
 @HiltViewModel
 class CreateFolderViewModel @Inject constructor(
     private val folderRepo: FolderRepository,
-    userPrefRepository: UserPreferenceRepository
+    userPrefRepository: UserPreferenceRepository,
+    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     private val userPref = userPrefRepository.userData
@@ -36,9 +41,12 @@ class CreateFolderViewModel @Inject constructor(
     val event = _event.asSharedFlow()
 
     private var _userLanguage: UserLanguage = UserLanguage.NOT_SPECIFIED
+    private var _folderId: Int? = null
 
     init {
         setupUserPref()
+        _folderId = savedStateHandle.get<Int?>("folderId")?.takeIf { it >= 0 }
+        _folderId?.let { getFolderData(it) }
     }
 
     private fun setupUserPref() = viewModelScope.launch {
@@ -95,13 +103,34 @@ class CreateFolderViewModel @Inject constructor(
         }
         folderRepo.addNewFolder(
             FolderEntity(
+                folderId = _folderId ?: 0,
                 title = folderData.folderName.text,
                 emoji = folderData.selectedEmoji ?: folderData.selectedLanguage.flagUnicode,
                 folderLangCode = folderData.selectedLanguage.isoCode,
                 userLangCode = _userLanguage.isoCode,
+                isFavorite = folderData.isFavorite,
                 color = getDefaultColors()[state.value.selectedColorIndex].toArgb()
             )
         )
         _event.emit(UiEvent.ClearBackstack)
+    }
+
+    private fun getFolderData(folderId: Int) = viewModelScope.launch(Dispatchers.IO) {
+        folderRepo.getFolder(folderId).collectLatest {
+            _state.update { s ->
+                s.copy(
+                    folderName = TextFieldValue(
+                        text = it.title,
+                        selection = TextRange(it.title.length)
+                    ),
+                    selectedEmoji = it.emoji,
+                    selectedLanguage = UserLanguage.values()
+                        .first { f -> f.isoCode == it.folderLangCode },
+                    selectedColorIndex = getDefaultColors().indexOf(Color(it.color)),
+                    isFavorite = it.isFavorite,
+                    showLangSelection = false
+                )
+            }
+        }
     }
 }

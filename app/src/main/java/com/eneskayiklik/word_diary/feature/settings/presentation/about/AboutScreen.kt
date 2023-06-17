@@ -133,7 +133,7 @@ fun AboutScreen(
                                 style = MaterialTheme.typography.labelSmall,
                                 modifier = Modifier
                                     .clip(CircleShape)
-                                    .background(MaterialTheme.colorScheme.surfaceColorAtElevation(3.dp))
+                                    .background(MaterialTheme.colorScheme.secondaryContainer)
                                     .padding(horizontal = 8.dp, vertical = 4.dp)
                                     .align(Alignment.End)
                             )
@@ -153,7 +153,7 @@ fun AboutScreen(
                                 .size(72.dp)
                                 .clip(WaveShape())
                                 .background(
-                                    color = MaterialTheme.colorScheme.surfaceColorAtElevation(3.dp),
+                                    color = MaterialTheme.colorScheme.secondaryContainer,
                                     shape = WaveShape()
                                 )
                                 .clickable {
@@ -177,7 +177,7 @@ fun AboutScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .clip(MaterialTheme.shapes.large)
-                        .background(MaterialTheme.colorScheme.secondaryContainer)
+                        .background(MaterialTheme.colorScheme.surfaceColorAtElevation(12.dp))
                         .padding(horizontal = 16.dp, vertical = 12.dp)
                 )
             }
@@ -214,7 +214,7 @@ fun AboutScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .clip(MaterialTheme.shapes.large)
-                        .background(MaterialTheme.colorScheme.secondaryContainer)
+                        .background(MaterialTheme.colorScheme.surfaceColorAtElevation(12.dp))
                         .padding(horizontal = 16.dp, vertical = 12.dp)
                 )
             }
@@ -250,7 +250,7 @@ fun AboutScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .clip(MaterialTheme.shapes.large)
-                        .background(MaterialTheme.colorScheme.secondaryContainer)
+                        .background(MaterialTheme.colorScheme.surfaceColorAtElevation(12.dp))
                         .padding(horizontal = 16.dp, vertical = 12.dp)
                 )
             }

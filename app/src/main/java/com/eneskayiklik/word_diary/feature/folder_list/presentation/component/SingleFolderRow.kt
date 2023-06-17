@@ -8,7 +8,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.MoreHoriz
+import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -25,14 +27,21 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.eneskayiklik.word_diary.R
+import com.eneskayiklik.word_diary.core.data_store.data.SwipeAction
 import com.eneskayiklik.word_diary.core.database.model.FolderWithWordCount
 import com.eneskayiklik.word_diary.feature.word_list.presentation.component.WordDropdownMenu
 
 @Composable
 fun SingleFolderRow(
     folderWithCount: FolderWithWordCount,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onAddWord: (folderId: Int) -> Unit,
+    onPractise: (folderId: Int) -> Unit,
+    onEdit: (folderId: Int) -> Unit,
+    onDelete: (folderId: Int) -> Unit,
+    onFavorite: (folderId: Int, isFavorite: Boolean) -> Unit
 ) {
     val folder = folderWithCount.folder
     var isMenuExpanded by remember { mutableStateOf(false) }
@@ -41,7 +50,11 @@ fun SingleFolderRow(
         modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        Text(text = folder.emoji ?: "", style = MaterialTheme.typography.titleLarge)
+        Text(
+            text = folder.emoji ?: "",
+            style = MaterialTheme.typography.titleLarge,
+            fontSize = 20.sp
+        )
         Column(
             modifier = Modifier.weight(1F),
             verticalArrangement = Arrangement.spacedBy(4.dp)
@@ -61,7 +74,8 @@ fun SingleFolderRow(
             }
             Text(
                 text = folder.title,
-                style = MaterialTheme.typography.titleLarge
+                style = MaterialTheme.typography.titleLarge,
+                fontSize = 20.sp
             )
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -79,30 +93,55 @@ fun SingleFolderRow(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                OutlinedButton(onClick = { /*TODO*/ }) {
-                    Text(text = "Add word")
+                OutlinedButton(
+                    onClick = { onAddWord(folder.folderId) }
+                ) {
+                    Text(text = stringResource(id = R.string.add_word))
                 }
-                OutlinedButton(onClick = { /*TODO*/ }) {
-                    Text(text = "Practise")
+                OutlinedButton(
+                    onClick = { onPractise(folder.folderId) }
+                ) {
+                    Text(text = stringResource(id = R.string.practise))
                 }
             }
         }
 
-        Box {
-            Icon(imageVector = Icons.Default.MoreHoriz,
+        Column(
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Box {
+                Icon(imageVector = Icons.Default.MoreHoriz,
+                    contentDescription = null,
+                    modifier = Modifier.clickable(
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = rememberRipple(bounded = false),
+                        onClick = { isMenuExpanded = isMenuExpanded.not() }
+                    )
+                )
+
+                WordDropdownMenu(
+                    expanded = isMenuExpanded,
+                    onDismiss = { isMenuExpanded = false },
+                    onAction = {
+                        when (it) {
+                            SwipeAction.DELETE_WORD -> onDelete(folder.folderId)
+                            SwipeAction.EDIT_WORD -> onEdit(folder.folderId)
+                            else -> Unit
+                        }
+                    },
+                    fixedWidth = 144.dp
+                )
+            }
+
+            Icon(
+                imageVector = if (folder.isFavorite) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
                 contentDescription = null,
                 modifier = Modifier.clickable(
                     interactionSource = remember { MutableInteractionSource() },
                     indication = rememberRipple(bounded = false),
-                    onClick = { isMenuExpanded = isMenuExpanded.not() }
-                )
-            )
-
-            WordDropdownMenu(
-                expanded = isMenuExpanded,
-                onDismiss = { isMenuExpanded = false },
-                onAction = { },
-                fixedWidth = 144.dp
+                    onClick = { onFavorite(folder.folderId, folder.isFavorite) }
+                ), tint = MaterialTheme.colorScheme.primary
             )
         }
     }

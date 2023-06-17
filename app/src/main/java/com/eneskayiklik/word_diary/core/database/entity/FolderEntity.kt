@@ -9,6 +9,7 @@ data class FolderEntity(
     @PrimaryKey(autoGenerate = true) val folderId: Int = 0,
     @ColumnInfo(name = "folder_lang_code") val folderLangCode: String,
     @ColumnInfo(name = "user_lang_code") val userLangCode: String,
+    val isFavorite: Boolean = false,
     val title: String,
     val color: Int,
     val emoji: String?

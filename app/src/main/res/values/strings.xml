@@ -36,6 +36,9 @@
     <string name="list_item_word_count">%d word</string>
     <string name="list_item_word_counts">%d words</string>
     <string name="empty_folder">List is empty</string>
+    <string name="add_word">Add word</string>
+    <string name="practise">Practise</string>
+    <string name="lists_screen_search_bar_placeholder">Search collections</string>
 
     <string name="destination_create_folder_title">Create list</string>
     <string name="warning_select_proper_language">You have to select list language</string>
@@ -99,8 +102,8 @@
     <string name="dialog_pick">Pick</string>
     <string name="permission_required">Permission required</string>
     <string name="oops">Oops…</string>
-    <string name="empty_folder_desc">You don\'t have any list. You can create list by clicking \'+\' button on bottom right.</string>
-    <string name="empty_word_desc">You don\'t have any word in this list. You can add word by clicking \'+\' button on bottom right.</string>
+    <string name="empty_folder_desc">You don\'t have any list. Create new list and start studying.</string>
+    <string name="empty_word_desc">You don\'t have any word in this list. Add new word and start learning.</string>
     <string name="undo_action">Undo</string>
     <string name="day_singular">%d day</string>
     <string name="day_plural">%d days</string>
@@ -180,7 +183,7 @@
     <string name="study_option_title">Study</string>
     <string name="filter_option_title">Filter</string>
     <string name="delete_option_title">Delete list</string>
-    <string name="delete_option_desc">Are you sure to delete this list and words in it permanently?</string>
+    <string name="delete_option_desc">Are you sure to delete this list and words in it permanently?. This action can not be undo!</string>
 
     <string name="word_state_learned">Learned</string>
     <string name="word_state_learning">Learning</string>

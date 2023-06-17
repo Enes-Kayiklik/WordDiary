@@ -23,6 +23,8 @@ interface FolderRepository {
 
     fun removeFolder(folderId: Int)
 
+    fun updateFolderFavoriteState(folderId: Int, isFavorite: Boolean)
+
     fun updateWordFavoriteState(wordId: Int, folderId: Int, isFavorite: Boolean)
 
     fun getWord(folderId: Int, wordId: Int): Flow<WordEntity>

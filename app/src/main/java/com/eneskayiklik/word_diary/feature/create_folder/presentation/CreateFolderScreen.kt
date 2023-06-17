@@ -81,6 +81,7 @@ import com.eneskayiklik.word_diary.feature.destinations.EmojiPickerSheetDestinat
 @Composable
 fun CreateFolderScreen(
     navigator: DestinationsNavigator,
+    folderId: Int = -1,
     resultRecipient: ResultRecipient<EmojiPickerSheetDestination, String>,
     viewModel: CreateFolderViewModel = hiltViewModel()
 ) {
@@ -117,6 +118,7 @@ fun CreateFolderScreen(
                         e.printStackTrace()
                     }
                 }
+
                 else -> Unit
             }
         }
@@ -171,7 +173,7 @@ fun CreateFolderScreen(
             verticalArrangement = Arrangement.spacedBy(24.dp),
             modifier = Modifier.fillMaxSize()
         ) {
-            item {
+            item("write_title") {
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
@@ -211,7 +213,7 @@ fun CreateFolderScreen(
                 }
             }
 
-            item {
+            item("pick_color") {
                 Text(
                     text = stringResource(id = R.string.select_color_title),
                     style = MaterialTheme.typography.titleMedium
@@ -247,7 +249,7 @@ fun CreateFolderScreen(
                 }
             }
 
-            item {
+            if (state.showLangSelection) item("pick_language") {
                 Text(
                     text = stringResource(id = R.string.pick_language_title),
                     style = MaterialTheme.typography.titleMedium

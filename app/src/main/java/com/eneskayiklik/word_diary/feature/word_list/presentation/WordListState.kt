@@ -6,6 +6,7 @@ import com.eneskayiklik.word_diary.core.data_store.data.SwipeAction
 import com.eneskayiklik.word_diary.core.database.entity.LearnState
 import com.eneskayiklik.word_diary.core.database.model.FolderWithWords
 import com.eneskayiklik.word_diary.util.extensions.filterIf
+import com.google.android.gms.ads.nativead.NativeAd
 
 data class WordListState(
     val folder: FolderWithWords? = null,
@@ -14,7 +15,8 @@ data class WordListState(
     val sortType: WordListSortType = WordListSortType.DateAdded,
     val sortDirection: WordListSortDirection = WordListSortDirection.Desc,
     val swipeAction: SwipeAction = SwipeAction.SPEECH_LOUD,
-    val dialogType: WordListDialogType = WordListDialogType.NONE
+    val dialogType: WordListDialogType = WordListDialogType.NONE,
+    val nativeAd: NativeAd? = null
 ) {
     val showEmptyLayout = folder?.words.isNullOrEmpty()
     val isLoading = folder == null
