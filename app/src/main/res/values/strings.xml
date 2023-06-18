@@ -50,6 +50,23 @@
     <string name="destination_settings_title">Settings</string>
     <string name="destination_settings_content_desc">Settings</string>
 
+    <!-- Paywall -->
+    <string name="destination_buy_premium">Premium</string>
+    <string name="paywall_title">Uncover the full potential of Word Diary by choosing a subscription plan</string>
+    <string name="unlimited_auto_translation">Unlimited auto translation</string>
+    <string name="google_drive_backup">Google Drive backup</string>
+    <string name="more_study_option">More study option</string>
+    <string name="remove_ads">Remove ads</string>
+    <string name="support_development">Support development</string>
+    <string name="subscription_renews_automatically">Subscription renews automatically, you can cancel anytime</string>
+    <string name="by_selecting_continue">By choosing to proceed with "Continue," your payment will be debited from your Google Play account, and the subscription will automatically renew for the same duration and cost, unless cancelled through the Google Play Store settings. Your acceptance of our Terms is confirmed upon selecting Continue.</string>
+    <string name="paywall_continue">Continue</string>
+    <string name="start_free_trial">Start free trial</string>
+
+    <string name="purchase_dialog_title">Purchase Successful!</string>
+    <string name="purchase_dialog_desc">Thank you for upgrading to our premium package. You now have access to exclusive features and benefits that will enhance your experience with our service. Enjoy using our app.</string>
+    <string name="purchase_dialog_dismiss">Start using</string>
+
     <string name="destination_about">About</string>
     <string name="destination_about_title">About</string>
     <string name="destination_about_content_desc">About</string>
@@ -346,7 +363,10 @@
     <string name="emoji_food">Food &amp; Drink</string>
     <string name="emoji_animals">Animals &amp; Nature</string>
     <string name="emoji_smileys">Smileys &amp; People</string>
-    
+
+    <!-- Other things -->
+    <string name="week">week</string>
+
     <!-- Permission -->
     <string name="notification_permission_declined">To receive important updates and stay connected, our app requires notification permission. Unfortunately, you have permanently declined this permission</string>
     <string name="notification_permission_rationale">We would like to request your permission to send you notifications. Notifications help us keep you informed about important updates, personalized recommendations, and time-sensitive information</string>

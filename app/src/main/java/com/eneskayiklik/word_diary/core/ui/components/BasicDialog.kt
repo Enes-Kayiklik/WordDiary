@@ -11,16 +11,18 @@ import androidx.compose.ui.graphics.vector.ImageVector
 fun BasicDialog(
     onDismiss: () -> Unit,
     onDismissRequest: () -> Unit = onDismiss,
-    onConfirm: () -> Unit,
+    onConfirm: (() -> Unit)? = null,
     title: String,
     description: String,
-    confirmText: String,
+    confirmText: String? = null,
     dismissText: String,
     icon: ImageVector? = null
 ) {
     AlertDialog(onDismissRequest = onDismissRequest, confirmButton = {
-        TextButton(onClick = onConfirm) {
-            Text(text = confirmText)
+        if (onConfirm != null && confirmText != null) {
+            TextButton(onClick = onConfirm) {
+                Text(text = confirmText)
+            }
         }
     }, dismissButton = {
         TextButton(onClick = onDismiss) {

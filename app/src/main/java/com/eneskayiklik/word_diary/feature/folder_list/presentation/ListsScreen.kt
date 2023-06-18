@@ -68,6 +68,7 @@ import com.eneskayiklik.word_diary.feature.folder_list.presentation.component.Em
 import com.eneskayiklik.word_diary.feature.destinations.WordListScreenDestination
 import com.eneskayiklik.word_diary.core.ui.components.ad.MediumNativeAdView
 import com.eneskayiklik.word_diary.core.ui.components.ad.SmallNativeAdView
+import com.eneskayiklik.word_diary.feature.destinations.PaywallScreenDestination
 import com.eneskayiklik.word_diary.feature.folder_list.presentation.component.SingleFolderRow
 import com.eneskayiklik.word_diary.feature.word_list.domain.StudyType
 import com.eneskayiklik.word_diary.util.extensions.plus
@@ -216,7 +217,10 @@ fun ListsScreen(
 
                         Icon(
                             imageVector = icon,
-                            contentDescription = null
+                            contentDescription = null,
+                            modifier = Modifier.clickable {
+                                navigator.navigate(PaywallScreenDestination)
+                            }
                         )
                     }
                 },

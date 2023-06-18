@@ -50,13 +50,13 @@ object AppDependencies {
 
     val composeModalSheet = "io.github.oleksandrbalan:modalsheet:${Versions.composeModalSheet}"
 
-    val flurryAnalytics = "com.flurry.android:analytics:${Versions.flurry}"
     val oneSignal = "com.onesignal:OneSignal:${Versions.oneSignal}"
     val adsIdentifier = "com.google.android.gms:play-services-ads-identifier:${Versions.adsIdentifier}"
 
     val mpChart = "com.github.PhilJay:MPAndroidChart:${Versions.mpChart}"
 
     val adapty = "com.github.adaptyteam:AdaptySDK-Android:${Versions.adaptyVersion}"
+    val lottie = "com.airbnb.android:lottie-compose:${Versions.lottie}"
 
     val androidxLibraries = listOf(
         coreKtx,

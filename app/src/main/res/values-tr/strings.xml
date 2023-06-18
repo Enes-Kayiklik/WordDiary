@@ -48,6 +48,22 @@
     <string name="destination_settings_title">Ayarlar</string>
     <string name="destination_settings_content_desc">Ayarlar</string>
 
+    <!-- Paywall -->
+    <string name="destination_buy_premium">Premium</string>
+    <string name="paywall_title">Bir abonelik planı seçerek Word Diary\'nin tüm potansiyelini ortaya çıkarın</string>
+    <string name="unlimited_auto_translation">Sınırsız otomatik çeviri</string>
+    <string name="google_drive_backup">Google Drive yedekleme</string>
+    <string name="more_study_option">Daha fazla çalışma seçeneği</string>
+    <string name="remove_ads">Reklamları kaldır</string>
+    <string name="support_development">Geliştiriciyi destekle</string>
+    <string name="subscription_renews_automatically">Abonelik otomatik olarak yenilenir, istediğiniz zaman iptal edebilirsiniz</string>
+    <string name="by_selecting_continue">"Devam" ile devam etmeyi seçtiğinizde, ödemeniz Google Play hesabınızdan çekilecek ve Google Play Store ayarları aracılığıyla iptal edilmediği sürece abonelik aynı süre ve ücret için otomatik olarak yenilenecektir. Devam\'ı seçtiğinizde Şartlarımızı kabul ettiğiniz onaylanmış olur.</string>
+    <string name="paywall_continue">Devam</string>
+    <string name="start_free_trial">Ücretsiz denemeye başla</string>
+    <string name="purchase_dialog_title">Satın Alma Başarılı!</string>
+    <string name="purchase_dialog_desc">Premium paketimize yükseltme yaptığınız için teşekkür ederiz. Artık hizmetimizle ilgili deneyiminizi geliştirecek özel özelliklere ve avantajlara erişiminiz var. Uygulamamızı kullanmanın keyfini çıkarın.</string>
+    <string name="purchase_dialog_dismiss">Kullanmaya başla</string>
+
     <string name="destination_about">Hakkında</string>
     <string name="destination_about_title">Hakkında</string>
     <string name="destination_about_content_desc">Hakkında</string>
@@ -338,12 +354,15 @@
 
     <string name="emoji_symbols">Semboller</string>
     <string name="emoji_flags">Bayraklar</string>
-    <string name="emoji_objects">nesneler</string>
+    <string name="emoji_objects">Nesneler</string>
     <string name="emoji_activity">Aktivite</string>
     <string name="emoji_travel">Seyahat ve Yerler</string>
     <string name="emoji_food">Yiyecek içecek</string>
     <string name="emoji_animals">Hayvanlar ve Doğa</string>
     <string name="emoji_smileys">Suratlar ve İnsanlar</string>
+
+    <!-- Other things -->
+    <string name="week">hafta</string>
 
     <!-- Permission -->
     <string name="notification_permission_declined">Önemli güncellemeleri almak ve bağlantıda kalmak için uygulamamız bildirim izni gerektirir. Ne yazık ki, bu izni kalıcı olarak reddettiniz</string>
