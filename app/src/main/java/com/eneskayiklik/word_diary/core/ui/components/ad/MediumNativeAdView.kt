@@ -15,6 +15,7 @@ import com.google.android.gms.ads.nativead.NativeAd
 @Composable
 fun MediumNativeAdView(
     modifier: Modifier = Modifier,
+    onRemoveAds: () -> Unit,
     nativeAd: NativeAd
 ) {
     val colorScheme = MaterialTheme.colorScheme
@@ -60,6 +61,9 @@ fun MediumNativeAdView(
             strokeColor = ColorStateList.valueOf(colorScheme.outline.toArgb())
             textSize = 12.sp.value
             rippleColor = ColorStateList.valueOf(colorScheme.primary.copy(.1F).toArgb())
+            setOnClickListener {
+                onRemoveAds()
+            }
         }
 
         if (nativeAd.icon == null) {

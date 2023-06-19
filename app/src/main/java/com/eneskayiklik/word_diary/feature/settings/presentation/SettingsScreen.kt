@@ -28,6 +28,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -35,26 +36,50 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.eneskayiklik.word_diary.R
+import com.eneskayiklik.word_diary.WordDiaryApp
 import com.eneskayiklik.word_diary.core.util.ScreensAnim
+import com.eneskayiklik.word_diary.core.util.UiEvent
 import com.eneskayiklik.word_diary.feature.destinations.AboutScreenDestination
 import com.eneskayiklik.word_diary.feature.destinations.AppLanguageScreenDestination
 import com.eneskayiklik.word_diary.feature.destinations.GeneralScreenDestination
+import com.eneskayiklik.word_diary.feature.destinations.PaywallScreenDestination
 import com.eneskayiklik.word_diary.feature.destinations.ThemeScreenDestination
 import com.eneskayiklik.word_diary.feature.destinations.UserLanguageScreenDestination
 import com.eneskayiklik.word_diary.feature.settings.presentation.premium.BuyPremiumButton
 import com.eneskayiklik.word_diary.util.TITLE_LETTER_SPACING
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import kotlinx.coroutines.flow.collectLatest
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class)
 @Destination(style = ScreensAnim::class)
 @Composable
 fun SettingsScreen(
-    navigator: DestinationsNavigator
+    navigator: DestinationsNavigator,
+    viewModel: SettingsViewModel = hiltViewModel()
 ) {
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     val context = LocalContext.current
+
+    LaunchedEffect(key1 = Unit) {
+        viewModel.event.collectLatest {
+            when (it) {
+                UiEvent.ClearBackstack -> navigator.navigateUp()
+
+                is UiEvent.ShowToast -> {
+                    if (it.text != null) {
+                        Toast.makeText(context, it.text, Toast.LENGTH_LONG).show()
+                    } else if (it.textRes != null) {
+                        Toast.makeText(context, it.textRes, Toast.LENGTH_LONG).show()
+                    }
+                }
+
+                else -> Unit
+            }
+        }
+    }
 
     Scaffold(
         modifier = Modifier
@@ -74,7 +99,7 @@ fun SettingsScreen(
             contentPadding = it,
             modifier = Modifier.fillMaxSize()
         ) {
-            item(key = "buy_premium") {
+            if (WordDiaryApp.hasPremium.not()) item(key = "buy_premium") {
                 BuyPremiumButton(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -83,15 +108,9 @@ fun SettingsScreen(
                         .background(MaterialTheme.colorScheme.surfaceColorAtElevation(12.dp))
                         .padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 4.dp),
                     onBuyNow = {
-                        Toast.makeText(
-                            context,
-                            context.getString(R.string.coming_soon),
-                            Toast.LENGTH_LONG
-                        ).show()
+                        navigator.navigate(PaywallScreenDestination)
                     },
-                    onRestore = {
-
-                    }
+                    onRestore = viewModel::restorePurchase
                 )
             }
             item(key = "general") {

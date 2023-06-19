@@ -3,6 +3,7 @@ package com.eneskayiklik.word_diary.core.helper.ad
 import android.content.Context
 import androidx.core.os.bundleOf
 import com.eneskayiklik.word_diary.BuildConfig
+import com.eneskayiklik.word_diary.WordDiaryApp
 import com.eneskayiklik.word_diary.util.extensions.hasInternetConnection
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdLoader
@@ -30,7 +31,7 @@ class AdLoaderHelper @Inject constructor(
     suspend fun getNativeAd(
         count: Int
     ): NativeAd? = suspendCancellableCoroutine { continuation ->
-        if (context.hasInternetConnection().not()) {
+        if (context.hasInternetConnection().not() || WordDiaryApp.hasPremium) {
             continuation.resume(null, null)
             return@suspendCancellableCoroutine
         }

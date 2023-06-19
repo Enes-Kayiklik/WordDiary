@@ -39,10 +39,12 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import com.eneskayiklik.word_diary.R
+import com.eneskayiklik.word_diary.WordDiaryApp
 import com.eneskayiklik.word_diary.core.ui.OnLifecycleEvent
 import com.eneskayiklik.word_diary.core.ui.components.ad.MediumNativeAdView
 import com.eneskayiklik.word_diary.core.util.ScreensAnim
 import com.eneskayiklik.word_diary.core.util.UiEvent
+import com.eneskayiklik.word_diary.feature.destinations.PaywallScreenDestination
 import com.eneskayiklik.word_diary.feature.statistics.presentation.component.CurrentStreakView
 import com.eneskayiklik.word_diary.feature.statistics.presentation.component.GeneralStatisticsView
 import com.eneskayiklik.word_diary.feature.statistics.presentation.component.StatisticsChart
@@ -176,7 +178,7 @@ fun StatisticsScreen(
                 )
             }
 
-            if (state.nativeAd != null) {
+            if (state.nativeAd != null && WordDiaryApp.hasPremium.not()) {
                 item(key = "native_ad") {
                     MediumNativeAdView(
                         modifier = Modifier
@@ -186,7 +188,10 @@ fun StatisticsScreen(
                                 MaterialTheme.colorScheme
                                     .surfaceColorAtElevation(12.dp)
                             ),
-                        nativeAd = state.nativeAd
+                        nativeAd = state.nativeAd,
+                        onRemoveAds = {
+                            navigator.navigate(PaywallScreenDestination)
+                        }
                     )
                 }
             }

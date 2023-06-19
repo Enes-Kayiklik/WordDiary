@@ -2,6 +2,7 @@ package com.eneskayiklik.word_diary
 
 import android.app.Application
 import com.adapty.Adapty
+import com.adapty.utils.AdaptyResult
 import com.google.android.gms.ads.MobileAds
 import com.onesignal.OneSignal
 import dagger.hilt.android.HiltAndroidApp
@@ -14,10 +15,26 @@ class WordDiaryApp: Application() {
         MobileAds.initialize(this) {}
         Adapty.activate(this, BuildConfig.ADAPTY_KEY)
         initOneSignal()
+        updatePremiumStatus()
+    }
+
+    private fun updatePremiumStatus() {
+        Adapty.getProfile { result ->
+            when (result) {
+                is AdaptyResult.Success -> {
+                    hasPremium = result.value.accessLevels["premium"]?.isActive == true
+                }
+                is AdaptyResult.Error -> Unit
+            }
+        }
     }
 
     private fun initOneSignal() {
         OneSignal.initWithContext(this)
         OneSignal.setAppId(BuildConfig.ONE_SIGNAL_APP_ID)
+    }
+
+    companion object {
+        var hasPremium: Boolean = false
     }
 }
