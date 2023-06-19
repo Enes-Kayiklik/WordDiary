@@ -25,7 +25,8 @@ data class StatisticsState(
     val currentStreakCount: Int = 1,
     @StringRes val maxStreakFormatter: Int = R.string.day_singular,
     @StringRes val currentStreakFormatter: Int = R.string.day_singular,
-    val barEntry: List<BarEntry> = emptyList()
+    val studiedBarEntry: List<BarEntry> = emptyList(),
+    val newWordBarEntry: List<BarEntry> = emptyList()
 ) {
     val todayNewWords = "${minOf(todayNewWordCount, newWordDailyGoal)} / $newWordDailyGoal"
     val todayStudySessions =

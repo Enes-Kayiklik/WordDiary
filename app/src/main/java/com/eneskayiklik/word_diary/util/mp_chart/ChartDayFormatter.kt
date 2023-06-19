@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter
 
 class ChartDayFormatter : ValueFormatter() {
 
-    private val formatter = DateTimeFormatter.ofPattern("dd MMMM")
+    private val formatter = DateTimeFormatter.ofPattern("EEE")
 
     override fun getAxisLabel(value: Float, axis: AxisBase?): String {
         /**
