@@ -58,6 +58,7 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import com.eneskayiklik.word_diary.R
+import com.eneskayiklik.word_diary.WordDiaryApp
 import com.eneskayiklik.word_diary.core.ui.OnLifecycleEvent
 import com.eneskayiklik.word_diary.core.ui.components.BasicDialog
 import com.eneskayiklik.word_diary.core.ui.components.StatusSearchBar
@@ -230,7 +231,9 @@ fun ListsScreen(
                         contentPadding = PaddingValues(16.dp),
                         verticalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
-                        if (state.searchAd != null) stickyHeader(key = "search_ad") {
+                        if (state.searchAd != null && WordDiaryApp.hasPremium.not()) stickyHeader(
+                            key = "search_ad"
+                        ) {
                             SmallNativeAdView(
                                 nativeAd = state.searchAd,
                                 modifier = Modifier.fillMaxWidth()
@@ -351,7 +354,7 @@ fun ListsScreen(
                         )
                     }
 
-                    if (index == 0 && state.nativeAd != null) {
+                    if (index == 0 && state.nativeAd != null && WordDiaryApp.hasPremium.not()) {
                         item(key = "ad_item") {
                             MediumNativeAdView(
                                 modifier = Modifier
@@ -361,7 +364,10 @@ fun ListsScreen(
                                         MaterialTheme.colorScheme
                                             .surfaceColorAtElevation(12.dp)
                                     ),
-                                nativeAd = state.nativeAd
+                                nativeAd = state.nativeAd,
+                                onRemoveAds = {
+                                    viewModel.onEvent(UiEvent.OnNavigate(PaywallScreenDestination))
+                                }
                             )
                         }
                     }

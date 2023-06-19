@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.eneskayiklik.word_diary.R
+import com.eneskayiklik.word_diary.WordDiaryApp
 import com.eneskayiklik.word_diary.core.data.Result
 import com.eneskayiklik.word_diary.core.util.UiEvent
 import com.eneskayiklik.word_diary.feature.paywall.domain.PaywallRepository
@@ -86,7 +87,10 @@ class PaywallViewModel @Inject constructor(
         }
 
         when (result) {
-            is Result.Success -> _state.update { it.copy(dialogType = PaywallDialog.SubscriptionSuccess) }
+            is Result.Success -> {
+                WordDiaryApp.hasPremium = true
+                _state.update { it.copy(dialogType = PaywallDialog.SubscriptionSuccess) }
+            }
             else -> Unit
         }
     }
@@ -100,7 +104,10 @@ class PaywallViewModel @Inject constructor(
         }
 
         when (result) {
-            is Result.Success -> _state.update { it.copy(dialogType = PaywallDialog.SubscriptionSuccess) }
+            is Result.Success -> {
+                WordDiaryApp.hasPremium = true
+                _state.update { it.copy(dialogType = PaywallDialog.SubscriptionSuccess) }
+            }
             is Result.Error -> onEvent(UiEvent.ShowToast(textRes = R.string.uncaught_error))
             else -> Unit
         }
