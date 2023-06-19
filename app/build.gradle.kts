@@ -201,4 +201,7 @@ dependencies {
 
     // Adapty
     implementation(AppDependencies.adapty)
+
+    // Lottie
+    implementation(AppDependencies.lottie)
 }

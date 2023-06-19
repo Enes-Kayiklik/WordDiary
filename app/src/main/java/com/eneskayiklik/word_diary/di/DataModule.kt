@@ -4,6 +4,8 @@ import com.eneskayiklik.word_diary.core.data_store.data.UserPreferenceRepository
 import com.eneskayiklik.word_diary.core.data_store.domain.UserPreferenceRepository
 import com.eneskayiklik.word_diary.feature.folder_list.data.repository.FolderRepositoryImpl
 import com.eneskayiklik.word_diary.feature.folder_list.domain.FolderRepository
+import com.eneskayiklik.word_diary.feature.paywall.data.PaywallRepositoryImpl
+import com.eneskayiklik.word_diary.feature.paywall.domain.PaywallRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -22,4 +24,9 @@ interface DataModule {
     fun bindsUserPreferenceRepository(
         userPreferenceRepository: UserPreferenceRepositoryImpl
     ): UserPreferenceRepository
+
+    @Binds
+    fun bindsPaywallRepository(
+        paywallRepository: PaywallRepositoryImpl
+    ): PaywallRepository
 }

@@ -1,6 +1,8 @@
 package com.eneskayiklik.word_diary.util.extensions
 
+import android.app.Activity
 import android.content.Context
+import android.content.ContextWrapper
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
@@ -90,4 +92,13 @@ fun Context.hasInternetConnection(): Boolean {
         capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
         else -> true
     }
+}
+
+fun Context.findActivity(): Activity {
+    var context = this
+    while (context is ContextWrapper) {
+        if (context is Activity) return context
+        context = context.baseContext
+    }
+    throw IllegalStateException("no activity")
 }

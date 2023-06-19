@@ -38,8 +38,8 @@ object Versions {
     const val composeModalSheet = "0.4.0"
     const val adaptyVersion = "2.4.3"
 
-    const val flurry = "14.2.0"
     const val oneSignal = "[4.0.0, 4.99.99]"
     const val adsIdentifier = "17.1.0"
     const val mpChart = "v3.1.0"
+    const val lottie = "6.0.1"
 }
