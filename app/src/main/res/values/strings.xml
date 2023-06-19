@@ -288,6 +288,7 @@
     <!-- Settings About -->
     <string name="settings_about_title">About</string>
     <string name="settings_privacy_policy">Privacy &amp; Policy</string>
+    <string name="settings_terms_conditions">Terms of conditions</string>
     <string name="settings_about_desc">Learn more about %s</string>
 
     <string name="settings_developer_info_desc">Developer of Word Diary</string>

@@ -285,6 +285,7 @@
     <!-- Settings About -->
     <string name="settings_about_title">Hakkında</string>
     <string name="settings_privacy_policy">Gizlilik Politikası</string>
+    <string name="settings_terms_conditions">Şartlar ve koşullar</string>
     <string name="settings_about_desc">%s hakkında daha fazla bilgi edin</string>
 
     <string name="settings_developer_info_desc">Word Diary\'nin Geliştiricisi</string>
