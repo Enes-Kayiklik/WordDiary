@@ -12,5 +12,7 @@ const val TELEGRAM_CHANNEL_REPORT_BUGS_TOPIC = "https://t.me/word_diary/2"
 const val GITHUB_ACCOUNT = "https://github.com/Enes-Kayiklik"
 const val TWITTER_ACCOUNT = "https://twitter.com/eneskayiklik"
 const val LINKEDIN_ACCOUNT = "https://linkedin.com/in/eneskayiklik"
+const val PRIVACY = "https://github.com/Enes-Kayiklik/WordDiary/blob/main/Privacy.md"
+const val TERMS = "https://github.com/Enes-Kayiklik/WordDiary/blob/main/Terms.md"
 
 const val GOOGLE_TTS = "https://play.google.com/store/apps/details?id=com.google.android.tts"
