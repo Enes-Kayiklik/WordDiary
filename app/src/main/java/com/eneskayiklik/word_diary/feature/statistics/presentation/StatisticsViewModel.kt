@@ -1,5 +1,6 @@
 package com.eneskayiklik.word_diary.feature.statistics.presentation
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.eneskayiklik.word_diary.R
@@ -154,37 +155,43 @@ class StatisticsViewModel @Inject constructor(
     ) = viewModelScope.launch {
         // added word count
         // if (it.addedDate.toEpochDay() - _sevenDaysAgo - 6).absoluteValue == 0 this means it is today
-        val wordLearnedLast7Day = words.filter { _sevenDaysAgo <= it.addedDate.toEpochDay() }
+        val wordAddedLast7Day = words.filter { _sevenDaysAgo <= it.addedDate.toEpochDay() }
             .groupBy { (it.addedDate.toEpochDay() - _sevenDaysAgo - 6).absoluteValue }
 
         // studied unique words in last 7 days
         val sessionLast7Day = sessions.filter { _sevenDaysAgo <= it.date.toEpochDay() }
             .groupBy { (it.date.toEpochDay() - _sevenDaysAgo - 6).absoluteValue }
 
-        val barEntry = mutableListOf<BarEntry>()
+        val studiedBarEntry = mutableListOf<BarEntry>()
+        val newWordBarEntry = mutableListOf<BarEntry>()
 
         repeat(7) { dayFromToday ->
-            val learnedWordCount =
-                wordLearnedLast7Day.getOrDefault(dayFromToday.toLong(), listOf()).size.toFloat()
+            val addedWordCount =
+                wordAddedLast7Day.getOrDefault(dayFromToday.toLong(), listOf()).size.toFloat()
 
             val studiedWordCount = sessionLast7Day.getOrDefault(dayFromToday.toLong(), listOf())
                 .map { it.wordsInOrder.map { w -> w.wordId } }.flatten().toSet().size.toFloat()
 
-            barEntry.add(
+            studiedBarEntry.add(
                 // Bar data is reversed. If 'x' value is 0 it means it is 7 day ago
                 // So if 'x' value is 6 it is today.
-                BarEntry(
-                    6F - dayFromToday, floatArrayOf(
-                        learnedWordCount,
-                        studiedWordCount
-                    )
-                )
+                BarEntry(6F - dayFromToday, studiedWordCount)
+            )
+            newWordBarEntry.add(
+                BarEntry(6F - dayFromToday, addedWordCount)
             )
         }
 
-        _state.update {
-            it.copy(
-                barEntry = barEntry
+        val maxValue = maxOf(studiedBarEntry.maxBy { it.y }.y, newWordBarEntry.maxBy { it.y }.y)
+
+        if (maxValue > 0F) _state.update { state ->
+            state.copy(
+                studiedBarEntry = studiedBarEntry.sortedBy { it.x }.map {
+                    BarEntry(it.x, it.y.takeIf { y -> y > 0F } ?: (maxValue / 50))
+                },
+                newWordBarEntry = newWordBarEntry.sortedBy { it.x }.map {
+                    BarEntry(it.x, it.y.takeIf { y -> y > 0F } ?: (maxValue / 50))
+                }
             )
         }
     }

@@ -85,6 +85,8 @@
     <string name="statistics_all_time_study_time">Çalışma süresi</string>
     <string name="statistics_all_time_study_sessions">Çalışma oturumları</string>
     <string name="statistics_start_of_learning">Öğrenmeye başlama</string>
+    <string name="chart_studied">Çalışılan kelime</string>
+    <string name="chart_new_word">Yeni eklenen kelime</string>
 
     <string name="destination_licenses">Açık Kaynak Lisansları</string>
     <string name="destination_licenses_title">Lisanslar</string>

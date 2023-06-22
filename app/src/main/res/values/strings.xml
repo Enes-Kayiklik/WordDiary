@@ -88,6 +88,8 @@
     <string name="statistics_all_time_study_time">Study time</string>
     <string name="statistics_all_time_study_sessions">Study sessions</string>
     <string name="statistics_start_of_learning">Start of learning</string>
+    <string name="chart_studied">Studied word</string>
+    <string name="chart_new_word">New added word</string>
 
     <string name="destination_licenses">Open Source Licenses</string>
     <string name="destination_licenses_title">Licenses</string>

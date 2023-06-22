@@ -136,7 +136,7 @@ fun StatisticsScreen(
 
             item(key = "statistics_chart") {
                 AnimatedVisibility(
-                    visible = state.barEntry.isNotEmpty(),
+                    visible = state.studiedBarEntry.isNotEmpty(),
                     enter = expandVertically(),
                     exit = shrinkVertically()
                 ) {
@@ -149,7 +149,8 @@ fun StatisticsScreen(
                                 .clip(MaterialTheme.shapes.medium)
                                 .background(MaterialTheme.colorScheme.surfaceColorAtElevation(12.dp))
                                 .padding(8.dp),
-                            barEntry = state.barEntry
+                            studiedBarEntry = state.studiedBarEntry,
+                            newWordBarEntry = state.newWordBarEntry
                         )
                     }
                 }
