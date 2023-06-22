@@ -50,7 +50,7 @@ fun WordListItem(
         Column(modifier = Modifier.weight(1F), verticalArrangement = Arrangement.spacedBy(16.dp)) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 CircularProgressIndicator(
                     progress = (word.proficiency / 100).toFloat(),
@@ -79,8 +79,8 @@ fun WordListItem(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = 40.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    .padding(start = 48.dp),
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 Icon(
                     imageVector = Icons.Default.VolumeUp,
@@ -90,7 +90,7 @@ fun WordListItem(
                             MutableInteractionSource()
                         }, indication = rememberRipple(bounded = false),
                         onClick = { onAction(SwipeAction.SPEECH_LOUD) }
-                    )
+                    ), tint = MaterialTheme.colorScheme.primary
                 )
                 Icon(
                     imageVector = if (word.isFavorite) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
@@ -100,7 +100,7 @@ fun WordListItem(
                             MutableInteractionSource()
                         }, indication = rememberRipple(bounded = false),
                         onClick = { onAction(SwipeAction.ADD_FAVORITES) }
-                    )
+                    ), tint = MaterialTheme.colorScheme.primary
                 )
             }
         }

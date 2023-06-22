@@ -4,6 +4,9 @@ import android.app.Application
 import com.adapty.Adapty
 import com.adapty.utils.AdaptyResult
 import com.google.android.gms.ads.MobileAds
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
 import com.onesignal.OneSignal
 import dagger.hilt.android.HiltAndroidApp
 
@@ -14,6 +17,8 @@ class WordDiaryApp: Application() {
         super.onCreate()
         MobileAds.initialize(this) {}
         Adapty.activate(this, BuildConfig.ADAPTY_KEY)
+        Firebase.crashlytics.setCrashlyticsCollectionEnabled(BuildConfig.DEBUG.not())
+        Firebase.analytics.setAnalyticsCollectionEnabled(BuildConfig.DEBUG.not())
         initOneSignal()
         updatePremiumStatus()
     }

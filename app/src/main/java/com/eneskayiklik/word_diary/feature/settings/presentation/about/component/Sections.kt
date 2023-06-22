@@ -2,12 +2,9 @@ package com.eneskayiklik.word_diary.feature.settings.presentation.about.componen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.BugReport
-import androidx.compose.material.icons.outlined.Redeem
 import androidx.compose.material.icons.outlined.Share
 import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material.icons.outlined.Translate
@@ -24,8 +21,10 @@ import com.eneskayiklik.word_diary.util.LINKEDIN_ACCOUNT
 import com.eneskayiklik.word_diary.util.TELEGRAM_CHANNEL
 import com.eneskayiklik.word_diary.util.TELEGRAM_CHANNEL_REPORT_BUGS_TOPIC
 import com.eneskayiklik.word_diary.util.TWITTER_ACCOUNT
+import com.eneskayiklik.word_diary.util.WORD_DIARY_PLAY_STORE
 import com.eneskayiklik.word_diary.util.extensions.openLink
 import com.eneskayiklik.word_diary.util.extensions.sendEmail
+import com.eneskayiklik.word_diary.util.extensions.shareAppLink
 
 @Composable
 fun AboutAppContent() {
@@ -105,13 +104,7 @@ fun SupportDevelopmentActions() {
                 imageVector = Icons.Outlined.Star,
                 title = stringResource(id = R.string.rate)
             ) {
-
-            }
-            AboutTextButton(
-                imageVector = Icons.Outlined.Share,
-                title = stringResource(id = R.string.share)
-            ) {
-
+                context.openLink(WORD_DIARY_PLAY_STORE)
             }
         }
         Row(
@@ -119,11 +112,17 @@ fun SupportDevelopmentActions() {
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             AboutTextButton(
+                imageVector = Icons.Outlined.Share,
+                title = stringResource(id = R.string.share)
+            ) {
+                context.shareAppLink()
+            }
+            /*AboutTextButton(
                 imageVector = Icons.Outlined.Redeem,
                 title = stringResource(id = R.string.donate)
             ) {
 
-            }
+            }*/
             AboutTextButton(
                 imageVector = Icons.Outlined.BugReport,
                 title = stringResource(id = R.string.report_bugs)
