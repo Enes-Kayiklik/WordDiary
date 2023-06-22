@@ -208,6 +208,10 @@
     <string name="word_state_learning">Learning</string>
     <string name="word_state_new_word">New word</string>
 
+    <string name="total_words">Total words</string>
+    <string name="mastered_words">Mastered words</string>
+    <string name="mastered">mastered</string>
+
     <string name="filter_by">Filter by</string>
     <string name="filter_by_learned">Learned</string>
     <string name="filter_by_new_word">New word</string>

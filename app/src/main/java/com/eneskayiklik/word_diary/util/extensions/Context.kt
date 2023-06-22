@@ -12,6 +12,7 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
 import android.provider.Settings
+import com.eneskayiklik.word_diary.util.WORD_DIARY_PLAY_STORE
 
 fun Context.vibratePhone(time: Long) {
     try {
@@ -46,17 +47,29 @@ fun Context.openLink(link: String) {
     }
 }
 
+fun Context.shareAppLink() {
+    try {
+        Intent(Intent.ACTION_SEND).apply {
+            type = "text/plain"
+            putExtra(Intent.EXTRA_TEXT, WORD_DIARY_PLAY_STORE)
+            startActivity(Intent.createChooser(this, "Share"))
+        }
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+}
+
 fun Context.sendEmail(address: String) {
-   try {
-       Intent(Intent.ACTION_SENDTO).apply {
-           data = Uri.parse("mailto:")
-           putExtra(Intent.EXTRA_EMAIL, address)
-           addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-           startActivity(this)
-       }
-   } catch (e: Exception) {
-       e.printStackTrace()
-   }
+    try {
+        Intent(Intent.ACTION_SENDTO).apply {
+            data = Uri.parse("mailto:")
+            putExtra(Intent.EXTRA_EMAIL, address)
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(this)
+        }
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
 }
 
 fun Context.openTTSSettings() {

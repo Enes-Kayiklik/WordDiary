@@ -23,7 +23,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.MoreHoriz
+import androidx.compose.material.icons.filled.FilterList
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.Close
@@ -60,7 +60,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -79,7 +78,7 @@ import com.eneskayiklik.word_diary.core.util.UiEvent
 import com.eneskayiklik.word_diary.feature.destinations.StudyScreenDestination
 import com.eneskayiklik.word_diary.feature.word_list.domain.StudyType
 import com.eneskayiklik.word_diary.feature.word_list.presentation.component.FilterMenu
-import com.eneskayiklik.word_diary.feature.word_list.presentation.component.WordListDropdownMenu
+import com.eneskayiklik.word_diary.feature.word_list.presentation.component.ListsStatisticView
 import com.eneskayiklik.word_diary.feature.word_list.presentation.component.WordListItem
 import com.eneskayiklik.word_diary.feature.word_list.presentation.component.word_queue.WordQueueView
 import com.eneskayiklik.word_diary.util.extensions.plus
@@ -109,7 +108,6 @@ fun WordListScreen(
     val itemsScale by animateFloatAsState(
         targetValue = if (state.isWordQueueVisible) 0F else 1F
     )
-    var isMenuExpanded by remember { mutableStateOf(false) }
     var isStudyListVisible by remember { mutableStateOf(false) }
 
     val firstItemVisible by remember {
@@ -234,23 +232,19 @@ fun WordListScreen(
                 }
             }, actions = {
                 IconButton(
-                    onClick = { isMenuExpanded = true },
-                    modifier = Modifier
-                        .graphicsLayer {
-                            translationX = 8.dp.toPx()
-                        }
-                        .scale(itemsScale)
+                    onClick = { isFilterMenuVisible = true },
+                    modifier = Modifier.scale(itemsScale)
                 ) {
-                    Icon(imageVector = Icons.Default.MoreHoriz, contentDescription = null)
+                    Icon(imageVector = Icons.Default.FilterList, contentDescription = null)
                 }
 
-                WordListDropdownMenu(
+                /*WordListDropdownMenu(
                     expanded = isMenuExpanded,
                     onFilter = { isFilterMenuVisible = isFilterMenuVisible.not() },
                     onQuiz = { isStudyListVisible = isStudyListVisible.not() },
                     onDelete = { viewModel.onEvent(WordListEvent.OnShowDialog(WordListDialogType.DELETE_LIST)) },
                     onDismiss = { isMenuExpanded = false }
-                )
+                )*/
             }, scrollBehavior = scrollBehavior)
         }
     ) { padding ->
@@ -278,6 +272,16 @@ fun WordListScreen(
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
+                item("simple_statistics") {
+                    ListsStatisticView(
+                        statistic = state.listStatistic,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 24.dp)
+                            .padding(bottom = 8.dp),
+                        onStudyClick = { isStudyListVisible = true }
+                    )
+                }
                 state.words.forEachIndexed { index, word ->
                     item(key = word.wordId) {
                         WordListItem(

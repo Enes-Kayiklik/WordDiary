@@ -11,6 +11,7 @@ import com.google.android.gms.ads.nativead.NativeAd
 data class WordListState(
     val folder: FolderWithWords? = null,
     val initialWordIndex: Int = -1,
+    val listStatistic: ListStatistic = ListStatistic(),
     val filterType: List<WordListFilterType> = listOf(WordListFilterType.NewWord),
     val sortType: WordListSortType = WordListSortType.DateAdded,
     val sortDirection: WordListSortDirection = WordListSortDirection.Desc,
@@ -29,6 +30,13 @@ data class WordListState(
     val userLangIso = folder?.folder?.userLangCode
     val folderLangIso = folder?.folder?.folderLangCode
 }
+
+data class ListStatistic(
+    val progress: Float = 0F,
+    val percentage: Int = 0,
+    val totalWords: Int = 0,
+    val masteredWords: Int = 0
+)
 
 enum class WordListFilterType(@StringRes val title: Int, val learnState: LearnState?) {
     Learned(R.string.filter_by_learned, LearnState.Learned),

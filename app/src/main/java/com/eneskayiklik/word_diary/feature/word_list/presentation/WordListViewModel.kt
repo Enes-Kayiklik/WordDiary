@@ -9,6 +9,7 @@ import com.eneskayiklik.word_diary.R
 import com.eneskayiklik.word_diary.core.data_store.data.SwipeAction
 import com.eneskayiklik.word_diary.core.data_store.domain.UserPreferenceRepository
 import com.eneskayiklik.word_diary.core.database.entity.WordEntity
+import com.eneskayiklik.word_diary.core.database.model.FolderWithWords
 import com.eneskayiklik.word_diary.core.helper.ad.AdLoaderHelper
 import com.eneskayiklik.word_diary.core.tts.WordToSpeech
 import com.eneskayiklik.word_diary.feature.folder_list.domain.FolderRepository
@@ -105,6 +106,7 @@ class WordListViewModel @Inject constructor(
                 event.secondSentence,
                 event.secondSource
             )
+
             is WordListEvent.OnShowDialog -> _state.update {
                 it.copy(
                     dialogType = event.type
@@ -231,6 +233,23 @@ class WordListViewModel @Inject constructor(
         _folderId = folderId
         folderRepo.getFolderWithWords(folderId).collectLatest { new ->
             _state.update { it.copy(folder = new) }
+            setupStatistics(new)
+        }
+    }
+
+    private fun setupStatistics(folder: FolderWithWords) = viewModelScope.launch(Dispatchers.IO) {
+        val totalWordCount = folder.words.size
+        val finishedWordsCount = folder.words.count { it.proficiency >= 100.0 }
+        val progress = folder.words.sumOf { it.proficiency } / totalWordCount
+        _state.update {
+            it.copy(
+                listStatistic = ListStatistic(
+                    progress = (progress / 100).toFloat(),
+                    percentage = progress.toInt(),
+                    totalWords = totalWordCount,
+                    masteredWords = finishedWordsCount
+                )
+            )
         }
     }
 

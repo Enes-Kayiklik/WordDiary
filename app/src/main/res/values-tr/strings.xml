@@ -205,6 +205,10 @@
     <string name="word_state_learning">Öğreniliyor</string>
     <string name="word_state_new_word">Yeni kelime</string>
 
+    <string name="total_words">Toplam kelime</string>
+    <string name="mastered_words">Ustalaşmış kelime</string>
+    <string name="mastered">ustalaşma</string>
+
     <string name="filter_by">Filtrele</string>
     <string name="filter_by_learned">Öğrenildi</string>
     <string name="filter_by_new_word">Yeni kelime</string>
