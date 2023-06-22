@@ -53,7 +53,7 @@ fun dynamicColorScheme(
             scrim = 0.n1,
             secondary = 40.a2,
             secondaryContainer = 90.a2,
-            surface = (if (colorfulBackground) 98.a2 else 99.n1).copy(.97F),
+            surface = (if (colorfulBackground) 98.a2 else 99.n1),
             surfaceVariant = 90.n2,
             tertiary = 40.a3,
             tertiaryContainer = 90.a3
@@ -81,8 +81,8 @@ fun dynamicColorScheme(
             secondary = 80.a2,
             secondaryContainer = 30.a2,
             surface = if (isAmoledBlack) 0.n1
-            else if (colorfulBackground) 10.a1.copy(.97F)
-            else 10.n1.copy(.97F),
+            else if (colorfulBackground) 10.a1
+            else 10.n1,
             surfaceVariant = 30.n2,
             tertiary = 80.a3,
             tertiaryContainer = 30.a3
