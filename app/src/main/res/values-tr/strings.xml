@@ -68,6 +68,11 @@
     <string name="destination_about_title">Hakkında</string>
     <string name="destination_about_content_desc">Hakkında</string>
 
+    <!-- Update Screen -->
+    <string name="destination_update_available">Güncelleme mevcut!</string>
+    <string name="update">Güncelle</string>
+    <string name="destination_update_available_desc">En son özellikler ve iyileştirmelerle güncel kalın! Gelişmiş işlevsellik ve daha da iyi bir kullanıcı deneyiminin keyfini çıkarmak için şimdi güncelleyin</string>
+
     <!-- Statistics Screen -->
     <string name="destination_statistics">İstatistikler</string>
     <string name="destination_statistics_content_desc">İstatistikler</string>
@@ -114,6 +119,7 @@
     <string name="dialog_save">Kaydet</string>
     <string name="delete_confirm">Sil</string>
     <string name="dialog_ok">TAMAM</string>
+    <string name="close">Kapat</string>
     <string name="dialog_grant_permission">İzin ver</string>
     <string name="dialog_pick">Seç</string>
     <string name="permission_required">İzin gerekli</string>
@@ -210,13 +216,16 @@
     <string name="mastered">ustalaşma</string>
 
     <string name="filter_by">Filtrele</string>
-    <string name="filter_by_learned">Öğrenildi</string>
-    <string name="filter_by_new_word">Yeni kelime</string>
-    <string name="filter_by_learning">Öğreniliyor</string>
-    <string name="filter_by_favorite">Favori</string>
+    <string name="beginner">Başlangıç</string>
+    <string name="intermediate">Orta seviye</string>
+    <string name="advanced">Gelişmiş</string>
+    <string name="expert">Uzman</string>
+    <string name="master">Usta</string>
+    <string name="favorite">Favorite</string>
 
     <string name="sort_by">Sırala</string>
     <string name="sort_direction">Sıralama yönü</string>
+    <string name="sort_by_proficiency">Yetkinlik</string>
     <string name="sort_by_date_added">Eklenme tarihi</string>
     <string name="sort_by_last_studied">Son çalışma</string>
     <string name="sort_by_study_count">Çalışma sayısı</string>

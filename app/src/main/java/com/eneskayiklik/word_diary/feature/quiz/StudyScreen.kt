@@ -176,9 +176,11 @@ fun StudyScreen(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(16.dp)
-                                .align(Alignment.BottomCenter)
+                                .align(Alignment.BottomCenter),
+                            enabled = state.isStartActive
                         ) {
                             Text(text = stringResource(id = R.string.action_start_study))
+                            Text(text = "(${state.currentTotal} words)")
                         }
                     }
 

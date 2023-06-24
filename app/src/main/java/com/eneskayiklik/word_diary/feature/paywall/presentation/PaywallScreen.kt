@@ -54,10 +54,10 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.eneskayiklik.word_diary.R
 import com.eneskayiklik.word_diary.core.ui.components.BasicDialog
+import com.eneskayiklik.word_diary.core.ui.components.LottieAnimation
 import com.eneskayiklik.word_diary.core.util.ScreensAnim
 import com.eneskayiklik.word_diary.core.util.UiEvent
 import com.eneskayiklik.word_diary.feature.paywall.presentation.component.BenefitView
-import com.eneskayiklik.word_diary.feature.paywall.presentation.component.BubbleAnimation
 import com.eneskayiklik.word_diary.feature.paywall.presentation.component.ProductView
 import com.eneskayiklik.word_diary.util.TITLE_LETTER_SPACING
 import com.ramcosta.composedestinations.annotation.Destination
@@ -133,11 +133,12 @@ fun PaywallScreen(
         }
     ) { padding ->
         Box(modifier = Modifier.fillMaxSize()) {
-            BubbleAnimation(
+            LottieAnimation(
                 modifier = Modifier
                     .fillMaxSize()
                     .align(Alignment.BottomCenter)
-                    .alpha(.5F)
+                    .alpha(.5F),
+                rawRes = R.raw.bubble_anim
             )
 
             Icon(

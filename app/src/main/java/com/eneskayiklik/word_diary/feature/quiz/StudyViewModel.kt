@@ -12,7 +12,9 @@ import com.eneskayiklik.word_diary.core.tts.WordToSpeech
 import com.eneskayiklik.word_diary.feature.folder_list.domain.FolderRepository
 import com.eneskayiklik.word_diary.core.util.UiEvent
 import com.eneskayiklik.word_diary.feature.word_list.domain.StudyType
+import com.eneskayiklik.word_diary.feature.word_list.presentation.WordListFilterType
 import com.eneskayiklik.word_diary.util.extensions.calculateProficiencyLevel
+import com.eneskayiklik.word_diary.util.extensions.filterIf
 import com.eneskayiklik.word_diary.util.extensions.sumOf
 import com.eneskayiklik.word_diary.util.extensions.sumOfAll
 import com.eneskayiklik.word_diary.util.extensions.sumOfAllDouble
@@ -22,9 +24,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -37,18 +41,47 @@ class StudyViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
+    private val _words = MutableStateFlow<List<WordEntity>>(emptyList())
+    private var _filteredWords: List<WordEntity> = emptyList()
+
+    private val _selectedFilters = MutableStateFlow(
+        listOf(
+            WordListFilterType.Beginner,
+            WordListFilterType.Intermediate,
+            WordListFilterType.Advanced,
+            WordListFilterType.Expert
+        )
+    )
+
     private var _folderId: Int? = null
     private var _folderLang: String? = null
 
     private val _event = MutableSharedFlow<UiEvent>()
     val event = _event.asSharedFlow()
 
-    private val _state = MutableStateFlow(StudyState())
-    val state = _state.asStateFlow()
-
-    private var _folderWords: List<WordEntity> = emptyList()
-
     private val _wordStatistics: HashMap<WordEntity, WordStatistics> = hashMapOf()
+
+    private val _state = MutableStateFlow(StudyState())
+    val state = combine(
+        _state,
+        _words,
+        _selectedFilters
+    ) { state, words, selectedFilters ->
+        val ranges = selectedFilters.mapNotNull { it.proficiency }
+
+        _filteredWords = words.filterIf(
+            filter = { selectedFilters.contains(WordListFilterType.Favorite) },
+            predicate = { it.isFavorite }
+        ).filterIf(
+            filter = { ranges.isNotEmpty() },
+            predicate = { word -> ranges.any { word.proficiency.toInt() in it } }
+        )
+
+        state.copy(
+            currentTotal = _filteredWords.size,
+            selectedFilters = selectedFilters
+        )
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), StudyState())
 
     init {
         val folderId = savedStateHandle.get<Int>("folderId")
@@ -84,6 +117,7 @@ class StudyViewModel @Inject constructor(
 
             is StudyEvent.SpeakLoud -> tts.speak(event.word.meaning, _folderLang ?: return)
             is StudyEvent.ShowDialog -> showDialog(event.type)
+            is StudyEvent.OnFilterSelected -> onFilterSelected(event.filter)
             StudyEvent.OnLooping -> _state.update { it.copy(isLoopingEnable = it.isLoopingEnable.not()) }
             StudyEvent.OnShuffle -> _state.update { it.copy(isShuffleEnable = it.isShuffleEnable.not()) }
             StudyEvent.OnTimer -> _state.update { it.copy(isTimerEnable = it.isTimerEnable.not()) }
@@ -102,20 +136,19 @@ class StudyViewModel @Inject constructor(
     }
 
     private fun startStudy() = viewModelScope.launch {
-        if (_folderWords.isEmpty()) {
+        if (_filteredWords.isEmpty()) {
             onEvent(UiEvent.ShowToast(textRes = R.string.uncaught_error))
             onEvent(UiEvent.ClearBackstack)
             return@launch
         }
 
         val studyState = _state.value
-        val currentWords = if (
-            studyState.isShuffleEnable
-        ) studyState.words.shuffled() else studyState.words
+        val currentWords =
+            if (studyState.isShuffleEnable) _filteredWords.shuffled() else _filteredWords
 
         val answers = if (
             studyState.studyType == StudyType.MultipleChoice
-        ) (_folderWords.takeRandom(
+        ) (_filteredWords.takeRandom(
             3,
             listOf(currentWords.first())
         ) + currentWords.first()).shuffled() else emptyList()
@@ -171,7 +204,7 @@ class StudyViewModel @Inject constructor(
                                 studyType = studyType,
                                 factor = 5.0
                             )
-                        } + _folderWords.sumOf { w -> w.proficiency }) / _folderWords.size
+                        } + _filteredWords.sumOf { w -> w.proficiency }) / _filteredWords.size
                     )
                 )
             }
@@ -221,7 +254,7 @@ class StudyViewModel @Inject constructor(
 
     private fun onWordStudyQuestionAnswered(word: WordEntity) = viewModelScope.launch {
         val stateValue = _state.value
-        if (_folderWords.isEmpty()) {
+        if (_filteredWords.isEmpty()) {
             onEvent(UiEvent.ShowToast(textRes = R.string.uncaught_error))
             onEvent(UiEvent.ClearBackstack)
             return@launch
@@ -229,13 +262,13 @@ class StudyViewModel @Inject constructor(
         val currentWords = stateValue.words.toMutableList()
         if (currentWords.size <= 2 && stateValue.isLoopingEnable) {
             if (stateValue.isShuffleEnable) {
-                var shuffled = _folderWords.shuffled()
+                var shuffled = _filteredWords.shuffled()
                 while (shuffled.first() == currentWords.last()) {
-                    shuffled = _folderWords.shuffled()
+                    shuffled = _filteredWords.shuffled()
                 }
                 currentWords += shuffled
             } else {
-                currentWords += _folderWords
+                currentWords += _filteredWords
             }
         }
         val firstIndex = currentWords.indexOfFirst { it == word }
@@ -265,7 +298,7 @@ class StudyViewModel @Inject constructor(
     private fun onMultipleChoiceStudyAction(currentWords: List<WordEntity>) =
         viewModelScope.launch {
             if (currentWords.isNotEmpty()) {
-                val answers = (_folderWords.takeRandom(
+                val answers = (_filteredWords.takeRandom(
                     3,
                     listOf(currentWords.first())
                 ) + currentWords.first()).shuffled()
@@ -303,6 +336,13 @@ class StudyViewModel @Inject constructor(
         }
     }
 
+    private fun onFilterSelected(filterType: WordListFilterType) = viewModelScope.launch {
+        val newList = _selectedFilters.value.toMutableList()
+        if (newList.contains(filterType) && newList.size > 1) newList.remove(filterType)
+        else if (newList.contains(filterType).not()) newList.add(filterType)
+        _selectedFilters.update { newList }
+    }
+
     private fun startTimer() = viewModelScope.launch(Dispatchers.IO) {
         val initialTime = System.currentTimeMillis()
         while (_state.value.quizState == QuizState.Started) {
@@ -327,8 +367,8 @@ class StudyViewModel @Inject constructor(
     ) = viewModelScope.launch(Dispatchers.IO) {
         _folderId = folderId
         folderRepo.getWords(folderId).collectLatest { words ->
-            if (_folderWords.isEmpty()) {
-                _folderWords = words
+            if (_words.value.isEmpty()) {
+                _words.update { words }
                 _state.update { it.copy(words = words) }
             }
         }

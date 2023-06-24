@@ -5,6 +5,7 @@ import androidx.annotation.StringRes
 import com.eneskayiklik.word_diary.core.database.entity.FolderEntity
 import com.eneskayiklik.word_diary.core.database.entity.WordEntity
 import com.eneskayiklik.word_diary.feature.word_list.domain.StudyType
+import com.eneskayiklik.word_diary.feature.word_list.presentation.WordListFilterType
 import com.eneskayiklik.word_diary.util.extensions.formatStudyTimer
 import com.eneskayiklik.word_diary.util.extensions.getAccuracyStringRes
 import com.eneskayiklik.word_diary.util.extensions.getHeadlineImage
@@ -19,12 +20,15 @@ data class StudyState(
     val studyType: StudyType? = null,
     val quizState: QuizState = QuizState.Initial,
     val isTimerEnable: Boolean = true,
-    val isShuffleEnable: Boolean = false,
+    val isShuffleEnable: Boolean = true,
     val isLoopingEnable: Boolean = true,
     val isVoiceEnabled: Boolean = true,
     val studyResult: StudyResult = StudyResult(),
-    val dialogType: StudyDialogType = StudyDialogType.None
+    val dialogType: StudyDialogType = StudyDialogType.None,
+    val currentTotal: Int = 0,
+    val selectedFilters: List<WordListFilterType> = emptyList()
 ) {
+    val isStartActive = currentTotal >= (studyType?.minimumWordCount ?: -1)
     val isDialogActive = dialogType != StudyDialogType.None
     val timerText = spendTime.formatStudyTimer()
 }
@@ -38,8 +42,10 @@ data class StudyResult(
 ) {
     val accuracyProgress: Float = (accuracy / 100).toFloat()
     val proficiencyProgress: Float = (proficiency / 100).toFloat()
+
     @DrawableRes
     val headlineImage: Int = accuracy.getHeadlineImage()
+
     @StringRes
     val kudosTextRes: Int = accuracy.getAccuracyStringRes()
 }

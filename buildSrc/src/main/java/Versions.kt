@@ -42,4 +42,5 @@ object Versions {
     const val adsIdentifier = "17.1.0"
     const val mpChart = "v3.1.0"
     const val lottie = "6.0.1"
+    const val ktor = "2.3.1"
 }

@@ -115,3 +115,11 @@ fun Context.findActivity(): Activity {
     }
     throw IllegalStateException("no activity")
 }
+
+fun Context.finishActivity() {
+    try {
+        findActivity().finish()
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+}
