@@ -270,7 +270,8 @@ fun WordListScreen(
             else -> LazyColumn(
                 contentPadding = padding + PaddingValues(vertical = 24.dp, horizontal = 16.dp),
                 modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+                state = lazyListState
             ) {
                 item("simple_statistics") {
                     ListsStatisticView(
@@ -349,7 +350,7 @@ fun WordListScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(padding)
-                    .background(MaterialTheme.colorScheme.surface),
+                    .background(MaterialTheme.colorScheme.background),
                 onDismiss = {
                     viewModel.onEvent(
                         WordListEvent.OnWordClick(word = null)

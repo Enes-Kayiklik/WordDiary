@@ -28,7 +28,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.eneskayiklik.word_diary.core.data_store.data.SwipeAction
 import com.eneskayiklik.word_diary.core.database.entity.WordEntity
 
@@ -50,27 +49,33 @@ fun WordListItem(
         Column(modifier = Modifier.weight(1F), verticalArrangement = Arrangement.spacedBy(16.dp)) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(16.dp)
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                CircularProgressIndicator(
-                    progress = (word.proficiency / 100).toFloat(),
-                    modifier = Modifier.size(32.dp),
-                    color = MaterialTheme.colorScheme.primary,
-                    trackColor = MaterialTheme.colorScheme.primary.copy(.3F),
-                    strokeWidth = 4.dp,
-                    strokeCap = StrokeCap.Round
-                )
+                Box(contentAlignment = Alignment.Center) {
+                    CircularProgressIndicator(
+                        progress = (word.proficiency / 100).toFloat(),
+                        modifier = Modifier.size(44.dp),
+                        color = MaterialTheme.colorScheme.primary,
+                        trackColor = MaterialTheme.colorScheme.primary.copy(.3F),
+                        strokeWidth = 4.dp,
+                        strokeCap = StrokeCap.Round
+                    )
+                    Text(
+                        text = "${word.proficiency.toInt()}%",
+                        style = MaterialTheme.typography.labelSmall
+                    )
+                }
                 Column(
                     modifier = Modifier.weight(1F)
                 ) {
                     Text(
                         text = word.meaning,
-                        style = MaterialTheme.typography.titleLarge.copy(fontSize = 20.sp),
+                        style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.onSurface
                     )
                     Text(
                         text = word.word,
-                        style = MaterialTheme.typography.bodyLarge,
+                        style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
@@ -79,7 +84,7 @@ fun WordListItem(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = 48.dp),
+                    .padding(start = 56.dp),
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 Icon(

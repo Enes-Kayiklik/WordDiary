@@ -81,6 +81,6 @@ fun WordDiaryTheme(
             content = content
         )
 
-        surfaceColor = colorScheme.surfaceColorAtElevation(3.dp).copy(.97F)
+        surfaceColor = colorScheme.surfaceColorAtElevation(3.dp)
     }
 }
