@@ -2,6 +2,7 @@ package com.eneskayiklik.word_diary.feature.quiz
 
 import com.eneskayiklik.swiper.SwipedOutDirection
 import com.eneskayiklik.word_diary.core.database.entity.WordEntity
+import com.eneskayiklik.word_diary.feature.word_list.presentation.WordListFilterType
 
 sealed class StudyEvent {
 
@@ -20,6 +21,8 @@ sealed class StudyEvent {
     data class ShowDialog(val type: StudyDialogType) : StudyEvent()
 
     data class SpeakLoud(val word: WordEntity) : StudyEvent()
+
+    data class OnFilterSelected(val filter: WordListFilterType) : StudyEvent()
 
     data class OnWordStudyAction(
         val word: WordEntity,

@@ -33,6 +33,7 @@ object AppDependencies {
     val roomKapt = "androidx.room:room-compiler:${Versions.roomVersion}"
 
     val dataStore = "androidx.datastore:datastore:${Versions.dataStore}"
+    val preferencesDataStore = "androidx.datastore:datastore-preferences:${Versions.dataStore}"
 
     val kotlinSerailization = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.kotlinSerailization}"
 
@@ -58,6 +59,12 @@ object AppDependencies {
     val adapty = "com.github.adaptyteam:AdaptySDK-Android:${Versions.adaptyVersion}"
     val lottie = "com.airbnb.android:lottie-compose:${Versions.lottie}"
 
+    val ktorClient = "io.ktor:ktor-client-cio:${Versions.ktor}"
+    val ktorCore = "io.ktor:ktor-client-core:${Versions.ktor}"
+    val ktorLogging = "io.ktor:ktor-client-logging:${Versions.ktor}"
+    val ktorContentNegotiation = "io.ktor:ktor-client-content-negotiation:${Versions.ktor}"
+    val ktorJsonSerialization = "io.ktor:ktor-serialization-kotlinx-json:${Versions.ktor}"
+
     val androidxLibraries = listOf(
         coreKtx,
         lifecycleRuntime
@@ -73,6 +80,14 @@ object AppDependencies {
         composeMaterialIcons,
         composeAnimation,
         composeViewBinding
+    )
+
+    val ktorLibraries = listOf(
+        ktorClient,
+        ktorCore,
+        ktorLogging,
+        ktorContentNegotiation,
+        ktorJsonSerialization
     )
 }
 

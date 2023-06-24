@@ -21,9 +21,3 @@ data class WordEntity(
     val proficiency: Double,
     val totalSpendTime: Long,
 )
-
-enum class LearnState {
-    Learned,
-    Learning,
-    NewWord,
-}

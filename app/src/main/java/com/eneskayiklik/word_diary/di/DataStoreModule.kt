@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.core.DataStoreFactory
 import androidx.datastore.dataStoreFile
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import com.eneskayiklik.word_diary.core.data_store.data.UserPreference
 import com.eneskayiklik.word_diary.core.data_store.data.UserPreferenceSerializer
 import com.eneskayiklik.word_diary.util.USER_PREFERENCE_FILE
@@ -18,6 +20,20 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object DataStoreModule {
 
+    private val Context.userDataStore by preferencesDataStore(
+        name = "user_preferences"
+    )
+
+    // Preference Data Store
+    @Provides
+    @Singleton
+    fun providePreferenceDataStore(
+        @ApplicationContext context: Context
+    ): DataStore<Preferences> {
+        return context.userDataStore
+    }
+
+    // Proto Data Store
     @Provides
     @Singleton
     fun provideUserPreferenceDataStore(

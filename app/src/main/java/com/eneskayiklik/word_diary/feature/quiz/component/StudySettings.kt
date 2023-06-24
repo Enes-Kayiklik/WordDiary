@@ -2,17 +2,24 @@ package com.eneskayiklik.word_diary.feature.quiz.component
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ListItem
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.eneskayiklik.word_diary.R
+import com.eneskayiklik.word_diary.core.util.components.FilterChip
 import com.eneskayiklik.word_diary.feature.quiz.StudyEvent
 import com.eneskayiklik.word_diary.feature.quiz.StudyState
+import com.eneskayiklik.word_diary.feature.word_list.presentation.WordListFilterType
+import com.google.accompanist.flowlayout.FlowRow
 
 @Composable
 fun StudySettings(
@@ -21,7 +28,7 @@ fun StudySettings(
     modifier: Modifier = Modifier
 ) {
     LazyColumn(modifier = modifier, contentPadding = PaddingValues(bottom = 64.dp)) {
-        item {
+        item("timer") {
             ListItem(
                 headlineText = {
                     Text(text = stringResource(id = R.string.study_settings_timer_title))
@@ -38,7 +45,7 @@ fun StudySettings(
                 }
             )
         }
-        item {
+        item("looping") {
             ListItem(
                 headlineText = {
                     Text(text = stringResource(id = R.string.study_settings_looping_title))
@@ -55,7 +62,7 @@ fun StudySettings(
                 }
             )
         }
-        item {
+        item("shuffle") {
             ListItem(
                 headlineText = {
                     Text(text = stringResource(id = R.string.study_settings_shuffle_title))
@@ -72,7 +79,7 @@ fun StudySettings(
                 }
             )
         }
-        item {
+        item("sound") {
             ListItem(
                 headlineText = {
                     Text(text = stringResource(id = R.string.study_settings_sound_title))
@@ -86,6 +93,36 @@ fun StudySettings(
                     )
                 }, modifier = Modifier.clickable {
                     onEvent(StudyEvent.OnSound)
+                }
+            )
+        }
+        item("filter") {
+            ListItem(
+                headlineText = {
+                    Text(text = stringResource(id = R.string.filter_by))
+                },
+                supportingText = {
+                    FlowRow(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 8.dp),
+                        mainAxisSpacing = 8.dp,
+                        crossAxisSpacing = 8.dp
+                    ) {
+                        WordListFilterType.values().forEach { item ->
+                            FilterChip(
+                                isSelected = item in state.selectedFilters,
+                                content = {
+                                    Text(
+                                        text = stringResource(id = item.title),
+                                        style = MaterialTheme.typography.labelMedium
+                                    )
+                                },
+                                onClick = { onEvent(StudyEvent.OnFilterSelected(item)) },
+                                modifier = Modifier.clip(MaterialTheme.shapes.small)
+                            )
+                        }
+                    }
                 }
             )
         }

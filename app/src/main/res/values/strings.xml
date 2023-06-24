@@ -71,6 +71,11 @@
     <string name="destination_about_title">About</string>
     <string name="destination_about_content_desc">About</string>
 
+    <!-- Update Screen -->
+    <string name="destination_update_available">Update available!</string>
+    <string name="update">Update</string>
+    <string name="destination_update_available_desc">Stay up to date with the latest features and improvements! Upgrade now to enjoy enhanced functionality and an even better user experience</string>
+
     <!-- Statistics Screen -->
     <string name="destination_statistics">Statistics</string>
     <string name="destination_statistics_content_desc">Statistics</string>
@@ -117,6 +122,7 @@
     <string name="dialog_save">Save</string>
     <string name="delete_confirm">Delete</string>
     <string name="dialog_ok">OK</string>
+    <string name="close">Close</string>
     <string name="dialog_grant_permission">Grant permission</string>
     <string name="dialog_pick">Pick</string>
     <string name="permission_required">Permission required</string>
@@ -213,13 +219,16 @@
     <string name="mastered">mastered</string>
 
     <string name="filter_by">Filter by</string>
-    <string name="filter_by_learned">Learned</string>
-    <string name="filter_by_new_word">New word</string>
-    <string name="filter_by_learning">Learning</string>
-    <string name="filter_by_favorite">Favorite</string>
+    <string name="beginner">Beginner</string>
+    <string name="intermediate">Intermediate</string>
+    <string name="advanced">Advanced</string>
+    <string name="expert">Expert</string>
+    <string name="master">Master</string>
+    <string name="favorite">Favorite</string>
 
     <string name="sort_by">Sort by</string>
     <string name="sort_direction">Sort direction</string>
+    <string name="sort_by_proficiency">Proficiency</string>
     <string name="sort_by_date_added">Date added</string>
     <string name="sort_by_last_studied">Last studied</string>
     <string name="sort_by_study_count">Study count</string>

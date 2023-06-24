@@ -141,6 +141,9 @@ dependencies {
     implementation(platform(AppDependencies.firebaseBom))
     firebaseThings()
 
+    // Ktor
+    implementation(AppDependencies.ktorLibraries)
+
     // Hilt
     daggerHilt()
 
@@ -149,6 +152,7 @@ dependencies {
 
     // Data Store
     implementation(AppDependencies.dataStore)
+    implementation(AppDependencies.preferencesDataStore)
 
     // Serialization
     implementation(AppDependencies.kotlinSerailization)

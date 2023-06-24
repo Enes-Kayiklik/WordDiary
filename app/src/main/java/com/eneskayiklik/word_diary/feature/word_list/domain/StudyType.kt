@@ -14,24 +14,28 @@ enum class StudyType(
     @StringRes val title: Int,
     @StringRes val subtitle: Int,
     val icon: ImageVector,
-    val requirePremium: Boolean
+    val requirePremium: Boolean,
+    val minimumWordCount: Int,
 ) {
     FlashCard(
         title = R.string.quiz_type_flash_card_title,
         subtitle = R.string.quiz_type_flash_card_desc,
         icon = Icons.Outlined.Style,
-        requirePremium = false
+        requirePremium = false,
+        minimumWordCount = 3
     ),
     Write(
         title = R.string.quiz_type_write_title,
         subtitle = R.string.quiz_type_write_desc,
         icon = Icons.Outlined.Spellcheck,
-        requirePremium = false
+        requirePremium = false,
+        minimumWordCount = 3
     ),
     MultipleChoice(
         title = R.string.quiz_type_multiple_choice_title,
         subtitle = R.string.quiz_type_multiple_choice_desc,
         icon = Icons.Outlined.Ballot,
-        requirePremium = false
+        requirePremium = false,
+        minimumWordCount = 4
     )
 }

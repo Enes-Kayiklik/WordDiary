@@ -41,7 +41,15 @@ class WordListViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val _filterType = MutableStateFlow(listOf(WordListFilterType.NewWord))
+    private val _filterType = MutableStateFlow(
+        listOf(
+            WordListFilterType.Beginner,
+            WordListFilterType.Intermediate,
+            WordListFilterType.Advanced,
+            WordListFilterType.Expert,
+            WordListFilterType.Master
+        )
+    )
     private val _sortType = MutableStateFlow(WordListSortType.DateAdded)
     private val _sortDirection = MutableStateFlow(WordListSortDirection.Asc)
     private var _folderId: Int? = null
