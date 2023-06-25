@@ -187,6 +187,12 @@
     <!-- Sample: Sample sentence in Español language -->
     <string name="sample_sentence_hint">%s dilinde örnek cümle</string>
 
+    <string name="watch_ads">Reklam izle</string>
+    <string name="not_enough_coin">Yetersiz jeton</string>
+    <string name="coin_detail">Jetan</string>
+    <string name="coin_detail_desc">Reklamları izleyerek 5 ek otomatik çeviri alabilir veya sınırsız otomatik çeviri için premium satın alabilirsiniz</string>
+    <string name="not_enoug_coin_desc">Otomatik çeviri için yeterli paranız yok. Otomatik çeviriye 5 ekleme almak için reklamları izleyebilir veya sınırsız otomatik çeviri için premium satın alabilirsiniz</string>
+
     <string name="word_translation_empty_error">- Otomatik çeviri için bu alanı girin</string>
     <string name="meaning_empty_error">- Kelimenin anlamını ekle</string>
 
@@ -214,7 +220,7 @@
 
     <string name="total_words">Toplam kelime</string>
     <string name="mastered_words">Ustalaşmış kelime</string>
-    <string name="mastered">ustalaşma</string>
+    <string name="mastered">ustalık</string>
 
     <string name="filter_by">Filtrele</string>
     <string name="beginner">Başlangıç</string>
