@@ -76,6 +76,11 @@ android {
                 "NATIVE_ADS_KEY",
                 localProperties.getProperty("admobNativeProd")
             )
+            buildConfigField(
+                "String",
+                "REWARDED_INTERSTITIAL_ADS_KEY",
+                localProperties.getProperty("admobRewardedProd")
+            )
         }
         getByName("debug") {
             versionNameSuffix = "-debug"
@@ -83,6 +88,11 @@ android {
                 "String",
                 "NATIVE_ADS_KEY",
                 localProperties.getProperty("admobNativeDebug")
+            )
+            buildConfigField(
+                "String",
+                "REWARDED_INTERSTITIAL_ADS_KEY",
+                localProperties.getProperty("admobRewardedDebug")
             )
         }
     }

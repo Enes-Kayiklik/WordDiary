@@ -190,6 +190,12 @@
     <!-- Sample: Sample sentence in Español language -->
     <string name="sample_sentence_hint">Sample sentence in %s language</string>
 
+    <string name="watch_ads">Watch ads</string>
+    <string name="not_enough_coin">Not enough coin</string>
+    <string name="coin_detail">Coin</string>
+    <string name="coin_detail_desc">You can watch ads to get 5 addition auto translation or you can buy premium to unlimited auto translation</string>
+    <string name="not_enoug_coin_desc">You do not have enough coin to auto translate. You can watch ads to get 5 addition auto translation or you can buy premium to unlimited auto translation</string>
+
     <string name="word_translation_empty_error">- Input this field for auto translation</string>
     <string name="meaning_empty_error">- Add meaning of word</string>
 
