@@ -10,6 +10,8 @@ import com.eneskayiklik.word_diary.core.data_store.domain.UpdateConfigRepository
 import com.eneskayiklik.word_diary.core.data_store.domain.UserPreferenceRepository
 import com.eneskayiklik.word_diary.core.domain.repository.InitRepository
 import com.eneskayiklik.word_diary.core.domain.repository.TranslationRepository
+import com.eneskayiklik.word_diary.feature.backup.data.repository.BackupRepositoryImpl
+import com.eneskayiklik.word_diary.feature.backup.domain.repository.BackupRepository
 import com.eneskayiklik.word_diary.feature.folder_list.data.repository.FolderRepositoryImpl
 import com.eneskayiklik.word_diary.feature.folder_list.domain.FolderRepository
 import com.eneskayiklik.word_diary.feature.paywall.data.PaywallRepositoryImpl
@@ -57,4 +59,9 @@ interface DataModule {
     fun bindCoinRepository(
         coinRepository: CoinRepositoryImpl
     ): CoinRepository
+
+    @Binds
+    fun bindBackupRepository(
+        backupRepository: BackupRepositoryImpl
+    ): BackupRepository
 }

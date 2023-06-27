@@ -43,6 +43,7 @@ import com.eneskayiklik.word_diary.core.util.ScreensAnim
 import com.eneskayiklik.word_diary.core.util.UiEvent
 import com.eneskayiklik.word_diary.feature.destinations.AboutScreenDestination
 import com.eneskayiklik.word_diary.feature.destinations.AppLanguageScreenDestination
+import com.eneskayiklik.word_diary.feature.destinations.BackupScreenDestination
 import com.eneskayiklik.word_diary.feature.destinations.GeneralScreenDestination
 import com.eneskayiklik.word_diary.feature.destinations.PaywallScreenDestination
 import com.eneskayiklik.word_diary.feature.destinations.ThemeScreenDestination
@@ -171,11 +172,7 @@ fun SettingsScreen(
                         )
                     },
                     modifier = Modifier.clickable {
-                        Toast.makeText(
-                            context,
-                            context.getString(R.string.coming_soon),
-                            Toast.LENGTH_LONG
-                        ).show()
+                        navigator.navigate(BackupScreenDestination)
                     }
                 )
             }
