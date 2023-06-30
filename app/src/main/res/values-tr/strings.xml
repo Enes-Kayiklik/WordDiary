@@ -27,6 +27,7 @@
     <string name="more_button_desc">Daha fazla seçenek</string>
     <string name="uncaught_error">Bir hata oluştu</string>
     <string name="connection_error">Internet bağlantısı yok</string>
+    <string name="back_up_success">Yedek dosyası oluşturuldu</string>
 
     <string name="destination_lists">Koleksiyonlar</string>
     <string name="destination_lists_title">Koleksiyonlar</string>

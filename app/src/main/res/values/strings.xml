@@ -30,6 +30,8 @@
     <string name="uncaught_error">An error occurred</string>
     <string name="connection_error">There is no internet connection</string>
 
+    <string name="back_up_success">Backup file created</string>
+
     <string name="destination_lists">Collections</string>
     <string name="destination_lists_title">Collections</string>
     <string name="destination_lists_content_desc">Collections</string>

@@ -15,12 +15,14 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object DbModule {
 
+    const val DB_NAME = "word_diary.db"
+
     @Singleton
     @Provides
     fun provideWordDiaryDb(
         @ApplicationContext context: Context
     ): WordDiaryDatabase = Room.databaseBuilder(
-        context, WordDiaryDatabase::class.java, "word_diary.db"
+        context, WordDiaryDatabase::class.java, DB_NAME
     ).build()
 
     @Singleton
