@@ -12,7 +12,20 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
 import android.provider.Settings
+import com.eneskayiklik.word_diary.BuildConfig
+import com.eneskayiklik.word_diary.R
 import com.eneskayiklik.word_diary.util.WORD_DIARY_PLAY_STORE
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.Scopes
+import com.google.android.gms.common.api.Scope
+import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential
+import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport
+import com.google.api.client.http.javanet.NetHttpTransport
+import com.google.api.client.json.gson.GsonFactory
+import com.google.api.services.drive.Drive
+import java.util.Collections
 
 fun Context.vibratePhone(time: Long) {
     try {
@@ -31,6 +44,36 @@ fun Context.vibratePhone(time: Long) {
     } catch (e: Exception) {
         e.printStackTrace()
     }
+}
+
+fun Context.googleLoginClient(): GoogleSignInClient {
+    val signInOptions = GoogleSignInOptions.Builder()
+        .requestScopes(
+            Scope("https://www.googleapis.com/auth/drive.file"),
+            Scope("https://www.googleapis.com/auth/drive.appdata")
+        )
+        .requestIdToken(BuildConfig.GOOGLE_CLIENT_ID)
+        .requestEmail()
+        .requestProfile()
+        .build()
+    return GoogleSignIn.getClient(this, signInOptions)
+}
+
+fun Context.getDriveService(): Drive {
+    val signedInAccount = GoogleSignIn.getLastSignedInAccount(this)
+    val credential = GoogleAccountCredential
+        .usingOAuth2(this, Collections.singleton(Scopes.DRIVE_FILE))
+        .apply {
+            selectedAccount = signedInAccount?.account
+        }
+
+    return Drive.Builder(
+        NetHttpTransport(),
+        GsonFactory.getDefaultInstance(),
+        credential
+    ).setApplicationName(
+        getString(R.string.app_name)
+    ).build()
 }
 
 fun Context.openLink(link: String) {

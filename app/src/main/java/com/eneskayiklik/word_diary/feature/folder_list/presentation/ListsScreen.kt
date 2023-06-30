@@ -1,5 +1,6 @@
 package com.eneskayiklik.word_diary.feature.folder_list.presentation
 
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.slideInVertically
@@ -16,8 +17,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.Add
@@ -49,14 +52,17 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
+import coil.compose.SubcomposeAsyncImage
 import com.eneskayiklik.word_diary.R
 import com.eneskayiklik.word_diary.WordDiaryApp
 import com.eneskayiklik.word_diary.core.ui.OnLifecycleEvent
@@ -70,9 +76,12 @@ import com.eneskayiklik.word_diary.feature.destinations.WordListScreenDestinatio
 import com.eneskayiklik.word_diary.core.ui.components.ad.MediumNativeAdView
 import com.eneskayiklik.word_diary.core.ui.components.ad.SmallNativeAdView
 import com.eneskayiklik.word_diary.feature.destinations.PaywallScreenDestination
+import com.eneskayiklik.word_diary.feature.folder_list.presentation.component.DriveSheet
 import com.eneskayiklik.word_diary.feature.folder_list.presentation.component.SingleFolderRow
 import com.eneskayiklik.word_diary.feature.word_list.domain.StudyType
+import com.eneskayiklik.word_diary.util.contract.GoogleLoginContract
 import com.eneskayiklik.word_diary.util.extensions.plus
+import com.google.android.gms.common.api.ApiException
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import eu.wewox.modalsheet.ExperimentalSheetApi
@@ -96,18 +105,34 @@ fun ListsScreen(
     val state = viewModel.state.collectAsState().value
 
     var query by remember { mutableStateOf("") }
-    var isSearchActive by remember { mutableStateOf(false) }
+    var isSearchActive by rememberSaveable { mutableStateOf(false) }
     var lastSelectedFolder by remember { mutableStateOf(-1) }
     var isStudyListVisible by remember { mutableStateOf(false) }
+    var isDriveSheetVisible by remember { mutableStateOf(false) }
 
     val showSearchTrailingIcon by remember {
         derivedStateOf { query.isNotEmpty() || isSearchActive.not() }
     }
 
+    val userData = state.userData
+
     val lazyListState = rememberLazyListState()
 
     val firstItemVisible by remember {
         derivedStateOf { lazyListState.firstVisibleItemIndex == 0 }
+    }
+
+    val googleLoginLauncher = rememberLauncherForActivityResult(GoogleLoginContract()) { task ->
+        try {
+            val account = task?.getResult(ApiException::class.java)
+            viewModel.onEvent(
+                FolderListEvent.OnGoogleLogin(
+                    account ?: return@rememberLauncherForActivityResult
+                )
+            )
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     OnLifecycleEvent { _, event ->
@@ -213,16 +238,56 @@ fun ListsScreen(
                 },
                 trailingIcon = {
                     if (showSearchTrailingIcon) {
-                        val icon = if (query.isNotEmpty() || isSearchActive) Icons.Outlined.Close
-                        else Icons.Outlined.AccountCircle
-
-                        Icon(
-                            imageVector = icon,
-                            contentDescription = null,
-                            modifier = Modifier.clickable {
-                                navigator.navigate(PaywallScreenDestination)
+                        if (query.isNotEmpty() || isSearchActive) {
+                            Icon(
+                                imageVector = Icons.Outlined.Close,
+                                contentDescription = null,
+                                modifier = Modifier.clickable(
+                                    interactionSource = remember {
+                                        MutableInteractionSource()
+                                    }, indication = rememberRipple(bounded = false),
+                                    onClick = { query = "" }
+                                )
+                            )
+                        } else {
+                            if (userData.photoUrl == null) {
+                                Icon(
+                                    imageVector = Icons.Outlined.AccountCircle,
+                                    contentDescription = null,
+                                    modifier = Modifier.clickable(
+                                        interactionSource = remember {
+                                            MutableInteractionSource()
+                                        }, indication = rememberRipple(bounded = false),
+                                        onClick = { googleLoginLauncher.launch(1881) }
+                                    )
+                                )
+                            } else {
+                                SubcomposeAsyncImage(
+                                    model = userData.photoUrl,
+                                    error = {
+                                        Icon(
+                                            imageVector = Icons.Outlined.AccountCircle,
+                                            contentDescription = null
+                                        )
+                                    },
+                                    contentDescription = null,
+                                    contentScale = ContentScale.Crop,
+                                    modifier = Modifier
+                                        .size(24.dp)
+                                        .clip(CircleShape)
+                                        .clickable(
+                                            interactionSource = remember {
+                                                MutableInteractionSource()
+                                            }, indication = rememberRipple(bounded = false),
+                                            onClick = {
+                                                if (WordDiaryApp.hasPremium) isDriveSheetVisible =
+                                                    true
+                                                else navigator.navigate(PaywallScreenDestination)
+                                            }
+                                        )
+                                )
                             }
-                        )
+                        }
                     }
                 },
                 content = {
@@ -374,6 +439,22 @@ fun ListsScreen(
                 }
             }
         }
+    }
+
+    ModalSheet(
+        visible = isDriveSheetVisible,
+        onVisibleChange = { isDriveSheetVisible = it },
+        backgroundColor = MaterialTheme.colorScheme.surface,
+        shape = MaterialTheme.shapes.large
+    ) {
+        BottomSheetDefaults.DragHandle(modifier = Modifier.align(Alignment.CenterHorizontally))
+
+        DriveSheet(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 48.dp),
+            userData = userData
+        )
     }
 
     ModalSheet(
