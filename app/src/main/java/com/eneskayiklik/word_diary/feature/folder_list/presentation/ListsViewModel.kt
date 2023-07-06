@@ -1,5 +1,6 @@
 package com.eneskayiklik.word_diary.feature.folder_list.presentation
 
+import android.app.Application
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,6 +11,8 @@ import com.eneskayiklik.word_diary.core.util.UiEvent
 import com.eneskayiklik.word_diary.feature.destinations.CreateFolderScreenDestination
 import com.eneskayiklik.word_diary.feature.destinations.CreateWordScreenDestination
 import com.eneskayiklik.word_diary.feature.folder_list.domain.FolderRepository
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -26,6 +29,7 @@ import javax.inject.Inject
 class ListsViewModel @Inject constructor(
     private val folderRepo: FolderRepository,
     private val adLoader: AdLoaderHelper,
+    private val app: Application,
     userPrefs: UserPreferenceRepository,
 ) : ViewModel() {
     private val _userPrefs = userPrefs.userData
@@ -43,6 +47,7 @@ class ListsViewModel @Inject constructor(
 
     init {
         collectUserLang()
+        getLastGoogleUser()
     }
 
     private fun onAdEvent(isStart: Boolean) = viewModelScope.launch {
@@ -107,6 +112,7 @@ class ListsViewModel @Inject constructor(
             is FolderListEvent.OnFavorite -> addToFavorite(event.id, event.isFavorite)
             is FolderListEvent.OnSearchQueryChanged -> onSearchQueryChanged(event.q)
             is FolderListEvent.OnAdEvent -> onAdEvent(event.startAd)
+            is FolderListEvent.OnGoogleLogin -> onGoogleLogin(event.account)
         }
     }
 
@@ -150,6 +156,26 @@ class ListsViewModel @Inject constructor(
         folderRepo.getFoldersWithWordCount(userLangIso).collectLatest { new ->
             _state.update { it.copy(folders = new, isLoading = false) }
         }
+    }
+
+    private fun onGoogleLogin(account: GoogleSignInAccount) = viewModelScope.launch {
+        _state.update {
+            it.copy(
+                userData = it.userData.copy(
+                    photoUrl = account.photoUrl,
+                    displayName = account.displayName,
+                    email = account.email
+                )
+            )
+        }
+    }
+
+    private fun getLastGoogleUser() = viewModelScope.launch(Dispatchers.IO) {
+        onEvent(
+            FolderListEvent.OnGoogleLogin(
+                GoogleSignIn.getLastSignedInAccount(app) ?: return@launch
+            )
+        )
     }
 
     companion object {

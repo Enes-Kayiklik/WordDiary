@@ -1,5 +1,7 @@
 package com.eneskayiklik.word_diary.feature.folder_list.presentation
 
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+
 sealed class FolderListEvent {
 
     object AddFolder : FolderListEvent()
@@ -11,4 +13,6 @@ sealed class FolderListEvent {
     data class AddWordToFolder(val id: Int) : FolderListEvent()
 
     data class OnAdEvent(val startAd: Boolean) : FolderListEvent()
+
+    data class OnGoogleLogin(val account: GoogleSignInAccount) : FolderListEvent()
 }

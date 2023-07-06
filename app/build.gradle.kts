@@ -31,7 +31,11 @@ val localVersionCode = versionProperties.getProperty("VERSION_CODE").toInt()
 android {
     namespace = "com.eneskayiklik.word_diary"
     compileSdk = AppConfig.compileSdk
-    buildToolsVersion(AppConfig.buildToolsVersion)
+    buildToolsVersion = AppConfig.buildToolsVersion
+
+    packagingOptions {
+        resources.excludes.add("META-INF/DEPENDENCIES")
+    }
 
     defaultConfig {
         applicationId = "com.eneskayiklik.word_diary"
@@ -45,6 +49,11 @@ android {
             useSupportLibrary = true
         }
         buildConfigField("String", "ADAPTY_KEY", localProperties.getProperty("adaptyKey"))
+        buildConfigField(
+            "String",
+            "GOOGLE_CLIENT_ID",
+            localProperties.getProperty("googleLoginWebClientId")
+        )
         buildConfigField(
             "String",
             "ONE_SIGNAL_APP_ID",
@@ -167,6 +176,9 @@ dependencies {
     // Serialization
     implementation(AppDependencies.kotlinSerailization)
 
+    // Google Login
+    implementation(AppDependencies.googleAuth)
+
     // Nav Host
     implementation("com.google.accompanist:accompanist-navigation-animation:${Versions.accompanist_version}")
     implementation("com.google.accompanist:accompanist-navigation-material:${Versions.accompanist_version}")
@@ -218,4 +230,10 @@ dependencies {
 
     // Lottie
     implementation(AppDependencies.lottie)
+
+    // Coil
+    implementation(AppDependencies.coil)
+
+    // Drive
+    implementation(AppDependencies.googleDriveLibraries)
 }

@@ -11,7 +11,7 @@ import com.onesignal.OneSignal
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class WordDiaryApp: Application() {
+class WordDiaryApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
@@ -24,11 +24,12 @@ class WordDiaryApp: Application() {
     }
 
     private fun updatePremiumStatus() {
-        Adapty.getProfile { result ->
+        if (BuildConfig.DEBUG.not()) Adapty.getProfile { result ->
             when (result) {
                 is AdaptyResult.Success -> {
                     hasPremium = result.value.accessLevels["premium"]?.isActive == true
                 }
+
                 is AdaptyResult.Error -> Unit
             }
         }
@@ -40,6 +41,6 @@ class WordDiaryApp: Application() {
     }
 
     companion object {
-        var hasPremium: Boolean = false
+        var hasPremium: Boolean = BuildConfig.DEBUG
     }
 }

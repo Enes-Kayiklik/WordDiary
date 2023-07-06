@@ -13,19 +13,28 @@ object AppDependencies {
     val composeFoundation = "androidx.compose.foundation:foundation:${Versions.composeUiVersion}"
     val composePreview = "androidx.compose.ui:ui-tooling-preview:${Versions.composeUiVersion}"
     val composeMaterial3 = "androidx.compose.material3:material3:${Versions.composeMaterialVersion}"
-    val composeMaterialIcons = "androidx.compose.material:material-icons-extended:${Versions.composeUiVersion}"
-    val composeAnimation = "androidx.compose.animation:animation-graphics:${Versions.composeUiVersion}"
+    val composeMaterialIcons =
+        "androidx.compose.material:material-icons-extended:${Versions.composeUiVersion}"
+    val composeAnimation =
+        "androidx.compose.animation:animation-graphics:${Versions.composeUiVersion}"
     val composeViewBinding = "androidx.compose.ui:ui-viewbinding:${Versions.composeUiVersion}"
 
     val firebaseBom = "com.google.firebase:firebase-bom:${Versions.firebaseBom}"
     val crashlytics = "com.google.firebase:firebase-crashlytics-ktx"
     val analytics = "com.google.firebase:firebase-analytics-ktx"
 
-    val accompanistPermission = "com.google.accompanist:accompanist-permissions:${Versions.accompanist_version}"
+    val googleAuth = "com.google.android.gms:play-services-auth:${Versions.googleAuth}"
+    val googleDrive = "com.google.apis:google-api-services-drive:${Versions.driveApi}"
+    val googleGson = "com.google.http-client:google-http-client-gson:${Versions.googleGson}"
+    val googleClient = "com.google.api-client:google-api-client-android:${Versions.googleApiClient}"
+
+    val accompanistPermission =
+        "com.google.accompanist:accompanist-permissions:${Versions.accompanist_version}"
 
     val hiltGradle = "com.google.dagger:hilt-android:${Versions.hiltVersion}"
     val hiltKapt = "com.google.dagger:hilt-compiler:${Versions.hiltVersion}"
-    val hiltNavigaitonCompose = "androidx.hilt:hilt-navigation-compose:${Versions.hiltNavigationComposeVersion}"
+    val hiltNavigaitonCompose =
+        "androidx.hilt:hilt-navigation-compose:${Versions.hiltNavigationComposeVersion}"
 
     val roomRuntime = "androidx.room:room-runtime:${Versions.roomVersion}"
     val roomKtx = "androidx.room:room-ktx:${Versions.roomVersion}"
@@ -35,24 +44,32 @@ object AppDependencies {
     val dataStore = "androidx.datastore:datastore:${Versions.dataStore}"
     val preferencesDataStore = "androidx.datastore:datastore-preferences:${Versions.dataStore}"
 
-    val kotlinSerailization = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.kotlinSerailization}"
+    val kotlinSerailization =
+        "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.kotlinSerailization}"
 
-    val composeDesntinationCore = "io.github.raamcosta.compose-destinations:core:${Versions.composeDestinations}"
-    val composeDesntinationAnimation = "io.github.raamcosta.compose-destinations:animations-core:${Versions.composeDestinations}"
-    val composeDesntinationKsp = "io.github.raamcosta.compose-destinations:ksp:${Versions.composeDestinations}"
+    val composeDesntinationCore =
+        "io.github.raamcosta.compose-destinations:core:${Versions.composeDestinations}"
+    val composeDesntinationAnimation =
+        "io.github.raamcosta.compose-destinations:animations-core:${Versions.composeDestinations}"
+    val composeDesntinationKsp =
+        "io.github.raamcosta.compose-destinations:ksp:${Versions.composeDestinations}"
 
     val gradle = "com.android.tools.build:gradle:${Versions.gradle}"
 
     val cascadeDropdown = "me.saket.cascade:cascade-compose:${Versions.cascadeDropdown}"
 
-    val composeDialogsCore = "com.maxkeppeler.sheets-compose-dialogs:core:${Versions.composeDialogs}"
-    val composeDialogsColorPicker = "com.maxkeppeler.sheets-compose-dialogs:color:${Versions.composeDialogs}"
-    val composeDialogsClockPicker = "com.maxkeppeler.sheets-compose-dialogs:clock:${Versions.composeDialogs}"
+    val composeDialogsCore =
+        "com.maxkeppeler.sheets-compose-dialogs:core:${Versions.composeDialogs}"
+    val composeDialogsColorPicker =
+        "com.maxkeppeler.sheets-compose-dialogs:color:${Versions.composeDialogs}"
+    val composeDialogsClockPicker =
+        "com.maxkeppeler.sheets-compose-dialogs:clock:${Versions.composeDialogs}"
 
     val composeModalSheet = "io.github.oleksandrbalan:modalsheet:${Versions.composeModalSheet}"
 
     val oneSignal = "com.onesignal:OneSignal:${Versions.oneSignal}"
-    val adsIdentifier = "com.google.android.gms:play-services-ads-identifier:${Versions.adsIdentifier}"
+    val adsIdentifier =
+        "com.google.android.gms:play-services-ads-identifier:${Versions.adsIdentifier}"
 
     val mpChart = "com.github.PhilJay:MPAndroidChart:${Versions.mpChart}"
 
@@ -64,6 +81,7 @@ object AppDependencies {
     val ktorLogging = "io.ktor:ktor-client-logging:${Versions.ktor}"
     val ktorContentNegotiation = "io.ktor:ktor-client-content-negotiation:${Versions.ktor}"
     val ktorJsonSerialization = "io.ktor:ktor-serialization-kotlinx-json:${Versions.ktor}"
+    val coil = "io.coil-kt:coil-compose:${Versions.coil}"
 
     val androidxLibraries = listOf(
         coreKtx,
@@ -88,6 +106,12 @@ object AppDependencies {
         ktorLogging,
         ktorContentNegotiation,
         ktorJsonSerialization
+    )
+
+    val googleDriveLibraries = listOf(
+        googleGson,
+        googleDrive,
+        googleClient
     )
 }
 

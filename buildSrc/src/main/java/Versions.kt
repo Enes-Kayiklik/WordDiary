@@ -27,6 +27,10 @@ object Versions {
     const val splashScreen = "1.0.0"
     const val composeUiVersion = "1.3.1"
     const val firebaseBom = "32.1.1"
+    const val googleAuth = "20.6.0"
+    const val googleGson = "1.43.3"
+    const val googleApiClient = "2.2.0"
+    const val driveApi = "v3-rev136-1.25.0"
     const val hiltVersion = "2.44"
     const val roomVersion = "2.4.3"
     const val kotlinSerailization = "1.4.1"
@@ -43,4 +47,5 @@ object Versions {
     const val mpChart = "v3.1.0"
     const val lottie = "6.0.1"
     const val ktor = "2.3.1"
+    const val coil = "2.4.0"
 }
