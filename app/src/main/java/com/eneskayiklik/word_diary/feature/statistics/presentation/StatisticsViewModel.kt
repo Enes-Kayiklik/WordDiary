@@ -1,6 +1,5 @@
 package com.eneskayiklik.word_diary.feature.statistics.presentation
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.eneskayiklik.word_diary.R

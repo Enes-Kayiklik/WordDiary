@@ -44,6 +44,11 @@ Welcome to the Word Diary repository! Word Diary is an innovative word learning 
 - [Dagger - Hilt](https://dagger.dev/hilt/) - Dependency Injection Framework.
 - [Jsoup](https://jsoup.org/) - HTML parser library.
 - [Monet](https://github.com/Kyant0/m3color) - Material 3 color generator.
+- [Sheets Compose Dialogs](https://github.com/maxkeppeler/sheets-compose-dialogs) - A powerful collection of views (including dialogs, popups, and bottom sheets)
+- [Cascade](https://github.com/saket/cascade) - Nested popup menus with smooth height animations for Android
+- [Modal Sheet](https://github.com/oleksandrbalan/modalsheet) - Modal Sheet library for Jetpack Compose
+- [Compose Rich Editor](https://github.com/MohamedRejeb/Compose-Rich-Editor) - A Rich text editor library for both Jetpack Compose and Compose Multiplatform
+- [MPChart](https://github.com/PhilJay/MPAndroidChart) - A powerful 🚀 Android chart view / graph view library
 
 ## 📬 Contact
 
@@ -57,6 +62,7 @@ Special thanks to mentioned users and projects.
 - [Feeder](https://gitlab.com/spacecowboy/Feeder) RSS/Atom/JSON feed reader app for Android.
 - [Seal](https://github.com/JunkFood02/Seal) Video/Audio Downloader for Android, based on yt-dlp, designed with Material You.
 - [Read You](https://github.com/Ashinch/ReadYou) An Android RSS reader presented in Material You style.
+- [Diarium](https://diariumapp.com/) Cross-platform diary & journal app
 
 ### 🏆 Contributors
 - [Enes Telli](https://github.com/enes-telli): Turkish translation and Telegram admin.
