@@ -116,6 +116,7 @@
     <string name="settings_user_language_desc">Ana dilinizi güncelleyin</string>
 
     <string name="dialog_cancel">Vazgeç</string>
+    <string name="dialog_restart">Yeniden başlat</string>
     <string name="dialog_warning">Uyarı</string>
     <string name="dialog_continue">Devam et</string>
     <string name="dialog_save">Kaydet</string>

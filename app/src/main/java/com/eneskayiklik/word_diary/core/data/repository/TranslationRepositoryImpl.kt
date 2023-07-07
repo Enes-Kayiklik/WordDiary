@@ -48,17 +48,14 @@ class TranslationRepositoryImpl @Inject constructor(
         try {
             val synonyms = mutableListOf<SynonymState>()
             val samples = mutableListOf<SampleSentence>()
-            val departmentUrl = "https://glosbe.com/$sourceLang/$targetLang/$word"
+            val departmentUrl = "https://glosbe.com/$sourceLang/$targetLang/${word.lowercase()}"
             val doc = Jsoup.connect(departmentUrl).get()
 
-            val elements =
-                doc.select("div.pl-1 > div > ul > li")
-
-            elements.forEach { element ->
-                val synonym = element.select("div.py-1 > h3").text()
-                val sampleSentence = element.select("div.pt-1 > div").getOrNull(1)?.select("p")
-                val learnedLang = sampleSentence?.getOrNull(1)?.text()
-                val nativeLang = sampleSentence?.getOrNull(0)?.text()
+            doc.select("section.px-1 > div.pl-1 > div > ul.pr-1 > li").forEach { element ->
+                val synonym = element.select("h3.align-top").text()
+                val sampleSentence = element.select("div.translation__example > p")
+                val learnedLang = sampleSentence.getOrNull(1)?.text()
+                val nativeLang = sampleSentence.getOrNull(0)?.text()
                 if (synonym.isNotEmpty()) synonyms.add(
                     SynonymState(
                         synonym = synonym,

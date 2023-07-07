@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.time.LocalTime
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,7 +29,17 @@ class GeneralViewModel @Inject constructor(
             is GeneralEvent.PickSwipeAction -> pickSwipeAction(event.action)
             is GeneralEvent.SetNewWordGoal -> setNewWordDailyGoal(event.value)
             is GeneralEvent.SetStudySessionGoal -> setStudySessionDailyGoal(event.value)
+            is GeneralEvent.SetAlarm -> setAlarm(event.time)
+            is GeneralEvent.EnableAlarm -> enableAlarm(event.enable)
         }
+    }
+
+    private fun setAlarm(time: LocalTime) = viewModelScope.launch(Dispatchers.IO) {
+        userPreferenceRepository.setAlarm(time)
+    }
+
+    private fun enableAlarm(enable: Boolean) = viewModelScope.launch(Dispatchers.IO) {
+        userPreferenceRepository.enableAlarm(enable)
     }
 
     private fun pickSwipeAction(action: SwipeAction) = viewModelScope.launch(Dispatchers.IO) {
