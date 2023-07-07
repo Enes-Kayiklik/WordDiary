@@ -56,6 +56,11 @@ android {
         )
         buildConfigField(
             "String",
+            "ENCRYPTION_SECRET",
+            localProperties.getProperty("encryptionSecret")
+        )
+        buildConfigField(
+            "String",
             "ONE_SIGNAL_APP_ID",
             localProperties.getProperty("oneSignalAppId")
         )
@@ -236,4 +241,7 @@ dependencies {
 
     // Drive
     implementation(AppDependencies.googleDriveLibraries)
+
+    // Rich Text
+    implementation(AppDependencies.richText)
 }

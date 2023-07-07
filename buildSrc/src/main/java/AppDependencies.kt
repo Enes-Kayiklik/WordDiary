@@ -83,6 +83,8 @@ object AppDependencies {
     val ktorJsonSerialization = "io.ktor:ktor-serialization-kotlinx-json:${Versions.ktor}"
     val coil = "io.coil-kt:coil-compose:${Versions.coil}"
 
+    val richText = "com.mohamedrejeb.richeditor:richeditor-compose:${Versions.richText}"
+
     val androidxLibraries = listOf(
         coreKtx,
         lifecycleRuntime

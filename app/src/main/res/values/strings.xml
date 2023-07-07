@@ -120,6 +120,7 @@
     <string name="settings_user_language_desc">Change your preferred language</string>
 
     <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_restart">Restart</string>
     <string name="dialog_warning">Warning</string>
     <string name="dialog_continue">Continue</string>
     <string name="dialog_save">Save</string>

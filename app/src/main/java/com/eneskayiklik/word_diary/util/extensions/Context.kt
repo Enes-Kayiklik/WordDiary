@@ -14,6 +14,7 @@ import android.os.VibratorManager
 import android.provider.Settings
 import com.eneskayiklik.word_diary.BuildConfig
 import com.eneskayiklik.word_diary.R
+import com.eneskayiklik.word_diary.util.DEVELOPER_MAIL
 import com.eneskayiklik.word_diary.util.WORD_DIARY_PLAY_STORE
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -21,7 +22,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.Scopes
 import com.google.android.gms.common.api.Scope
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential
-import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport
 import com.google.api.client.http.javanet.NetHttpTransport
 import com.google.api.client.json.gson.GsonFactory
 import com.google.api.services.drive.Drive
@@ -105,7 +105,7 @@ fun Context.shareAppLink() {
 fun Context.sendEmail(address: String) {
     try {
         Intent(Intent.ACTION_SENDTO).apply {
-            data = Uri.parse("mailto:")
+            data = Uri.parse("mailto:$DEVELOPER_MAIL")
             putExtra(Intent.EXTRA_EMAIL, address)
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(this)
@@ -161,6 +161,19 @@ fun Context.findActivity(): Activity {
 
 fun Context.finishActivity() {
     try {
+        findActivity().finish()
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+}
+
+fun Context.restartApp() {
+    try {
+        findActivity().finish()
+        packageManager.getLaunchIntentForPackage(packageName)?.apply {
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(this)
+        }
         findActivity().finish()
     } catch (e: Exception) {
         e.printStackTrace()

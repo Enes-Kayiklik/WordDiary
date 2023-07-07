@@ -2,15 +2,14 @@ package com.eneskayiklik.word_diary.feature.settings.presentation.general
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Alarm
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.TextIncrease
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -20,11 +19,14 @@ import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -35,6 +37,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.eneskayiklik.word_diary.R
 import com.eneskayiklik.word_diary.core.data_store.data.UserPreference
 import com.eneskayiklik.word_diary.core.util.ScreensAnim
+import com.eneskayiklik.word_diary.core.util.components.ClockPicker
+import com.eneskayiklik.word_diary.feature.onboarding.presentation.component.AlarmView
 import com.eneskayiklik.word_diary.feature.settings.presentation.general.component.CounterView
 import com.eneskayiklik.word_diary.feature.settings.presentation.general.component.SwipeActionPickerDialog
 import com.eneskayiklik.word_diary.util.TITLE_LETTER_SPACING
@@ -53,6 +57,7 @@ fun GeneralScreen(
 
     val userPrefs = viewModel.userPrefs.collectAsState(initial = UserPreference()).value
     val personalPrefs = userPrefs.personalPrefs
+    var isClockPickerVisible by remember { mutableStateOf(false) }
 
     val state = viewModel.state.collectAsState().value
 
@@ -117,21 +122,19 @@ fun GeneralScreen(
                 )
             }*/
             item("set_reminder") {
-                ListItem(
-                    headlineText = {
-                        Text(text = stringResource(id = R.string.option_set_reminder_title))
-                    }, supportingText = {
-                        Text(text = stringResource(id = R.string.option_set_reminder_desc))
-                    }, leadingContent = {
-                        Icon(imageVector = Icons.Outlined.Alarm, contentDescription = null)
-                    }, trailingContent = {
-                        Switch(
-                            checked = false,
-                            onCheckedChange = {
-                            }
-                        )
-                    }, modifier = Modifier.clickable {
-                    }
+                AlarmView(
+                    isActive = userPrefs.notification.isNotificationEnabled,
+                    selectedTime = stringResource(
+                        id = R.string.onboarding_alarm_notify_me_at,
+                        userPrefs.notification.notificationTime
+                    ),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
+                        .clip(MaterialTheme.shapes.medium)
+                        .background(MaterialTheme.colorScheme.secondaryContainer),
+                    onCheckedChange = { e -> viewModel.onEvent(GeneralEvent.EnableAlarm(e)) },
+                    onClick = { isClockPickerVisible = isClockPickerVisible.not() }
                 )
             }
             item("daily_goal_title") {
@@ -211,4 +214,9 @@ fun GeneralScreen(
             }
         }
     }
+
+    if (isClockPickerVisible) ClockPicker(
+        selectTime = { viewModel.onEvent(GeneralEvent.SetAlarm(it)) },
+        closePicker = { isClockPickerVisible = false }
+    )
 }

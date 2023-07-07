@@ -48,4 +48,5 @@ object Versions {
     const val lottie = "6.0.1"
     const val ktor = "2.3.1"
     const val coil = "2.4.0"
+    const val richText = "0.2.0"
 }

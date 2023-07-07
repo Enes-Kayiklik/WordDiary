@@ -36,10 +36,9 @@ fun PageIndicator(
         horizontalArrangement = Arrangement.spacedBy(space),
         modifier = modifier,
     ) {
-        for (i in 0 until numberOfPages) {
-            val isSelected = i == selectedPage
+        repeat(numberOfPages) {
             PageIndicatorView(
-                isSelected = isSelected,
+                isSelected = it == selectedPage,
                 selectedColor = selectedColor,
                 defaultColor = defaultColor,
                 defaultRadius = defaultRadius,

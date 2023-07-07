@@ -1,10 +1,15 @@
 package com.eneskayiklik.word_diary.core.util
 
+import com.eneskayiklik.word_diary.BuildConfig
+import java.io.ByteArrayInputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
 import java.util.zip.ZipOutputStream
+import javax.crypto.Cipher
+import javax.crypto.spec.IvParameterSpec
+import javax.crypto.spec.SecretKeySpec
 
 object BackupUtils {
 
@@ -22,6 +27,13 @@ object BackupUtils {
                 zipOut.closeEntry()
             }
             zipOut.close()
+
+            // Encrypt file
+            val inputBytes = outputFile.readBytes()
+            val encrypted = inputBytes.encrypt()
+            FileOutputStream(outputFile).use { outputStream ->
+                outputStream.write(encrypted)
+            }
             true
         } catch (e: Exception) {
             e.printStackTrace()
@@ -31,7 +43,16 @@ object BackupUtils {
 
     fun unzipFiles(zipFile: File, destDir: File) {
         val buffer = ByteArray(1024)
-        val zipIn = ZipInputStream(zipFile.inputStream())
+
+        // Decrypt input file
+        val inputBytes = zipFile.readBytes()
+        val decryptedBytes = inputBytes.decrypt()
+        FileOutputStream(zipFile).use { outputStream ->
+            outputStream.write(decryptedBytes)
+            outputStream.close()
+        }
+
+        val zipIn = ZipInputStream(ByteArrayInputStream(decryptedBytes))
 
         var entry = zipIn.nextEntry
         while (entry != null) {
@@ -53,4 +74,28 @@ object BackupUtils {
         }
         zipIn.close()
     }
+
+    private fun ByteArray.encrypt(): ByteArray {
+        val secretKeySpec: SecretKeySpec = generateKey()
+
+        return Cipher.getInstance(TRANSFORMATION).apply {
+            init(Cipher.ENCRYPT_MODE, secretKeySpec, IvParameterSpec(ByteArray(blockSize)))
+        }.doFinal(this)
+    }
+
+    private fun ByteArray.decrypt(): ByteArray {
+        val secretKeySpec: SecretKeySpec = generateKey()
+
+        return Cipher.getInstance(TRANSFORMATION).apply {
+            init(Cipher.DECRYPT_MODE, secretKeySpec, IvParameterSpec(ByteArray(blockSize)))
+        }.doFinal(this)
+    }
+
+    private fun generateKey(): SecretKeySpec {
+        val keyBytes: ByteArray = BuildConfig.ENCRYPTION_SECRET.toByteArray().copyOf(16)
+        return SecretKeySpec(keyBytes, ALGORITHM)
+    }
+
+    private const val TRANSFORMATION = "AES/CBC/PKCS5Padding"
+    private const val ALGORITHM = "AES"
 }

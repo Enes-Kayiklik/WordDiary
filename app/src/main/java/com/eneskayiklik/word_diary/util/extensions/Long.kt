@@ -1,6 +1,8 @@
 package com.eneskayiklik.word_diary.util.extensions
 
 import com.eneskayiklik.word_diary.R
+import java.text.CharacterIterator
+import java.text.StringCharacterIterator
 
 fun Long.formatStudyTimer(): String {
     val hour = this / (1000 * 60 * 60)
@@ -46,6 +48,19 @@ fun Long.getTimeShortName(): Int {
         minute > 0 -> R.string.minute_format
         else -> R.string.second_format
     }
+}
+
+fun Long.toHumanReadableSize(): String {
+    var bytes = this
+    if (-1000 < bytes && bytes < 1000) {
+        return "$bytes B"
+    }
+    val ci: CharacterIterator = StringCharacterIterator("kMGTPE")
+    while (bytes <= -999950 || bytes >= 999950) {
+        bytes /= 1000
+        ci.next()
+    }
+    return "%.1f %cB".format(bytes / 1000.0, ci.current())
 }
 
 fun Long.toEpochDay() = this / 86_400_000
