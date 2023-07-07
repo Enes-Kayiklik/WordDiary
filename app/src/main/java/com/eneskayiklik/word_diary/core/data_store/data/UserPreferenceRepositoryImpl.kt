@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.datastore.core.DataStore
+import com.eneskayiklik.word_diary.core.alarm_manager.ReminderManager
 import com.eneskayiklik.word_diary.core.data_store.domain.UserPreferenceRepository
 import com.eneskayiklik.word_diary.core.ui.theme.DEFAULT_PRIMARY_COLOR
 import kotlinx.coroutines.flow.Flow
@@ -17,7 +18,8 @@ import javax.inject.Inject
 import kotlin.random.Random
 
 class UserPreferenceRepositoryImpl @Inject constructor(
-    private val dataStore: DataStore<UserPreference>
+    private val dataStore: DataStore<UserPreference>,
+    private val reminderManager: ReminderManager
 ) : UserPreferenceRepository {
 
     override val userData: Flow<UserPreference>
@@ -228,6 +230,9 @@ class UserPreferenceRepositoryImpl @Inject constructor(
     override suspend fun enableAlarm(enable: Boolean) {
         try {
             dataStore.updateData {
+                if (enable) reminderManager.enableReminder(it.notification.notificationTime)
+                else reminderManager.disableReminder()
+
                 it.copy(
                     notification = it.notification.copy(
                         isNotificationEnabled = enable
@@ -249,6 +254,7 @@ class UserPreferenceRepositoryImpl @Inject constructor(
                     )
                 )
             }
+            reminderManager.enableReminder(time.toString())
         } catch (e: Exception) {
             e.printStackTrace()
         }
