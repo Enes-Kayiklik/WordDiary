@@ -16,7 +16,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.eneskayiklik.word_diary.R
 import com.eneskayiklik.word_diary.util.DEVELOPER_MAIL
-import com.eneskayiklik.word_diary.util.GITHUB_ACCOUNT
+import com.eneskayiklik.word_diary.util.WORD_DIARY_GITHUB
+import com.eneskayiklik.word_diary.util.WORD_DIARY_CROWDIN
 import com.eneskayiklik.word_diary.util.LINKEDIN_ACCOUNT
 import com.eneskayiklik.word_diary.util.TELEGRAM_CHANNEL
 import com.eneskayiklik.word_diary.util.TELEGRAM_CHANNEL_REPORT_BUGS_TOPIC
@@ -56,7 +57,7 @@ fun AboutDeveloperContent() {
                 icon = painterResource(id = R.drawable.ic_github),
                 title = stringResource(id = R.string.github)
             ) {
-                context.openLink(GITHUB_ACCOUNT)
+                context.openLink(WORD_DIARY_GITHUB)
             }
             AboutTextButton(
                 icon = painterResource(id = R.drawable.ic_linkedin),
@@ -98,7 +99,7 @@ fun SupportDevelopmentActions() {
                 imageVector = Icons.Outlined.Translate,
                 title = stringResource(id = R.string.translate)
             ) {
-
+                context.openLink(WORD_DIARY_CROWDIN)
             }
             AboutTextButton(
                 imageVector = Icons.Outlined.Star,

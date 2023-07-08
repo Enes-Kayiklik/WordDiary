@@ -27,6 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -39,6 +40,8 @@ import com.eneskayiklik.word_diary.core.data_store.data.UserPreference
 import com.eneskayiklik.word_diary.core.util.ScreensAnim
 import com.eneskayiklik.word_diary.feature.settings.presentation.app_language.component.TranslateAppButton
 import com.eneskayiklik.word_diary.util.TITLE_LETTER_SPACING
+import com.eneskayiklik.word_diary.util.WORD_DIARY_CROWDIN
+import com.eneskayiklik.word_diary.util.extensions.openLink
 import com.eneskayiklik.word_diary.util.extensions.plus
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -52,6 +55,7 @@ fun AppLanguageScreen(
 ) {
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     val userPrefs = viewModel.userPrefs.collectAsState(initial = UserPreference()).value
+    val context = LocalContext.current
 
     Scaffold(
         modifier = Modifier
@@ -90,6 +94,9 @@ fun AppLanguageScreen(
                         .padding(horizontal = 16.dp, vertical = 8.dp)
                         .clip(MaterialTheme.shapes.large)
                         .background(MaterialTheme.colorScheme.secondaryContainer)
+                        .clickable {
+                            context.openLink(WORD_DIARY_CROWDIN)
+                        }
                         .padding(16.dp)
                 )
             }
