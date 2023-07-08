@@ -52,7 +52,7 @@ fun AboutDropdownMenu(
             }
         )
         DropdownMenuItem(
-            text = { Text(stringResource(id = R.string.settings_privacy_policy)) },
+            text = { Text(stringResource(id = R.string.privacy_policy)) },
             onClick = {
                 onDismiss()
                 context.openLink(PRIVACY)
@@ -65,7 +65,7 @@ fun AboutDropdownMenu(
             }
         )
         DropdownMenuItem(
-            text = { Text(stringResource(id = R.string.settings_terms_conditions)) },
+            text = { Text(stringResource(id = R.string.terms_conditions)) },
             onClick = {
                 onDismiss()
                 context.openLink(TERMS)

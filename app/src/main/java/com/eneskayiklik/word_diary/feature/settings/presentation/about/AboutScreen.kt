@@ -90,7 +90,7 @@ fun AboutScreen(
         topBar = {
             LargeTopAppBar(title = {
                 Text(
-                    text = stringResource(id = R.string.destination_about_title),
+                    text = stringResource(id = R.string.about),
                     fontWeight = FontWeight.Medium,
                     letterSpacing = TITLE_LETTER_SPACING
                 )
@@ -125,7 +125,7 @@ fun AboutScreen(
         ) {
             item {
                 AboutCard(
-                    cardTitle = stringResource(id = R.string.settings_about_the_app),
+                    cardTitle = stringResource(id = R.string.about_the_app),
                     sectionTitle = {
                         Column {
                             Text(
@@ -184,16 +184,17 @@ fun AboutScreen(
 
             item {
                 AboutCard(
-                    cardTitle = stringResource(id = R.string.settings_developer_info),
+                    cardTitle = stringResource(id = R.string.development_and_design),
                     sectionTitle = {
                         Text(
                             text = stringResource(id = R.string.developer_name),
-                            style = MaterialTheme.typography.titleMedium
+                            style = MaterialTheme.typography.titleMedium,
+                            textAlign = TextAlign.Center
                         )
                     },
                     sectionDescription = {
                         Text(
-                            text = stringResource(id = R.string.settings_developer_info_desc),
+                            text = stringResource(id = R.string.developer_info_desc),
                             style = MaterialTheme.typography.bodyMedium,
                             modifier = Modifier.padding(horizontal = 24.dp),
                             textAlign = TextAlign.Center
@@ -221,16 +222,17 @@ fun AboutScreen(
 
             item {
                 AboutCard(
-                    cardTitle = stringResource(id = R.string.settings_support_development),
+                    cardTitle = stringResource(id = R.string.support_development),
                     sectionTitle = {
                         Text(
-                            text = stringResource(id = R.string.settings_support_development),
-                            style = MaterialTheme.typography.titleMedium
+                            text = stringResource(id = R.string.support_development_title),
+                            style = MaterialTheme.typography.titleMedium,
+                            textAlign = TextAlign.Center
                         )
                     },
                     sectionDescription = {
                         Text(
-                            text = stringResource(id = R.string.settings_support_development_desc),
+                            text = stringResource(id = R.string.support_development_desc),
                             style = MaterialTheme.typography.bodyMedium,
                             modifier = Modifier.padding(horizontal = 24.dp),
                             textAlign = TextAlign.Center

@@ -18,7 +18,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import com.eneskayiklik.word_diary.R
 import com.eneskayiklik.word_diary.core.data_store.data.SwipeAction
 
 @Composable
@@ -35,7 +34,7 @@ fun SwipeActionPickerDialog(
                 .background(MaterialTheme.colorScheme.surface),
         ) {
             Text(
-                text = stringResource(id = R.string.option_swipe_action_title),
+                text = "---",
                 style = MaterialTheme.typography.headlineSmall,
                 modifier = Modifier.padding(24.dp),
                 color = MaterialTheme.colorScheme.onSurface

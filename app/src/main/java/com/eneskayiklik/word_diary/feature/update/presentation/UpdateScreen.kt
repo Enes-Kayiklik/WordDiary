@@ -82,7 +82,7 @@ fun UpdateScreen(
         topBar = {
             TopAppBar(title = {
                 Text(
-                    text = stringResource(id = R.string.destination_update_available),
+                    text = stringResource(id = R.string.update_available),
                     fontWeight = FontWeight.Medium,
                     letterSpacing = TITLE_LETTER_SPACING
                 )

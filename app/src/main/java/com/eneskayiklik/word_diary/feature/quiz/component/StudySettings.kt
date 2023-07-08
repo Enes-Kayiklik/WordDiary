@@ -31,10 +31,10 @@ fun StudySettings(
         item("timer") {
             ListItem(
                 headlineText = {
-                    Text(text = stringResource(id = R.string.study_settings_timer_title))
+                    Text(text = stringResource(id = R.string.enable_timer))
                 },
                 supportingText = {
-                    Text(text = stringResource(id = R.string.study_settings_timer_desc))
+                    Text(text = stringResource(id = R.string.enable_timer_desc))
                 }, trailingContent = {
                     Switch(
                         checked = state.isTimerEnable,
@@ -48,10 +48,10 @@ fun StudySettings(
         item("looping") {
             ListItem(
                 headlineText = {
-                    Text(text = stringResource(id = R.string.study_settings_looping_title))
+                    Text(text = stringResource(id = R.string.enable_looping))
                 },
                 supportingText = {
-                    Text(text = stringResource(id = R.string.study_settings_looping_desc))
+                    Text(text = stringResource(id = R.string.enable_looping_desc))
                 }, trailingContent = {
                     Switch(
                         checked = state.isLoopingEnable,
@@ -65,10 +65,10 @@ fun StudySettings(
         item("shuffle") {
             ListItem(
                 headlineText = {
-                    Text(text = stringResource(id = R.string.study_settings_shuffle_title))
+                    Text(text = stringResource(id = R.string.shuffle_words))
                 },
                 supportingText = {
-                    Text(text = stringResource(id = R.string.study_settings_shuffle_desc))
+                    Text(text = stringResource(id = R.string.shuffle_words_desc))
                 }, trailingContent = {
                     Switch(
                         checked = state.isShuffleEnable,
@@ -82,10 +82,10 @@ fun StudySettings(
         item("sound") {
             ListItem(
                 headlineText = {
-                    Text(text = stringResource(id = R.string.study_settings_sound_title))
+                    Text(text = stringResource(id = R.string.sound_transcription))
                 },
                 supportingText = {
-                    Text(text = stringResource(id = R.string.study_settings_sound_desc))
+                    Text(text = stringResource(id = R.string.sound_transcription_desc))
                 }, trailingContent = {
                     Switch(
                         checked = state.isVoiceEnabled,

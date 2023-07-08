@@ -175,8 +175,8 @@ fun ListsScreen(
                         )
                     )
                 },
-                title = stringResource(id = R.string.delete_option_title),
-                description = stringResource(id = R.string.delete_option_desc),
+                title = stringResource(id = R.string.delete_collection),
+                description = stringResource(id = R.string.delete_collection_desc),
                 confirmText = stringResource(id = R.string.delete_confirm),
                 dismissText = stringResource(id = R.string.dialog_cancel),
                 icon = Icons.Outlined.Delete
@@ -215,7 +215,7 @@ fun ListsScreen(
                     viewModel.onEvent(FolderListEvent.OnSearchQueryChanged(it))
                 },
                 onSearch = { },
-                placeholder = { Text(text = stringResource(id = R.string.lists_screen_search_bar_placeholder)) },
+                placeholder = { Text(text = stringResource(id = R.string.search_collections)) },
                 active = isSearchActive,
                 onActiveChange = { isSearchActive = it },
                 leadingIcon = {
@@ -359,9 +359,9 @@ fun ListsScreen(
             state.showEmptyLayout -> EmptyDataView(
                 modifier = Modifier.fillMaxSize(),
                 title = stringResource(id = R.string.oops),
-                subtitle = stringResource(id = R.string.empty_folder_desc),
+                subtitle = stringResource(id = R.string.empty_collection_desc),
                 icon = Icons.Outlined.Folder,
-                actionText = stringResource(id = R.string.destination_create_folder_title),
+                actionText = stringResource(id = R.string.create_collection),
                 onAction = { viewModel.onEvent(FolderListEvent.AddFolder) }
             )
 
@@ -480,6 +480,7 @@ fun ListsScreen(
                                 contentDescription = stringResource(id = study.title)
                             )
                         }, modifier = Modifier.clickable {
+                            isStudyListVisible = false
                             val folder = lastSelectedFolder.takeIf { it >= 0 } ?: return@clickable
                             lastSelectedFolder = -1
                             navigator.navigate(

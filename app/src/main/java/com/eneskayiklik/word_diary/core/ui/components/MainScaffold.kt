@@ -27,21 +27,21 @@ fun MainScaffold(
     bottomNavItems: List<BottomNavItem> = listOf(
         BottomNavItem(
             route = ListsScreenDestination,
-            title = R.string.destination_lists,
+            title = R.string.collections,
             icon = Icons.Outlined.Style,
-            contentDescription = R.string.destination_lists_content_desc
+            contentDescription = R.string.collections
         ),
         BottomNavItem(
             route = StatisticsScreenDestination,
-            title = R.string.destination_statistics,
+            title = R.string.statistics,
             resIcon = R.drawable.ic_line_chart,
-            contentDescription = R.string.destination_statistics_content_desc
+            contentDescription = R.string.statistics
         ),
         BottomNavItem(
             route = SettingsScreenDestination,
-            title = R.string.destination_settings,
+            title = R.string.settings,
             icon = Icons.Outlined.Settings,
-            contentDescription = R.string.destination_settings_content_desc
+            contentDescription = R.string.settings
         ),
     ),
     content: @Composable () -> Unit

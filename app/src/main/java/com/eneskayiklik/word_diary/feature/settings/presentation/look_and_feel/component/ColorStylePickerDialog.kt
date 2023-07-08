@@ -35,7 +35,7 @@ fun ColorStylePickerDialog(
                 .background(MaterialTheme.colorScheme.surface),
         ) {
             Text(
-                text = stringResource(id = R.string.option_app_theme_title),
+                text = stringResource(id = R.string.palette_style),
                 style = MaterialTheme.typography.headlineSmall,
                 modifier = Modifier.padding(24.dp),
                 color = MaterialTheme.colorScheme.onSurface

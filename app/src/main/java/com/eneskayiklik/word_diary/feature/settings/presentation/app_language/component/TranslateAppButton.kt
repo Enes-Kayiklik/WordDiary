@@ -35,11 +35,11 @@ fun TranslateAppButton(
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
             Text(
-                text = stringResource(id = R.string.settings_help_translate_title),
+                text = stringResource(id = R.string.help_translate),
                 style = MaterialTheme.typography.bodyLarge
             )
             Text(
-                text = stringResource(id = R.string.settings_help_translate_desc),
+                text = stringResource(id = R.string.help_translate_desc),
                 style = MaterialTheme.typography.bodyMedium
             )
         }

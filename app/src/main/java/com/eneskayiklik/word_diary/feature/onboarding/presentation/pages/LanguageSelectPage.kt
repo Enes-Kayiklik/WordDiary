@@ -41,7 +41,7 @@ fun LanguageSelectPage(
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
 
     BackHandler(userLanguage == UserLanguage.NOT_SPECIFIED, onBack = {
-        onEvent(UiEvent.ShowToast(textRes = R.string.error_select_valid_language))
+        onEvent(UiEvent.ShowToast(textRes = R.string.select_language_warning))
     })
 
     Scaffold(
@@ -50,7 +50,7 @@ fun LanguageSelectPage(
         topBar = {
             LargeTopAppBar(title = {
                 Text(
-                    text = stringResource(id = R.string.destination_user_language_title),
+                    text = stringResource(id = R.string.user_language),
                     fontWeight = FontWeight.Medium,
                     letterSpacing = TITLE_LETTER_SPACING
                 )
@@ -64,7 +64,7 @@ fun LanguageSelectPage(
         ) {
             item {
                 Text(
-                    text = stringResource(id = R.string.destination_user_language_desc),
+                    text = stringResource(id = R.string.user_language_desc),
                     style = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier.padding(
                         start = 16.dp,

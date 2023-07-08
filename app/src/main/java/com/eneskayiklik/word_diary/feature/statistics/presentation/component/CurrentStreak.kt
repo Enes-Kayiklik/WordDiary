@@ -46,7 +46,7 @@ fun CurrentStreakView(
         Column(modifier = Modifier.weight(1F), verticalArrangement = Arrangement.spacedBy(16.dp)) {
             StatisticsHeaderItem(
                 modifier = Modifier.weight(1F),
-                title = stringResource(id = R.string.statistics_new_words),
+                title = stringResource(id = R.string.new_words),
                 subTitle = newWords,
                 leadingContent = {
                     val progress by animateFloatAsState(targetValue = newWordProgress)
@@ -62,7 +62,7 @@ fun CurrentStreakView(
             )
             StatisticsHeaderItem(
                 modifier = Modifier.weight(1F),
-                title = stringResource(id = R.string.statistics_study_time),
+                title = stringResource(id = R.string.study_time),
                 subTitle = stringResource(id = studyTimeFormatter, studyTime),
                 leadingContent = {
                     Icon(
@@ -81,7 +81,7 @@ fun CurrentStreakView(
         Column(modifier = Modifier.weight(1F), verticalArrangement = Arrangement.spacedBy(16.dp)) {
             StatisticsHeaderItem(
                 modifier = Modifier.weight(1F),
-                title = stringResource(id = R.string.statistics_current_streak),
+                title = stringResource(id = R.string.current_streak),
                 subTitle = stringResource(id = streakFormatter, streakCount),
                 leadingContent = {
                     Icon(
@@ -93,7 +93,7 @@ fun CurrentStreakView(
             )
             StatisticsHeaderItem(
                 modifier = Modifier.weight(1F),
-                title = stringResource(id = R.string.statistics_study_sessions),
+                title = stringResource(id = R.string.study_sessions),
                 subTitle = studySessions,
                 leadingContent = {
                     Icon(

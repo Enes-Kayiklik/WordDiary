@@ -31,7 +31,7 @@ fun WordListDropdownMenu(
         offset = DpOffset(x = 0.dp, y = (-24).dp)
     ) {
         DropdownMenuItem(
-            text = { Text(stringResource(id = R.string.study_option_title)) },
+            text = { Text(stringResource(id = R.string.practise)) },
             onClick = {
                 onDismiss()
                 onQuiz()
@@ -44,7 +44,7 @@ fun WordListDropdownMenu(
             }
         )
         DropdownMenuItem(
-            text = { Text(stringResource(id = R.string.filter_option_title)) },
+            text = { Text(stringResource(id = R.string.filter)) },
             onClick = {
                 onDismiss()
                 onFilter()
@@ -57,7 +57,7 @@ fun WordListDropdownMenu(
             }
         )
         DropdownMenuItem(
-            text = { Text(stringResource(id = R.string.delete_option_title)) },
+            text = { Text(stringResource(id = R.string.delete_collection)) },
             onClick = {
                 onDismiss()
                 onDelete()

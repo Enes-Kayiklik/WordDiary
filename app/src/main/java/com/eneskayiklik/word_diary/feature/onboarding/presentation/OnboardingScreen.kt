@@ -132,7 +132,7 @@ fun OnboardingScreen(
                                         imageVector = Icons.Outlined.ChevronLeft,
                                         contentDescription = null
                                     )
-                                    Text(text = stringResource(id = R.string.onboarding_previous))
+                                    Text(text = stringResource(id = R.string.previous))
                                 }
                             }
 
@@ -157,9 +157,9 @@ fun OnboardingScreen(
                                 modifier = Modifier.align(Alignment.CenterEnd)
                             ) {
                                 if (pagerState.currentPage == state.pages.size - 1) {
-                                    Text(text = stringResource(id = R.string.onboarding_finish))
+                                    Text(text = stringResource(id = R.string.finish))
                                 } else {
-                                    Text(text = stringResource(id = R.string.onboarding_next))
+                                    Text(text = stringResource(id = R.string.next))
                                 }
                                 Icon(
                                     imageVector = Icons.Outlined.ChevronRight,

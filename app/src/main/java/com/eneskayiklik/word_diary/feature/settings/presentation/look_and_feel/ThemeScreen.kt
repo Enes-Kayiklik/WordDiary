@@ -95,7 +95,7 @@ fun ThemeScreen(
         topBar = {
             LargeTopAppBar(title = {
                 Text(
-                    text = stringResource(id = R.string.settings_theming_title),
+                    text = stringResource(id = R.string.theme_and_colors),
                     fontWeight = FontWeight.Medium,
                     letterSpacing = TITLE_LETTER_SPACING
                 )
@@ -117,7 +117,7 @@ fun ThemeScreen(
         ) {
             item("theme_title") {
                 Text(
-                    text = stringResource(id = R.string.settings_theme_section_title),
+                    text = stringResource(id = R.string.theme),
                     style = MaterialTheme.typography.labelSmall.copy(
                         color = MaterialTheme.colorScheme.primary
                     ),
@@ -127,7 +127,7 @@ fun ThemeScreen(
             item("app_theme") {
                 ListItem(
                     headlineText = {
-                        Text(text = stringResource(id = R.string.option_app_theme_title))
+                        Text(text = stringResource(id = R.string.app_theme))
                     },
                     supportingText = {
                         Text(text = stringResource(id = themePrefs.appTheme.title))
@@ -141,10 +141,10 @@ fun ThemeScreen(
             item("amoled_black") {
                 ListItem(
                     headlineText = {
-                        Text(text = stringResource(id = R.string.option_amoled_black_title))
+                        Text(text = stringResource(id = R.string.amoled_black))
                     },
                     supportingText = {
-                        Text(text = stringResource(id = R.string.option_amoled_black_desc))
+                        Text(text = stringResource(id = R.string.amoled_black_desc))
                     }, leadingContent = {
                         Box(modifier = Modifier.size(24.dp))
                     }, trailingContent = {
@@ -162,10 +162,10 @@ fun ThemeScreen(
             item("colorful_background") {
                 ListItem(
                     headlineText = {
-                        Text(text = stringResource(id = R.string.option_colorful_background_title))
+                        Text(text = stringResource(id = R.string.colorful_background))
                     },
                     supportingText = {
-                        Text(text = stringResource(id = R.string.option_colorful_background_desc))
+                        Text(text = stringResource(id = R.string.colorful_background_desc))
                     }, leadingContent = {
                         Box(modifier = Modifier.size(24.dp))
                     }, trailingContent = {
@@ -184,7 +184,7 @@ fun ThemeScreen(
             item("font_family") {
                 ListItem(
                     headlineText = {
-                        Text(text = stringResource(id = R.string.option_font_family_title))
+                        Text(text = stringResource(id = R.string.font_family))
                     },
                     supportingText = {
                         Text(text = themePrefs.fontFamily.title)
@@ -198,7 +198,7 @@ fun ThemeScreen(
 
             item("colors_title") {
                 Text(
-                    text = stringResource(id = R.string.settings_colors_section_title),
+                    text = stringResource(id = R.string.colors),
                     style = MaterialTheme.typography.labelSmall.copy(
                         color = MaterialTheme.colorScheme.primary
                     ),
@@ -208,10 +208,10 @@ fun ThemeScreen(
             item("primary_color") {
                 ListItem(
                     headlineText = {
-                        Text(text = stringResource(id = R.string.option_primary_color_title))
+                        Text(text = stringResource(id = R.string.primary_color))
                     },
                     supportingText = {
-                        Text(text = stringResource(id = R.string.option_primary_color_desc))
+                        Text(text = stringResource(id = R.string.primary_color_desc))
                     }, leadingContent = {
                         Icon(imageVector = Icons.Filled.Palette, contentDescription = null)
                     }, trailingContent = {
@@ -230,10 +230,10 @@ fun ThemeScreen(
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) item("wallpaper_color") {
                 ListItem(
                     headlineText = {
-                        Text(text = stringResource(id = R.string.option_wallpaper_color_title))
+                        Text(text = stringResource(id = R.string.wallpaper_color))
                     },
                     supportingText = {
-                        Text(text = stringResource(id = R.string.option_wallpaper_color_desc))
+                        Text(text = stringResource(id = R.string.wallpaper_color_desc))
                     }, leadingContent = {
                         Box(modifier = Modifier.size(24.dp))
                     }, trailingContent = {
@@ -252,10 +252,10 @@ fun ThemeScreen(
             item("random_color") {
                 ListItem(
                     headlineText = {
-                        Text(text = stringResource(id = R.string.option_random_color_title))
+                        Text(text = stringResource(id = R.string.random_color))
                     },
                     supportingText = {
-                        Text(text = stringResource(id = R.string.option_random_color_desc))
+                        Text(text = stringResource(id = R.string.random_color_desc))
                     }, leadingContent = {
                         Box(modifier = Modifier.size(24.dp))
                     }, trailingContent = {
@@ -274,7 +274,7 @@ fun ThemeScreen(
             item("palette_style") {
                 ListItem(
                     headlineText = {
-                        Text(text = stringResource(id = R.string.option_color_style_title))
+                        Text(text = stringResource(id = R.string.palette_style))
                     },
                     supportingText = {
                         Text(text = themePrefs.colorStyle.title)

@@ -36,7 +36,7 @@ fun ThemePickerDialog(
                 .padding(vertical = 24.dp)
         ) {
             Text(
-                text = stringResource(id = R.string.option_app_theme_title),
+                text = stringResource(id = R.string.app_theme),
                 style = MaterialTheme.typography.headlineSmall,
                 modifier = Modifier.padding(start = 24.dp),
                 color = MaterialTheme.colorScheme.onSurface

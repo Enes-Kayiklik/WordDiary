@@ -90,7 +90,7 @@ fun ListsStatisticView(
                     contentDescription = null
                 )
                 Text(
-                    text = stringResource(id = R.string.study_option_title),
+                    text = stringResource(id = R.string.practise),
                     modifier = Modifier.padding(start = 8.dp)
                 )
             }

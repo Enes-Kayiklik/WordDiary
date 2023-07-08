@@ -60,7 +60,7 @@ fun AppLanguageScreen(
         topBar = {
             LargeTopAppBar(title = {
                 Text(
-                    text = stringResource(id = R.string.destination_user_language_title),
+                    text = stringResource(id = R.string.languages),
                     fontWeight = FontWeight.Medium,
                     letterSpacing = TITLE_LETTER_SPACING
                 )

@@ -54,42 +54,42 @@ fun GeneralStatisticsView(
     ) {
         GeneralStatisticsItem(
             modifier = Modifier.fillMaxWidth(),
-            title = stringResource(id = R.string.statistics_all_time_learning),
+            title = stringResource(id = R.string.learning),
             valueText = learningWordText,
             leadingIcon = Icons.Outlined.Book
         )
         Divider(modifier = Modifier.fillMaxWidth())
         GeneralStatisticsItem(
             modifier = Modifier.fillMaxWidth(),
-            title = stringResource(id = R.string.statistics_all_time_complete),
+            title = stringResource(id = R.string.learned),
             valueText = completeLearnedText,
             leadingIcon = Icons.Outlined.StarBorder
         )
         Divider(modifier = Modifier.fillMaxWidth())
         GeneralStatisticsItem(
             modifier = Modifier.fillMaxWidth(),
-            title = stringResource(id = R.string.statistics_best_streak),
+            title = stringResource(id = R.string.best_streak),
             valueText = stringResource(id = streakFormatter, streakCount),
             leadingIcon = Icons.Outlined.LocalFireDepartment
         )
         Divider(modifier = Modifier.fillMaxWidth())
         GeneralStatisticsItem(
             modifier = Modifier.fillMaxWidth(),
-            title = stringResource(id = R.string.statistics_all_time_study_time),
+            title = stringResource(id = R.string.study_time),
             valueText = stringResource(id = studyTimeFormatter, studyTime),
             leadingIcon = Icons.Outlined.Schedule
         )
         Divider(modifier = Modifier.fillMaxWidth())
         GeneralStatisticsItem(
             modifier = Modifier.fillMaxWidth(),
-            title = stringResource(id = R.string.statistics_all_time_study_sessions),
+            title = stringResource(id = R.string.study_sessions),
             valueText = "$studySessions",
             leadingIcon = Icons.Outlined.Architecture
         )
         Divider(modifier = Modifier.fillMaxWidth())
         GeneralStatisticsItem(
             modifier = Modifier.fillMaxWidth(),
-            title = stringResource(id = R.string.statistics_start_of_learning),
+            title = stringResource(id = R.string.start_of_learning),
             valueText = startOfLearning,
             leadingIcon = Icons.Outlined.CalendarMonth
         )

@@ -152,7 +152,7 @@ fun CreateFolderScreen(
         topBar = {
             CenterAlignedTopAppBar(title = {
                 Text(
-                    text = stringResource(id = R.string.destination_create_folder_title),
+                    text = stringResource(id = R.string.create_collection),
                     fontWeight = FontWeight.Medium,
                     letterSpacing = TITLE_LETTER_SPACING
                 )
@@ -188,8 +188,8 @@ fun CreateFolderScreen(
                     OutlinedTextField(
                         value = state.folderName,
                         onValueChange = viewModel::onFolderNameChanged,
-                        label = { Text(text = stringResource(id = R.string.folder_name_label)) },
-                        placeholder = { Text(text = stringResource(id = R.string.folder_name_hint)) },
+                        label = { Text(text = stringResource(id = R.string.collection_name)) },
+                        placeholder = { Text(text = stringResource(id = R.string.collection_name_hint)) },
                         trailingIcon = {
                             Text(
                                 text = state.counterText,
@@ -200,7 +200,7 @@ fun CreateFolderScreen(
                         supportingText = {
                             Box(modifier = Modifier.animateContentSize()) {
                                 if (state.hasNameError) Text(
-                                    text = stringResource(id = R.string.warning_field_empty),
+                                    text = stringResource(id = R.string.empty_field_warning),
                                     color = MaterialTheme.colorScheme.error
                                 )
                             }
@@ -215,7 +215,7 @@ fun CreateFolderScreen(
 
             item("pick_color") {
                 Text(
-                    text = stringResource(id = R.string.select_color_title),
+                    text = stringResource(id = R.string.select_color),
                     style = MaterialTheme.typography.titleMedium
                 )
                 Spacer(modifier = Modifier.height(8.dp))
@@ -251,7 +251,7 @@ fun CreateFolderScreen(
 
             if (state.showLangSelection) item("pick_language") {
                 Text(
-                    text = stringResource(id = R.string.pick_language_title),
+                    text = stringResource(id = R.string.pick_language),
                     style = MaterialTheme.typography.titleMedium
                 )
                 Spacer(modifier = Modifier.height(8.dp))

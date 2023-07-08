@@ -107,10 +107,10 @@ fun StudyScreen(
                 onDismissRequest = {
                     viewModel.onEvent(StudyEvent.ShowDialog(StudyDialogType.None))
                 },
-                title = stringResource(id = R.string.study_quit_dialog_title),
-                description = stringResource(id = R.string.study_quit_dialog_description),
-                confirmText = stringResource(id = R.string.study_quit_dialog_see_results),
-                dismissText = stringResource(id = R.string.study_quit_dialog_finish_without_save)
+                title = stringResource(id = R.string.finish_study_dialog),
+                description = stringResource(id = R.string.finish_study_dialog_desc),
+                confirmText = stringResource(id = R.string.see_results),
+                dismissText = stringResource(id = R.string.finish_without_saving)
             )
 
             else -> Unit
@@ -125,7 +125,7 @@ fun StudyScreen(
             CenterAlignedTopAppBar(title = {
                 Text(
                     text = when (state.quizState) {
-                        QuizState.Initial -> stringResource(id = R.string.study_settings_title)
+                        QuizState.Initial -> stringResource(id = R.string.study_settings)
                         QuizState.Finished -> "Well done!"
                         else -> ""
                     },
@@ -179,7 +179,7 @@ fun StudyScreen(
                                 .align(Alignment.BottomCenter),
                             enabled = state.isStartActive
                         ) {
-                            Text(text = stringResource(id = R.string.action_start_study))
+                            Text(text = stringResource(id = R.string.start_study))
                             Text(text = "(${state.currentTotal} words)")
                         }
                     }

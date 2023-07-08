@@ -2,7 +2,6 @@ package com.eneskayiklik.word_diary.feature.onboarding.presentation.pages
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -49,14 +48,14 @@ fun AlarmPage(
         )
 
         Text(
-            text = stringResource(id = R.string.onboarding_alarm_title),
+            text = stringResource(id = R.string.setup_notification),
             style = MaterialTheme.typography.displaySmall,
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(horizontal = 16.dp)
         )
 
         Text(
-            text = stringResource(id = R.string.onboarding_alarm_desc),
+            text = stringResource(id = R.string.setup_notification_desc),
             style = MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(horizontal = 16.dp)
@@ -65,7 +64,7 @@ fun AlarmPage(
         AlarmView(
             isActive = notificationSettings.isNotificationEnabled,
             selectedTime = stringResource(
-                id = R.string.onboarding_alarm_notify_me_at,
+                id = R.string.notify_me_at,
                 notificationSettings.notificationTime
             ),
             modifier = Modifier

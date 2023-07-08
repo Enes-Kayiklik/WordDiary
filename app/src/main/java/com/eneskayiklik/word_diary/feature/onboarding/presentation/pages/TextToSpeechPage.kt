@@ -49,7 +49,7 @@ fun TextToSpeechPage(
         topBar = {
             LargeTopAppBar(title = {
                 Text(
-                    text = stringResource(id = R.string.onboarding_text_to_speech_title),
+                    text = stringResource(id = R.string.text_to_speech),
                     fontWeight = FontWeight.Medium,
                     letterSpacing = TITLE_LETTER_SPACING
                 )
@@ -63,7 +63,7 @@ fun TextToSpeechPage(
         ) {
             item {
                 Text(
-                    text = stringResource(id = R.string.onboarding_text_to_speech_desc),
+                    text = stringResource(id = R.string.text_to_speech_desc),
                     style = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier.padding(top = 8.dp, bottom = 8.dp)
                 )
@@ -71,12 +71,12 @@ fun TextToSpeechPage(
 
             item {
                 Text(
-                    text = stringResource(id = R.string.onboarding_text_to_speech_first_title),
+                    text = stringResource(id = R.string.install_text_to_speech),
                     style = MaterialTheme.typography.titleMedium
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
-                    text = stringResource(id = R.string.onboarding_text_to_speech_first_desc),
+                    text = stringResource(id = R.string.install_text_to_speech_desc),
                     style = MaterialTheme.typography.bodyMedium
                 )
                 Spacer(modifier = Modifier.height(8.dp))
@@ -87,18 +87,18 @@ fun TextToSpeechPage(
                         modifier = Modifier.size(24.dp)
                     )
                     Spacer(modifier = Modifier.width(4.dp))
-                    Text(text = stringResource(id = R.string.onboarding_text_to_speech_open_play_store))
+                    Text(text = stringResource(id = R.string.open_play_store))
                 }
             }
 
             item {
                 Text(
-                    text = stringResource(id = R.string.onboarding_text_to_speech_second_title),
+                    text = stringResource(id = R.string.choose_engine),
                     style = MaterialTheme.typography.titleMedium
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
-                    text = stringResource(id = R.string.onboarding_text_to_speech_second_desc),
+                    text = stringResource(id = R.string.choose_engine_desc),
                     style = MaterialTheme.typography.bodyMedium
                 )
                 Spacer(modifier = Modifier.height(8.dp))
@@ -108,7 +108,7 @@ fun TextToSpeechPage(
                         contentDescription = null
                     )
                     Spacer(modifier = Modifier.width(4.dp))
-                    Text(text = stringResource(id = R.string.onboarding_text_to_speech_open_settings))
+                    Text(text = stringResource(id = R.string.open_settings))
                 }
             }
         }

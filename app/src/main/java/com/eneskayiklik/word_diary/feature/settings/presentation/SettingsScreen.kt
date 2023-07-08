@@ -89,7 +89,7 @@ fun SettingsScreen(
         topBar = {
             LargeTopAppBar(title = {
                 Text(
-                    text = stringResource(id = R.string.destination_settings_title),
+                    text = stringResource(id = R.string.settings),
                     fontWeight = FontWeight.Medium,
                     letterSpacing = TITLE_LETTER_SPACING
                 )
@@ -116,12 +116,12 @@ fun SettingsScreen(
             }
             item(key = "general") {
                 ListItem(
-                    headlineText = { Text(text = stringResource(id = R.string.settings_general_title)) },
-                    supportingText = { Text(text = stringResource(id = R.string.settings_general_desc)) },
+                    headlineText = { Text(text = stringResource(id = R.string.general)) },
+                    supportingText = { Text(text = stringResource(id = R.string.general_desc)) },
                     leadingContent = {
                         Icon(
                             imageVector = Icons.Outlined.ToggleOn,
-                            contentDescription = stringResource(id = R.string.settings_general_desc)
+                            contentDescription = stringResource(id = R.string.general_desc)
                         )
                     },
                     modifier = Modifier.clickable { navigator.navigate(GeneralScreenDestination) }
@@ -129,12 +129,12 @@ fun SettingsScreen(
             }
             item(key = "theme") {
                 ListItem(
-                    headlineText = { Text(text = stringResource(id = R.string.settings_theming_title)) },
-                    supportingText = { Text(text = stringResource(id = R.string.settings_theming_desc)) },
+                    headlineText = { Text(text = stringResource(id = R.string.theme_and_colors)) },
+                    supportingText = { Text(text = stringResource(id = R.string.theme_and_colors_desc)) },
                     leadingContent = {
                         Icon(
                             imageVector = Icons.Outlined.Palette,
-                            contentDescription = stringResource(id = R.string.settings_theming_desc)
+                            contentDescription = stringResource(id = R.string.theme_and_colors_desc)
                         )
                     },
                     modifier = Modifier.clickable { navigator.navigate(ThemeScreenDestination) }
@@ -143,8 +143,8 @@ fun SettingsScreen(
 
             item(key = "personalize") {
                 ListItem(
-                    headlineText = { Text(text = stringResource(id = R.string.settings_personalize_title)) },
-                    supportingText = { Text(text = stringResource(id = R.string.settings_personalize_desc)) },
+                    headlineText = { Text(text = stringResource(id = R.string.personalize)) },
+                    supportingText = { Text(text = stringResource(id = R.string.personalize_desc)) },
                     leadingContent = {
                         Icon(
                             imageVector = Icons.Outlined.Visibility,
@@ -163,8 +163,8 @@ fun SettingsScreen(
 
             item(key = "backup") {
                 ListItem(
-                    headlineText = { Text(text = stringResource(id = R.string.settings_backup_title)) },
-                    supportingText = { Text(text = stringResource(id = R.string.settings_backup_desc)) },
+                    headlineText = { Text(text = stringResource(id = R.string.backup_and_restore)) },
+                    supportingText = { Text(text = stringResource(id = R.string.backup_and_restore_desc)) },
                     leadingContent = {
                         Icon(
                             imageVector = Icons.Outlined.AddToDrive,
@@ -179,8 +179,8 @@ fun SettingsScreen(
 
             item(key = "app_language") {
                 ListItem(
-                    headlineText = { Text(text = stringResource(id = R.string.settings_app_language_title)) },
-                    supportingText = { Text(text = stringResource(id = R.string.settings_app_language_desc)) },
+                    headlineText = { Text(text = stringResource(id = R.string.app_language)) },
+                    supportingText = { Text(text = stringResource(id = R.string.app_language_desc)) },
                     leadingContent = {
                         Icon(
                             imageVector = Icons.Outlined.Language,
@@ -193,8 +193,8 @@ fun SettingsScreen(
 
             item(key = "user_language") {
                 ListItem(
-                    headlineText = { Text(text = stringResource(id = R.string.settings_user_language_title)) },
-                    supportingText = { Text(text = stringResource(id = R.string.settings_user_language_desc)) },
+                    headlineText = { Text(text = stringResource(id = R.string.user_language)) },
+                    supportingText = { Text(text = stringResource(id = R.string.user_language_desc)) },
                     leadingContent = {
                         Icon(
                             imageVector = Icons.Outlined.Translate,
@@ -207,11 +207,11 @@ fun SettingsScreen(
 
             item(key = "about") {
                 ListItem(
-                    headlineText = { Text(text = stringResource(id = R.string.settings_about_title)) },
+                    headlineText = { Text(text = stringResource(id = R.string.about)) },
                     supportingText = {
                         Text(
                             text = stringResource(
-                                R.string.settings_about_desc,
+                                R.string.about_desc,
                                 stringResource(id = R.string.app_name)
                             )
                         )
@@ -219,7 +219,7 @@ fun SettingsScreen(
                     leadingContent = {
                         Icon(
                             imageVector = Icons.Outlined.Info,
-                            contentDescription = stringResource(id = R.string.settings_about_desc)
+                            contentDescription = stringResource(id = R.string.about_the_app)
                         )
                     },
                     modifier = Modifier.clickable { navigator.navigate(AboutScreenDestination) }
