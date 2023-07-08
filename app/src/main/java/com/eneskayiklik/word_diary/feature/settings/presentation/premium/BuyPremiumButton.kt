@@ -40,21 +40,21 @@ fun BuyPremiumButton(
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 Text(
-                    text = stringResource(id = R.string.settings_buy_premium_title),
+                    text = stringResource(id = R.string.word_diary_pro),
                     style = MaterialTheme.typography.bodyLarge
                 )
                 Text(
-                    text = stringResource(id = R.string.settings_buy_premium_desc),
+                    text = stringResource(id = R.string.word_diary_pro_desc),
                     style = MaterialTheme.typography.bodyMedium
                 )
             }
         }
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
             TextButton(onClick = onBuyNow) {
-                Text(text = stringResource(id = R.string.settings_buy_premium_button))
+                Text(text = stringResource(id = R.string.buy_now))
             }
             TextButton(onClick = onRestore) {
-                Text(text = stringResource(id = R.string.settings_restore_premium_button))
+                Text(text = stringResource(id = R.string.restore_premium))
             }
         }
     }

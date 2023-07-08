@@ -59,7 +59,7 @@ fun UserLanguageScreen(
     val context = LocalContext.current
 
     BackHandler(userPrefs.userLanguage == UserLanguage.NOT_SPECIFIED, onBack = {
-        viewModel.onEven(UiEvent.ShowToast(textRes = R.string.error_select_valid_language))
+        viewModel.onEven(UiEvent.ShowToast(textRes = R.string.select_language_warning))
     })
 
     LaunchedEffect(key1 = Unit) {
@@ -82,14 +82,14 @@ fun UserLanguageScreen(
         topBar = {
             LargeTopAppBar(title = {
                 Text(
-                    text = stringResource(id = R.string.destination_user_language_title),
+                    text = stringResource(id = R.string.languages),
                     fontWeight = FontWeight.Medium,
                     letterSpacing = TITLE_LETTER_SPACING
                 )
             }, navigationIcon = {
                 IconButton(onClick = {
                     if (userPrefs.userLanguage != UserLanguage.NOT_SPECIFIED) navigator.popBackStack()
-                    else viewModel.onEven(UiEvent.ShowToast(textRes = R.string.error_select_valid_language))
+                    else viewModel.onEven(UiEvent.ShowToast(textRes = R.string.select_language_warning))
                 }) {
                     Icon(
                         imageVector = Icons.Outlined.ArrowBack,
@@ -102,7 +102,7 @@ fun UserLanguageScreen(
             FloatingActionButton(
                 onClick = {
                     if (userPrefs.userLanguage != UserLanguage.NOT_SPECIFIED) navigator.popBackStack()
-                    else viewModel.onEven(UiEvent.ShowToast(textRes = R.string.error_select_valid_language))
+                    else viewModel.onEven(UiEvent.ShowToast(textRes = R.string.select_language_warning))
                 }
             ) {
                 Icon(
@@ -121,7 +121,7 @@ fun UserLanguageScreen(
         ) {
             item {
                 Text(
-                    text = stringResource(id = R.string.destination_user_language_desc),
+                    text = stringResource(id = R.string.languages_desc),
                     style = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier.padding(start = 16.dp, end = 64.dp, bottom = 8.dp)
                 )

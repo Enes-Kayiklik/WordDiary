@@ -119,7 +119,7 @@ fun WordListScreen(
             WordListDialogType.DELETE -> BasicDialog(
                 onDismiss = { viewModel.onEvent(WordListEvent.OnShowDialog(WordListDialogType.NONE)) },
                 onConfirm = { viewModel.onEvent(WordListEvent.OnDeleteWord) },
-                title = stringResource(id = R.string.delete_word_title),
+                title = stringResource(id = R.string.delete_word),
                 description = stringResource(id = R.string.delete_word_desc),
                 confirmText = stringResource(id = R.string.delete_confirm),
                 dismissText = stringResource(id = R.string.dialog_cancel),
@@ -129,8 +129,8 @@ fun WordListScreen(
             WordListDialogType.DELETE_LIST -> BasicDialog(
                 onDismiss = { viewModel.onEvent(WordListEvent.OnShowDialog(WordListDialogType.NONE)) },
                 onConfirm = { viewModel.onEvent(WordListEvent.OnDeleteList) },
-                title = stringResource(id = R.string.delete_option_title),
-                description = stringResource(id = R.string.delete_option_desc),
+                title = stringResource(id = R.string.delete_collection),
+                description = stringResource(id = R.string.delete_collection_desc),
                 confirmText = stringResource(id = R.string.delete_confirm),
                 dismissText = stringResource(id = R.string.dialog_cancel),
                 icon = Icons.Outlined.Delete
@@ -262,7 +262,7 @@ fun WordListScreen(
                     title = stringResource(id = R.string.oops),
                     subtitle = stringResource(id = R.string.empty_word_desc),
                     icon = Icons.Outlined.FolderOpen,
-                    actionText = stringResource(id = R.string.destination_create_word_title),
+                    actionText = stringResource(id = R.string.create_word),
                     onAction = { viewModel.onEvent(WordListEvent.CreateWord) }
                 )
             }
@@ -370,7 +370,8 @@ fun WordListScreen(
             FilterMenu(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 48.dp),
+                    .padding(WindowInsets.navigationBars.asPaddingValues())
+                    .padding(horizontal = 16.dp, vertical = 8.dp),
                 selectedFilterType = state.filterType,
                 selectedSortType = state.sortType,
                 selectedSortDirection = state.sortDirection,

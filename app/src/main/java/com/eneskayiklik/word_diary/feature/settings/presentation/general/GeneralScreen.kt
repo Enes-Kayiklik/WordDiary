@@ -78,7 +78,7 @@ fun GeneralScreen(
         topBar = {
             LargeTopAppBar(title = {
                 Text(
-                    text = stringResource(id = R.string.settings_general_title),
+                    text = stringResource(id = R.string.general),
                     fontWeight = FontWeight.Medium,
                     letterSpacing = TITLE_LETTER_SPACING
                 )
@@ -125,7 +125,7 @@ fun GeneralScreen(
                 AlarmView(
                     isActive = userPrefs.notification.isNotificationEnabled,
                     selectedTime = stringResource(
-                        id = R.string.onboarding_alarm_notify_me_at,
+                        id = R.string.notify_me_at,
                         userPrefs.notification.notificationTime
                     ),
                     modifier = Modifier
@@ -139,7 +139,7 @@ fun GeneralScreen(
             }
             item("daily_goal_title") {
                 Text(
-                    text = stringResource(id = R.string.settings_daily_goal_section_title),
+                    text = stringResource(id = R.string.daily_goal),
                     style = MaterialTheme.typography.labelSmall.copy(
                         color = MaterialTheme.colorScheme.primary
                     ),
@@ -149,9 +149,9 @@ fun GeneralScreen(
             item("new_word_goal") {
                 ListItem(
                     headlineText = {
-                        Text(text = stringResource(id = R.string.option_new_word_title))
+                        Text(text = stringResource(id = R.string.new_word))
                     }, supportingText = {
-                        Text(text = stringResource(id = R.string.option_new_word_desc))
+                        Text(text = stringResource(id = R.string.new_word_desc))
                     }, leadingContent = {
                         Icon(imageVector = Icons.Outlined.TextIncrease, contentDescription = null)
                     }, trailingContent = {
@@ -182,9 +182,9 @@ fun GeneralScreen(
             item("study_session_goal") {
                 ListItem(
                     headlineText = {
-                        Text(text = stringResource(id = R.string.option_study_session_title))
+                        Text(text = stringResource(id = R.string.study_session))
                     }, supportingText = {
-                        Text(text = stringResource(id = R.string.option_study_session_desc))
+                        Text(text = stringResource(id = R.string.study_session_desc))
                     }, leadingContent = {
                         Box(modifier = Modifier.size(24.dp))
                     }, trailingContent = {

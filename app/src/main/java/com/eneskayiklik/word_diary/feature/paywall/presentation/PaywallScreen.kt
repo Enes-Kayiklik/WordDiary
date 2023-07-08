@@ -117,13 +117,13 @@ fun PaywallScreen(
         topBar = {
             TopAppBar(title = {
                 Text(
-                    text = stringResource(id = R.string.destination_buy_premium),
+                    text = stringResource(id = R.string.premium),
                     fontWeight = FontWeight.Medium,
                     letterSpacing = TITLE_LETTER_SPACING
                 )
             }, actions = {
                 TextButton(onClick = { viewModel.onEvent(PaywallEvent.OnRestore) }) {
-                    Text(text = stringResource(id = R.string.settings_restore_premium_button))
+                    Text(text = stringResource(id = R.string.restore_premium))
                 }
             }, navigationIcon = {
                 IconButton(onClick = { navigator.navigateUp() }) {

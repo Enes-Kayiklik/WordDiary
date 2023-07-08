@@ -35,7 +35,7 @@ fun FontFamilyPickerDialog(
                 .background(MaterialTheme.colorScheme.surface),
         ) {
             Text(
-                text = stringResource(id = R.string.option_font_family_title),
+                text = stringResource(id = R.string.font_family),
                 style = MaterialTheme.typography.headlineSmall,
                 modifier = Modifier.padding(24.dp),
                 color = MaterialTheme.colorScheme.onSurface

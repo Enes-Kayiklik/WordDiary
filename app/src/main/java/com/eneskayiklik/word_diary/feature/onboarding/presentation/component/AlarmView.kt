@@ -96,7 +96,7 @@ fun AlarmView(
     ) {
         Column(modifier = Modifier.weight(1F)) {
             Text(
-                text = stringResource(id = R.string.onboarding_alarm_notify_me),
+                text = stringResource(id = R.string.notify_me),
                 style = MaterialTheme.typography.bodyLarge
             )
             Text(text = selectedTime, style = MaterialTheme.typography.bodyMedium)

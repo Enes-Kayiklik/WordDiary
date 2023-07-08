@@ -85,32 +85,27 @@ enum class AppLanguage(
 }
 
 enum class AppTheme(@StringRes val title: Int) {
-    DARK(R.string.theme_dark_title),
-    LIGHT(R.string.theme_light_title),
-    FOLLOW_SYSTEM(R.string.theme_system_title)
+    DARK(R.string.darker_than_night),
+    LIGHT(R.string.brighter_than_sun),
+    FOLLOW_SYSTEM(R.string.follow_system)
 }
 
 enum class SwipeAction(@StringRes val title: Int, @StringRes val actionDesc: Int) {
     ADD_FAVORITES(
-        R.string.settings_swipe_action_add_favorite,
-        R.string.settings_swipe_action_add_favorite_action_title
+        R.string.add_remove_favorites,
+        R.string.add_favorites
     ),
     SPEECH_LOUD(
-        R.string.settings_swipe_action_speech_loud,
-        R.string.settings_swipe_action_speech_loud_action_title
+        R.string.speech_loud,
+        R.string.speech_loud_short
     ),
-
-    /*MARK_AS_LEARNED(
-        R.string.settings_swipe_action_mark_learned,
-        R.string.settings_swipe_action_mark_learned_action_title
-    ),*/
     EDIT_WORD(
-        R.string.settings_swipe_action_edit,
-        R.string.settings_swipe_action_edit_action_title
+        R.string.edit_word,
+        R.string.edit_word_short
     ),
     DELETE_WORD(
-        R.string.settings_swipe_action_delete,
-        R.string.settings_swipe_action_delete_action_title
+        R.string.delete_from_list,
+        R.string.delete_from_list_short
     ),
 }
 

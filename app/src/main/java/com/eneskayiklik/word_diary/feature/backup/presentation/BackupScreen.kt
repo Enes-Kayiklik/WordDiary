@@ -114,8 +114,8 @@ fun BackupScreen(
                     }
                     activeBackup = null
                 },
-                title = "Remove backup",
-                description = "Are you sure to remove this backup file permanently?",
+                title = stringResource(id = R.string.remove_backup),
+                description = stringResource(id = R.string.remove_backup_desc),
                 confirmText = stringResource(id = R.string.delete_confirm),
                 dismissText = stringResource(id = R.string.dialog_cancel),
                 icon = Icons.Outlined.Delete
@@ -129,16 +129,16 @@ fun BackupScreen(
                     else backupSelector.launch(arrayOf("application/zip"))
                     activeBackup = null
                 },
-                title = "Restore backup",
-                description = "When you restore the backup file, your local files will be delete. Are you sure to continue?",
+                title = stringResource(id = R.string.restore_backup),
+                description = stringResource(id = R.string.restore_backup_desc),
                 confirmText = stringResource(id = R.string.dialog_continue),
                 dismissText = stringResource(id = R.string.dialog_cancel)
             )
 
             BackupDialog.RestartApp -> BasicDialog(
                 onDismiss = { context.restartApp() },
-                title = "Restart needed",
-                description = "To take effect this action, you must restart the application",
+                title = stringResource(id = R.string.restart_needed),
+                description = stringResource(id = R.string.restart_needed_desc),
                 dismissText = stringResource(id = R.string.dialog_restart),
                 icon = Icons.Outlined.RestartAlt
             )
@@ -170,7 +170,7 @@ fun BackupScreen(
         topBar = {
             TopAppBar(title = {
                 Text(
-                    text = stringResource(id = R.string.settings_backup_title),
+                    text = stringResource(id = R.string.backup_and_restore),
                     fontWeight = FontWeight.Medium,
                     letterSpacing = TITLE_LETTER_SPACING
                 )
@@ -190,14 +190,14 @@ fun BackupScreen(
         ) {
             item {
                 Text(
-                    text = "LOCAL",
+                    text = stringResource(id = R.string.local),
                     style = MaterialTheme.typography.labelSmall.copy(
                         color = MaterialTheme.colorScheme.primary
                     ),
                     modifier = Modifier.padding(start = 56.dp)
                 )
                 ListItem(
-                    headlineText = { Text(text = "Backup to local") },
+                    headlineText = { Text(text = stringResource(id = R.string.backup_to_local)) },
                     leadingContent = {
                         Icon(
                             imageVector = Icons.Outlined.Backup,
@@ -211,7 +211,7 @@ fun BackupScreen(
                     }
                 )
                 ListItem(
-                    headlineText = { Text(text = "Restore from local") },
+                    headlineText = { Text(text = stringResource(id = R.string.restore_from_local)) },
                     leadingContent = {
                         Icon(
                             imageVector = Icons.Outlined.Restore,
@@ -226,7 +226,7 @@ fun BackupScreen(
 
             item {
                 Text(
-                    text = "GOOGLE DRIVE",
+                    text = stringResource(id = R.string.google_drive),
                     style = MaterialTheme.typography.labelSmall.copy(
                         color = MaterialTheme.colorScheme.primary
                     ),
@@ -237,13 +237,13 @@ fun BackupScreen(
                         if (state.userData.displayName != null) {
                             Text(text = state.userData.displayName)
                         } else {
-                            Text(text = "Google Drive backup")
+                            Text(text = stringResource(id = R.string.google_drive_backup))
                         }
                     }, supportingText = {
                         if (state.userData.email != null) {
                             Text(text = state.userData.email)
                         } else {
-                            Text(text = "You have to login to backup")
+                            Text(text = stringResource(id = R.string.login_to_backup))
                         }
                     }, leadingContent = {
                         Image(
@@ -253,7 +253,7 @@ fun BackupScreen(
                     }, trailingContent = {
                         if (state.userData.email == null) {
                             TextButton(onClick = { googleLoginLauncher.launch(1881) }) {
-                                Text(text = "Sign in")
+                                Text(text = stringResource(id = R.string.sign_in))
                             }
                         } else {
                             IconButton(onClick = { viewModel.logOut() }) {
@@ -265,7 +265,7 @@ fun BackupScreen(
                 ListItem(
                     headlineText = {
                         Row(verticalAlignment = Alignment.CenterVertically) {
-                            Text(text = "Cloud backups")
+                            Text(text = stringResource(id = R.string.cloud_backups))
                             AnimatedVisibility(visible = state.isDriveBackupsLoading) {
                                 CircularProgressIndicator(
                                     modifier = Modifier
@@ -282,7 +282,7 @@ fun BackupScreen(
                             else navigator.navigate(PaywallScreenDestination)
                         }) {
                             Row(verticalAlignment = Alignment.CenterVertically) {
-                                Text(text = "Create backup")
+                                Text(text = stringResource(id = R.string.create_backup))
                                 AnimatedVisibility(visible = state.isDriveBackingUp) {
                                     CircularProgressIndicator(
                                         modifier = Modifier

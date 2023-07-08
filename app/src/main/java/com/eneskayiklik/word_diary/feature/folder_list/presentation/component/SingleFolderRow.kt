@@ -61,16 +61,16 @@ fun SingleFolderRow(
         ) {
             val supportingText = when {
                 folderWithCount.wordCount == 1 -> stringResource(
-                    id = R.string.list_item_word_count,
+                    id = R.string.collection_word_count_singular,
                     folderWithCount.wordCount
                 )
 
                 folderWithCount.wordCount > 1 -> stringResource(
-                    id = R.string.list_item_word_counts,
+                    id = R.string.collection_word_count_plural,
                     folderWithCount.wordCount
                 )
 
-                else -> stringResource(id = R.string.empty_folder)
+                else -> stringResource(id = R.string.empty_collection)
             }
             Text(
                 text = folder.title,

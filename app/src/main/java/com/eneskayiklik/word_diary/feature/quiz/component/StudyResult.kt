@@ -67,7 +67,7 @@ fun StudyResultView(
         }
         item {
             Text(
-                text = stringResource(id = R.string.study_result_your_performance),
+                text = stringResource(id = R.string.your_performance),
                 style = MaterialTheme.typography.titleSmall
             )
             Row(
@@ -79,14 +79,14 @@ fun StudyResultView(
             ) {
                 StudyResultPercentageViewer(
                     icon = R.drawable.ic_graduation_cap,
-                    title = stringResource(id = R.string.study_result_proficiency),
+                    title = stringResource(id = R.string.proficiency),
                     percentage = resultState.proficiency,
                     progress = resultState.proficiencyProgress,
                     modifier = Modifier.weight(1F)
                 )
                 StudyResultPercentageViewer(
                     icon = R.drawable.ic_accuracy,
-                    title = stringResource(id = R.string.study_result_accuracy),
+                    title = stringResource(id = R.string.accuracy),
                     percentage = resultState.accuracy,
                     progress = resultState.accuracyProgress,
                     modifier = Modifier.weight(1F)
@@ -102,7 +102,7 @@ fun StudyResultView(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = stringResource(id = R.string.study_result_study_duration),
+                    text = stringResource(id = R.string.study_duration),
                     style = MaterialTheme.typography.titleSmall
                 )
 
@@ -122,7 +122,7 @@ fun StudyResultView(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = stringResource(id = R.string.study_result_total_words_studied),
+                    text = stringResource(id = R.string.total_words_studied),
                     style = MaterialTheme.typography.titleSmall
                 )
 

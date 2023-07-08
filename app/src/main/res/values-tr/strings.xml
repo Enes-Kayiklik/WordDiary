@@ -2,119 +2,14 @@
     <string name="app_name">Kelime Günlüğü</string>
     <string name="developer_name">Enes Kayıklık</string>
 
-    <!-- Onboarding -->
-    <string name="onboarding_previous">Önceki</string>
-    <string name="onboarding_next">Sonraki</string>
-    <string name="onboarding_finish">Bitir</string>
-    <string name="onboarding_title">İlerlemeyi Takip Et, Kelimeler Öğren!</string>
-    <string name="onboarding_desc">Kelime Günlüğü ile dillerde zahmetsizce ustalaşın. Kelime bilginizi artırın, telaffuzunuzu geliştirin ve ilerlemenizi takip edin. Kelime öğrenme yolculuğunuza şimdi başlayın!</string>
-    <string name="onboarding_text_to_speech_title">Metinden sese</string>
-    <string name="onboarding_text_to_speech_desc">Kelime öğrenme uygulamamızda gelişmiş bir metinden sese deneyimi sağlamak için, uygun motoru seçmek üzere aşağıdaki ayarları yapmanızı öneririz</string>
-    <string name="onboarding_text_to_speech_first_title">1. Gerekli motoru kurun</string>
-    <string name="onboarding_text_to_speech_first_desc">En son özelliklere ve iyileştirmelere erişmek için Google Metin Okuma motorunu kullanmanızı şiddetle tavsiye ederiz. Aşağıdaki butona tıklayarak yükleyebilir veya güncelleyebilirsiniz</string>
-    <string name="onboarding_text_to_speech_second_title">2. Doğru motoru seçin</string>
-    <string name="onboarding_text_to_speech_second_desc">Lütfen aşağıdaki butona tıklayarak ayarları açın ve işlevselliği en iyi seviyeye için Google\'ın metinden sese motorunu seçin</string>
-    <string name="onboarding_text_to_speech_open_play_store">Mağazayı aç</string>
-    <string name="onboarding_text_to_speech_open_settings">Ayarları aç</string>
-    <string name="onboarding_alarm_title">Bilidirimleri ayarla</string>
-    <string name="onboarding_alarm_desc">Tutarlı kalmak, zamanınızı etkili bir şekilde yönetmek ve dil öğrenme yolculuğunuzda motivasyonunuzu korumak için bildirim alın</string>
-    <string name="onboarding_alarm_notify_me">Beni bilgilendir</string>
-    <string name="onboarding_alarm_notify_me_at">%s\'de</string>
-
+    <!-- Common strings -->
     <string name="coming_soon">Yakında gelecek</string>
-
     <string name="back_button_desc">Geri git</string>
     <string name="more_button_desc">Daha fazla seçenek</string>
     <string name="uncaught_error">Bir hata oluştu</string>
     <string name="connection_error">Internet bağlantısı yok</string>
-    <string name="back_up_success">Yedek dosyası oluşturuldu</string>
-
-    <string name="destination_lists">Koleksiyonlar</string>
-    <string name="destination_lists_title">Koleksiyonlar</string>
-    <string name="destination_lists_content_desc">Koleksiyonlar</string>
-
-    <string name="list_item_word_count">%d kelime</string>
-    <string name="list_item_word_counts">%d kelime</string>
-    <string name="empty_folder">Bu liste boş</string>
-    <string name="add_word">Kelime ekle</string>
-    <string name="practise">Pratik yap</string>
-    <string name="lists_screen_search_bar_placeholder">Kolaksiyonları ara</string>
-
-    <string name="destination_create_folder_title">Liste oluştur</string>
-    <string name="warning_select_proper_language">Liste dilini seçmelisiniz</string>
-    <string name="warning_field_empty">- Bu alanı doldurmalısınız</string>
-
-    <string name="destination_create_word_title">Kelime oluştur</string>
-
-    <string name="destination_settings">Ayarlar</string>
-    <string name="destination_settings_title">Ayarlar</string>
-    <string name="destination_settings_content_desc">Ayarlar</string>
-
-    <!-- Paywall -->
-    <string name="destination_buy_premium">Premium</string>
-    <string name="paywall_title">Bir abonelik planı seçerek Word Diary\'nin tüm potansiyelini ortaya çıkarın</string>
-    <string name="unlimited_auto_translation">Sınırsız otomatik çeviri</string>
-    <string name="google_drive_backup">Google Drive yedekleme</string>
-    <string name="more_study_option">Daha fazla çalışma seçeneği</string>
-    <string name="remove_ads">Reklamları kaldır</string>
-    <string name="support_development">Geliştiriciyi destekle</string>
-    <string name="subscription_renews_automatically">Abonelik otomatik olarak yenilenir, istediğiniz zaman iptal edebilirsiniz</string>
-    <string name="by_selecting_continue">"Devam" ile devam etmeyi seçtiğinizde, ödemeniz Google Play hesabınızdan çekilecek ve Google Play Store ayarları aracılığıyla iptal edilmediği sürece abonelik aynı süre ve ücret için otomatik olarak yenilenecektir. Devam\'ı seçtiğinizde Şartlarımızı kabul ettiğiniz onaylanmış olur.</string>
-    <string name="paywall_continue">Devam</string>
-    <string name="start_free_trial">Ücretsiz denemeye başla</string>
-    <string name="purchase_dialog_title">Satın Alma Başarılı!</string>
-    <string name="purchase_dialog_desc">Premium paketimize yükseltme yaptığınız için teşekkür ederiz. Artık hizmetimizle ilgili deneyiminizi geliştirecek özel özelliklere ve avantajlara erişiminiz var. Uygulamamızı kullanmanın keyfini çıkarın.</string>
-    <string name="purchase_dialog_dismiss">Kullanmaya başla</string>
-
-    <string name="destination_about">Hakkında</string>
-    <string name="destination_about_title">Hakkında</string>
-    <string name="destination_about_content_desc">Hakkında</string>
-
-    <!-- Update Screen -->
-    <string name="destination_update_available">Güncelleme mevcut!</string>
-    <string name="update">Güncelle</string>
-    <string name="destination_update_available_desc">En son özellikler ve iyileştirmelerle güncel kalın! Gelişmiş işlevsellik ve daha da iyi bir kullanıcı deneyiminin keyfini çıkarmak için şimdi güncelleyin</string>
-
-    <!-- Statistics Screen -->
-    <string name="destination_statistics">İstatistikler</string>
-    <string name="destination_statistics_content_desc">İstatistikler</string>
-
-    <string name="statistics_today">Bugün</string>
-    <string name="statistics_new_words">Yeni kelime</string>
-    <string name="statistics_current_streak">Şimdiki seri</string>
-    <string name="statistics_study_time">Çalışma süresi</string>
-    <string name="statistics_study_sessions">Çalışma oturumu</string>
-
-    <string name="statistics_all_time">Tüm zamanlar</string>
-    <string name="statistics_all_time_learning">Öğrenilen</string>
-    <string name="statistics_all_time_complete">Öğrenildi</string>
-    <string name="statistics_best_streak">En iyi seri</string>
-    <string name="statistics_all_time_study_time">Çalışma süresi</string>
-    <string name="statistics_all_time_study_sessions">Çalışma oturumları</string>
-    <string name="statistics_start_of_learning">Öğrenmeye başlama</string>
-    <string name="chart_studied">Çalışılan kelime</string>
-    <string name="chart_new_word">Yeni eklenen kelime</string>
-
-    <string name="destination_licenses">Açık Kaynak Lisansları</string>
-    <string name="destination_licenses_title">Lisanslar</string>
-    <string name="destination_licenses_content_desc">Lisanslar ekranı</string>
-
-    <string name="buy_premium_content_desc">Premium Düğme Satın Al</string>
-    <string name="add_list_content_desc">Yeni Liste Oluştur</string>
-
-    <string name="destination_user_language_title">Diller</string>
-    <string name="destination_user_language_desc">Ana dilinizi seçin. Bu, otomatik çeviri özelliği gerektirir. Daha sonra değiştirebilirsiniz, endişe etmeyin.</string>
-    <string name="user_language_select_button_title">Devam</string>
-    <string name="error_select_valid_language">Lütfen bir dil seçin</string>
-
-    <string name="folder_settings_content_desc">Liste Ayarları Butonu</string>
-
-    <string name="settings_app_language_title">Uygulama dili</string>
-    <string name="settings_app_language_desc">Tercih ettiğiniz dili seçin</string>
-
-    <string name="settings_user_language_title">Kullanıcı dili</string>
-    <string name="settings_user_language_desc">Ana dilinizi güncelleyin</string>
-
+    <string name="empty_field_warning">- Bu alanı doldurmalısınız</string>
+    <string name="filter">Filtrele</string>
     <string name="dialog_cancel">Vazgeç</string>
     <string name="dialog_restart">Yeniden başlat</string>
     <string name="dialog_warning">Uyarı</string>
@@ -127,8 +22,7 @@
     <string name="dialog_pick">Seç</string>
     <string name="permission_required">İzin gerekli</string>
     <string name="oops">Oops…</string>
-    <string name="empty_folder_desc">Herhangi bir listeniz yok. Hemen liste oluştur ve çalışmaya başla.</string>
-    <string name="empty_word_desc">Bu listede herhangi bir kelime yok. Hemen kelime ekle ve çalışmaya başla.</string>
+
     <string name="undo_action">Geri al</string>
     <string name="day_singular">%d gün</string>
     <string name="day_plural">%d gün</string>
@@ -139,86 +33,50 @@
     <string name="hour_format">%s sa</string>
     <string name="day_format">%s gün</string>
 
-    <string name="folder_name_label">Liste adı</string>
-    <string name="folder_name_hint">Yiyecekler ve içecekler</string>
-    <string name="select_color_title">Renk seç</string>
-    <string name="pick_language_title">Dil seç</string>
+    <string name="week">hafta</string>
+
+    <!-- Onboarding -->
+    <string name="previous">Önceki</string>
+    <string name="next">Sonraki</string>
+    <string name="finish">Bitir</string>
+    <string name="onboarding_title">İlerlemeyi Takip Et, Kelimeler Öğren!</string>
+    <string name="onboarding_desc">Kelime Günlüğü ile dillerde zahmetsizce ustalaşın. Kelime bilginizi artırın, telaffuzunuzu geliştirin ve ilerlemenizi takip edin. Kelime öğrenme yolculuğunuza şimdi başlayın!</string>
+    <string name="text_to_speech">Metinden sese</string>
+    <string name="text_to_speech_desc">Kelime öğrenme uygulamamızda gelişmiş bir metinden sese deneyimi sağlamak için, uygun motoru seçmek üzere aşağıdaki ayarları yapmanızı öneririz</string>
+    <string name="install_text_to_speech">1. Gerekli motoru kurun</string>
+    <string name="install_text_to_speech_desc">En son özelliklere ve iyileştirmelere erişmek için Google Metin Okuma motorunu kullanmanızı şiddetle tavsiye ederiz. Aşağıdaki butona tıklayarak yükleyebilir veya güncelleyebilirsiniz</string>
+    <string name="choose_engine">2. Doğru motoru seçin</string>
+    <string name="choose_engine_desc">Lütfen aşağıdaki butona tıklayarak ayarları açın ve işlevselliği en iyi seviyeye için Google\'ın metinden sese motorunu seçin</string>
+    <string name="open_play_store">Mağazayı aç</string>
+    <string name="open_settings">Ayarları aç</string>
+    <string name="setup_notification">Bilidirimleri ayarla</string>
+    <string name="setup_notification_desc">Tutarlı kalmak, zamanınızı etkili bir şekilde yönetmek ve dil öğrenme yolculuğunuzda motivasyonunuzu korumak için bildirim alın</string>
+    <string name="notify_me">Beni bilgilendir</string>
+    <string name="notify_me_at">%s\'de</string>
+
+    <!-- Collections -->
+    <string name="collections">Koleksiyonlar</string>
+
+    <string name="collection_word_count_singular">%d kelime</string>
+    <string name="collection_word_count_plural">%d kelime</string>
+    <string name="empty_collection">Bu Koleksiyon boş</string>
+    <string name="add_word">Kelime ekle</string>
+    <string name="practise">Pratik yap</string>
+    <string name="search_collections">Kolaksiyonları ara</string>
+    <string name="select_collection_language_warning">Koleksiyon dilini seçmelisiniz</string>
+    <string name="empty_collection_desc">Herhangi bir koleksiyonunuz yok. Hemen koleksiyon oluştur ve çalışmaya başla.</string>
+
+    <!-- Create collection -->
+    <string name="create_collection">Koleksiyon oluştur</string>
+    <string name="collection_name">Koleksiyon adı</string>
+    <string name="collection_name_hint">Yiyecekler ve içecekler</string>
+    <string name="select_color">Renk seç</string>
+    <string name="pick_language">Dil seç</string>
     <string name="pick_language_desc">Listenin dilini temsil eden bir dil seçin. Dili seçerseniz, bu listeye yeni kelimeler eklerken otomatik çeviri özelliğini etkinleştirebilirsiniz.</string>
 
-    <string name="synonym_title">Eş anlamlılar</string>
-    <string name="add_synonym">Eş anlam ekle</string>
-    <string name="sample_title">Örnekler</string>
-    <string name="add_sample">Örnek ekle</string>
-    <string name="edit_title">Girişleri düzenle</string>
-    <string name="empty_sample_section">Örnek cümle eklenmedi. Sağ üstteki \'Örnek ekle\' butonuna tıklayarak ekleyebilirsiniz.</string>
-    <string name="empty_synonym_section">Eş anlam eklenmedi. Sağ üstteki \'Eş anlam ekle\' düğmesini tıklayarak ekleyebilirsiniz.</string>
-
-    <string name="delete_word_title">Kelimeyi sil</string>
-    <string name="delete_word_desc">Bu kelimeyi kalıcı olarak silmek istediğinizden emin misiniz?</string>
-    <string name="delete_word_snackbar_message">Kelime Silindi.</string>
-
-    <string name="delete_sample_dialog_title">Örneği sil</string>
-    <string name="delete_sample_dialog_desc">Bu örnek cümleyi kalıcı olarak silmek istediğinizden emin misiniz\?</string>
-    <string name="delete_sample_snackbar_message">Örnek cümle silindi.</string>
-    <string name="dialog_edit_sample_title">Örneği düzenle</string>
-
-    <string name="delete_synonym_dialog_title">Eş anlamlıyı sil</string>
-    <string name="delete_synonym_dialog_desc">Bu eşanlamlı cümleyi kalıcı olarak silmek istediğinizden emin misiniz\?</string>
-    <string name="delete_synonym_snackbar_message">Eş anlamlı cümle silindi.</string>
-    <string name="dialog_edit_synonym_title">Düzenle</string>
-
-    <string name="quiz_type_flash_card_title">Alıştırma kartları</string>
-    <string name="quiz_type_flash_card_desc">Egzersiz kartları ile hafızanızı güçlendirin.</string>
-    <string name="quiz_type_write_title">Yazma alıştırması</string>
-    <string name="quiz_type_write_desc">Yazma pratiği ile imla ve el yazınızı geliştirin.</string>
-    <string name="quiz_type_multiple_choice_title">Çoktan seçmeli</string>
-    <string name="quiz_type_multiple_choice_desc">Çoktan seçmeli bilginizi test edin.</string>
-
-    <string name="empty_sentence">Örnek cümle yok. Bu alanı düzenlemek için uzun tıklayın</string>
-    <!-- Sample: Turkish word-->
-    <string name="word_in_lang_label">%s kelime</string>
-    <!-- Sample: Word in English language -->
-    <string name="word_in_lang_hint">%s dilinde kelime</string>
-    <string name="synonym_in_lang_hint">%s dilinde eş anlamlı</string>
-
-    <string name="synonym_word_label">Eşanlamlı sözcük</string>
-    <string name="synonym_word_hint">kelimesinin eş anlamlısı</string>
-
-    <!-- Sample: 한국인 sentence-->
-    <string name="sample_sentence_label">%s cümle</string>
-    <!-- Sample: Sample sentence in Español language -->
-    <string name="sample_sentence_hint">%s dilinde örnek cümle</string>
-
-    <string name="watch_ads">Reklam izle</string>
-    <string name="not_enough_coin">Yetersiz jeton</string>
-    <string name="coin_detail">Jetan</string>
-    <string name="coin_detail_desc">Reklamları izleyerek 5 ek otomatik çeviri alabilir veya sınırsız otomatik çeviri için premium satın alabilirsiniz</string>
-    <string name="not_enoug_coin_desc">Otomatik çeviri için yeterli paranız yok. Otomatik çeviriye 5 ekleme almak için reklamları izleyebilir veya sınırsız otomatik çeviri için premium satın alabilirsiniz</string>
-
-    <string name="word_translation_empty_error">- Otomatik çeviri için bu alanı girin</string>
-    <string name="meaning_empty_error">- Kelimenin anlamını ekle</string>
-
-    <string name="word_create_empty_error">- Ana dilinizde öğrenmek istediğiniz kelimeyi girin</string>
-    <string name="meaning_create_empty_error">- İkinci dilinizde öğrenmek istediğiniz kelimeyi girin</string>
-
-    <string name="edit_sentence_empty_error">- Öğrenmek istediğiniz cümleyi veya çeviriyi girin</string>
-
-    <string name="remove_old_word_state_desc">Eski çeviriler silinecek. Devam etmek istiyor musun\?</string>
-    <string name="remove_old_word_state_title">Çevirileri sil</string>
-
-    <string name="translation_duration_error">Yalnızca her 10 saniyede bir istekte bulunabilirsiniz</string>
-
-    <string name="get_translation">Çeviriyi getir</string>
-
     <!-- Word List -->
-    <string name="study_option_title">Çalış</string>
-    <string name="filter_option_title">Filtrele</string>
-    <string name="delete_option_title">Listeyi sil</string>
-    <string name="delete_option_desc">Bu listeyi ve içerisindeki kelimeleri kalıcı olarak silmek istediğinizden emin misiniz?. Bu işlem geri alınamaz!</string>
-
-    <string name="word_state_learned">Öğrenildi</string>
-    <string name="word_state_learning">Öğreniliyor</string>
-    <string name="word_state_new_word">Yeni kelime</string>
+    <string name="delete_collection">Koleksiyonu sil</string>
+    <string name="delete_collection_desc">Bu koleksiyonu ve içerisindeki kelimeleri kalıcı olarak silmek istediğinizden emin misiniz?. Bu işlem geri alınamaz!</string>
 
     <string name="total_words">Toplam kelime</string>
     <string name="mastered_words">Ustalaşmış kelime</string>
@@ -241,15 +99,113 @@
     <string name="sort_direction_ascending">Artan</string>
     <string name="sort_direction_descending">Azalan</string>
 
+    <string name="flash_card">Alıştırma kartları</string>
+    <string name="flash_card_desc">Egzersiz kartları ile hafızanızı güçlendirin.</string>
+    <string name="writing_practise">Yazma alıştırması</string>
+    <string name="writing_practise_desc">Yazma pratiği ile imla ve el yazınızı geliştirin.</string>
+    <string name="multiple_choice">Çoktan seçmeli</string>
+    <string name="multiple_choice_desc">Çoktan seçmeli bilginizi test edin.</string>
+
+    <!-- Create word -->
+    <string name="create_word">Kelime oluştur</string>
+    <string name="empty_word_desc">Bu koleksiyonda herhangi bir kelime yok. Hemen kelime ekle ve çalışmaya başla.</string>
+    <string name="empty_sentence">Örnek cümle yok. Bu alanı düzenlemek için uzun tıklayın</string>
+    <string name="word_in_lang_label">%s kelime</string>
+    <string name="word_in_lang_hint">%s dilinde kelime</string>
+    <string name="synonym_in_lang_hint">%s dilinde eş anlamlı</string>
+    <string name="synonym_word_label">Eşanlamlı sözcük</string>
+    <string name="synonym_word_hint">Kelimesinin eş anlamlısı</string>
+    <string name="sample_sentence_label">%s cümle</string>
+    <string name="sample_sentence_hint">%s dilinde örnek cümle</string>
+    <string name="watch_ads">Reklam izle</string>
+    <string name="not_enough_coin">Yetersiz jeton</string>
+    <string name="coin_detail">Jeton</string>
+    <string name="coin_detail_desc">Reklamları izleyerek 5 ek otomatik çeviri alabilir veya sınırsız otomatik çeviri için premium satın alabilirsiniz</string>
+    <string name="not_enough_coin_desc">Otomatik çeviri için yeterli paranız yok. Otomatik çeviriye 5 ekleme almak için reklamları izleyebilir veya sınırsız otomatik çeviri için premium satın alabilirsiniz</string>
+    <string name="word_translation_empty_error">- Otomatik çeviri için bu alanı girin</string>
+    <string name="meaning_empty_error">- Kelimenin anlamını ekle</string>
+    <string name="word_create_empty_error">- Ana dilinizde öğrenmek istediğiniz kelimeyi girin</string>
+    <string name="meaning_create_empty_error">- İkinci dilinizde öğrenmek istediğiniz kelimeyi girin</string>
+    <string name="edit_sentence_empty_error">- Öğrenmek istediğiniz cümleyi veya çeviriyi girin</string>
+    <string name="remove_old_word_state_desc">Eski çeviriler silinecek. Devam etmek istiyor musun\?</string>
+    <string name="remove_old_word_state_title">Çevirileri sil</string>
+    <string name="translation_duration_error">Yalnızca her 10 saniyede bir istekte bulunabilirsiniz</string>
+    <string name="get_translation">Çeviriyi getir</string>
+    <string name="synonym_title">Eş anlamlılar</string>
+    <string name="add_synonym">Eş anlam ekle</string>
+    <string name="samples">Örnekler</string>
+    <string name="add_sample">Örnek ekle</string>
+    <string name="edit_inputs">Girişleri düzenle</string>
+    <string name="empty_sample_section">Örnek cümle eklenmedi. Sağ üstteki \'Örnek ekle\' butonuna tıklayarak ekleyebilirsiniz.</string>
+    <string name="empty_synonym_section">Eş anlam eklenmedi. Sağ üstteki \'Eş anlam ekle\' düğmesini tıklayarak ekleyebilirsiniz.</string>
+
+    <string name="delete_word">Kelimeyi sil</string>
+    <string name="delete_word_desc">Bu kelimeyi kalıcı olarak silmek istediğinizden emin misiniz?</string>
+    <string name="delete_word_snackbar_message">Kelime Silindi.</string>
+
+    <string name="delete_sample">Örneği sil</string>
+    <string name="delete_sample_desc">Bu örnek cümleyi kalıcı olarak silmek istediğinizden emin misiniz\?</string>
+    <string name="delete_sample_snackbar_message">Örnek cümle silindi.</string>
+    <string name="dialog_edit_sample_title">Örneği düzenle</string>
+
+    <string name="delete_synonym">Eş anlamlıyı sil</string>
+    <string name="delete_synonym_desc">Bu eşanlamlı cümleyi kalıcı olarak silmek istediğinizden emin misiniz\?</string>
+    <string name="delete_synonym_snackbar_message">Eş anlamlı cümle silindi.</string>
+    <string name="edit_synonym">Düzenle</string>
+
+    <!-- Statistics Screen -->
+    <string name="statistics">İstatistikler</string>
+
+    <string name="today">Bugün</string>
+    <string name="new_words">Yeni kelime</string>
+    <string name="current_streak">Şimdiki seri</string>
+    <string name="study_time">Çalışma süresi</string>
+    <string name="study_sessions">Çalışma oturumu</string>
+
+    <string name="all_time">Tüm zamanlar</string>
+    <string name="learning">Öğrenilen</string>
+    <string name="learned">Öğrenildi</string>
+    <string name="best_streak">En iyi seri</string>
+    <string name="start_of_learning">Öğrenmeye başlama</string>
+    <string name="chart_studied">Çalışılan kelime</string>
+    <string name="chart_new_word">Yeni eklenen kelime</string>
+
+    <!-- Paywall -->
+    <string name="premium">Premium</string>
+    <string name="paywall_title">Bir abonelik planı seçerek Word Diary\'nin tüm potansiyelini ortaya çıkarın</string>
+    <string name="unlimited_auto_translation">Sınırsız otomatik çeviri</string>
+    <string name="google_drive_backup">Google Drive yedekleme</string>
+    <string name="more_study_option">Daha fazla çalışma seçeneği</string>
+    <string name="remove_ads">Reklamları kaldır</string>
+    <string name="subscription_renews_automatically">Abonelik otomatik olarak yenilenir, istediğiniz zaman iptal edebilirsiniz</string>
+    <string name="by_selecting_continue">"Devam" ile devam etmeyi seçtiğinizde, ödemeniz Google Play hesabınızdan çekilecek ve Google Play Store ayarları aracılığıyla iptal edilmediği sürece abonelik aynı süre ve ücret için otomatik olarak yenilenecektir. Devam\'ı seçtiğinizde Şartlarımızı kabul ettiğiniz onaylanmış olur.</string>
+    <string name="paywall_continue">Devam</string>
+    <string name="start_free_trial">Ücretsiz denemeye başla</string>
+    <string name="purchase_dialog_title">Satın Alma Başarılı!</string>
+    <string name="purchase_dialog_desc">Premium paketimize yükseltme yaptığınız için teşekkür ederiz. Artık hizmetimizle ilgili deneyiminizi geliştirecek özel özelliklere ve avantajlara erişiminiz var. Uygulamamızı kullanmanın keyfini çıkarın.</string>
+    <string name="purchase_dialog_dismiss">Kullanmaya başla</string>
+
+    <!-- Update Screen -->
+    <string name="update_available">Güncelleme mevcut!</string>
+    <string name="update">Güncelle</string>
+    <string name="destination_update_available_desc">En son özellikler ve iyileştirmelerle güncel kalın! Gelişmiş işlevsellik ve daha da iyi bir kullanıcı deneyiminin keyfini çıkarmak için şimdi güncelleyin</string>
+
+    <string name="destination_licenses">Açık Kaynak Lisansları</string>
+    <string name="destination_licenses_title">Lisanslar</string>
+    <string name="destination_licenses_content_desc">Lisanslar ekranı</string>
+
+    <string name="buy_premium_content_desc">Premium Düğme Satın Al</string>
+    <string name="add_list_content_desc">Yeni Liste Oluştur</string>
+
     <!-- Study Screen -->
-    <string name="action_finish_study">Bitir</string>
-    <string name="action_start_study">Başla</string>
-    <string name="study_statistics_title">İstatistikler</string>
-    <string name="study_settings_title">Çalışma ayarları</string>
-    <string name="study_quit_dialog_title">Çalışmayı bitir</string>
-    <string name="study_quit_dialog_description">Bu çalışma oturumunu sonlandırmak üzeresiniz. Devam etmek için aşağıdaki seçeneklerden birini seçiniz</string>
-    <string name="study_quit_dialog_finish_without_save">İlerlemeyi kaydetmeden bitir</string>
-    <string name="study_quit_dialog_see_results">Sonuçları gör</string>
+    <string name="finish_study">Bitir</string>
+    <string name="start_study">Başla</string>
+    <string name="study_settings">Çalışma ayarları</string>
+    <string name="study_statistics">İstatistikler</string>
+    <string name="finish_study_dialog">Çalışmayı bitir</string>
+    <string name="finish_study_dialog_desc">Bu çalışma oturumunu sonlandırmak üzeresiniz. Devam etmek için aşağıdaki seçeneklerden birini seçiniz</string>
+    <string name="finish_without_saving">İlerlemeyi kaydetmeden bitir</string>
+    <string name="see_results">Sonuçları gör</string>
 
     <string name="study_result_kudos_1">Olağanüstü isabetliliğiniz için tebrikler! Öğrenmeye olan bağlılığınız ortada. Dil yeterliliğinizde yeni zirvelere ulaşmak için kendinizi zorlamaya devam edin</string>
     <string name="study_result_kudos_2">Muhteşem performans! Doğruluğunuz övgüye değer bir ustalık düzeyi gösteriyor. Bilginizi genişletmek için ek kelime dağarcığı ve gramer alıştırmaları keşfetmeyi düşünün</string>
@@ -263,85 +219,106 @@
     <string name="study_result_kudos_8">Öğrenmeye devam edin! Doğruluk puanınız, anlayışınızı hâlâ geliştirmekte olduğunuzu gösteriyor. Tutarlı alıştırma ve inceleme, zaman içinde gelişmenize yardımcı olacaktır</string>
     <string name="study_result_kudos_9">İstikrarlı kalın! Doğruluk puanınız, becerilerinizi geliştirebileceğiniz alanları gösterir. Pratik yapmak ve gerekirse ek kaynaklar veya rehberlik almak için düzenli olarak zaman ayırın</string>
 
-    <string name="study_result_your_performance">Performansın</string>
-    <string name="study_result_study_duration">Çalışma süresi</string>
-    <string name="study_result_total_words_studied">Çalışılan toplam kelime</string>
-    <string name="study_result_accuracy">Doğruluk</string>
-    <string name="study_result_proficiency">Yetkinlik</string>
+    <string name="your_performance">Performansın</string>
+    <string name="study_duration">Çalışma süresi</string>
+    <string name="total_words_studied">Çalışılan toplam kelime</string>
+    <string name="accuracy">Doğruluk</string>
+    <string name="proficiency">Yetkinlik</string>
 
-    <string name="study_settings_timer_title">Zamanlayıcı</string>
-    <string name="study_settings_timer_desc">Set a timer to test your memory against the clock, or turn off the timer to review the cards at your own pace.</string>
-    <string name="study_settings_shuffle_title">Kelimeleri karıştır</string>
-    <string name="study_settings_shuffle_desc">Shuffle the cards for a randomized learning experience, or turn off shuffling to review the cards in the order they were added.</string>
-    <string name="study_settings_sound_title">Sesli okuma</string>
-    <string name="study_settings_sound_desc">Add sound effects or voiceover for an immersive learning experience, or turn off sound to focus on the visual cues of the flashcards.</string>
-    <string name="study_settings_looping_title">Döngü</string>
-    <string name="study_settings_looping_desc">Review the flashcards continuously without having to manually restart the session.</string>
+    <string name="enable_timer">Zamanlayıcı</string>
+    <string name="enable_timer_desc">Set a timer to test your memory against the clock, or turn off the timer to review the cards at your own pace.</string>
+    <string name="shuffle_words">Kelimeleri karıştır</string>
+    <string name="shuffle_words_desc">Shuffle the cards for a randomized learning experience, or turn off shuffling to review the cards in the order they were added.</string>
+    <string name="sound_transcription">Sesli okuma</string>
+    <string name="sound_transcription_desc">Add sound effects or voiceover for an immersive learning experience, or turn off sound to focus on the visual cues of the flashcards.</string>
+    <string name="enable_looping">Döngü</string>
+    <string name="enable_looping_desc">Review the flashcards continuously without having to manually restart the session.</string>
+
+    <!-- Settings -->
+    <string name="settings">Ayarlar</string>
+
+    <string name="languages">Diller</string>
+    <string name="languages_desc">Ana dilinizi seçin. Bu, otomatik çeviri özelliği gerektirir. Daha sonra değiştirebilirsiniz, endişe etmeyin.</string>
+    <string name="select_language_warning">Lütfen bir dil seçin</string>
+
+    <string name="app_language">Uygulama dili</string>
+    <string name="app_language_desc">Tercih ettiğiniz dili seçin</string>
+
+    <string name="user_language">Kullanıcı dili</string>
+    <string name="user_language_desc">Ana dilinizi güncelleyin</string>
 
     <!-- Settings General -->
-    <string name="settings_general_title">Genel</string>
-    <string name="settings_general_desc">Uygulama ayarlarını ve tercihlerini yönetin</string>
+    <string name="general">Genel</string>
+    <string name="general_desc">Uygulama ayarlarını ve tercihlerini yönetin</string>
 
-    <string name="settings_word_list_section_title">KELIME LISTESI</string>
-    <string name="option_swipe_action_title">Kaydırma hareketi</string>
+    <string name="daily_goal">GÜNLÜK HEDEF</string>
+    <string name="new_word">Yeni kelime</string>
+    <string name="new_word_desc">Yeni kelimeler oluşturmak için günlük bir hedef belirleyin</string>
+    <string name="study_session">Çalışma oturumu</string>
+    <string name="study_session_desc">Verimli çalışma oturumları için günlük bir hedef belirleyin</string>
 
-    <string name="settings_daily_goal_section_title">GÜNLÜK HEDEF</string>
-    <string name="option_new_word_title">Yeni kelime</string>
-    <string name="option_new_word_desc">Yeni kelimeler oluşturmak için günlük bir hedef belirleyin</string>
-    <string name="option_study_session_title">Çalışma oturumu</string>
-    <string name="option_study_session_desc">Verimli çalışma oturumları için günlük bir hedef belirleyin</string>
-    <string name="option_set_reminder_title">Hatırlatıcı</string>
-    <string name="option_set_reminder_desc">Hedeflerinizi takip etmek için hatırlatıcıları etkinleştirin</string>
+    <string name="add_remove_favorites">Favori\'ye ekle / kaldır</string>
+    <string name="speech_loud">Sesli söyle</string>
+    <string name="edit_word">Kelimeyi düzenle</string>
+    <string name="delete_from_list">Klasörden sil</string>
 
-    <string name="settings_swipe_action_add_favorite">Favori\'ye ekle / kaldır</string>
-    <string name="settings_swipe_action_speech_loud">Sesli söyle</string>
-    <string name="settings_swipe_action_mark_learned">Öğrenildi olarak işaretle</string>
-    <string name="settings_swipe_action_edit">Kelimeyi düzenle</string>
-    <string name="settings_swipe_action_delete">Klasörden sil</string>
-
-    <string name="settings_swipe_action_add_favorite_action_title">Favori ekle</string>
-    <string name="settings_swipe_action_remove_favorite_action_title">Favori kaldır</string>
-    <string name="settings_swipe_action_speech_loud_action_title">Sesli</string>
-    <string name="settings_swipe_action_mark_learned_action_title">Öğrenildi</string>
-    <string name="settings_swipe_action_edit_action_title">Düzenle</string>
-    <string name="settings_swipe_action_delete_action_title">Kaldır</string>
+    <string name="add_favorites">Favori ekle</string>
+    <string name="remove_favorites">Favori kaldır</string>
+    <string name="speech_loud_short">Sesli</string>
+    <string name="edit_word_short">Düzenle</string>
+    <string name="delete_from_list_short">Kaldır</string>
 
     <!-- Settings About -->
-    <string name="settings_about_title">Hakkında</string>
-    <string name="settings_privacy_policy">Gizlilik Politikası</string>
-    <string name="settings_terms_conditions">Şartlar ve koşullar</string>
-    <string name="settings_about_desc">%s hakkında daha fazla bilgi edin</string>
+    <string name="about">Hakkında</string>
+    <string name="privacy_policy">Gizlilik Politikası</string>
+    <string name="terms_conditions">Şartlar ve koşullar</string>
+    <string name="about_desc">%s hakkında daha fazla bilgi edin</string>
 
-    <string name="settings_developer_info_desc">Word Diary\'nin Geliştiricisi</string>
-    <string name="settings_developer_info">Tasarım ve geliştirme</string>
+    <string name="developer_info_desc">Word Diary\'nin Geliştiricisi</string>
+    <string name="development_and_design">Tasarım ve geliştirme</string>
 
-    <string name="settings_about_the_app">Uygulama hakkında</string>
+    <string name="about_the_app">Uygulama hakkında</string>
 
-    <string name="settings_support_development">Geliştiriciyi destekle</string>
-    <string name="settings_support_development_title">Uygulamayı daha iyi hale getirmemize yardımcı ol</string>
-    <string name="settings_support_development_desc">Onlarca kişi uygulamanın çevrilmesine yardımcı oldu ve yüzlerce kişi sorunları ve hataları bildirerek iyileştirmeye yardımcı oldu! Bu insanlara özel bir teşekkür!</string>
+    <string name="support_development">Geliştiriciyi destekle</string>
+    <string name="support_development_title">Uygulamayı daha iyi hale getirmemize yardımcı ol</string>
+    <string name="support_development_desc">Onlarca kişi uygulamanın çevrilmesine yardımcı oldu ve yüzlerce kişi sorunları ve hataları bildirerek iyileştirmeye yardımcı oldu! Bu insanlara özel bir teşekkür!</string>
 
     <!-- Settings HelpTranslate -->
-    <string name="settings_help_translate_title">Çeviri</string>
-    <string name="settings_help_translate_desc">Çevirilerin daya iyi olması için bize yardım et</string>
+    <string name="help_translate">Çeviri</string>
+    <string name="help_translate_desc">Çevirilerin daya iyi olması için bize yardım et</string>
 
     <!-- Settings Buy Premium -->
-    <string name="settings_buy_premium_title">Kelime Günlüğü Pro</string>
-    <string name="settings_buy_premium_desc">Siyah tema, özel tema ve daha fazlası…</string>
-    <string name="settings_restore_premium_button">Yenile</string>
-    <string name="settings_buy_premium_button">Şimdi al</string>
+    <string name="word_diary_pro">Kelime Günlüğü Pro</string>
+    <string name="word_diary_pro_desc">Siyah tema, özel tema ve daha fazlası…</string>
+    <string name="restore_premium">Yenile</string>
+    <string name="buy_now">Şimdi al</string>
 
     <!-- Settings Backup -->
-    <string name="settings_backup_title">Yedekleme ve Geri Yükleme</string>
-    <string name="settings_backup_desc">Cihazınızı kaybederseniz veya yükseltirseniz verilerinizi kolayca geri yükleyin</string>
+    <string name="backup_and_restore">Yedekleme ve Geri Yükleme</string>
+    <string name="backup_and_restore_desc">Cihazınızı kaybederseniz veya yükseltirseniz verilerinizi kolayca geri yükleyin</string>
+    <string name="remove_backup">Yedeği sil</string>
+    <string name="remove_backup_desc">Bu yedek dosyası tamamen silinecek. Emin misiniz?</string>
+    <string name="restore_backup">Yedekten yükle</string>
+    <string name="restore_backup_desc">Yedek dosyasını geri yüklediğinizde, yerel dosyalarınız silinecektir. Devam etmek istediğinizden emin misiniz?</string>
+    <string name="restart_needed">Yeniden başlatma gerekli</string>
+    <string name="restart_needed_desc">Bu eylemi gerçekleştirmek için uygulamayı yeniden başlatmanız gerekir</string>
+    <string name="local">YEREL</string>
+    <string name="backup_to_local">Yerel yedek oluştur</string>
+    <string name="restore_from_local">Yerel yedekten yükle</string>
+    <string name="google_drive">GOOGLE DRIVE</string>
+    <string name="login_to_backup">Yedekleme için giriş yapmalısınız</string>
+    <string name="sign_in">Giriş yap</string>
+    <string name="cloud_backups">Bulut yedekleri</string>
+    <string name="create_backup">Yedek oluştur</string>
+    <string name="back_up_success">Yedek dosyası oluşturuldu</string>
 
     <!-- Settings Personalize -->
-    <string name="settings_personalize_title">Kişiselleştir</string>
-    <string name="settings_personalize_desc">Kendiniz için benzersiz bir uygulama arayüzü tasarlayın</string>
+    <string name="personalize">Kişiselleştir</string>
+    <string name="personalize_desc">Kendiniz için benzersiz bir uygulama arayüzü tasarlayın</string>
 
     <!-- Settings Appearance -->
-    <string name="settings_theming_title">Tema ve Renkler</string>
-    <string name="settings_theming_desc">Görünümü tarzınıza uyacak şekilde özelleştirin</string>
+    <string name="theme_and_colors">Tema ve Renkler</string>
+    <string name="theme_and_colors_desc">Görünümü tarzınıza uyacak şekilde özelleştirin</string>
 
     <!-- About -->
     <string name="telegram">Telegram</string>
@@ -355,24 +332,24 @@
     <string name="rate">Puanla</string>
     <string name="translate">Çeviri yap</string>
 
-    <string name="settings_theme_section_title">TEMA</string>
-    <string name="option_app_theme_title">Uygulama teması</string>
-    <string name="theme_dark_title">Geceden daha karanlık</string>
-    <string name="theme_light_title">Güneşten daha parlak</string>
-    <string name="theme_system_title">Sistemi takip et</string>
-    <string name="option_amoled_black_title">Amoled siyah</string>
-    <string name="option_amoled_black_desc">Karanlık modda çok daha koyu bir palet kullanın</string>
-    <string name="option_colorful_background_title">Renkli arka plan</string>
-    <string name="option_colorful_background_desc">Arka plana ekstra bir renk ekleyin. Bu, Amoled siyah seçeneğiyle çalışmaz</string>
-    <string name="settings_colors_section_title">RENKLER</string>
-    <string name="option_primary_color_title">Ana renk</string>
-    <string name="option_primary_color_desc">Temanın ana rengi, varsayılan olarak mordur</string>
-    <string name="option_color_style_title">Palet stili</string>
-    <string name="option_wallpaper_color_title">Duvar kağıdı rengi</string>
-    <string name="option_wallpaper_color_desc">Ana rengi duvar kağıdınızdan çıkarın. Etkili olması için duvar kağıdını değiştirdiğinizde uygulamayı yeniden başlatmanız gerekir</string>
-    <string name="option_random_color_title">Rastgele renk</string>
-    <string name="option_random_color_desc">Uygulamayı her açtığınızda güncellenen rastgele renk kullanın</string>
-    <string name="option_font_family_title">Yazı fontu</string>
+    <string name="theme">TEMA</string>
+    <string name="app_theme">Uygulama teması</string>
+    <string name="darker_than_night">Geceden daha karanlık</string>
+    <string name="brighter_than_sun">Güneşten daha parlak</string>
+    <string name="follow_system">Sistemi takip et</string>
+    <string name="amoled_black">Amoled siyah</string>
+    <string name="amoled_black_desc">Karanlık modda çok daha koyu bir palet kullanın</string>
+    <string name="colorful_background">Renkli arka plan</string>
+    <string name="colorful_background_desc">Arka plana ekstra bir renk ekleyin. Bu, Amoled siyah seçeneğiyle çalışmaz</string>
+    <string name="colors">RENKLER</string>
+    <string name="primary_color">Ana renk</string>
+    <string name="primary_color_desc">Temanın ana rengi, varsayılan olarak mordur</string>
+    <string name="palette_style">Palet stili</string>
+    <string name="wallpaper_color">Duvar kağıdı rengi</string>
+    <string name="wallpaper_color_desc">Ana rengi duvar kağıdınızdan çıkarın. Etkili olması için duvar kağıdını değiştirdiğinizde uygulamayı yeniden başlatmanız gerekir</string>
+    <string name="random_color">Rastgele renk</string>
+    <string name="random_color_desc">Uygulamayı her açtığınızda güncellenen rastgele renk kullanın</string>
+    <string name="font_family">Yazı fontu</string>
 
     <!-- Language -->
     <string name="lang_follow_system">Sistemi takip et</string>
@@ -381,13 +358,10 @@
     <string name="emoji_flags">Bayraklar</string>
     <string name="emoji_objects">Nesneler</string>
     <string name="emoji_activity">Aktivite</string>
-    <string name="emoji_travel">Seyahat ve Yerler</string>
+    <string name="emoji_travel">Seyahat &amp; Yerler</string>
     <string name="emoji_food">Yiyecek içecek</string>
-    <string name="emoji_animals">Hayvanlar ve Doğa</string>
-    <string name="emoji_smileys">Suratlar ve İnsanlar</string>
-
-    <!-- Other things -->
-    <string name="week">hafta</string>
+    <string name="emoji_animals">Hayvanlar &amp; Doğa</string>
+    <string name="emoji_smileys">Suratlar &amp; İnsanlar</string>
 
     <!-- Permission -->
     <string name="notification_permission_declined">Önemli güncellemeleri almak ve bağlantıda kalmak için uygulamamız bildirim izni gerektirir. Ne yazık ki, bu izni kalıcı olarak reddettiniz</string>

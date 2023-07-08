@@ -62,7 +62,6 @@ class CreateFolderViewModel @Inject constructor(
     fun onEvent(event: CreateFolderEvent) {
         when (event) {
             CreateFolderEvent.CreateFolder -> createFolder()
-            else -> Unit
         }
     }
 
@@ -98,7 +97,7 @@ class CreateFolderViewModel @Inject constructor(
         if (_userLanguage == UserLanguage.NOT_SPECIFIED ||
             folderData.selectedLanguage == UserLanguage.NOT_SPECIFIED
         ) {
-            _event.emit(UiEvent.ShowToast(textRes = R.string.warning_select_proper_language))
+            _event.emit(UiEvent.ShowToast(textRes = R.string.select_collection_language_warning))
             return@launch
         }
         folderRepo.addNewFolder(

@@ -18,22 +18,22 @@ enum class StudyType(
     val minimumWordCount: Int,
 ) {
     FlashCard(
-        title = R.string.quiz_type_flash_card_title,
-        subtitle = R.string.quiz_type_flash_card_desc,
+        title = R.string.flash_card,
+        subtitle = R.string.flash_card_desc,
         icon = Icons.Outlined.Style,
         requirePremium = false,
         minimumWordCount = 3
     ),
     Write(
-        title = R.string.quiz_type_write_title,
-        subtitle = R.string.quiz_type_write_desc,
+        title = R.string.writing_practise,
+        subtitle = R.string.writing_practise_desc,
         icon = Icons.Outlined.Spellcheck,
         requirePremium = false,
         minimumWordCount = 3
     ),
     MultipleChoice(
-        title = R.string.quiz_type_multiple_choice_title,
-        subtitle = R.string.quiz_type_multiple_choice_desc,
+        title = R.string.multiple_choice,
+        subtitle = R.string.multiple_choice_desc,
         icon = Icons.Outlined.Ballot,
         requirePremium = false,
         minimumWordCount = 4

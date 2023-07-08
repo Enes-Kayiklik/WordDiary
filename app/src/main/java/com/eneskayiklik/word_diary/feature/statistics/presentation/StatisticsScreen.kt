@@ -88,7 +88,7 @@ fun StatisticsScreen(
         topBar = {
             LargeTopAppBar(title = {
                 Text(
-                    text = stringResource(id = R.string.destination_statistics),
+                    text = stringResource(id = R.string.statistics),
                     fontWeight = FontWeight.Medium,
                     letterSpacing = TITLE_LETTER_SPACING
                 )
@@ -114,7 +114,7 @@ fun StatisticsScreen(
         ) {
             item("today_statistics") {
                 Text(
-                    text = stringResource(id = R.string.statistics_today),
+                    text = stringResource(id = R.string.today),
                     style = MaterialTheme.typography.titleMedium
                 )
                 Spacer(modifier = Modifier.height(8.dp))
@@ -158,7 +158,7 @@ fun StatisticsScreen(
 
             item(key = "general_statistics") {
                 Text(
-                    text = stringResource(id = R.string.statistics_all_time),
+                    text = stringResource(id = R.string.all_time),
                     style = MaterialTheme.typography.titleMedium
                 )
                 Spacer(modifier = Modifier.height(8.dp))
