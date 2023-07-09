@@ -32,6 +32,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -50,6 +51,7 @@ import com.eneskayiklik.word_diary.feature.statistics.presentation.component.Gen
 import com.eneskayiklik.word_diary.feature.statistics.presentation.component.StatisticsChart
 import com.eneskayiklik.word_diary.util.TITLE_LETTER_SPACING
 import com.eneskayiklik.word_diary.util.extensions.plus
+import com.eneskayiklik.word_diary.util.extensions.shareStatistics
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.flow.collectLatest
@@ -63,6 +65,7 @@ fun StatisticsScreen(
 ) {
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     val state = viewModel.state.collectAsState().value
+    val context = LocalContext.current
 
     LaunchedEffect(key1 = Unit) {
         viewModel.event.collectLatest {
@@ -93,7 +96,7 @@ fun StatisticsScreen(
                     letterSpacing = TITLE_LETTER_SPACING
                 )
             }, actions = {
-                IconButton(onClick = { /*TODO*/ }) {
+                IconButton(onClick = { context.shareStatistics(state) }) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_upload),
                         contentDescription = null

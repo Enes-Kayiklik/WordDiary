@@ -16,5 +16,6 @@ const val TERMS = "https://github.com/Enes-Kayiklik/WordDiary/blob/main/Terms.md
 
 const val GOOGLE_TTS = "https://play.google.com/store/apps/details?id=com.google.android.tts"
 const val WORD_DIARY_PLAY_STORE = "https://play.google.com/store/apps/details?id=com.eneskayiklik.word_diary"
+const val WORD_DIARY_PLAY_STORE_SHORT = "https://cutt.ly/nwimasOV"
 const val WORD_DIARY_GITHUB = "https://github.com/Enes-Kayiklik/WordDiary"
 const val WORD_DIARY_CROWDIN = "https://crowdin.com/project/word-diary/invite?h=e9dde52d80819f626e9e4b8741c246291760791"

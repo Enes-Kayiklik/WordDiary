@@ -5,6 +5,7 @@
     <string name="developer_name">Enes Kayıklık</string>
 
     <!-- Common strings -->
+    <string name="download_now">Join us now!</string>
     <string name="coming_soon">Coming soon</string>
     <string name="back_button_desc">Navigate back</string>
     <string name="more_button_desc">More options</string>
