@@ -8,6 +8,19 @@ Welcome to the Word Diary repository! Word Diary is an innovative word learning 
 
 </div>
 
+## 📱 Screenshots
+
+<div align="center">
+<div>
+<img src="assets/1.png" width="30%" />
+<img src="assets/2.png" width="30%" />
+<img src="assets/3.png" width="30%" />
+<img src="assets/4.png" width="30%" />
+<img src="assets/5.png" width="30%" />
+<img src="assets/6.png" width="30%" />
+</div>
+</div>
+
 ## ⭐️ Key Features
 
 - Build your own personalized collections.
@@ -50,6 +63,10 @@ Welcome to the Word Diary repository! Word Diary is an innovative word learning 
 - [Compose Rich Editor](https://github.com/MohamedRejeb/Compose-Rich-Editor) - A Rich text editor library for both Jetpack Compose and Compose Multiplatform
 - [MPChart](https://github.com/PhilJay/MPAndroidChart) - A powerful 🚀 Android chart view / graph view library
 
+## 📦 Other Technologies
+- [App Mockup Studio](https://studio.app-mockup.com/) - Store Screenshots
+- [Hotpot Ai](https://hotpot.ai/) - Play Store Feature Graphic
+
 ## 📬 Contact
 
 Join our [Telegram Channel](https://t.me/word_diary) for discussion, announcements, and releases!
@@ -58,16 +75,16 @@ Join our [Telegram Channel](https://t.me/word_diary) for discussion, announcemen
 
 Special thanks to mentioned users and projects.
 
-### 🖌️ Ui design inspirations
+## 🖌️ Design Inspirations
 - [Feeder](https://gitlab.com/spacecowboy/Feeder) RSS/Atom/JSON feed reader app for Android.
 - [Seal](https://github.com/JunkFood02/Seal) Video/Audio Downloader for Android, based on yt-dlp, designed with Material You.
 - [Read You](https://github.com/Ashinch/ReadYou) An Android RSS reader presented in Material You style.
-- [Diarium](https://diariumapp.com/) Cross-platform diary & journal app
+- [Diarium](https://diariumapp.com/) Cross-platform diary & journal app.
 
-### 💬 Translate
+## 💬 Translate
 - You can help us to translate Word Diary to other languages with [Crowdin](https://crowdin.com/project/word-diary/invite?h=e9dde52d80819f626e9e4b8741c246291760791)
 
-### 🏆 Contributors
+## 🏆 Contributors
 - [Enes Telli](https://github.com/enes-telli): Turkish translation and Telegram admin.
 
 ## Contributing to the Repository
