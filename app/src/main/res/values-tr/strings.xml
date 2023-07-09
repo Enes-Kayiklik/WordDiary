@@ -3,6 +3,7 @@
     <string name="developer_name">Enes Kayıklık</string>
 
     <!-- Common strings -->
+    <string name="download_now">Hemen sen de katıl!</string>
     <string name="coming_soon">Yakında gelecek</string>
     <string name="back_button_desc">Geri git</string>
     <string name="more_button_desc">Daha fazla seçenek</string>

@@ -14,8 +14,10 @@ import android.os.VibratorManager
 import android.provider.Settings
 import com.eneskayiklik.word_diary.BuildConfig
 import com.eneskayiklik.word_diary.R
+import com.eneskayiklik.word_diary.feature.statistics.presentation.StatisticsState
 import com.eneskayiklik.word_diary.util.DEVELOPER_MAIL
 import com.eneskayiklik.word_diary.util.WORD_DIARY_PLAY_STORE
+import com.eneskayiklik.word_diary.util.WORD_DIARY_PLAY_STORE_SHORT
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -132,6 +134,42 @@ fun Context.openAppSettings() {
         Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
         Uri.fromParts("package", packageName, null)
     ).also(::startActivity)
+}
+
+fun Context.shareStatistics(statisticsState: StatisticsState) {
+    val learningWordText =
+        "${statisticsState.learningWordCount} " + if (statisticsState.learningWordCount <= 1) getString(
+            R.string.word_singular
+        )
+        else getString(R.string.word_plural)
+
+    val completeLearnedText =
+        "${statisticsState.completeLearnedWordCount} " + if (statisticsState.completeLearnedWordCount <= 1) getString(
+            R.string.word_singular
+        )
+        else getString(R.string.word_plural)
+
+    val shareText = """
+        📅 ${getString(R.string.start_of_learning)}, ${statisticsState.startOfLearning}
+        ⭐ $learningWordText ${getString(R.string.learned)}
+        📘 $completeLearnedText ${getString(R.string.learning)}
+        🔥 ${getString(R.string.best_streak)} ${getString(statisticsState.maxStreakFormatter, statisticsState.maxStreakCount)}
+        🕔 ${statisticsState.allTimeStudyTime} ${getString(R.string.study_time)}
+        🔬 ${statisticsState.allTimeStudySessions} ${getString(R.string.study_sessions)}
+        
+        📱${getString(R.string.download_now)} $WORD_DIARY_PLAY_STORE_SHORT
+    """.trimIndent()
+
+    try {
+        Intent(Intent.ACTION_SEND).apply {
+            type = "text/plain"
+            putExtra(Intent.EXTRA_TEXT, shareText)
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(this)
+        }
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
 }
 
 fun Context.hasInternetConnection(): Boolean {

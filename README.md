@@ -64,8 +64,8 @@ Special thanks to mentioned users and projects.
 - [Read You](https://github.com/Ashinch/ReadYou) An Android RSS reader presented in Material You style.
 - [Diarium](https://diariumapp.com/) Cross-platform diary & journal app
 
-### Translate
-- You can help translate Word Diary to other languages with [Crowdin](https://crowdin.com/project/word-diary/invite?h=e9dde52d80819f626e9e4b8741c246291760791)
+### 💬 Translate
+- You can help us to translate Word Diary to other languages with [Crowdin](https://crowdin.com/project/word-diary/invite?h=e9dde52d80819f626e9e4b8741c246291760791)
 
 ### 🏆 Contributors
 - [Enes Telli](https://github.com/enes-telli): Turkish translation and Telegram admin.
