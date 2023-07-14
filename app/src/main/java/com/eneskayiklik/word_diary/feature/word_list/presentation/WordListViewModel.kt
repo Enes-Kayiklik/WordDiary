@@ -94,7 +94,7 @@ class WordListViewModel @Inject constructor(
             WordListEvent.CreateWord -> _folderId?.let { folderId ->
                 onEvent(
                     UiEvent.OnNavigate(
-                        CreateWordScreenDestination(folderId = folderId)
+                        CreateWordScreenDestination(folderId = folderId, wordId = -1)
                     )
                 )
             }
@@ -120,8 +120,6 @@ class WordListViewModel @Inject constructor(
                     dialogType = event.type
                 )
             }
-
-            else -> Unit
         }
     }
 

@@ -103,7 +103,7 @@ class ListsViewModel @Inject constructor(
 
             is FolderListEvent.AddWordToFolder -> onEvent(
                 UiEvent.OnNavigate(
-                    CreateWordScreenDestination(folderId = event.id)
+                    CreateWordScreenDestination(folderId = event.id, wordId = -1)
                 )
             )
 
