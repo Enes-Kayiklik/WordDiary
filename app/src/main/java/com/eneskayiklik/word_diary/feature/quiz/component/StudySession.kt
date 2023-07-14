@@ -25,7 +25,6 @@ import com.eneskayiklik.word_diary.feature.word_list.domain.StudyType
 @Composable
 fun StudySession(
     state: StudyState,
-    studyType: StudyType,
     onEvent: (StudyEvent) -> Unit
 ) {
     Column(modifier = Modifier.fillMaxSize()) {
@@ -37,7 +36,7 @@ fun StudySession(
             )
         }
 
-        when (studyType) {
+        when (state.studyType) {
             StudyType.FlashCard -> {
                 FlashcardSession(
                     modifier = Modifier.weight(1F),
@@ -114,6 +113,8 @@ fun StudySession(
                     }
                 )
             }
+
+            else -> Unit
         }
     }
 }

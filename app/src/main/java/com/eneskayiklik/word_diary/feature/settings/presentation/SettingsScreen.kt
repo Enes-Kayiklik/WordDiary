@@ -17,7 +17,6 @@ import androidx.compose.material.icons.outlined.Language
 import androidx.compose.material.icons.outlined.Palette
 import androidx.compose.material.icons.outlined.ToggleOn
 import androidx.compose.material.icons.outlined.Translate
-import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LargeTopAppBar
@@ -141,7 +140,7 @@ fun SettingsScreen(
                 )
             }
 
-            item(key = "personalize") {
+            /*item(key = "personalize") {
                 ListItem(
                     headlineText = { Text(text = stringResource(id = R.string.personalize)) },
                     supportingText = { Text(text = stringResource(id = R.string.personalize_desc)) },
@@ -159,7 +158,7 @@ fun SettingsScreen(
                         ).show()
                     }
                 )
-            }
+            }*/
 
             item(key = "backup") {
                 ListItem(

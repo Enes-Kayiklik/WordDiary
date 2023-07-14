@@ -7,8 +7,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidViewBinding
+import com.eneskayiklik.word_diary.R
 import com.eneskayiklik.word_diary.databinding.AdFullMediaBinding
 import com.google.android.gms.ads.nativead.NativeAd
 
@@ -19,6 +21,7 @@ fun MediumNativeAdView(
     nativeAd: NativeAd
 ) {
     val colorScheme = MaterialTheme.colorScheme
+    val removeAd = stringResource(id = R.string.remove_ads)
 
     AndroidViewBinding(factory = AdFullMediaBinding::inflate, modifier = modifier) {
         root.apply {
@@ -59,6 +62,7 @@ fun MediumNativeAdView(
         removeAds.apply {
             setTextColor(colorScheme.primary.toArgb())
             strokeColor = ColorStateList.valueOf(colorScheme.outline.toArgb())
+            text = removeAd
             textSize = 12.sp.value
             rippleColor = ColorStateList.valueOf(colorScheme.primary.copy(.1F).toArgb())
             setOnClickListener {

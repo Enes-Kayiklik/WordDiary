@@ -94,7 +94,7 @@ class ListsViewModel @Inject constructor(
     @OptIn(ExperimentalAnimationApi::class)
     fun onEvent(event: FolderListEvent) {
         when (event) {
-            FolderListEvent.AddFolder -> onEvent(UiEvent.OnNavigate(CreateFolderScreenDestination()))
+            FolderListEvent.AddFolder -> onEvent(UiEvent.OnNavigate(CreateFolderScreenDestination(-1)))
             is FolderListEvent.EditFolder -> onEvent(
                 UiEvent.OnNavigate(
                     CreateFolderScreenDestination(folderId = event.id)
