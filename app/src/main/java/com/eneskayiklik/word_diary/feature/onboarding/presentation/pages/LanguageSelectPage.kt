@@ -64,7 +64,7 @@ fun LanguageSelectPage(
         ) {
             item {
                 Text(
-                    text = stringResource(id = R.string.user_language_desc),
+                    text = stringResource(id = R.string.languages_desc),
                     style = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier.padding(
                         start = 16.dp,

@@ -102,6 +102,7 @@ fun StudySettings(
                     Text(text = stringResource(id = R.string.filter_by))
                 },
                 supportingText = {
+                    Text(text = stringResource(id = R.string.filter_cards_desc))
                     FlowRow(
                         modifier = Modifier
                             .fillMaxWidth()

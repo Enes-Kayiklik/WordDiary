@@ -275,6 +275,7 @@ class UserPreferenceRepositoryImpl @Inject constructor(
                     currentData.currentStreakCount + 1,
                     maxOf(currentData.maxStreakCount, currentData.currentStreakCount + 1)
                 )
+
                 else -> listOf(1, maxOf(currentData.maxStreakCount, currentData.currentStreakCount))
             }
 

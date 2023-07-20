@@ -3,11 +3,15 @@ package com.eneskayiklik.word_diary.feature.quiz
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.with
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -36,6 +40,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.eneskayiklik.word_diary.R
@@ -173,17 +178,38 @@ fun StudyScreen(
                             onEvent = viewModel::onEvent,
                             modifier = Modifier.fillMaxSize()
                         )
-                        Button(
-                            onClick = { viewModel.onEvent(StudyEvent.StartStudy) },
-                            shape = MaterialTheme.shapes.small,
+                        Column(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(16.dp)
                                 .align(Alignment.BottomCenter),
-                            enabled = state.isStartActive
                         ) {
-                            Text(text = stringResource(id = R.string.start_study))
-                            Text(text = "(${state.currentTotal} words)")
+                            AnimatedVisibility(
+                                visible = state.isStartActive.not(),
+                                modifier = Modifier.fillMaxWidth(),
+                                enter = expandVertically(),
+                                exit = shrinkVertically()
+                            ) {
+                                Text(
+                                    text = stringResource(
+                                        id = R.string.study_not_enough_words_desc,
+                                        state.studyType?.minimumWordCount ?: 5
+                                    ),
+                                    modifier = Modifier.fillMaxWidth(),
+                                    textAlign = TextAlign.Center,
+                                    style = MaterialTheme.typography.labelMedium
+                                )
+                            }
+                            Button(
+                                onClick = { viewModel.onEvent(StudyEvent.StartStudy) },
+                                shape = MaterialTheme.shapes.small,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(16.dp),
+                                enabled = state.isStartActive
+                            ) {
+                                Text(text = stringResource(id = R.string.start_study))
+                                Text(text = "(${state.currentTotal} words)")
+                            }
                         }
                     }
 

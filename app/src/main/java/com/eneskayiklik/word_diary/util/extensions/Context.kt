@@ -1,9 +1,11 @@
 package com.eneskayiklik.word_diary.util.extensions
 
 import android.app.Activity
+import android.content.ComponentName
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.Uri
@@ -14,6 +16,7 @@ import android.os.VibratorManager
 import android.provider.Settings
 import com.eneskayiklik.word_diary.BuildConfig
 import com.eneskayiklik.word_diary.R
+import com.eneskayiklik.word_diary.core.alarm_manager.BootReceiver
 import com.eneskayiklik.word_diary.feature.statistics.presentation.StatisticsState
 import com.eneskayiklik.word_diary.util.DEVELOPER_MAIL
 import com.eneskayiklik.word_diary.util.WORD_DIARY_PLAY_STORE
@@ -153,7 +156,12 @@ fun Context.shareStatistics(statisticsState: StatisticsState) {
         📅 ${getString(R.string.start_of_learning)}, ${statisticsState.startOfLearning}
         ⭐ $learningWordText ${getString(R.string.learned)}
         📘 $completeLearnedText ${getString(R.string.learning)}
-        🔥 ${getString(R.string.best_streak)} ${getString(statisticsState.maxStreakFormatter, statisticsState.maxStreakCount)}
+        🔥 ${getString(R.string.best_streak)} ${
+        getString(
+            statisticsState.maxStreakFormatter,
+            statisticsState.maxStreakCount
+        )
+    }
         🕔 ${statisticsState.allTimeStudyTime} ${getString(R.string.study_time)}
         🔬 ${statisticsState.allTimeStudySessions} ${getString(R.string.study_sessions)}
         
@@ -216,4 +224,16 @@ fun Context.restartApp() {
     } catch (e: Exception) {
         e.printStackTrace()
     }
+}
+
+fun Context.updateBootReceiver(
+    newState: Int
+) {
+    val receiver = ComponentName(this, BootReceiver::class.java)
+
+    packageManager.setComponentEnabledSetting(
+        receiver,
+        newState,
+        PackageManager.DONT_KILL_APP
+    )
 }
