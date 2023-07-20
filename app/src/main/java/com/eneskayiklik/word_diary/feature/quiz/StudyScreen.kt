@@ -51,14 +51,17 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.flow.collectLatest
 
+data class StudyScreenNavArgs(
+    val folderId: Int,
+    val studyType: StudyType
+)
+
 @OptIn(
     ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class
 )
-@Destination(style = ScreensAnim::class)
+@Destination(style = ScreensAnim::class, navArgsDelegate = StudyScreenNavArgs::class)
 @Composable
 fun StudyScreen(
-    folderId: Int,
-    studyType: StudyType,
     navigator: DestinationsNavigator,
     viewModel: StudyViewModel = hiltViewModel()
 ) {
@@ -186,7 +189,6 @@ fun StudyScreen(
 
                     QuizState.Started -> StudySession(
                         state = state,
-                        studyType = studyType,
                         onEvent = viewModel::onEvent
                     )
 

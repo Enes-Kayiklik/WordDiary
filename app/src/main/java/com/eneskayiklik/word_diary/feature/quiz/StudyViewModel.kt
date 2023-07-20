@@ -1,5 +1,6 @@
 package com.eneskayiklik.word_diary.feature.quiz
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,6 +12,7 @@ import com.eneskayiklik.word_diary.core.database.entity.WordEntity
 import com.eneskayiklik.word_diary.core.tts.WordToSpeech
 import com.eneskayiklik.word_diary.feature.folder_list.domain.FolderRepository
 import com.eneskayiklik.word_diary.core.util.UiEvent
+import com.eneskayiklik.word_diary.feature.navArgs
 import com.eneskayiklik.word_diary.feature.word_list.domain.StudyType
 import com.eneskayiklik.word_diary.feature.word_list.presentation.WordListFilterType
 import com.eneskayiklik.word_diary.util.extensions.calculateProficiencyLevel
@@ -33,6 +35,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@OptIn(ExperimentalAnimationApi::class)
 @HiltViewModel
 class StudyViewModel @Inject constructor(
     private val folderRepo: FolderRepository,
@@ -84,14 +87,12 @@ class StudyViewModel @Inject constructor(
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), StudyState())
 
     init {
-        val folderId = savedStateHandle.get<Int>("folderId")
-            ?: throw NullPointerException("folderId can not be null")
-        val studyType = savedStateHandle.get<StudyType>("studyType")
+        val navArgs = savedStateHandle.navArgs<StudyScreenNavArgs>()
 
-        _state.update { it.copy(studyType = studyType) }
+        _state.update { it.copy(studyType = navArgs.studyType) }
 
-        getFolder(folderId)
-        getWords(folderId)
+        getFolder(navArgs.folderId)
+        getWords(navArgs.folderId)
     }
 
     fun onEvent(event: StudyEvent) {

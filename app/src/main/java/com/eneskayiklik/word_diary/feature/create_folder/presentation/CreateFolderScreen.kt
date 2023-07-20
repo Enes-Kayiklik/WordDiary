@@ -71,17 +71,21 @@ import kotlinx.coroutines.flow.collectLatest
 import com.eneskayiklik.word_diary.feature.create_folder.presentation.component.LanguageChip
 import com.eneskayiklik.word_diary.feature.destinations.EmojiPickerSheetDestination
 
+data class CreateFolderScreenArgs(
+    val folderId: Int
+)
+
 @OptIn(
     ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class,
     ExperimentalAnimationApi::class
 )
 @Destination(
-    style = ScreensAnim::class
+    style = ScreensAnim::class,
+    navArgsDelegate = CreateFolderScreenArgs::class
 )
 @Composable
 fun CreateFolderScreen(
     navigator: DestinationsNavigator,
-    folderId: Int = -1,
     resultRecipient: ResultRecipient<EmojiPickerSheetDestination, String>,
     viewModel: CreateFolderViewModel = hiltViewModel()
 ) {

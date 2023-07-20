@@ -1,5 +1,6 @@
 package com.eneskayiklik.word_diary.feature.create_folder.presentation
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.text.TextRange
@@ -13,6 +14,7 @@ import com.eneskayiklik.word_diary.core.data_store.domain.UserPreferenceReposito
 import com.eneskayiklik.word_diary.core.database.entity.FolderEntity
 import com.eneskayiklik.word_diary.feature.folder_list.domain.FolderRepository
 import com.eneskayiklik.word_diary.core.util.UiEvent
+import com.eneskayiklik.word_diary.feature.navArgs
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -25,6 +27,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@OptIn(ExperimentalAnimationApi::class)
 @HiltViewModel
 class CreateFolderViewModel @Inject constructor(
     private val folderRepo: FolderRepository,
@@ -45,7 +48,7 @@ class CreateFolderViewModel @Inject constructor(
 
     init {
         setupUserPref()
-        _folderId = savedStateHandle.get<Int?>("folderId")?.takeIf { it >= 0 }
+        _folderId = savedStateHandle.navArgs<CreateFolderScreenArgs>().folderId.takeIf { it >= 0 }
         _folderId?.let { getFolderData(it) }
     }
 
