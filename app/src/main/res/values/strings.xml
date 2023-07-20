@@ -228,13 +228,15 @@
     <string name="proficiency">Proficiency</string>
 
     <string name="enable_timer">Enable timer</string>
-    <string name="enable_timer_desc">Set a timer to test your memory against the clock, or turn off the timer to review the cards at your own pace.</string>
+    <string name="enable_timer_desc">Time yourself to test memory, or review cards at your own pace</string>
     <string name="shuffle_words">Shuffle words</string>
-    <string name="shuffle_words_desc">Shuffle the cards for a randomized learning experience, or turn off shuffling to review the cards in the order they were added.</string>
+    <string name="shuffle_words_desc">Randomize cards for varied learning, or review in original order</string>
     <string name="sound_transcription">Sound transcription</string>
-    <string name="sound_transcription_desc">Add sound effects or voiceover for an immersive learning experience, or turn off sound to focus on the visual cues of the flashcards.</string>
+    <string name="sound_transcription_desc">Add sound effects or voiceover for immersion, or turn off sound for focus.</string>
     <string name="enable_looping">Enable looping</string>
-    <string name="enable_looping_desc">Review the flashcards continuously without having to manually restart the session.</string>
+    <string name="enable_looping_desc">Review the flashcards continuously without having to manually restart the session</string>
+    <string name="filter_cards_desc">Use the Filter section to find the flashcards you want to study</string>
+    <string name="study_not_enough_words_desc">At least %d words needed</string>
 
     <!-- Settings -->
     <string name="settings">Settings</string>
@@ -368,4 +370,7 @@
     <!-- Permission -->
     <string name="notification_permission_declined">To receive important updates and stay connected, our app requires notification permission. Unfortunately, you have permanently declined this permission</string>
     <string name="notification_permission_rationale">We would like to request your permission to send you notifications. Notifications help us keep you informed about important updates, personalized recommendations, and time-sensitive information</string>
+    <string name="reminder_notification_channel">Reminder</string>
+    <string name="reminder_notification_title">Time to learn a new word!</string>
+    <string name="reminder_notification_desc">You can review the words by tapping on the notification</string>
 </resources>

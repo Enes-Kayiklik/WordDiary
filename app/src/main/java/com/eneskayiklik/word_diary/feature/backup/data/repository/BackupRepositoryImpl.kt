@@ -66,10 +66,10 @@ class BackupRepositoryImpl @Inject constructor(
         // Check if the folder exists
         val query =
             "mimeType='application/vnd.google-apps.folder' and trashed=false and name='$folderName'"
-        val folders = driveService.files().list().setQ(query).execute()
-        if (folders.files.isNullOrEmpty().not()) {
-            driveFolder = folders.files[0].id
-            return folders.files[0].id
+        val folders = driveService.files().list().setQ(query).execute().files
+        if (folders != null && folders.isNotEmpty()) {
+            driveFolder = folders.first().id
+            return folders.first().id
         }
 
         // Create the folder if it doesn't exist
@@ -174,11 +174,13 @@ class BackupRepositoryImpl @Inject constructor(
                 .setFields("nextPageToken, files(*)")
                 .setPageSize(20)
                 .execute()
-
-            emit(Result.Success(files.files
-                .sortedByDescending { it.createdTime.value }
-                .mapNotNull { it.toDriveFile() })
-            )
+                .files
+            if (files != null) {
+                emit(Result.Success(files
+                    .sortedByDescending { it.createdTime.value }
+                    .mapNotNull { it.toDriveFile() })
+                )
+            } else emit(Result.Success(emptyList()))
         } catch (e: Exception) {
             e.printStackTrace()
             emit(Result.Error(e))

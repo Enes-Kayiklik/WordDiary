@@ -18,8 +18,9 @@ class AlarmReceiver : HiltBroadcastReceiver() {
     @Inject
     lateinit var reminderManager: ReminderManager
 
-    override fun onReceive(context: Context, intent: Intent) {
+    override fun onReceive(context: Context?, intent: Intent?) {
         super.onReceive(context, intent)
+        if (context == null) return
 
         val notificationManager = ContextCompat.getSystemService(
             context,
@@ -30,8 +31,9 @@ class AlarmReceiver : HiltBroadcastReceiver() {
             context = context,
             channelId = ALARM_NOTIFICATION_CHANNEL_ID
         )
-        // Remove this line if you don't want to reschedule the reminder
-        intent.getStringExtra(ReminderManager.ALARM_TIME_EXTRA)?.let { time ->
+
+        // Reschedule the notification
+        intent?.getStringExtra(ReminderManager.ALARM_TIME_EXTRA)?.let { time ->
             reminderManager.enableReminder(time)
         }
     }
@@ -50,11 +52,11 @@ fun NotificationManager.sendReminderNotification(
         context,
         1,
         contentIntent,
-        PendingIntent.FLAG_UPDATE_CURRENT
+        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
     )
     val builder = NotificationCompat.Builder(context, channelId)
-        .setContentTitle("Content title")
-        .setContentText("Content text")
+        .setContentTitle(context.getString(R.string.reminder_notification_title))
+        .setContentText(context.getString(R.string.reminder_notification_desc))
         .setSmallIcon(R.drawable.ic_foreground)
         .setContentIntent(pendingIntent)
         .setAutoCancel(true)

@@ -157,6 +157,7 @@ class BackupViewModel @Inject constructor(
 
     fun logOut() = viewModelScope.launch {
         app.googleLoginClient().signOut().addOnSuccessListener {
+            onEvent(UiEvent.ClearBackstack)
             _state.update {
                 it.copy(
                     userData = UserData(),

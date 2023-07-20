@@ -158,6 +158,8 @@ fun BackupScreen(
                     }
                 }
 
+                UiEvent.ClearBackstack -> navigator.navigateUp()
+
                 else -> Unit
             }
         }

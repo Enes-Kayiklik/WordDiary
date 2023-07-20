@@ -89,7 +89,7 @@
     <string name="advanced">Gelişmiş</string>
     <string name="expert">Uzman</string>
     <string name="master">Usta</string>
-    <string name="favorite">Favorite</string>
+    <string name="favorite">Favori</string>
 
     <string name="sort_by">Sırala</string>
     <string name="sort_direction">Sıralama yönü</string>
@@ -227,13 +227,15 @@
     <string name="proficiency">Yetkinlik</string>
 
     <string name="enable_timer">Zamanlayıcı</string>
-    <string name="enable_timer_desc">Set a timer to test your memory against the clock, or turn off the timer to review the cards at your own pace.</string>
+    <string name="enable_timer_desc">Hafızanızı test etmek için zaman tutun veya kartları kendi hızınızda gözden geçirin</string>
     <string name="shuffle_words">Kelimeleri karıştır</string>
-    <string name="shuffle_words_desc">Shuffle the cards for a randomized learning experience, or turn off shuffling to review the cards in the order they were added.</string>
+    <string name="shuffle_words_desc">Çeşitli öğrenme için kartları rastgele sıralayın veya orijinal sırayla gözden geçirin</string>
     <string name="sound_transcription">Sesli okuma</string>
-    <string name="sound_transcription_desc">Add sound effects or voiceover for an immersive learning experience, or turn off sound to focus on the visual cues of the flashcards.</string>
+    <string name="sound_transcription_desc">Sürükleyicilik için ses efektleri veya seslendirme ekleyin veya odaklanmak için sesi kapatın</string>
     <string name="enable_looping">Döngü</string>
-    <string name="enable_looping_desc">Review the flashcards continuously without having to manually restart the session.</string>
+    <string name="enable_looping_desc">Oturumu manuel olarak yeniden başlatmak zorunda kalmadan bilgi kartlarını sürekli olarak gözden geçirin</string>
+    <string name="filter_cards_desc">Çalışmak istediğiniz kartları sınırlandırmak için filtreleyin</string>
+    <string name="study_not_enough_words_desc">En az %d kelime gerekli</string>
 
     <!-- Settings -->
     <string name="settings">Ayarlar</string>
@@ -367,4 +369,7 @@
     <!-- Permission -->
     <string name="notification_permission_declined">Önemli güncellemeleri almak ve bağlantıda kalmak için uygulamamız bildirim izni gerektirir. Ne yazık ki, bu izni kalıcı olarak reddettiniz</string>
     <string name="notification_permission_rationale">Size bildirim göndermek için izninizi rica ediyoruz. Bildirimler, önemli güncellemeler, kişiselleştirilmiş öneriler ve zamana duyarlı bilgiler hakkında sizi bilgilendirmemize yardımcı olur</string>
+    <string name="reminder_notification_channel">Hatırlatıcı</string>
+    <string name="reminder_notification_title">Yeni bir kelime öğrenme zamanı!</string>
+    <string name="reminder_notification_desc">Bildirime dokunarak kelimeleri gözden geçirebilirsiniz</string>
 </resources>

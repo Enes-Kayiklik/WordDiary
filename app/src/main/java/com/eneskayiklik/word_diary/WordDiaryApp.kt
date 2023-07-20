@@ -50,7 +50,7 @@ class WordDiaryApp : Application() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 AlarmReceiver.ALARM_NOTIFICATION_CHANNEL_ID,
-                "Reminder",
+                getString(R.string.reminder_notification_channel),
                 NotificationManager.IMPORTANCE_HIGH
             )
             ContextCompat.getSystemService(this, NotificationManager::class.java)
