@@ -402,8 +402,8 @@ fun WordListScreen(
                 StudyType.values().forEach { study ->
                     item {
                         ListItem(
-                            headlineText = { Text(text = stringResource(id = study.title)) },
-                            supportingText = { Text(text = stringResource(id = study.subtitle)) },
+                            headlineContent = { Text(text = stringResource(id = study.title)) },
+                            supportingContent = { Text(text = stringResource(id = study.subtitle)) },
                             leadingContent = {
                                 Icon(
                                     imageVector = study.icon,

@@ -244,4 +244,10 @@ dependencies {
 
     // Rich Text
     implementation(AppDependencies.richText)
+
+    // Kalendar
+    implementation(AppDependencies.kalendar)
+
+    // Date Time
+    implementation(AppDependencies.kotlinxDateTime)
 }

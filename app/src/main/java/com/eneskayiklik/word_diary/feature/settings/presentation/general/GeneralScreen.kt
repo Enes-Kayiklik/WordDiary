@@ -148,9 +148,9 @@ fun GeneralScreen(
             }
             item("new_word_goal") {
                 ListItem(
-                    headlineText = {
+                    headlineContent = {
                         Text(text = stringResource(id = R.string.new_word))
-                    }, supportingText = {
+                    }, supportingContent = {
                         Text(text = stringResource(id = R.string.new_word_desc))
                     }, leadingContent = {
                         Icon(imageVector = Icons.Outlined.TextIncrease, contentDescription = null)
@@ -181,9 +181,9 @@ fun GeneralScreen(
             }
             item("study_session_goal") {
                 ListItem(
-                    headlineText = {
+                    headlineContent = {
                         Text(text = stringResource(id = R.string.study_session))
-                    }, supportingText = {
+                    }, supportingContent = {
                         Text(text = stringResource(id = R.string.study_session_desc))
                     }, leadingContent = {
                         Box(modifier = Modifier.size(24.dp))

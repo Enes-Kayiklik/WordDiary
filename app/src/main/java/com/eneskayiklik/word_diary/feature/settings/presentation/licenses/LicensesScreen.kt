@@ -65,12 +65,12 @@ fun LicensesScreen(
         ) {
             state.libs.forEach { lib ->
                 item {
-                    ListItem(headlineText = {
+                    ListItem(headlineContent = {
                         Text(
                             text = lib.title,
                             fontWeight = FontWeight.SemiBold
                         )
-                    }, supportingText = {
+                    }, supportingContent = {
                         if (lib.author != null) Text(text = lib.author)
                         if (lib.license != null) Text(text = lib.license)
                     }, trailingContent = { if (lib.version != null) Text(text = lib.version) },

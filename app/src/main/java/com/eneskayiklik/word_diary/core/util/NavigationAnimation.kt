@@ -12,6 +12,8 @@ import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.navigation.NavBackStackEntry
 import com.eneskayiklik.word_diary.feature.appDestination
+import com.eneskayiklik.word_diary.feature.destinations.CalendarScreenDestination
+import com.eneskayiklik.word_diary.feature.destinations.Destination
 import com.eneskayiklik.word_diary.feature.destinations.ListsScreenDestination
 import com.eneskayiklik.word_diary.feature.destinations.SettingsScreenDestination
 import com.eneskayiklik.word_diary.feature.destinations.StatisticsScreenDestination
@@ -21,32 +23,41 @@ const val NAVIGATION_ANIMATION_STIFFNESS = 800F
 private const val FADE_ANIM_STIFFNESS = Spring.StiffnessMedium
 private const val SLIDE_ANIM_DIVIDE_OFFSET = 6
 
+@OptIn(ExperimentalAnimationApi::class)
+private val bottomBarItems: List<Destination>
+    get() = listOf(
+        StatisticsScreenDestination,
+        ListsScreenDestination,
+        SettingsScreenDestination,
+        CalendarScreenDestination
+    )
+
 @ExperimentalAnimationApi
 object ScreensAnim : DestinationStyle.Animated {
     override fun AnimatedContentScope<NavBackStackEntry>.enterTransition(): EnterTransition? {
         return when (targetState.appDestination()) {
-            StatisticsScreenDestination, ListsScreenDestination, SettingsScreenDestination -> null
+            in bottomBarItems -> null
             else -> slideInAnim()
         }
     }
 
     override fun AnimatedContentScope<NavBackStackEntry>.exitTransition(): ExitTransition? {
         return when (targetState.appDestination()) {
-            StatisticsScreenDestination, ListsScreenDestination, SettingsScreenDestination -> null
+            in bottomBarItems-> null
             else -> slideOutAnim()
         }
     }
 
     override fun AnimatedContentScope<NavBackStackEntry>.popEnterTransition(): EnterTransition? {
         return when (initialState.appDestination()) {
-            StatisticsScreenDestination, ListsScreenDestination, SettingsScreenDestination -> null
+            in bottomBarItems -> null
             else -> popSlideInAnim()
         }
     }
 
     override fun AnimatedContentScope<NavBackStackEntry>.popExitTransition(): ExitTransition? {
         return when (initialState.appDestination()) {
-            StatisticsScreenDestination, ListsScreenDestination, SettingsScreenDestination -> null
+            in bottomBarItems -> null
             else -> popSlideOutAnim()
         }
     }

@@ -126,10 +126,10 @@ fun ThemeScreen(
             }
             item("app_theme") {
                 ListItem(
-                    headlineText = {
+                    headlineContent = {
                         Text(text = stringResource(id = R.string.app_theme))
                     },
-                    supportingText = {
+                    supportingContent = {
                         Text(text = stringResource(id = themePrefs.appTheme.title))
                     }, leadingContent = {
                         Icon(imageVector = Icons.Filled.Brush, contentDescription = null)
@@ -140,10 +140,10 @@ fun ThemeScreen(
             }
             item("amoled_black") {
                 ListItem(
-                    headlineText = {
+                    headlineContent = {
                         Text(text = stringResource(id = R.string.amoled_black))
                     },
-                    supportingText = {
+                    supportingContent = {
                         Text(text = stringResource(id = R.string.amoled_black_desc))
                     }, leadingContent = {
                         Box(modifier = Modifier.size(24.dp))
@@ -161,10 +161,10 @@ fun ThemeScreen(
             }
             item("colorful_background") {
                 ListItem(
-                    headlineText = {
+                    headlineContent = {
                         Text(text = stringResource(id = R.string.colorful_background))
                     },
-                    supportingText = {
+                    supportingContent = {
                         Text(text = stringResource(id = R.string.colorful_background_desc))
                     }, leadingContent = {
                         Box(modifier = Modifier.size(24.dp))
@@ -183,10 +183,10 @@ fun ThemeScreen(
 
             item("font_family") {
                 ListItem(
-                    headlineText = {
+                    headlineContent = {
                         Text(text = stringResource(id = R.string.font_family))
                     },
-                    supportingText = {
+                    supportingContent = {
                         Text(text = themePrefs.fontFamily.title)
                     }, leadingContent = {
                         Box(modifier = Modifier.size(24.dp))
@@ -207,10 +207,10 @@ fun ThemeScreen(
             }
             item("primary_color") {
                 ListItem(
-                    headlineText = {
+                    headlineContent = {
                         Text(text = stringResource(id = R.string.primary_color))
                     },
-                    supportingText = {
+                    supportingContent = {
                         Text(text = stringResource(id = R.string.primary_color_desc))
                     }, leadingContent = {
                         Icon(imageVector = Icons.Filled.Palette, contentDescription = null)
@@ -229,10 +229,10 @@ fun ThemeScreen(
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) item("wallpaper_color") {
                 ListItem(
-                    headlineText = {
+                    headlineContent = {
                         Text(text = stringResource(id = R.string.wallpaper_color))
                     },
-                    supportingText = {
+                    supportingContent = {
                         Text(text = stringResource(id = R.string.wallpaper_color_desc))
                     }, leadingContent = {
                         Box(modifier = Modifier.size(24.dp))
@@ -251,10 +251,10 @@ fun ThemeScreen(
 
             item("random_color") {
                 ListItem(
-                    headlineText = {
+                    headlineContent = {
                         Text(text = stringResource(id = R.string.random_color))
                     },
-                    supportingText = {
+                    supportingContent = {
                         Text(text = stringResource(id = R.string.random_color_desc))
                     }, leadingContent = {
                         Box(modifier = Modifier.size(24.dp))
@@ -273,10 +273,10 @@ fun ThemeScreen(
 
             item("palette_style") {
                 ListItem(
-                    headlineText = {
+                    headlineContent = {
                         Text(text = stringResource(id = R.string.palette_style))
                     },
-                    supportingText = {
+                    supportingContent = {
                         Text(text = themePrefs.colorStyle.title)
                     }, leadingContent = {
                         Box(modifier = Modifier.size(24.dp))

@@ -30,10 +30,10 @@ fun StudySettings(
     LazyColumn(modifier = modifier, contentPadding = PaddingValues(bottom = 64.dp)) {
         item("timer") {
             ListItem(
-                headlineText = {
+                headlineContent = {
                     Text(text = stringResource(id = R.string.enable_timer))
                 },
-                supportingText = {
+                supportingContent = {
                     Text(text = stringResource(id = R.string.enable_timer_desc))
                 }, trailingContent = {
                     Switch(
@@ -47,10 +47,10 @@ fun StudySettings(
         }
         item("looping") {
             ListItem(
-                headlineText = {
+                headlineContent = {
                     Text(text = stringResource(id = R.string.enable_looping))
                 },
-                supportingText = {
+                supportingContent = {
                     Text(text = stringResource(id = R.string.enable_looping_desc))
                 }, trailingContent = {
                     Switch(
@@ -64,10 +64,10 @@ fun StudySettings(
         }
         item("shuffle") {
             ListItem(
-                headlineText = {
+                headlineContent = {
                     Text(text = stringResource(id = R.string.shuffle_words))
                 },
-                supportingText = {
+                supportingContent = {
                     Text(text = stringResource(id = R.string.shuffle_words_desc))
                 }, trailingContent = {
                     Switch(
@@ -81,10 +81,10 @@ fun StudySettings(
         }
         item("sound") {
             ListItem(
-                headlineText = {
+                headlineContent = {
                     Text(text = stringResource(id = R.string.sound_transcription))
                 },
-                supportingText = {
+                supportingContent = {
                     Text(text = stringResource(id = R.string.sound_transcription_desc))
                 }, trailingContent = {
                     Switch(
@@ -98,10 +98,10 @@ fun StudySettings(
         }
         item("filter") {
             ListItem(
-                headlineText = {
+                headlineContent = {
                     Text(text = stringResource(id = R.string.filter_by))
                 },
-                supportingText = {
+                supportingContent = {
                     Text(text = stringResource(id = R.string.filter_cards_desc))
                     FlowRow(
                         modifier = Modifier

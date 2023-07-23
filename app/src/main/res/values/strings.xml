@@ -172,6 +172,9 @@
     <string name="chart_studied">Studied word</string>
     <string name="chart_new_word">New added word</string>
 
+    <!-- Calendar Screen -->
+    <string name="calendar">Calendar</string>
+
     <!-- Paywall -->
     <string name="premium">Premium</string>
     <string name="paywall_title">Uncover the full potential of Word Diary by choosing a subscription plan</string>

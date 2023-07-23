@@ -115,8 +115,8 @@ fun SettingsScreen(
             }
             item(key = "general") {
                 ListItem(
-                    headlineText = { Text(text = stringResource(id = R.string.general)) },
-                    supportingText = { Text(text = stringResource(id = R.string.general_desc)) },
+                    headlineContent = { Text(text = stringResource(id = R.string.general)) },
+                    supportingContent = { Text(text = stringResource(id = R.string.general_desc)) },
                     leadingContent = {
                         Icon(
                             imageVector = Icons.Outlined.ToggleOn,
@@ -128,8 +128,8 @@ fun SettingsScreen(
             }
             item(key = "theme") {
                 ListItem(
-                    headlineText = { Text(text = stringResource(id = R.string.theme_and_colors)) },
-                    supportingText = { Text(text = stringResource(id = R.string.theme_and_colors_desc)) },
+                    headlineContent = { Text(text = stringResource(id = R.string.theme_and_colors)) },
+                    supportingContent = { Text(text = stringResource(id = R.string.theme_and_colors_desc)) },
                     leadingContent = {
                         Icon(
                             imageVector = Icons.Outlined.Palette,
@@ -162,8 +162,8 @@ fun SettingsScreen(
 
             item(key = "backup") {
                 ListItem(
-                    headlineText = { Text(text = stringResource(id = R.string.backup_and_restore)) },
-                    supportingText = { Text(text = stringResource(id = R.string.backup_and_restore_desc)) },
+                    headlineContent = { Text(text = stringResource(id = R.string.backup_and_restore)) },
+                    supportingContent = { Text(text = stringResource(id = R.string.backup_and_restore_desc)) },
                     leadingContent = {
                         Icon(
                             imageVector = Icons.Outlined.AddToDrive,
@@ -178,8 +178,8 @@ fun SettingsScreen(
 
             item(key = "app_language") {
                 ListItem(
-                    headlineText = { Text(text = stringResource(id = R.string.app_language)) },
-                    supportingText = { Text(text = stringResource(id = R.string.app_language_desc)) },
+                    headlineContent = { Text(text = stringResource(id = R.string.app_language)) },
+                    supportingContent = { Text(text = stringResource(id = R.string.app_language_desc)) },
                     leadingContent = {
                         Icon(
                             imageVector = Icons.Outlined.Language,
@@ -192,8 +192,8 @@ fun SettingsScreen(
 
             item(key = "user_language") {
                 ListItem(
-                    headlineText = { Text(text = stringResource(id = R.string.user_language)) },
-                    supportingText = { Text(text = stringResource(id = R.string.user_language_desc)) },
+                    headlineContent = { Text(text = stringResource(id = R.string.user_language)) },
+                    supportingContent = { Text(text = stringResource(id = R.string.user_language_desc)) },
                     leadingContent = {
                         Icon(
                             imageVector = Icons.Outlined.Translate,
@@ -206,8 +206,8 @@ fun SettingsScreen(
 
             item(key = "about") {
                 ListItem(
-                    headlineText = { Text(text = stringResource(id = R.string.about)) },
-                    supportingText = {
+                    headlineContent = { Text(text = stringResource(id = R.string.about)) },
+                    supportingContent = {
                         Text(
                             text = stringResource(
                                 R.string.about_desc,
