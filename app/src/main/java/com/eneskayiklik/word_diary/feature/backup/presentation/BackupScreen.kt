@@ -199,7 +199,7 @@ fun BackupScreen(
                     modifier = Modifier.padding(start = 56.dp)
                 )
                 ListItem(
-                    headlineText = { Text(text = stringResource(id = R.string.backup_to_local)) },
+                    headlineContent = { Text(text = stringResource(id = R.string.backup_to_local)) },
                     leadingContent = {
                         Icon(
                             imageVector = Icons.Outlined.Backup,
@@ -213,7 +213,7 @@ fun BackupScreen(
                     }
                 )
                 ListItem(
-                    headlineText = { Text(text = stringResource(id = R.string.restore_from_local)) },
+                    headlineContent = { Text(text = stringResource(id = R.string.restore_from_local)) },
                     leadingContent = {
                         Icon(
                             imageVector = Icons.Outlined.Restore,
@@ -235,13 +235,13 @@ fun BackupScreen(
                     modifier = Modifier.padding(start = 56.dp)
                 )
                 ListItem(
-                    headlineText = {
+                    headlineContent = {
                         if (state.userData.displayName != null) {
                             Text(text = state.userData.displayName)
                         } else {
                             Text(text = stringResource(id = R.string.google_drive_backup))
                         }
-                    }, supportingText = {
+                    }, supportingContent = {
                         if (state.userData.email != null) {
                             Text(text = state.userData.email)
                         } else {
@@ -265,7 +265,7 @@ fun BackupScreen(
                     }
                 )
                 ListItem(
-                    headlineText = {
+                    headlineContent = {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Text(text = stringResource(id = R.string.cloud_backups))
                             AnimatedVisibility(visible = state.isDriveBackupsLoading) {
@@ -302,8 +302,8 @@ fun BackupScreen(
                 item(key = driveBackup.id) {
                     ListItem(
                         modifier = Modifier.animateItemPlacement(),
-                        headlineText = { Text(text = driveBackup.createDate) },
-                        supportingText = { Text(text = driveBackup.size) },
+                        headlineContent = { Text(text = driveBackup.createDate) },
+                        supportingContent = { Text(text = driveBackup.size) },
                         trailingContent = {
                             Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                                 Icon(

@@ -5,6 +5,7 @@ import androidx.compose.animation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.CalendarMonth
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.outlined.Style
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -12,6 +13,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import com.eneskayiklik.word_diary.R
+import com.eneskayiklik.word_diary.feature.destinations.CalendarScreenDestination
 import com.eneskayiklik.word_diary.feature.destinations.ListsScreenDestination
 import com.eneskayiklik.word_diary.feature.destinations.SettingsScreenDestination
 import com.eneskayiklik.word_diary.feature.destinations.StatisticsScreenDestination
@@ -36,6 +38,12 @@ fun MainScaffold(
             title = R.string.statistics,
             resIcon = R.drawable.ic_line_chart,
             contentDescription = R.string.statistics
+        ),
+        BottomNavItem(
+            route = CalendarScreenDestination,
+            title = R.string.calendar,
+            icon = Icons.Outlined.CalendarMonth,
+            contentDescription = R.string.calendar
         ),
         BottomNavItem(
             route = SettingsScreenDestination,

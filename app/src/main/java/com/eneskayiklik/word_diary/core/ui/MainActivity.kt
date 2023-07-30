@@ -29,6 +29,7 @@ import com.eneskayiklik.word_diary.core.tts.WordToSpeech
 import com.eneskayiklik.word_diary.core.util.UiEvent
 import com.eneskayiklik.word_diary.feature.NavGraphs
 import com.eneskayiklik.word_diary.feature.appCurrentDestinationAsState
+import com.eneskayiklik.word_diary.feature.destinations.CalendarScreenDestination
 import com.eneskayiklik.word_diary.feature.destinations.ListsScreenDestination
 import com.eneskayiklik.word_diary.feature.destinations.SettingsScreenDestination
 import com.eneskayiklik.word_diary.feature.destinations.StatisticsScreenDestination
@@ -127,5 +128,6 @@ private fun shouldShowBottomBar(backStackEntry: NavBackStackEntry?): Boolean {
         StatisticsScreenDestination.route,
         ListsScreenDestination.route,
         SettingsScreenDestination.route,
+        CalendarScreenDestination.route,
     )
 }

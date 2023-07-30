@@ -85,6 +85,9 @@ object AppDependencies {
 
     val richText = "com.mohamedrejeb.richeditor:richeditor-compose:${Versions.richText}"
 
+    val kalendar = "com.himanshoe:kalendar:${Versions.kalendar}"
+    val kotlinxDateTime = "org.jetbrains.kotlinx:kotlinx-datetime:${Versions.kotlinXDateTime}"
+
     val androidxLibraries = listOf(
         coreKtx,
         lifecycleRuntime
