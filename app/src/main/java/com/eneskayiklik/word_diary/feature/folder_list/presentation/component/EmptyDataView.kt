@@ -25,6 +25,7 @@ fun EmptyDataView(
     title: String,
     subtitle: String,
     actionText: String,
+    showAction: Boolean = true,
     onAction: () -> Unit
 ) {
     Column(
@@ -49,11 +50,13 @@ fun EmptyDataView(
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(horizontal = 16.dp)
         )
-        Spacer(modifier = Modifier)
-        ExtendedFloatingActionButton(
-            onClick = onAction,
-            icon = { Icon(imageVector = Icons.Outlined.Add, contentDescription = null) },
-            text = { Text(text = actionText) }
-        )
+        if (showAction) {
+            Spacer(modifier = Modifier)
+            ExtendedFloatingActionButton(
+                onClick = onAction,
+                icon = { Icon(imageVector = Icons.Outlined.Add, contentDescription = null) },
+                text = { Text(text = actionText) }
+            )
+        }
     }
 }

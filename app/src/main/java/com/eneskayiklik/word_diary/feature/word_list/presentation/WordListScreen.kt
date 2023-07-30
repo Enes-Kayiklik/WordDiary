@@ -15,10 +15,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -29,7 +27,6 @@ import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.FolderOpen
-import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.CircularProgressIndicator
@@ -39,6 +36,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarDefaults
@@ -81,15 +79,14 @@ import com.eneskayiklik.word_diary.feature.word_list.presentation.component.Filt
 import com.eneskayiklik.word_diary.feature.word_list.presentation.component.ListsStatisticView
 import com.eneskayiklik.word_diary.feature.word_list.presentation.component.WordListItem
 import com.eneskayiklik.word_diary.feature.word_list.presentation.component.word_queue.WordQueueView
+import com.eneskayiklik.word_diary.util.extensions.navigationBarPadding
 import com.eneskayiklik.word_diary.util.extensions.plus
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
-import eu.wewox.modalsheet.ExperimentalSheetApi
-import eu.wewox.modalsheet.ModalSheet
 import kotlinx.coroutines.flow.collectLatest
 
 @OptIn(
-    ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class, ExperimentalSheetApi::class,
+    ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class,
     ExperimentalFoundationApi::class
 )
 @Destination(style = ScreensAnim::class)
@@ -103,12 +100,13 @@ fun WordListScreen(
     val lazyListState = rememberLazyListState()
     val snackbarHostState = remember { SnackbarHostState() }
     val state = viewModel.state.collectAsState().value
-    var isFilterMenuVisible by remember { mutableStateOf(false) }
     val context = LocalContext.current
     val itemsScale by animateFloatAsState(
         targetValue = if (state.isWordQueueVisible) 0F else 1F
     )
+
     var isStudyListVisible by remember { mutableStateOf(false) }
+    var isFilterMenuVisible by remember { mutableStateOf(false) }
 
     val firstItemVisible by remember {
         derivedStateOf { lazyListState.firstVisibleItemIndex == 0 }
@@ -358,20 +356,19 @@ fun WordListScreen(
                 }
             )
         }
+    }
 
-        ModalSheet(
-            visible = isFilterMenuVisible,
-            onVisibleChange = { isFilterMenuVisible = it },
-            backgroundColor = MaterialTheme.colorScheme.surface,
-            shape = MaterialTheme.shapes.large
+    if (isFilterMenuVisible) {
+        ModalBottomSheet(
+            onDismissRequest = { isFilterMenuVisible = false },
+            windowInsets = WindowInsets(0)
         ) {
-            BottomSheetDefaults.DragHandle(modifier = Modifier.align(Alignment.CenterHorizontally))
-
             FilterMenu(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(WindowInsets.navigationBars.asPaddingValues())
-                    .padding(horizontal = 16.dp, vertical = 8.dp),
+                    .navigationBarPadding()
+                    .padding(horizontal = 16.dp)
+                    .padding(bottom = 24.dp),
                 selectedFilterType = state.filterType,
                 selectedSortType = state.sortType,
                 selectedSortDirection = state.sortDirection,
@@ -386,18 +383,18 @@ fun WordListScreen(
                 }
             )
         }
+    }
 
-        ModalSheet(
-            visible = isStudyListVisible,
-            onVisibleChange = { isStudyListVisible = it },
-            backgroundColor = MaterialTheme.colorScheme.surface,
-            shape = MaterialTheme.shapes.large
+    if (isStudyListVisible) {
+        ModalBottomSheet(
+            onDismissRequest = { isStudyListVisible = false },
+            windowInsets = WindowInsets(0)
         ) {
-            BottomSheetDefaults.DragHandle(modifier = Modifier.align(Alignment.CenterHorizontally))
-
             LazyColumn(
-                modifier = Modifier.fillMaxWidth(),
-                contentPadding = WindowInsets.navigationBars.asPaddingValues()
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .navigationBarPadding()
+                    .padding(bottom = 16.dp)
             ) {
                 StudyType.values().forEach { study ->
                     item {
@@ -412,7 +409,10 @@ fun WordListScreen(
                             }, modifier = Modifier.clickable {
                                 isStudyListVisible = false
                                 navigator.navigate(
-                                    StudyScreenDestination(folderId = folderId, studyType = study)
+                                    StudyScreenDestination(
+                                        folderId = folderId,
+                                        studyType = study
+                                    )
                                 )
                             }
                         )

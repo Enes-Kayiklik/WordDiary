@@ -2,66 +2,75 @@ package com.eneskayiklik.word_diary.feature.settings.presentation
 
 import android.widget.Toast
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.AddToDrive
-import androidx.compose.material.icons.outlined.Info
-import androidx.compose.material.icons.outlined.Language
-import androidx.compose.material.icons.outlined.Palette
-import androidx.compose.material.icons.outlined.ToggleOn
-import androidx.compose.material.icons.outlined.Translate
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.TabRow
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.LargeTopAppBar
-import androidx.compose.material3.ListItem
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRowDefaults
+import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.eneskayiklik.word_diary.R
-import com.eneskayiklik.word_diary.WordDiaryApp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.eneskayiklik.word_diary.core.util.ScreensAnim
 import com.eneskayiklik.word_diary.core.util.UiEvent
-import com.eneskayiklik.word_diary.feature.destinations.AboutScreenDestination
-import com.eneskayiklik.word_diary.feature.destinations.AppLanguageScreenDestination
-import com.eneskayiklik.word_diary.feature.destinations.BackupScreenDestination
-import com.eneskayiklik.word_diary.feature.destinations.GeneralScreenDestination
-import com.eneskayiklik.word_diary.feature.destinations.PaywallScreenDestination
-import com.eneskayiklik.word_diary.feature.destinations.ThemeScreenDestination
-import com.eneskayiklik.word_diary.feature.destinations.UserLanguageScreenDestination
-import com.eneskayiklik.word_diary.feature.settings.presentation.premium.BuyPremiumButton
+import com.eneskayiklik.word_diary.feature.settings.presentation.component.AppLanguageDialog
+import com.eneskayiklik.word_diary.feature.settings.presentation.component.MotherLanguageDialog
+import com.eneskayiklik.word_diary.feature.settings.presentation.pages.AboutPage
+import com.eneskayiklik.word_diary.feature.settings.presentation.pages.CloudSyncPage
+import com.eneskayiklik.word_diary.feature.settings.presentation.pages.GeneralPage
+import com.eneskayiklik.word_diary.feature.settings.presentation.pages.ThemingPage
 import com.eneskayiklik.word_diary.util.TITLE_LETTER_SPACING
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class)
+@OptIn(
+    ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class,
+    ExperimentalFoundationApi::class
+)
 @Destination(style = ScreensAnim::class)
 @Composable
 fun SettingsScreen(
     navigator: DestinationsNavigator,
     viewModel: SettingsViewModel = hiltViewModel()
 ) {
-    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     val context = LocalContext.current
+    val state = viewModel.state.collectAsStateWithLifecycle().value
+    val coroutineScope = rememberCoroutineScope()
+
+    val pagerState = rememberPagerState(pageCount = { state.pages.size })
+    var selectedPage by remember { mutableIntStateOf(0) }
 
     LaunchedEffect(key1 = Unit) {
         viewModel.event.collectLatest {
@@ -81,21 +90,111 @@ fun SettingsScreen(
         }
     }
 
+    LaunchedEffect(key1 = Unit) {
+        snapshotFlow { pagerState.currentPage }.collectLatest {
+            selectedPage = it
+        }
+    }
+
+    if (state.dialogType != SettingsDialog.None) {
+        when (state.dialogType) {
+            SettingsDialog.SelectAppLanguage -> AppLanguageDialog(
+                selectedLang = state.userPrefs.appLanguage,
+                onDismiss = {
+                    viewModel.onEvent(SettingsEvent.ShowDialog(SettingsDialog.None))
+                }, onSelected = { lang ->
+                    viewModel.onEvent(SettingsEvent.SetAppLanguage(lang))
+                }
+            )
+
+            SettingsDialog.SelectMotherLanguage -> MotherLanguageDialog(
+                selectedLang = state.userPrefs.userLanguage,
+                onDismiss = {
+                    viewModel.onEvent(SettingsEvent.ShowDialog(SettingsDialog.None))
+                }, onSelected = { lang ->
+                    viewModel.onEvent(SettingsEvent.SetMotherLanguage(lang))
+                }
+            )
+            else -> Unit
+        }
+    }
+
     Scaffold(
-        modifier = Modifier
-            .fillMaxSize()
-            .nestedScroll(scrollBehavior.nestedScrollConnection),
+        modifier = Modifier.fillMaxSize(),
         topBar = {
-            LargeTopAppBar(title = {
-                Text(
-                    text = stringResource(id = R.string.settings),
-                    fontWeight = FontWeight.Medium,
-                    letterSpacing = TITLE_LETTER_SPACING
+            TopAppBar(
+                title = {
+                    Text(
+                        text = stringResource(id = state.pages[selectedPage].title),
+                        fontWeight = FontWeight.Medium,
+                        letterSpacing = TITLE_LETTER_SPACING,
+                        fontSize = 20.sp
+                    )
+                }, navigationIcon = {
+                    IconButton(onClick = navigator::navigateUp) {
+                        Icon(imageVector = Icons.Default.ArrowBack, contentDescription = null)
+                    }
+                }, colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(3.dp)
                 )
-            }, scrollBehavior = scrollBehavior)
+            )
         }
     ) {
-        LazyColumn(
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(it)
+        ) {
+            TabRow(
+                selectedTabIndex = pagerState.currentPage,
+                indicator = { tabPositions ->
+                    TabRowDefaults.PrimaryIndicator(
+                        modifier = Modifier.tabIndicatorOffset(tabPositions[selectedPage]),
+                        shape = RoundedCornerShape(
+                            topStart = 3.dp,
+                            topEnd = 3.dp,
+                            bottomEnd = 0.dp,
+                            bottomStart = 0.dp,
+                        )
+                    )
+                },
+                divider = { },
+                containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(3.dp)
+            ) {
+                state.pages.forEachIndexed { index, page ->
+                    Tab(selected = index == selectedPage, onClick = {
+                        if (index != selectedPage) {
+                            coroutineScope.launch {
+                                pagerState.animateScrollToPage(index)
+                            }
+                        }
+                    }, icon = {
+                        val icon = if (index == selectedPage) page.selectedIcon
+                        else page.unselectedIcon
+                        Icon(imageVector = icon, contentDescription = null)
+                    })
+                }
+            }
+            HorizontalPager(
+                state = pagerState,
+                modifier = Modifier.weight(1F),
+                key = { i -> i }) { page ->
+                when (state.pages[page]) {
+                    SettingsPage.General -> GeneralPage(
+                        modifier = Modifier.fillMaxSize(),
+                        userPrefs = { state.userPrefs },
+                        onEvent = viewModel::onEvent
+                    )
+
+                    SettingsPage.Theming -> ThemingPage(modifier = Modifier.fillMaxSize())
+                    SettingsPage.SyncData -> CloudSyncPage(modifier = Modifier.fillMaxSize())
+                    SettingsPage.Notification -> Box(modifier = Modifier.fillMaxSize())
+                    SettingsPage.About -> AboutPage(modifier = Modifier.fillMaxSize())
+                }
+            }
+        }
+
+        /*LazyColumn(
             contentPadding = it,
             modifier = Modifier.fillMaxSize()
         ) {
@@ -115,8 +214,8 @@ fun SettingsScreen(
             }
             item(key = "general") {
                 ListItem(
-                    headlineContent = { Text(text = stringResource(id = R.string.general)) },
-                    supportingContent = { Text(text = stringResource(id = R.string.general_desc)) },
+                    headlineText = { Text(text = stringResource(id = R.string.general)) },
+                    supportingText = { Text(text = stringResource(id = R.string.general_desc)) },
                     leadingContent = {
                         Icon(
                             imageVector = Icons.Outlined.ToggleOn,
@@ -128,8 +227,8 @@ fun SettingsScreen(
             }
             item(key = "theme") {
                 ListItem(
-                    headlineContent = { Text(text = stringResource(id = R.string.theme_and_colors)) },
-                    supportingContent = { Text(text = stringResource(id = R.string.theme_and_colors_desc)) },
+                    headlineText = { Text(text = stringResource(id = R.string.theme_and_colors)) },
+                    supportingText = { Text(text = stringResource(id = R.string.theme_and_colors_desc)) },
                     leadingContent = {
                         Icon(
                             imageVector = Icons.Outlined.Palette,
@@ -162,8 +261,8 @@ fun SettingsScreen(
 
             item(key = "backup") {
                 ListItem(
-                    headlineContent = { Text(text = stringResource(id = R.string.backup_and_restore)) },
-                    supportingContent = { Text(text = stringResource(id = R.string.backup_and_restore_desc)) },
+                    headlineText = { Text(text = stringResource(id = R.string.backup_and_restore)) },
+                    supportingText = { Text(text = stringResource(id = R.string.backup_and_restore_desc)) },
                     leadingContent = {
                         Icon(
                             imageVector = Icons.Outlined.AddToDrive,
@@ -178,8 +277,8 @@ fun SettingsScreen(
 
             item(key = "app_language") {
                 ListItem(
-                    headlineContent = { Text(text = stringResource(id = R.string.app_language)) },
-                    supportingContent = { Text(text = stringResource(id = R.string.app_language_desc)) },
+                    headlineText = { Text(text = stringResource(id = R.string.app_language)) },
+                    supportingText = { Text(text = stringResource(id = R.string.app_language_desc)) },
                     leadingContent = {
                         Icon(
                             imageVector = Icons.Outlined.Language,
@@ -192,8 +291,8 @@ fun SettingsScreen(
 
             item(key = "user_language") {
                 ListItem(
-                    headlineContent = { Text(text = stringResource(id = R.string.user_language)) },
-                    supportingContent = { Text(text = stringResource(id = R.string.user_language_desc)) },
+                    headlineText = { Text(text = stringResource(id = R.string.user_language)) },
+                    supportingText = { Text(text = stringResource(id = R.string.user_language_desc)) },
                     leadingContent = {
                         Icon(
                             imageVector = Icons.Outlined.Translate,
@@ -206,8 +305,8 @@ fun SettingsScreen(
 
             item(key = "about") {
                 ListItem(
-                    headlineContent = { Text(text = stringResource(id = R.string.about)) },
-                    supportingContent = {
+                    headlineText = { Text(text = stringResource(id = R.string.about)) },
+                    supportingText = {
                         Text(
                             text = stringResource(
                                 R.string.about_desc,
@@ -228,6 +327,6 @@ fun SettingsScreen(
             item {
                 Spacer(modifier = Modifier.height(96.dp))
             }
-        }
+        }*/
     }
 }

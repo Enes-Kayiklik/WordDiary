@@ -5,8 +5,10 @@ import com.eneskayiklik.word_diary.core.database.entity.StudySessionEntity
 import com.eneskayiklik.word_diary.core.database.entity.WordEntity
 import com.eneskayiklik.word_diary.core.database.model.FolderWithWordCount
 import com.eneskayiklik.word_diary.core.database.model.FolderWithWords
+import com.eneskayiklik.word_diary.core.database.model.StudySessionWithFolder
 import com.eneskayiklik.word_diary.feature.quiz.WordStatistics
 import com.eneskayiklik.word_diary.feature.word_list.domain.StudyType
+import com.kizitonwose.calendar.core.CalendarDay
 import kotlinx.coroutines.flow.Flow
 
 interface FolderRepository {
@@ -45,4 +47,8 @@ interface FolderRepository {
     fun addStudySession(session: StudySessionEntity)
 
     fun getAllStudySessions(): Flow<List<StudySessionEntity>>
+
+    fun getStudySessionsAtDay(
+        day: CalendarDay
+    ): List<StudySessionWithFolder>
 }
