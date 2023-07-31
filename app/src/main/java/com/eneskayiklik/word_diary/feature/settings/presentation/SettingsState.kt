@@ -1,5 +1,6 @@
 package com.eneskayiklik.word_diary.feature.settings.presentation
 
+import android.graphics.Color
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CloudSync
@@ -25,13 +26,18 @@ data class SettingsState(
         SettingsPage.About
     ),
     val userPrefs: UserPreference = UserPreference(),
-    val dialogType: SettingsDialog = SettingsDialog.None
+    val dialogType: SettingsDialog = SettingsDialog.None,
+    val themeColors: List<Int> = generateThemeColors()
 )
 
 enum class SettingsDialog {
     None,
     SelectAppLanguage,
-    SelectMotherLanguage
+    SelectMotherLanguage,
+    SelectTheme,
+    SelectPrimaryColor,
+    SelectFont,
+    SelectPaletteStyle
 }
 
 enum class SettingsPage(
@@ -65,3 +71,21 @@ enum class SettingsPage(
         title = R.string.about
     ) // Privacy policy, Terms of condition, Open source licences
 }
+
+fun generateThemeColors() = listOf(
+    Color.parseColor("#FFD5E0"),
+    Color.parseColor("#D585AF"),
+    Color.parseColor("#C599D8"),
+    Color.parseColor("#D587FA"),
+    Color.parseColor("#AA87FF"),
+    Color.parseColor("#6587FF"),
+    Color.parseColor("#6286EA"),
+    Color.parseColor("#00B5FF"),
+    Color.parseColor("#0096EA"),
+    Color.parseColor("#1DE9BB"),
+    Color.parseColor("#00BFA5"),
+    Color.parseColor("#00E678"),
+    Color.parseColor("#00C85A"),
+    Color.parseColor("#C6FF00"),
+    Color.parseColor("#AEEA00")
+)

@@ -47,4 +47,6 @@ object Versions {
     const val richText = "1.0.0-alpha02"
     const val calendar = "2.4.0-beta01"
     const val kotlinXDateTime = "0.4.0"
+
+    const val monet = "2023.7.1"
 }

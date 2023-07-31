@@ -48,10 +48,10 @@ class MainViewModel @Inject constructor(
     private fun waitForInitialData() = viewModelScope.launch {
         val data = userPreferenceRepository.userData.first()
 
-        if (data.themePrefs.extractWallpaperColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) userPreferenceRepository.setColorFromWallpaper(
+        /*if (data.themePrefs.extractWallpaperColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) userPreferenceRepository.setColorFromWallpaper(
             app
-        )
-        else if (data.themePrefs.randomColor) userPreferenceRepository.setRandomColor()
+        )*/
+        //else if (data.themePrefs.randomColor) userPreferenceRepository.setRandomColor()
 
         if (data.userLanguage == UserLanguage.NOT_SPECIFIED || data.showOnboarding) _event.emit(
             UiEvent.OnNavigate(OnboardingScreenDestination)

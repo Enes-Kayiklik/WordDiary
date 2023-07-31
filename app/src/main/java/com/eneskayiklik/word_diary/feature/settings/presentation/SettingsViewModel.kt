@@ -53,6 +53,13 @@ class SettingsViewModel @Inject constructor(
             is SettingsEvent.ShowDialog -> _state.update { it.copy(dialogType = event.type) }
             is SettingsEvent.SetAppLanguage -> preferenceRepo.setAppLanguage(event.lang)
             is SettingsEvent.SetMotherLanguage -> preferenceRepo.setUserLanguage(event.lang)
+            is SettingsEvent.UpdateMonochrome -> preferenceRepo.updateColorfulBackground()
+            is SettingsEvent.UpdateAmoledBlack -> preferenceRepo.updateAmoledBlack()
+            is SettingsEvent.OnWallpaperColor -> preferenceRepo.updateWallpaperColor()
+            is SettingsEvent.PickColor -> preferenceRepo.setColor(event.color)
+            is SettingsEvent.PickColorStyle -> preferenceRepo.setColorStyle(event.style)
+            is SettingsEvent.PickFontFamily -> preferenceRepo.setFontFamily(event.style)
+            is SettingsEvent.PickTheme -> preferenceRepo.setAppTheme(event.theme)
         }
     }
 

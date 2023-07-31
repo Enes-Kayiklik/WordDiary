@@ -185,13 +185,6 @@ dependencies {
     // Google Login
     implementation(AppDependencies.googleAuth)
 
-    // Nav Host
-    implementation("com.google.accompanist:accompanist-navigation-animation:${Versions.accompanist_version}")
-    implementation("com.google.accompanist:accompanist-navigation-material:${Versions.accompanist_version}")
-
-    // Flow Layout
-    implementation("com.google.accompanist:accompanist-flowlayout:${Versions.accompanist_version}")
-
     // Compose Destinations
     composeDestinations()
 
@@ -199,7 +192,7 @@ dependencies {
     implementation("com.mikepenz:aboutlibraries-core:${Versions.about_libraries}")
 
     // Monet
-    implementation("com.github.Kyant0:Monet:0.1.0-alpha03")
+    implementation(AppDependencies.monet)
 
     // Gson
     implementation("com.google.code.gson:gson:2.10")

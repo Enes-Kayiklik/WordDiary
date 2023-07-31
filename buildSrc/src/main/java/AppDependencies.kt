@@ -89,6 +89,8 @@ object AppDependencies {
     val calendar = "com.kizitonwose.calendar:compose:${Versions.calendar}"
     val kotlinxDateTime = "org.jetbrains.kotlinx:kotlinx-datetime:${Versions.kotlinXDateTime}"
 
+    val monet = "com.github.Kyant0:m3color:${Versions.monet}"
+
     val androidxLibraries = listOf(
         coreKtx,
         lifecycleRuntime,

@@ -38,10 +38,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.eneskayiklik.word_diary.R
 import com.eneskayiklik.word_diary.core.data_store.data.UserPreference
 import com.eneskayiklik.word_diary.core.util.ScreensAnim
-import com.eneskayiklik.word_diary.feature.settings.presentation.look_and_feel.component.ColorPickerDialog
-import com.eneskayiklik.word_diary.feature.settings.presentation.look_and_feel.component.ColorStylePickerDialog
-import com.eneskayiklik.word_diary.feature.settings.presentation.look_and_feel.component.FontFamilyPickerDialog
-import com.eneskayiklik.word_diary.feature.settings.presentation.look_and_feel.component.ThemePickerDialog
+import com.eneskayiklik.word_diary.feature.settings.presentation.component.ColorPickerDialog
+import com.eneskayiklik.word_diary.feature.settings.presentation.component.ColorStylePickerDialog
+import com.eneskayiklik.word_diary.feature.settings.presentation.component.FontFamilyPickerDialog
+import com.eneskayiklik.word_diary.feature.settings.presentation.component.ThemePickerDialog
 import com.eneskayiklik.word_diary.util.TITLE_LETTER_SPACING
 import com.eneskayiklik.word_diary.util.extensions.plus
 import com.ramcosta.composedestinations.annotation.Destination
@@ -162,10 +162,10 @@ fun ThemeScreen(
             item("colorful_background") {
                 ListItem(
                     headlineContent = {
-                        Text(text = stringResource(id = R.string.colorful_background))
+                        Text(text = stringResource(id = R.string.monochrome))
                     },
                     supportingContent = {
-                        Text(text = stringResource(id = R.string.colorful_background_desc))
+                        Text(text = stringResource(id = R.string.monochrome_desc))
                     }, leadingContent = {
                         Box(modifier = Modifier.size(24.dp))
                     }, trailingContent = {

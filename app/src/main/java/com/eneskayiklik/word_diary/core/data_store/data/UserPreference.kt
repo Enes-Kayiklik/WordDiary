@@ -36,7 +36,7 @@ data class ThemePreference(
     val isAmoledBlack: Boolean = false,
     val randomColor: Boolean = false,
     val colorfulBackground: Boolean = false,
-    val colorStyle: ColorStyle = ColorStyle.TONAL_SPOT,
+    val colorStyle: ColorStyle = ColorStyle.TonalSpot,
     val fontFamily: FontFamilyStyle = FontFamilyStyle.SANS_SERIF,
     val primaryColor: Int = DEFAULT_PRIMARY_COLOR
 )
@@ -110,12 +110,15 @@ enum class SwipeAction(@StringRes val title: Int, @StringRes val actionDesc: Int
 }
 
 enum class ColorStyle(val title: String) {
-    TONAL_SPOT("Tonal spot"),
-    SPRITZ("Spritz"),
-    VIBRANT("Vibrant"),
-    EXPRESSIVE("Expressive"),
-    RAINBOW("Rainbow"),
-    FRUIT_SALAD("Fruit salad")
+    TonalSpot("Tonal spot"),
+    Neutral("Neutral"),
+    Vibrant("Vibrant"),
+    Expressive("Expressive"),
+    Rainbow("Rainbow"),
+    FruitSalad("Fruit salad"),
+    Monochrome(""),
+    Fidelity("Fidelity"),
+    Content("Content")
 }
 
 enum class FontFamilyStyle(val title: String, val family: FontFamily) {

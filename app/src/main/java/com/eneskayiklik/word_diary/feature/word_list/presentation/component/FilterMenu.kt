@@ -2,6 +2,8 @@ package com.eneskayiklik.word_diary.feature.word_list.presentation.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -15,8 +17,8 @@ import com.eneskayiklik.word_diary.core.util.components.FilterChip
 import com.eneskayiklik.word_diary.feature.word_list.presentation.WordListFilterType
 import com.eneskayiklik.word_diary.feature.word_list.presentation.WordListSortDirection
 import com.eneskayiklik.word_diary.feature.word_list.presentation.WordListSortType
-import com.google.accompanist.flowlayout.FlowRow
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun FilterMenu(
     modifier: Modifier = Modifier,
@@ -40,8 +42,8 @@ fun FilterMenu(
 
         FlowRow(
             modifier = Modifier.fillMaxWidth(),
-            mainAxisSpacing = 8.dp,
-            crossAxisSpacing = 8.dp
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             WordListFilterType.values().forEach { item ->
                 FilterChip(
@@ -67,8 +69,8 @@ fun FilterMenu(
 
         FlowRow(
             modifier = Modifier.fillMaxWidth(),
-            mainAxisSpacing = 8.dp,
-            crossAxisSpacing = 8.dp
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             WordListSortType.values().forEach { item ->
                 FilterChip(
@@ -94,8 +96,8 @@ fun FilterMenu(
 
         FlowRow(
             modifier = Modifier.fillMaxWidth(),
-            mainAxisSpacing = 8.dp,
-            crossAxisSpacing = 8.dp
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             WordListSortDirection.values().forEach { item ->
                 FilterChip(

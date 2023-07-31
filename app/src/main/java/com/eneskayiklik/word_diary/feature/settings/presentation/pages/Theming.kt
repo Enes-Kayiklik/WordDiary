@@ -5,35 +5,48 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Brush
-import androidx.compose.material.icons.filled.Palette
+import androidx.compose.material.icons.outlined.Brush
+import androidx.compose.material.icons.outlined.Contrast
+import androidx.compose.material.icons.outlined.DarkMode
+import androidx.compose.material.icons.outlined.FormatSize
+import androidx.compose.material.icons.outlined.Highlight
+import androidx.compose.material.icons.outlined.Palette
+import androidx.compose.material.icons.outlined.Wallpaper
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.eneskayiklik.word_diary.R
+import com.eneskayiklik.word_diary.core.data_store.data.UserPreference
+import com.eneskayiklik.word_diary.feature.settings.presentation.SettingsDialog
+import com.eneskayiklik.word_diary.feature.settings.presentation.SettingsEvent
+
 @Composable
 fun ThemingPage(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    userPrefs: () -> UserPreference,
+    onEvent: (SettingsEvent) -> Unit
 ) {
+    val themePrefs by remember(key1 = userPrefs) { mutableStateOf(userPrefs().themePrefs) }
+
     LazyColumn(
-        contentPadding = PaddingValues(
-            vertical = 24.dp
-        ),
+        contentPadding = PaddingValues(vertical = 16.dp),
         modifier = modifier
     ) {
-        item("theme_title") {
+        /*item("theme_title") {
             Text(
                 text = stringResource(id = R.string.theme),
                 style = MaterialTheme.typography.labelSmall.copy(
@@ -41,86 +54,19 @@ fun ThemingPage(
                 ),
                 modifier = Modifier.padding(start = 56.dp)
             )
-        }
+        }*/
         item("app_theme") {
             ListItem(
                 headlineContent = {
                     Text(text = stringResource(id = R.string.app_theme))
                 },
                 supportingContent = {
-                    Text(text = ""/*stringResource(id = themePrefs.appTheme.title)*/)
+                    Text(text = stringResource(id = themePrefs.appTheme.title))
                 }, leadingContent = {
-                    Icon(imageVector = Icons.Filled.Brush, contentDescription = null)
+                    Icon(imageVector = Icons.Outlined.DarkMode, contentDescription = null)
                 }, modifier = Modifier.clickable {
-                    //viewModel.onEvent(ThemeEvent.ShowDialog(ThemeDialogType.THEME_PICKER))
+                    onEvent(SettingsEvent.ShowDialog(SettingsDialog.SelectTheme))
                 }
-            )
-        }
-        item("amoled_black") {
-            ListItem(
-                headlineContent = {
-                    Text(text = stringResource(id = R.string.amoled_black))
-                },
-                supportingContent = {
-                    Text(text = stringResource(id = R.string.amoled_black_desc))
-                }, leadingContent = {
-                    Box(modifier = Modifier.size(24.dp))
-                }, trailingContent = {
-                    Switch(
-                        checked = false/*themePrefs.isAmoledBlack*/,
-                        onCheckedChange = {
-                            //viewModel.onEvent(ThemeEvent.OnAmoledBlack)
-                        }
-                    )
-                }, modifier = Modifier.clickable {
-                    //viewModel.onEvent(ThemeEvent.OnAmoledBlack)
-                }
-            )
-        }
-        item("colorful_background") {
-            ListItem(
-                headlineContent = {
-                    Text(text = stringResource(id = R.string.colorful_background))
-                },
-                supportingContent = {
-                    Text(text = stringResource(id = R.string.colorful_background_desc))
-                }, leadingContent = {
-                    Box(modifier = Modifier.size(24.dp))
-                }, trailingContent = {
-                    Switch(
-                        checked = false/*themePrefs.colorfulBackground*/,
-                        onCheckedChange = {
-                            //viewModel.onEvent(ThemeEvent.OnColorfulBackground)
-                        }
-                    )
-                }, modifier = Modifier.clickable {
-                    //viewModel.onEvent(ThemeEvent.OnColorfulBackground)
-                }
-            )
-        }
-
-        item("font_family") {
-            ListItem(
-                headlineContent = {
-                    Text(text = stringResource(id = R.string.font_family))
-                },
-                supportingContent = {
-                    Text(text = ""/*themePrefs.fontFamily.title*/)
-                }, leadingContent = {
-                    Box(modifier = Modifier.size(24.dp))
-                }, modifier = Modifier.clickable {
-                    //viewModel.onEvent(ThemeEvent.ShowDialog(ThemeDialogType.FONT_FAMILY_PICKER))
-                }
-            )
-        }
-
-        item("colors_title") {
-            Text(
-                text = stringResource(id = R.string.colors),
-                style = MaterialTheme.typography.labelSmall.copy(
-                    color = MaterialTheme.colorScheme.primary
-                ),
-                modifier = Modifier.padding(start = 56.dp)
             )
         }
         item("primary_color") {
@@ -131,21 +77,41 @@ fun ThemingPage(
                 supportingContent = {
                     Text(text = stringResource(id = R.string.primary_color_desc))
                 }, leadingContent = {
-                    Icon(imageVector = Icons.Filled.Palette, contentDescription = null)
+                    Icon(imageVector = Icons.Outlined.Brush, contentDescription = null)
                 }, trailingContent = {
                     Box(
                         modifier = Modifier
                             .size(24.dp)
                             .clip(CircleShape)
-                            .background(MaterialTheme.colorScheme.primary/*Color(themePrefs.primaryColor)*/)
+                            .background(MaterialTheme.colorScheme.primary)
                     )
                 }, modifier = Modifier.clickable {
-                    //viewModel.onEvent(ThemeEvent.ShowDialog(ThemeDialogType.COLOR_PICKER))
+                    onEvent(SettingsEvent.ShowDialog(SettingsDialog.SelectPrimaryColor))
                 }
             )
         }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) item("wallpaper_color") {
+        item("pure_black") {
+            ListItem(
+                headlineContent = {
+                    Text(text = stringResource(id = R.string.amoled_black))
+                },
+                supportingContent = {
+                    Text(text = stringResource(id = R.string.amoled_black_desc))
+                }, leadingContent = {
+                    Icon(imageVector = Icons.Outlined.Highlight, contentDescription = null)
+                }, trailingContent = {
+                    Switch(
+                        checked = themePrefs.isAmoledBlack,
+                        onCheckedChange = {
+                            onEvent(SettingsEvent.UpdateAmoledBlack)
+                        }
+                    )
+                }, modifier = Modifier.clickable {
+                    onEvent(SettingsEvent.UpdateAmoledBlack)
+                }
+            )
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) item("material_you") {
             ListItem(
                 headlineContent = {
                     Text(text = stringResource(id = R.string.wallpaper_color))
@@ -153,38 +119,52 @@ fun ThemingPage(
                 supportingContent = {
                     Text(text = stringResource(id = R.string.wallpaper_color_desc))
                 }, leadingContent = {
-                    Box(modifier = Modifier.size(24.dp))
+                    Icon(imageVector = Icons.Outlined.Wallpaper, contentDescription = null)
                 }, trailingContent = {
                     Switch(
-                        checked = false/*themePrefs.extractWallpaperColor*/,
+                        checked = themePrefs.extractWallpaperColor,
                         onCheckedChange = {
-                            //viewModel.onEvent(ThemeEvent.OnWallpaperColor)
+                            onEvent(SettingsEvent.OnWallpaperColor)
                         }
                     )
                 }, modifier = Modifier.clickable {
-                    //viewModel.onEvent(ThemeEvent.OnWallpaperColor)
+                    onEvent(SettingsEvent.OnWallpaperColor)
+                }
+            )
+        }
+        item("monochrome") {
+            ListItem(
+                headlineContent = {
+                    Text(text = stringResource(id = R.string.monochrome))
+                },
+                supportingContent = {
+                    Text(text = stringResource(id = R.string.monochrome_desc))
+                }, leadingContent = {
+                    Icon(imageVector = Icons.Outlined.Contrast, contentDescription = null)
+                }, trailingContent = {
+                    Switch(
+                        checked = themePrefs.colorfulBackground,
+                        onCheckedChange = {
+                            onEvent(SettingsEvent.UpdateMonochrome)
+                        }
+                    )
+                }, modifier = Modifier.clickable {
+                    onEvent(SettingsEvent.UpdateMonochrome)
                 }
             )
         }
 
-        item("random_color") {
+        item("font_family") {
             ListItem(
                 headlineContent = {
-                    Text(text = stringResource(id = R.string.random_color))
+                    Text(text = stringResource(id = R.string.font_family))
                 },
                 supportingContent = {
-                    Text(text = stringResource(id = R.string.random_color_desc))
+                    Text(text = themePrefs.fontFamily.title)
                 }, leadingContent = {
-                    Box(modifier = Modifier.size(24.dp))
-                }, trailingContent = {
-                    Switch(
-                        checked = false/*themePrefs.randomColor*/,
-                        onCheckedChange = {
-                            //viewModel.onEvent(ThemeEvent.OnRandomColor)
-                        }
-                    )
+                    Icon(imageVector = Icons.Outlined.FormatSize, contentDescription = null)
                 }, modifier = Modifier.clickable {
-                    //viewModel.onEvent(ThemeEvent.OnRandomColor)
+                    onEvent(SettingsEvent.ShowDialog(SettingsDialog.SelectFont))
                 }
             )
         }
@@ -195,13 +175,45 @@ fun ThemingPage(
                     Text(text = stringResource(id = R.string.palette_style))
                 },
                 supportingContent = {
-                    Text(text = ""/*themePrefs.colorStyle.title*/)
+                    Text(text = themePrefs.colorStyle.title)
                 }, leadingContent = {
-                    Box(modifier = Modifier.size(24.dp))
+                    Icon(imageVector = Icons.Outlined.Palette, contentDescription = null)
                 }, modifier = Modifier.clickable {
-                    //viewModel.onEvent(ThemeEvent.ShowDialog(ThemeDialogType.COLOR_STYLE_PICKER))
+                    onEvent(SettingsEvent.ShowDialog(SettingsDialog.SelectPaletteStyle))
                 }
             )
         }
+
+        /*item("colors_title") {
+            Text(
+                text = stringResource(id = R.string.colors),
+                style = MaterialTheme.typography.labelSmall.copy(
+                    color = MaterialTheme.colorScheme.primary
+                ),
+                modifier = Modifier.padding(start = 56.dp)
+            )
+        }*/
+
+        /*item("random_color") {
+            ListItem(
+                headlineContent = {
+                    Text(text = stringResource(id = R.string.random_color))
+                },
+                supportingContent = {
+                    Text(text = stringResource(id = R.string.random_color_desc))
+                }, leadingContent = {
+                    Box(modifier = Modifier.size(24.dp))
+                }, trailingContent = {
+                    Switch(
+                        checked = themePrefs.randomColor,
+                        onCheckedChange = {
+                            //viewModel.onEvent(ThemeEvent.OnRandomColor)
+                        }
+                    )
+                }, modifier = Modifier.clickable {
+                    //viewModel.onEvent(ThemeEvent.OnRandomColor)
+                }
+            )
+        }*/
     }
 }
