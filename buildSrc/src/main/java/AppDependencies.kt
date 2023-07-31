@@ -1,11 +1,14 @@
 import org.gradle.api.artifacts.dsl.DependencyHandler
 
 object AppDependencies {
-    val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
-
     val coreLibraryDesugaring = "com.android.tools:desugar_jdk_libs:${Versions.desugaring}"
     val coreKtx = "androidx.core:core-ktx:${Versions.androidxCoreVersion}"
     val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycleRuntime}"
+    val lifecycleRuntimeCompose =
+        "androidx.lifecycle:lifecycle-runtime-compose:${Versions.lifecycleRuntime}"
+    val lifecycleViewModelCompose =
+        "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.lifecycleRuntime}"
+
     val activityCompose = "androidx.activity:activity-compose:${Versions.activityCompose}"
     val splashScreen = "androidx.core:core-splashscreen:${Versions.splashScreen}"
     val composeUi = "androidx.compose.ui:ui:${Versions.composeUiVersion}"
@@ -54,8 +57,6 @@ object AppDependencies {
     val composeDesntinationKsp =
         "io.github.raamcosta.compose-destinations:ksp:${Versions.composeDestinations}"
 
-    val gradle = "com.android.tools.build:gradle:${Versions.gradle}"
-
     val cascadeDropdown = "me.saket.cascade:cascade-compose:${Versions.cascadeDropdown}"
 
     val composeDialogsCore =
@@ -64,8 +65,8 @@ object AppDependencies {
         "com.maxkeppeler.sheets-compose-dialogs:color:${Versions.composeDialogs}"
     val composeDialogsClockPicker =
         "com.maxkeppeler.sheets-compose-dialogs:clock:${Versions.composeDialogs}"
-
-    val composeModalSheet = "io.github.oleksandrbalan:modalsheet:${Versions.composeModalSheet}"
+    val composeDialogList =
+        "com.maxkeppeler.sheets-compose-dialogs:list:${Versions.composeDialogs}"
 
     val oneSignal = "com.onesignal:OneSignal:${Versions.oneSignal}"
     val adsIdentifier =
@@ -85,12 +86,14 @@ object AppDependencies {
 
     val richText = "com.mohamedrejeb.richeditor:richeditor-compose:${Versions.richText}"
 
-    val kalendar = "com.himanshoe:kalendar:${Versions.kalendar}"
+    val calendar = "com.kizitonwose.calendar:compose:${Versions.calendar}"
     val kotlinxDateTime = "org.jetbrains.kotlinx:kotlinx-datetime:${Versions.kotlinXDateTime}"
 
     val androidxLibraries = listOf(
         coreKtx,
-        lifecycleRuntime
+        lifecycleRuntime,
+        lifecycleRuntimeCompose,
+        lifecycleViewModelCompose
     )
 
     val composeLibraries = listOf(

@@ -31,7 +31,6 @@ import com.eneskayiklik.word_diary.feature.NavGraphs
 import com.eneskayiklik.word_diary.feature.appCurrentDestinationAsState
 import com.eneskayiklik.word_diary.feature.destinations.CalendarScreenDestination
 import com.eneskayiklik.word_diary.feature.destinations.ListsScreenDestination
-import com.eneskayiklik.word_diary.feature.destinations.SettingsScreenDestination
 import com.eneskayiklik.word_diary.feature.destinations.StatisticsScreenDestination
 import com.eneskayiklik.word_diary.feature.startAppDestination
 import com.eneskayiklik.word_diary.util.UpdateLanguage
@@ -127,7 +126,6 @@ private fun shouldShowBottomBar(backStackEntry: NavBackStackEntry?): Boolean {
     return backStackEntry?.destination?.route in listOf(
         StatisticsScreenDestination.route,
         ListsScreenDestination.route,
-        SettingsScreenDestination.route,
         CalendarScreenDestination.route,
     )
 }

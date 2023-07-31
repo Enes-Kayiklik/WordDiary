@@ -9,6 +9,7 @@ import com.eneskayiklik.word_diary.core.database.model.FolderWithWords
 import com.eneskayiklik.word_diary.feature.folder_list.domain.FolderRepository
 import com.eneskayiklik.word_diary.feature.quiz.WordStatistics
 import com.eneskayiklik.word_diary.feature.word_list.domain.StudyType
+import com.kizitonwose.calendar.core.CalendarDay
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -55,4 +56,8 @@ class FolderRepositoryImpl @Inject constructor(
     override fun addStudySession(session: StudySessionEntity) = dao.addStudySession(session)
 
     override fun getAllStudySessions() = dao.getAllStudySession()
+    override fun getStudySessionsAtDay(day: CalendarDay) = dao.getStudySessionsAtDay(
+        lowerTime = day.date.toEpochDay() * 24L * 60L * 60L * 1000L,
+        upperTime = (day.date.toEpochDay() + 1) * 24L * 60L * 60L * 1000L
+    )
 }

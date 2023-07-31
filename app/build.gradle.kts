@@ -4,13 +4,13 @@ import java.util.Properties
 plugins {
     id("com.android.application")
     kotlin("android")
-    id("com.google.devtools.ksp") version ("1.8.0-1.0.8")
+    id("com.google.devtools.ksp") version ("1.8.20-1.0.11")
     id("com.mikepenz.aboutlibraries.plugin")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
-    kotlin("plugin.serialization") version "1.8.0"
+    kotlin("plugin.serialization") version "1.8.20"
 }
 
 val versionFile = rootProject.file("version.properties")
@@ -112,20 +112,21 @@ android {
     }
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
 
     buildFeatures {
         compose = true
         viewBinding = true
+        buildConfig = true
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.0"
+        kotlinCompilerExtensionVersion = "1.4.6"
     }
 
     packagingOptions {
@@ -209,15 +210,11 @@ dependencies {
     // Dropdown
     implementation(AppDependencies.cascadeDropdown)
 
-    // Color Picker Dialog
+    // Compose Dialogs
     implementation(AppDependencies.composeDialogsCore)
     implementation(AppDependencies.composeDialogsColorPicker)
-
-    // Clock Picker
     implementation(AppDependencies.composeDialogsClockPicker)
-
-    // Modal Sheet
-    implementation(AppDependencies.composeModalSheet)
+    implementation(AppDependencies.composeDialogList)
 
     // Mp charts
     implementation(AppDependencies.mpChart)
@@ -245,9 +242,6 @@ dependencies {
     // Rich Text
     implementation(AppDependencies.richText)
 
-    // Kalendar
-    implementation(AppDependencies.kalendar)
-
-    // Date Time
-    implementation(AppDependencies.kotlinxDateTime)
+    // Calendar
+    implementation(AppDependencies.calendar)
 }

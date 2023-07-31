@@ -22,7 +22,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ChevronLeft
 import androidx.compose.material.icons.outlined.ChevronRight
 import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -61,7 +60,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @OptIn(
-    ExperimentalAnimationApi::class, ExperimentalMaterial3Api::class,
+    ExperimentalAnimationApi::class,
     ExperimentalFoundationApi::class
 )
 @Composable
@@ -72,7 +71,7 @@ fun OnboardingScreen(
 ) {
     val state = viewModel.state.collectAsState().value
     val userPrefs = viewModel.userPrefs.collectAsState(initial = UserPreference()).value
-    val pagerState = rememberPagerState()
+    val pagerState = rememberPagerState(pageCount = { state.pages.size })
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
 
@@ -211,7 +210,6 @@ fun OnboardingScreen(
         ) {
             HorizontalPager(
                 modifier = Modifier.fillMaxSize(),
-                pageCount = state.pages.size,
                 state = pagerState
             ) { currentPage ->
                 when (state.pages[currentPage]) {

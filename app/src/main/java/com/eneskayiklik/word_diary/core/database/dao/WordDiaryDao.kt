@@ -11,6 +11,7 @@ import com.eneskayiklik.word_diary.core.database.entity.StudySessionEntity
 import com.eneskayiklik.word_diary.core.database.entity.WordEntity
 import com.eneskayiklik.word_diary.core.database.model.FolderWithWordCount
 import com.eneskayiklik.word_diary.core.database.model.FolderWithWords
+import com.eneskayiklik.word_diary.core.database.model.StudySessionWithFolder
 import com.eneskayiklik.word_diary.feature.quiz.WordStatistics
 import com.eneskayiklik.word_diary.feature.word_list.domain.StudyType
 import com.eneskayiklik.word_diary.util.extensions.calculateAccuracy
@@ -115,4 +116,7 @@ interface WordDiaryDao {
 
     @Query("SELECT * FROM study_session")
     fun getAllStudySession(): Flow<List<StudySessionEntity>>
+
+    @Query("SELECT * FROM study_session WHERE date BETWEEN :lowerTime AND :upperTime")
+    fun getStudySessionsAtDay(lowerTime: Long, upperTime: Long): List<StudySessionWithFolder>
 }

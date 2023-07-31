@@ -5,27 +5,55 @@ import androidx.lifecycle.viewModelScope
 import com.eneskayiklik.word_diary.R
 import com.eneskayiklik.word_diary.WordDiaryApp
 import com.eneskayiklik.word_diary.core.data.Result
+import com.eneskayiklik.word_diary.core.data_store.domain.UserPreferenceRepository
 import com.eneskayiklik.word_diary.core.util.UiEvent
 import com.eneskayiklik.word_diary.feature.paywall.domain.PaywallRepository
 import com.eneskayiklik.word_diary.feature.paywall.presentation.PaywallDialog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
-    private val paywallRepository: PaywallRepository
+    private val paywallRepository: PaywallRepository,
+    private val preferenceRepo: UserPreferenceRepository
 ) : ViewModel() {
+
+    private val _state = MutableStateFlow(SettingsState())
+    val state = _state.asStateFlow()
 
     private val _event = MutableSharedFlow<UiEvent>()
     val event = _event.asSharedFlow()
 
+    init {
+        preferenceRepo.userData.onEach { prefs ->
+            _state.update { it.copy(userPrefs = prefs) }
+        }.launchIn(viewModelScope)
+    }
+
     fun onEvent(event: UiEvent) = viewModelScope.launch {
         _event.emit(event)
+    }
+
+    fun onEvent(event: SettingsEvent) = viewModelScope.launch {
+        when (event) {
+            is SettingsEvent.UpdateNewWordGoal -> preferenceRepo.setNewWordDailyGoal(event.newValue)
+            is SettingsEvent.UpdateSessionGoal -> preferenceRepo.setStudySessionDailyGoal(event.newValue)
+
+            is SettingsEvent.ShowDialog -> _state.update { it.copy(dialogType = event.type) }
+            is SettingsEvent.SetAppLanguage -> preferenceRepo.setAppLanguage(event.lang)
+            is SettingsEvent.SetMotherLanguage -> preferenceRepo.setUserLanguage(event.lang)
+        }
     }
 
     fun restorePurchase() = viewModelScope.launch(Dispatchers.IO) {

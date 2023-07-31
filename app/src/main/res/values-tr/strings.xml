@@ -173,6 +173,7 @@
 
     <!-- Calendar Screen -->
     <string name="calendar">Takvim</string>
+    <string name="empty_study_session">Görünüşe göre bugün herhangi bir çalışma oturumunuz yok</string>
 
     <!-- Paywall -->
     <string name="premium">Premium</string>
@@ -250,7 +251,7 @@
     <string name="app_language">Uygulama dili</string>
     <string name="app_language_desc">Tercih ettiğiniz dili seçin</string>
 
-    <string name="user_language">Kullanıcı dili</string>
+    <string name="user_language">Ana dil</string>
     <string name="user_language_desc">Ana dilinizi güncelleyin</string>
 
     <!-- Settings General -->
@@ -259,9 +260,9 @@
 
     <string name="daily_goal">GÜNLÜK HEDEF</string>
     <string name="new_word">Yeni kelime</string>
-    <string name="new_word_desc">Yeni kelimeler oluşturmak için günlük bir hedef belirleyin</string>
+    <string name="new_word_desc">Oluşturulacak kelime sayısı</string>
     <string name="study_session">Çalışma oturumu</string>
-    <string name="study_session_desc">Verimli çalışma oturumları için günlük bir hedef belirleyin</string>
+    <string name="study_session_desc">Çalışılacak oturum sayısı</string>
 
     <string name="add_remove_favorites">Favori\'ye ekle / kaldır</string>
     <string name="speech_loud">Sesli söyle</string>

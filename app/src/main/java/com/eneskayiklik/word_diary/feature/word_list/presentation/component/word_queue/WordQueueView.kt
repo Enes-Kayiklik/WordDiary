@@ -65,10 +65,9 @@ fun WordQueueView(
     }
 
     HorizontalPager(
-        pageCount = words.size,
         modifier = modifier,
         key = { words[it].wordId },
-        state = rememberPagerState(startIndex)
+        state = rememberPagerState(startIndex, pageCount = { words.size })
     ) { index ->
         val currentWord = words[index]
         val interactionSource = remember { MutableInteractionSource() }
