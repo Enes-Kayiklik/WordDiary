@@ -59,6 +59,7 @@ class MainActivity : ComponentActivity() {
                 color = Color(themePrefs.primaryColor),
                 isAmoledBlack = themePrefs.isAmoledBlack,
                 colorfulBackground = themePrefs.colorfulBackground,
+                materialYou = themePrefs.extractWallpaperColor,
                 appTheme = themePrefs.appTheme,
                 colorStyle = themePrefs.colorStyle,
                 fontFamily = themePrefs.fontFamily.family

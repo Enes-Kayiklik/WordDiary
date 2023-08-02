@@ -1,7 +1,6 @@
 package com.eneskayiklik.word_diary.feature.create_folder.presentation
 
 import android.widget.Toast
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.tween
@@ -11,6 +10,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -61,7 +62,6 @@ import com.eneskayiklik.word_diary.feature.create_folder.presentation.component.
 import com.eneskayiklik.word_diary.util.TITLE_LETTER_SPACING
 import com.eneskayiklik.word_diary.core.util.UiEvent
 import com.eneskayiklik.word_diary.util.extensions.plus
-import com.google.accompanist.flowlayout.FlowRow
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.result.NavResult
@@ -77,7 +77,7 @@ data class CreateFolderScreenArgs(
 
 @OptIn(
     ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class,
-    ExperimentalAnimationApi::class
+    ExperimentalAnimationApi::class, ExperimentalLayoutApi::class
 )
 @Destination(
     style = ScreensAnim::class,
@@ -225,8 +225,8 @@ fun CreateFolderScreen(
                 Spacer(modifier = Modifier.height(8.dp))
                 FlowRow(
                     modifier = Modifier.fillMaxWidth(),
-                    mainAxisSpacing = 8.dp,
-                    crossAxisSpacing = 8.dp
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     state.colors.forEachIndexed { index, item ->
                         Box(
@@ -237,7 +237,7 @@ fun CreateFolderScreen(
                                 .clickable { viewModel.onColorSelected(index) },
                             contentAlignment = Alignment.Center
                         ) {
-                            AnimatedVisibility(
+                            androidx.compose.animation.AnimatedVisibility(
                                 visible = state.selectedColorIndex == index,
                                 enter = scaleIn(tween(100), initialScale = .4F),
                                 exit = scaleOut(tween(100), targetScale = .4F)
@@ -266,8 +266,8 @@ fun CreateFolderScreen(
                 Spacer(modifier = Modifier.height(8.dp))
                 FlowRow(
                     modifier = Modifier.fillMaxWidth(),
-                    mainAxisSpacing = 8.dp,
-                    crossAxisSpacing = 8.dp
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     state.languages.forEach { item ->
                         LanguageChip(

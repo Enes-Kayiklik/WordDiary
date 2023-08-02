@@ -1,8 +1,10 @@
 package com.eneskayiklik.word_diary.feature.folder_list.presentation.component
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -48,10 +50,13 @@ fun EmptyDataView(
             text = subtitle,
             style = MaterialTheme.typography.bodyMedium,
             textAlign = TextAlign.Center,
-            modifier = Modifier.padding(horizontal = 16.dp)
+            modifier = Modifier.padding(horizontal = 16.dp).padding(bottom = 16.dp)
         )
-        if (showAction) {
-            Spacer(modifier = Modifier)
+        AnimatedVisibility(
+            visible = showAction,
+            enter = expandVertically(),
+            exit = shrinkVertically()
+        ) {
             ExtendedFloatingActionButton(
                 onClick = onAction,
                 icon = { Icon(imageVector = Icons.Outlined.Add, contentDescription = null) },

@@ -45,6 +45,10 @@ import com.eneskayiklik.word_diary.core.util.ScreensAnim
 import com.eneskayiklik.word_diary.core.util.UiEvent
 import com.eneskayiklik.word_diary.feature.settings.presentation.component.AppLanguageDialog
 import com.eneskayiklik.word_diary.feature.settings.presentation.component.MotherLanguageDialog
+import com.eneskayiklik.word_diary.feature.settings.presentation.component.ColorPickerDialog
+import com.eneskayiklik.word_diary.feature.settings.presentation.component.ColorStylePickerDialog
+import com.eneskayiklik.word_diary.feature.settings.presentation.component.FontFamilyPickerDialog
+import com.eneskayiklik.word_diary.feature.settings.presentation.component.ThemePickerDialog
 import com.eneskayiklik.word_diary.feature.settings.presentation.pages.AboutPage
 import com.eneskayiklik.word_diary.feature.settings.presentation.pages.CloudSyncPage
 import com.eneskayiklik.word_diary.feature.settings.presentation.pages.GeneralPage
@@ -115,6 +119,31 @@ fun SettingsScreen(
                     viewModel.onEvent(SettingsEvent.SetMotherLanguage(lang))
                 }
             )
+
+            SettingsDialog.SelectTheme -> ThemePickerDialog(
+                activeTheme = state.userPrefs.themePrefs.appTheme,
+                onSelected = { viewModel.onEvent(SettingsEvent.PickTheme(it)) },
+                onDismiss = { viewModel.onEvent(SettingsEvent.ShowDialog(SettingsDialog.None)) }
+            )
+
+            SettingsDialog.SelectPrimaryColor -> ColorPickerDialog(
+                onColorSelected = { viewModel.onEvent(SettingsEvent.PickColor(it)) },
+                onDismiss = { viewModel.onEvent(SettingsEvent.ShowDialog(SettingsDialog.None)) },
+                defaultColors = state.themeColors
+            )
+
+            SettingsDialog.SelectPaletteStyle -> ColorStylePickerDialog(
+                activeStyle = state.userPrefs.themePrefs.colorStyle,
+                onSelected = { viewModel.onEvent(SettingsEvent.PickColorStyle(it)) },
+                onDismiss = { viewModel.onEvent(SettingsEvent.ShowDialog(SettingsDialog.None)) }
+            )
+
+            SettingsDialog.SelectFont -> FontFamilyPickerDialog(
+                activeStyle = state.userPrefs.themePrefs.fontFamily,
+                onSelected = { viewModel.onEvent(SettingsEvent.PickFontFamily(it)) },
+                onDismiss = { viewModel.onEvent(SettingsEvent.ShowDialog(SettingsDialog.None)) }
+            )
+
             else -> Unit
         }
     }
@@ -186,7 +215,12 @@ fun SettingsScreen(
                         onEvent = viewModel::onEvent
                     )
 
-                    SettingsPage.Theming -> ThemingPage(modifier = Modifier.fillMaxSize())
+                    SettingsPage.Theming -> ThemingPage(
+                        modifier = Modifier.fillMaxSize(),
+                        userPrefs = { state.userPrefs },
+                        onEvent = viewModel::onEvent
+                    )
+
                     SettingsPage.SyncData -> CloudSyncPage(modifier = Modifier.fillMaxSize())
                     SettingsPage.Notification -> Box(modifier = Modifier.fillMaxSize())
                     SettingsPage.About -> AboutPage(modifier = Modifier.fillMaxSize())

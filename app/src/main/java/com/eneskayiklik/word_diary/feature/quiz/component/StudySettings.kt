@@ -1,9 +1,12 @@
 package com.eneskayiklik.word_diary.feature.quiz.component
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
@@ -19,8 +22,8 @@ import com.eneskayiklik.word_diary.core.util.components.FilterChip
 import com.eneskayiklik.word_diary.feature.quiz.StudyEvent
 import com.eneskayiklik.word_diary.feature.quiz.StudyState
 import com.eneskayiklik.word_diary.feature.word_list.presentation.WordListFilterType
-import com.google.accompanist.flowlayout.FlowRow
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun StudySettings(
     state: StudyState,
@@ -102,26 +105,29 @@ fun StudySettings(
                     Text(text = stringResource(id = R.string.filter_by))
                 },
                 supportingContent = {
-                    Text(text = stringResource(id = R.string.filter_cards_desc))
-                    FlowRow(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 8.dp),
-                        mainAxisSpacing = 8.dp,
-                        crossAxisSpacing = 8.dp
+                    Column(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        WordListFilterType.values().forEach { item ->
-                            FilterChip(
-                                isSelected = item in state.selectedFilters,
-                                content = {
-                                    Text(
-                                        text = stringResource(id = item.title),
-                                        style = MaterialTheme.typography.labelMedium
-                                    )
-                                },
-                                onClick = { onEvent(StudyEvent.OnFilterSelected(item)) },
-                                modifier = Modifier.clip(MaterialTheme.shapes.small)
-                            )
+                        Text(text = stringResource(id = R.string.filter_cards_desc))
+                        FlowRow(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            WordListFilterType.values().forEach { item ->
+                                FilterChip(
+                                    isSelected = item in state.selectedFilters,
+                                    content = {
+                                        Text(
+                                            text = stringResource(id = item.title),
+                                            style = MaterialTheme.typography.labelMedium
+                                        )
+                                    },
+                                    onClick = { onEvent(StudyEvent.OnFilterSelected(item)) },
+                                    modifier = Modifier.clip(MaterialTheme.shapes.small)
+                                )
+                            }
                         }
                     }
                 }

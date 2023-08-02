@@ -68,7 +68,9 @@ class UserPreferenceRepositoryImpl @Inject constructor(
             dataStore.updateData {
                 it.copy(
                     themePrefs = it.themePrefs.copy(
-                        primaryColor = color
+                        primaryColor = color,
+                        colorfulBackground = false,
+                        extractWallpaperColor = false
                     )
                 )
             }
@@ -136,7 +138,8 @@ class UserPreferenceRepositoryImpl @Inject constructor(
             dataStore.updateData {
                 it.copy(
                     themePrefs = it.themePrefs.copy(
-                        extractWallpaperColor = it.themePrefs.extractWallpaperColor.not()
+                        extractWallpaperColor = it.themePrefs.extractWallpaperColor.not(),
+                        colorfulBackground = if (it.themePrefs.extractWallpaperColor.not()) false else it.themePrefs.colorfulBackground
                     )
                 )
             }
@@ -164,7 +167,8 @@ class UserPreferenceRepositoryImpl @Inject constructor(
             dataStore.updateData {
                 it.copy(
                     themePrefs = it.themePrefs.copy(
-                        colorfulBackground = it.themePrefs.colorfulBackground.not()
+                        colorfulBackground = it.themePrefs.colorfulBackground.not(),
+                        extractWallpaperColor = if (it.themePrefs.colorfulBackground.not()) false else it.themePrefs.extractWallpaperColor
                     )
                 )
             }

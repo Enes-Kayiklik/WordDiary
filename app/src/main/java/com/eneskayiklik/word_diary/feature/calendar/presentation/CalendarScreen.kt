@@ -140,14 +140,11 @@ fun CalendarScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(1F)
-                        .padding(bottom = 80.dp), contentAlignment = Alignment.Center
+                        .padding(bottom = 80.dp),
+                    contentAlignment = Alignment.Center
                 ) {
                     EmptyDataView(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .animateContentSize(
-                                animationSpec = tween(durationMillis = 350)
-                            ),
+                        modifier = Modifier.fillMaxSize(),
                         icon = Icons.Outlined.HistoryEdu,
                         title = state.selectedDayFormatted,
                         subtitle = stringResource(id = R.string.empty_study_session),
