@@ -5,11 +5,11 @@ plugins {
 
 android {
     namespace = "com.eneskayiklik.swiper"
-    compileSdk = 34
+    compileSdk = AppConfig.compileSdk
 
     defaultConfig {
-        minSdk = 24
-        targetSdk = 34
+        minSdk = AppConfig.minSdk
+        targetSdk = AppConfig.targetSdk
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")

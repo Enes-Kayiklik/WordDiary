@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Kelime Günlüğü</string>
+    <string name="app_name">Kelime defteri</string>
     <string name="developer_name">Enes Kayıklık</string>
 
     <!-- Common strings -->
@@ -50,7 +50,7 @@
     <string name="choose_engine_desc">Lütfen aşağıdaki butona tıklayarak ayarları açın ve işlevselliği en iyi seviyeye için Google\'ın metinden sese motorunu seçin</string>
     <string name="open_play_store">Mağazayı aç</string>
     <string name="open_settings">Ayarları aç</string>
-    <string name="setup_notification">Bilidirimleri ayarla</string>
+    <string name="setup_notification">Bilidirimler</string>
     <string name="setup_notification_desc">Tutarlı kalmak, zamanınızı etkili bir şekilde yönetmek ve dil öğrenme yolculuğunuzda motivasyonunuzu korumak için bildirim alın</string>
     <string name="notify_me">Beni bilgilendir</string>
     <string name="notify_me_at">%s\'de</string>
@@ -254,6 +254,13 @@
     <string name="user_language">Ana dil</string>
     <string name="user_language_desc">Ana dilinizi güncelleyin</string>
 
+    <!-- Settings Notification -->
+    <string name="notification_time">Hatırlatıcı zamanı</string>
+    <string name="notification_frequency">Bildirim sıklığı</string>
+    <string name="once_a_day">Her gün</string>
+    <string name="one_in_three_day">Üç günde bir</string>
+    <string name="once_a_week">Haftada bir</string>
+
     <!-- Settings General -->
     <string name="general">Genel</string>
     <string name="general_desc">Uygulama ayarlarını ve tercihlerini yönetin</string>
@@ -301,7 +308,7 @@
     <string name="buy_now">Şimdi al</string>
 
     <!-- Settings Backup -->
-    <string name="backup_and_restore">Yedekleme ve Geri Yükleme</string>
+    <string name="backup_and_restore">Yedekle &amp; Geri Yükle</string>
     <string name="backup_and_restore_desc">Cihazınızı kaybederseniz veya yükseltirseniz verilerinizi kolayca geri yükleyin</string>
     <string name="remove_backup">Yedeği sil</string>
     <string name="remove_backup_desc">Bu yedek dosyası tamamen silinecek. Emin misiniz?</string>
@@ -310,14 +317,19 @@
     <string name="restart_needed">Yeniden başlatma gerekli</string>
     <string name="restart_needed_desc">Bu eylemi gerçekleştirmek için uygulamayı yeniden başlatmanız gerekir</string>
     <string name="local">YEREL</string>
-    <string name="backup_to_local">Yerel yedek oluştur</string>
-    <string name="restore_from_local">Yerel yedekten yükle</string>
+    <string name="backup_to_local">Yedek oluştur</string>
+    <string name="restore_from_local">Yedekten yükle</string>
     <string name="google_drive">GOOGLE DRIVE</string>
     <string name="login_to_backup">Yedekleme için giriş yapmalısınız</string>
     <string name="sign_in">Giriş yap</string>
     <string name="cloud_backups">Bulut yedekleri</string>
     <string name="create_backup">Yedek oluştur</string>
     <string name="back_up_success">Yedek dosyası oluşturuldu</string>
+
+    <!-- Premium -->
+    <string name="premium_feature">Premium Özellik</string>
+    <string name="premium_feature_desc">Bu özelliği etkinleştirmek için aboneliklerimizden birini satın almanız gerekir</string>
+    <string name="enable_premium_feature">Deneme sürümünü başlat</string>
 
     <!-- Settings Personalize -->
     <string name="personalize">Kişiselleştir</string>

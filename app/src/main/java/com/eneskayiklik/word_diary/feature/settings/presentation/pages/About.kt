@@ -1,37 +1,38 @@
 package com.eneskayiklik.word_diary.feature.settings.presentation.pages
 
-import androidx.compose.animation.graphics.ExperimentalAnimationGraphicsApi
-import androidx.compose.animation.graphics.res.animatedVectorResource
-import androidx.compose.animation.graphics.res.rememberAnimatedVectorPainter
-import androidx.compose.animation.graphics.vector.AnimatedImageVector
-import androidx.compose.foundation.Image
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Face
+import androidx.compose.material.icons.outlined.BugReport
+import androidx.compose.material.icons.outlined.ChevronRight
+import androidx.compose.material.icons.outlined.Description
+import androidx.compose.material.icons.outlined.LocalLibrary
+import androidx.compose.material.icons.outlined.Policy
+import androidx.compose.material.icons.outlined.Share
+import androidx.compose.material.icons.outlined.Star
+import androidx.compose.material.icons.outlined.Translate
 import androidx.compose.material3.Icon
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -39,166 +40,220 @@ import androidx.compose.ui.unit.dp
 import com.eneskayiklik.word_diary.BuildConfig
 import com.eneskayiklik.word_diary.R
 import com.eneskayiklik.word_diary.core.ui.components.WaveShape
-import com.eneskayiklik.word_diary.feature.settings.presentation.about.component.AboutAppContent
-import com.eneskayiklik.word_diary.feature.settings.presentation.about.component.AboutCard
-import com.eneskayiklik.word_diary.feature.settings.presentation.about.component.AboutDeveloperContent
-import com.eneskayiklik.word_diary.feature.settings.presentation.about.component.SupportDevelopmentActions
-import kotlinx.coroutines.delay
+import com.eneskayiklik.word_diary.feature.destinations.LicensesScreenDestination
+import com.eneskayiklik.word_diary.feature.settings.presentation.component.ContactButton
+import com.eneskayiklik.word_diary.util.PRIVACY
+import com.eneskayiklik.word_diary.util.TELEGRAM_CHANNEL
+import com.eneskayiklik.word_diary.util.TELEGRAM_CHANNEL_REPORT_BUGS_TOPIC
+import com.eneskayiklik.word_diary.util.TERMS
+import com.eneskayiklik.word_diary.util.WORD_DIARY_CROWDIN
+import com.eneskayiklik.word_diary.util.WORD_DIARY_GITHUB
+import com.eneskayiklik.word_diary.util.WORD_DIARY_PLAY_STORE
+import com.eneskayiklik.word_diary.util.extensions.openLink
+import com.eneskayiklik.word_diary.util.extensions.shareAppLink
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
-@OptIn(ExperimentalAnimationGraphicsApi::class)
+@OptIn(ExperimentalLayoutApi::class, ExperimentalAnimationApi::class)
 @Composable
 fun AboutPage(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navigator: DestinationsNavigator
 ) {
-    var atEnd by remember { mutableStateOf(false) }
-
-    LaunchedEffect(key1 = atEnd) {
-        if (atEnd.not()) {
-            delay(450)
-            atEnd = atEnd.not()
-        }
-    }
+    val context = LocalContext.current
 
     LazyColumn(
-        contentPadding = PaddingValues(
-            horizontal = 16.dp,
-            vertical = 24.dp
-        ),
+        contentPadding = PaddingValues(16.dp),
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         item {
-            AboutCard(
-                cardTitle = stringResource(id = R.string.about_the_app),
-                sectionTitle = {
-                    Column {
-                        Text(
-                            text = BuildConfig.VERSION_NAME,
-                            style = MaterialTheme.typography.labelSmall,
-                            modifier = Modifier
-                                .clip(CircleShape)
-                                .background(MaterialTheme.colorScheme.secondaryContainer)
-                                .padding(horizontal = 8.dp, vertical = 4.dp)
-                                .align(Alignment.End)
-                        )
-                        Text(
-                            text = stringResource(id = R.string.app_name),
-                            style = MaterialTheme.typography.titleMedium,
-                            modifier = Modifier.padding(horizontal = 16.dp)
-                        )
-                    }
+            ListItem(
+                headlineContent = {
+                    Text(text = stringResource(id = R.string.app_name))
                 },
-                actionContent = {
-                    AboutAppContent()
+                supportingContent = {
+                    Text(text = BuildConfig.VERSION_NAME)
                 },
-                sectionIcon = {
+                leadingContent = {
                     Box(
                         modifier = Modifier
-                            .size(72.dp)
+                            .size(56.dp)
                             .clip(WaveShape())
                             .background(
-                                color = MaterialTheme.colorScheme.secondaryContainer,
+                                color = MaterialTheme.colorScheme.primaryContainer,
                                 shape = WaveShape()
-                            )
-                            .clickable {
-                                atEnd = atEnd.not()
-                            },
+                            ),
                         contentAlignment = Alignment.Center
                     ) {
-                        val image = rememberAnimatedVectorPainter(
-                            AnimatedImageVector.animatedVectorResource(
-                                id = R.drawable.ic_launcher_animated
-                            ), atEnd = atEnd
-                        )
                         Icon(
-                            painter = image,
+                            painter = painterResource(id = R.drawable.ic_foreground),
                             contentDescription = null,
                             modifier = Modifier.fillMaxSize(.5F),
-                            tint = MaterialTheme.colorScheme.primary
+                            tint = MaterialTheme.colorScheme.onPrimaryContainer
                         )
                     }
                 },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(MaterialTheme.shapes.large)
-                    .background(MaterialTheme.colorScheme.surfaceColorAtElevation(12.dp))
-                    .padding(horizontal = 16.dp, vertical = 12.dp)
+                modifier = Modifier.border(
+                    width = 1.dp,
+                    color = MaterialTheme.colorScheme.outline,
+                    shape = MaterialTheme.shapes.medium
+                ).padding(vertical = 4.dp)
             )
         }
 
         item {
-            AboutCard(
-                cardTitle = stringResource(id = R.string.development_and_design),
-                sectionTitle = {
-                    Text(
-                        text = stringResource(id = R.string.developer_name),
-                        style = MaterialTheme.typography.titleMedium,
-                        textAlign = TextAlign.Center
-                    )
-                },
-                sectionDescription = {
-                    Text(
-                        text = stringResource(id = R.string.developer_info_desc),
-                        style = MaterialTheme.typography.bodyMedium,
-                        modifier = Modifier.padding(horizontal = 24.dp),
-                        textAlign = TextAlign.Center
-                    )
-                },
-                actionContent = {
-                    AboutDeveloperContent()
-                },
-                sectionIcon = {
-                    Image(
-                        painter = painterResource(id = R.drawable.ic_developer),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .size(72.dp)
-                            .clip(CircleShape)
-                    )
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(MaterialTheme.shapes.large)
-                    .background(MaterialTheme.colorScheme.surfaceColorAtElevation(12.dp))
-                    .padding(horizontal = 16.dp, vertical = 12.dp)
-            )
-        }
-
-        item {
-            AboutCard(
-                cardTitle = stringResource(id = R.string.support_development),
-                sectionTitle = {
-                    Text(
-                        text = stringResource(id = R.string.support_development_title),
-                        style = MaterialTheme.typography.titleMedium,
-                        textAlign = TextAlign.Center
-                    )
-                },
-                sectionDescription = {
-                    Text(
-                        text = stringResource(id = R.string.support_development_desc),
-                        style = MaterialTheme.typography.bodyMedium,
-                        modifier = Modifier.padding(horizontal = 24.dp),
-                        textAlign = TextAlign.Center
-                    )
-                },
-                sectionIcon = {
+            FlowRow(
+                horizontalArrangement = Arrangement.spacedBy(24.dp, Alignment.CenterHorizontally),
+                verticalArrangement = Arrangement.spacedBy(24.dp, Alignment.CenterVertically),
+                maxItemsInEachRow = 4,
+                modifier = Modifier.padding(vertical = 24.dp)
+            ) {
+                ContactButton(icon = {
                     Icon(
-                        imageVector = Icons.Outlined.Face,
+                        painter = painterResource(id = R.drawable.ic_github),
                         contentDescription = null,
-                        modifier = Modifier.size(72.dp),
-                        tint = MaterialTheme.colorScheme.primary
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant
                     )
+                }, title = stringResource(id = R.string.github), onClick = {
+                    context.openLink(WORD_DIARY_GITHUB)
+                })
+
+                ContactButton(icon = {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_telegram),
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }, title = stringResource(id = R.string.telegram), onClick = {
+                    context.openLink(TELEGRAM_CHANNEL)
+                })
+
+                ContactButton(icon = {
+                    Icon(
+                        imageVector = Icons.Outlined.Share,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }, title = stringResource(id = R.string.share), onClick = {
+                    context.shareAppLink()
+                })
+
+                ContactButton(icon = {
+                    Icon(
+                        imageVector = Icons.Outlined.Star,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }, title = stringResource(id = R.string.rate), onClick = {
+                    context.openLink(WORD_DIARY_PLAY_STORE)
+                })
+
+                ContactButton(icon = {
+                    Icon(
+                        imageVector = Icons.Outlined.BugReport,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }, title = stringResource(id = R.string.report_bugs), onClick = {
+                    context.openLink(TELEGRAM_CHANNEL_REPORT_BUGS_TOPIC)
+                })
+
+                ContactButton(icon = {
+                    Icon(
+                        imageVector = Icons.Outlined.Translate,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }, title = stringResource(id = R.string.translate), onClick = {
+                    context.openLink(WORD_DIARY_CROWDIN)
+                })
+            }
+        }
+
+        item {
+            ListItem(
+                headlineContent = {
+                    Text(text = stringResource(id = R.string.destination_licenses))
                 },
-                actionContent = {
-                    SupportDevelopmentActions()
-                },
+                leadingContent = {
+                    Icon(
+                        imageVector = Icons.Outlined.LocalLibrary,
+                        contentDescription = null,
+                    )
+                }, trailingContent = {
+                    Icon(
+                        imageVector = Icons.Outlined.ChevronRight,
+                        contentDescription = null,
+                    )
+                }, colors = ListItemDefaults.colors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = .5F),
+                    headlineColor = MaterialTheme.colorScheme.onSurface,
+                    supportingColor = MaterialTheme.colorScheme.onSurface
+                ), modifier = Modifier
+                    .clip(MaterialTheme.shapes.medium)
+                    .clickable { navigator.navigate(LicensesScreenDestination) }
+            )
+        }
+
+        item {
+            ListItem(
+                headlineContent = {
+                    Text(text = stringResource(id = R.string.privacy_policy))
+                }, leadingContent = {
+                    Icon(
+                        imageVector = Icons.Outlined.Policy,
+                        contentDescription = null,
+                    )
+                }, trailingContent = {
+                    Icon(
+                        imageVector = Icons.Outlined.ChevronRight,
+                        contentDescription = null,
+                    )
+                }, colors = ListItemDefaults.colors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = .5F),
+                    headlineColor = MaterialTheme.colorScheme.onSurface,
+                    supportingColor = MaterialTheme.colorScheme.onSurface
+                ), modifier = Modifier
+                    .clip(MaterialTheme.shapes.medium)
+                    .clickable {
+                        context.openLink(PRIVACY)
+                    }
+            )
+        }
+
+        item {
+            ListItem(
+                headlineContent = {
+                    Text(text = stringResource(id = R.string.terms_conditions))
+                }, leadingContent = {
+                    Icon(
+                        imageVector = Icons.Outlined.Description,
+                        contentDescription = null,
+                    )
+                }, trailingContent = {
+                    Icon(
+                        imageVector = Icons.Outlined.ChevronRight,
+                        contentDescription = null,
+                    )
+                }, colors = ListItemDefaults.colors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = .5F),
+                    headlineColor = MaterialTheme.colorScheme.onSurface,
+                    supportingColor = MaterialTheme.colorScheme.onSurface
+                ), modifier = Modifier
+                    .clip(MaterialTheme.shapes.medium)
+                    .clickable { context.openLink(TERMS) }
+            )
+        }
+
+        item {
+            Text(
+                text = "Designed and developed by Enes Kayıklık in Turkey with ❤️",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clip(MaterialTheme.shapes.large)
-                    .background(MaterialTheme.colorScheme.surfaceColorAtElevation(12.dp))
-                    .padding(horizontal = 16.dp, vertical = 12.dp)
+                    .padding(horizontal = 36.dp, vertical = 8.dp),
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.bodyMedium
             )
         }
     }

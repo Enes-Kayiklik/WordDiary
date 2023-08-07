@@ -16,7 +16,8 @@ fun PermissionDialog(
     onDismiss: () -> Unit,
     onConfirm: () -> Unit,
     onGoToSettings: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    icon: @Composable (() -> Unit)? = null
 ) {
     AlertDialog(
         onDismissRequest = onDismiss,
@@ -36,7 +37,7 @@ fun PermissionDialog(
                     text = stringResource(id = R.string.dialog_cancel)
                 )
             }
-        },
+        }, icon = icon,
         title = {
             Text(text = stringResource(id = R.string.permission_required))
         },

@@ -264,6 +264,21 @@ class UserPreferenceRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun setNotificationFrequency(frequency: NotificationFrequency) {
+        try {
+            dataStore.updateData {
+                it.copy(
+                    notification = it.notification.copy(
+                        notificationFrequency = frequency
+                    )
+                )
+            }
+            reminderManager.enableReminder(dataStore.data.first().notification.notificationTime)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
     override suspend fun setStreakDay(time: Long) {
         try {
             val currentData = dataStore.data.first().personalPrefs

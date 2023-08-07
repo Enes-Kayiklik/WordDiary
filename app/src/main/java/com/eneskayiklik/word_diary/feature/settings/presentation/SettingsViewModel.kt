@@ -1,5 +1,7 @@
 package com.eneskayiklik.word_diary.feature.settings.presentation
 
+import android.app.Application
+import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.eneskayiklik.word_diary.R
@@ -7,6 +9,8 @@ import com.eneskayiklik.word_diary.WordDiaryApp
 import com.eneskayiklik.word_diary.core.data.Result
 import com.eneskayiklik.word_diary.core.data_store.domain.UserPreferenceRepository
 import com.eneskayiklik.word_diary.core.util.UiEvent
+import com.eneskayiklik.word_diary.feature.backup.domain.repository.BackupRepository
+import com.eneskayiklik.word_diary.feature.backup.presentation.BackupDialog
 import com.eneskayiklik.word_diary.feature.paywall.domain.PaywallRepository
 import com.eneskayiklik.word_diary.feature.paywall.presentation.PaywallDialog
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -26,7 +30,9 @@ import javax.inject.Inject
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
     private val paywallRepository: PaywallRepository,
-    private val preferenceRepo: UserPreferenceRepository
+    private val preferenceRepo: UserPreferenceRepository,
+    private val backupRepository: BackupRepository,
+    private val app: Application
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(SettingsState())
@@ -60,6 +66,14 @@ class SettingsViewModel @Inject constructor(
             is SettingsEvent.PickColorStyle -> preferenceRepo.setColorStyle(event.style)
             is SettingsEvent.PickFontFamily -> preferenceRepo.setFontFamily(event.style)
             is SettingsEvent.PickTheme -> preferenceRepo.setAppTheme(event.theme)
+            is SettingsEvent.UpdateNotificationEnabled -> preferenceRepo.enableAlarm(event.enable)
+            is SettingsEvent.SelectTime -> preferenceRepo.setAlarm(event.time)
+            is SettingsEvent.PickNotificationFrequency -> preferenceRepo.setNotificationFrequency(
+                event.frequency
+            )
+
+            is SettingsEvent.RestoreBackup -> restoreBackup(event.uri)
+            is SettingsEvent.CreateBackup -> createBackup(event.uri)
         }
     }
 
@@ -79,6 +93,44 @@ class SettingsViewModel @Inject constructor(
 
             is Result.Error -> onEvent(UiEvent.ShowToast(textRes = R.string.uncaught_error))
             else -> Unit
+        }
+    }
+
+    private fun createBackup(uri: Uri?) = viewModelScope.launch {
+        if (uri == null) {
+            _event.emit(UiEvent.ShowToast(textRes = R.string.uncaught_error))
+            return@launch
+        }
+
+        backupRepository.backupToLocal(app, uri).collectLatest { result ->
+            when (result) {
+                Result.Loading -> Unit
+                is Result.Error -> _event.emit(UiEvent.ShowToast(textRes = R.string.uncaught_error))
+                is Result.Success -> {
+                    _event.emit(UiEvent.ShowToast(textRes = R.string.back_up_success))
+                }
+            }
+        }
+    }
+
+    private fun restoreBackup(uri: Uri?) = viewModelScope.launch {
+        if (uri == null) {
+            _event.emit(UiEvent.ShowToast(textRes = R.string.uncaught_error))
+            return@launch
+        }
+
+        backupRepository.restoreFromLocal(app, uri).collectLatest { result ->
+            when (result) {
+                Result.Loading -> Unit
+                is Result.Error -> _event.emit(UiEvent.ShowToast(textRes = R.string.uncaught_error))
+                is Result.Success -> {
+                    _state.update {
+                        it.copy(
+                            dialogType = SettingsDialog.RestartApp
+                        )
+                    }
+                }
+            }
         }
     }
 }
