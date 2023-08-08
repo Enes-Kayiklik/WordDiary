@@ -91,6 +91,8 @@ object AppDependencies {
 
     val monet = "com.github.Kyant0:m3color:${Versions.monet}"
 
+    val cloudy = "com.github.skydoves:cloudy:${Versions.cloudy}"
+
     val androidxLibraries = listOf(
         coreKtx,
         lifecycleRuntime,

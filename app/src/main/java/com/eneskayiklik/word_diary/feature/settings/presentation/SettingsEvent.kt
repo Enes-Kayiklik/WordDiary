@@ -7,6 +7,7 @@ import com.eneskayiklik.word_diary.core.data_store.data.ColorStyle
 import com.eneskayiklik.word_diary.core.data_store.data.FontFamilyStyle
 import com.eneskayiklik.word_diary.core.data_store.data.NotificationFrequency
 import com.eneskayiklik.word_diary.core.data_store.data.UserLanguage
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import java.time.LocalTime
 
 sealed class SettingsEvent {
@@ -27,5 +28,8 @@ sealed class SettingsEvent {
     data class SelectTime(val time: LocalTime) : SettingsEvent()
     data class RestoreBackup(val uri: Uri?) : SettingsEvent()
     data class CreateBackup(val uri: Uri?) : SettingsEvent()
+    object CreateDriveBackup : SettingsEvent()
+    data class OnGoogleLogin(val account: GoogleSignInAccount) : SettingsEvent()
+    object OnGoogleLogout : SettingsEvent()
     data class PickNotificationFrequency(val frequency: NotificationFrequency) : SettingsEvent()
 }

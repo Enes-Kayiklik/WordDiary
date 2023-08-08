@@ -29,7 +29,7 @@ import com.eneskayiklik.word_diary.R
 import com.eneskayiklik.word_diary.core.data_store.data.UserPreference
 import com.eneskayiklik.word_diary.feature.settings.presentation.SettingsDialog
 import com.eneskayiklik.word_diary.feature.settings.presentation.SettingsEvent
-import com.eneskayiklik.word_diary.feature.settings.presentation.general.component.CounterView
+import com.eneskayiklik.word_diary.feature.settings.presentation.component.CounterView
 
 @Composable
 fun GeneralPage(

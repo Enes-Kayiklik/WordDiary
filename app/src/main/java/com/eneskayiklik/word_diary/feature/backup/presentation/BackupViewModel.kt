@@ -1,15 +1,12 @@
 package com.eneskayiklik.word_diary.feature.backup.presentation
 
 import android.app.Application
-import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.eneskayiklik.word_diary.R
 import com.eneskayiklik.word_diary.core.data.Result
 import com.eneskayiklik.word_diary.core.util.UiEvent
 import com.eneskayiklik.word_diary.feature.backup.domain.repository.BackupRepository
-import com.eneskayiklik.word_diary.feature.folder_list.presentation.UserData
-import com.eneskayiklik.word_diary.util.extensions.googleLoginClient
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -43,46 +40,6 @@ class BackupViewModel @Inject constructor(
         _event.emit(event)
     }
 
-    fun createBackup(uri: Uri?) = viewModelScope.launch {
-        if (uri == null) {
-            _event.emit(UiEvent.ShowToast(textRes = R.string.uncaught_error))
-            return@launch
-        }
-
-        backupRepository.backupToLocal(app, uri).collectLatest { result ->
-            when (result) {
-                Result.Loading -> _state.update { it.copy(isLocalBackupLoading = true) }
-                is Result.Error -> _event.emit(UiEvent.ShowToast(textRes = R.string.uncaught_error))
-                is Result.Success -> {
-                    _state.update { it.copy(isLocalBackupLoading = false) }
-                    _event.emit(UiEvent.ShowToast(textRes = R.string.back_up_success))
-                }
-            }
-        }
-    }
-
-    fun restoreBackup(uri: Uri?) = viewModelScope.launch {
-        if (uri == null) {
-            _event.emit(UiEvent.ShowToast(textRes = R.string.uncaught_error))
-            return@launch
-        }
-
-        backupRepository.restoreFromLocal(app, uri).collectLatest { result ->
-            when (result) {
-                Result.Loading -> _state.update { it.copy(isLocalBackupLoading = true) }
-                is Result.Error -> _event.emit(UiEvent.ShowToast(textRes = R.string.uncaught_error))
-                is Result.Success -> {
-                    _state.update {
-                        it.copy(
-                            isLocalBackupLoading = false,
-                            dialogType = BackupDialog.RestartApp
-                        )
-                    }
-                }
-            }
-        }
-    }
-
     fun deleteBackup(fileId: String) = viewModelScope.launch(Dispatchers.IO) {
         // Remove backup file from list
         _state.update {
@@ -104,33 +61,14 @@ class BackupViewModel @Inject constructor(
         setDialog(BackupDialog.None)
         backupRepository.restoreFromDrive(app, fileId).collectLatest { result ->
             when (result) {
-                Result.Loading -> _state.update { it.copy(isLocalBackupLoading = true) }
+                Result.Loading -> Unit
                 is Result.Error -> _event.emit(UiEvent.ShowToast(textRes = R.string.uncaught_error))
                 is Result.Success -> {
                     _state.update {
                         it.copy(
-                            isLocalBackupLoading = false,
                             dialogType = BackupDialog.RestartApp
                         )
                     }
-                }
-            }
-        }
-    }
-
-    fun createDriveBackup() = viewModelScope.launch {
-        backupRepository.backupToDrive(app).collectLatest { result ->
-            when (result) {
-                Result.Loading -> _state.update { it.copy(isDriveBackingUp = true) }
-                is Result.Error -> {
-                    _state.update { it.copy(isDriveBackingUp = false) }
-                    _event.emit(UiEvent.ShowToast(textRes = R.string.uncaught_error))
-                }
-
-                is Result.Success -> {
-                    _state.update { it.copy(isDriveBackingUp = false) }
-                    listDriveFiles()
-                    onEvent(UiEvent.ShowToast(textRes = R.string.back_up_success))
                 }
             }
         }
@@ -142,7 +80,7 @@ class BackupViewModel @Inject constructor(
         )
     }
 
-    fun onGoogleLogin(account: GoogleSignInAccount) = viewModelScope.launch {
+    private fun onGoogleLogin(account: GoogleSignInAccount) = viewModelScope.launch {
         listDriveFiles()
         _state.update {
             it.copy(
@@ -155,33 +93,19 @@ class BackupViewModel @Inject constructor(
         }
     }
 
-    fun logOut() = viewModelScope.launch {
-        app.googleLoginClient().signOut().addOnSuccessListener {
-            onEvent(UiEvent.ClearBackstack)
-            _state.update {
-                it.copy(
-                    userData = UserData(),
-                    driveBackups = emptyList()
-                )
-            }
-        }.addOnFailureListener {
-            onEvent(UiEvent.ShowToast(textRes = R.string.back_up_success))
-        }
-    }
-
     private fun listDriveFiles() = viewModelScope.launch(Dispatchers.IO) {
         backupRepository.listDriveFiles(app).collectLatest { result ->
             when (result) {
-                Result.Loading -> _state.update { it.copy(isDriveBackupsLoading = true) }
+                Result.Loading -> _state.update { it.copy(isLoading = true) }
                 is Result.Error -> {
-                    _state.update { it.copy(isDriveBackupsLoading = false) }
+                    _state.update { it.copy(isLoading = false) }
                     onEvent(UiEvent.ShowToast(textRes = R.string.uncaught_error))
                 }
 
                 is Result.Success -> {
                     _state.update {
                         it.copy(
-                            isDriveBackupsLoading = false,
+                            isLoading = false,
                             driveBackups = result.result
                         )
                     }

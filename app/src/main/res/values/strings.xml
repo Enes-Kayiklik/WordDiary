@@ -323,9 +323,12 @@
     <string name="google_drive">GOOGLE DRIVE</string>
     <string name="login_to_backup">You have to login to backup</string>
     <string name="sign_in">Sign in</string>
+    <string name="sign_out">Log out</string>
     <string name="cloud_backups">Cloud backups</string>
     <string name="create_backup">Create backup</string>
     <string name="back_up_success">Backup file created</string>
+    <string name="backup_to_drive">Backup to Google Drive</string>
+    <string name="backup_to_drive_desc">Save words, statistics and progress to your Google account</string>
 
     <!-- Premium -->
     <string name="premium_feature">Premium Feature</string>

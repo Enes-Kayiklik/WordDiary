@@ -1,26 +1,19 @@
 package com.eneskayiklik.word_diary.feature.backup.presentation
 
 import android.widget.Toast
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
-import androidx.compose.material.icons.outlined.Backup
 import androidx.compose.material.icons.outlined.Delete
-import androidx.compose.material.icons.outlined.Logout
 import androidx.compose.material.icons.outlined.RestartAlt
 import androidx.compose.material.icons.outlined.Restore
 import androidx.compose.material.ripple.rememberRipple
@@ -28,12 +21,10 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.ListItem
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -46,23 +37,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.eneskayiklik.word_diary.R
-import com.eneskayiklik.word_diary.WordDiaryApp
 import com.eneskayiklik.word_diary.core.ui.components.BasicDialog
 import com.eneskayiklik.word_diary.core.util.ScreensAnim
 import com.eneskayiklik.word_diary.core.util.UiEvent
 import com.eneskayiklik.word_diary.feature.backup.domain.model.DriveFile
-import com.eneskayiklik.word_diary.feature.destinations.PaywallScreenDestination
 import com.eneskayiklik.word_diary.util.TITLE_LETTER_SPACING
-import com.eneskayiklik.word_diary.util.contract.GoogleLoginContract
 import com.eneskayiklik.word_diary.util.extensions.plus
 import com.eneskayiklik.word_diary.util.extensions.restartApp
-import com.google.android.gms.common.api.ApiException
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.flow.collectLatest
@@ -77,29 +63,10 @@ fun BackupScreen(
     navigator: DestinationsNavigator,
     viewModel: BackupViewModel = hiltViewModel()
 ) {
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     val context = LocalContext.current
 
     val state = viewModel.state.collectAsState().value
-
-    val backupCreator = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.CreateDocument("application/zip"),
-        onResult = viewModel::createBackup
-    )
-
-    val backupSelector = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.OpenDocument(),
-        onResult = viewModel::restoreBackup
-    )
-
-    val googleLoginLauncher = rememberLauncherForActivityResult(GoogleLoginContract()) { task ->
-        try {
-            val account = task?.getResult(ApiException::class.java)
-            viewModel.onGoogleLogin(account ?: return@rememberLauncherForActivityResult)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
 
     var activeBackup by remember { mutableStateOf<DriveFile?>(null) }
 
@@ -126,7 +93,6 @@ fun BackupScreen(
                 onConfirm = {
                     val fileId = activeBackup?.id
                     if (fileId != null) viewModel.restoreDriveBackup(fileId)
-                    else backupSelector.launch(arrayOf("application/zip"))
                     activeBackup = null
                 },
                 title = stringResource(id = R.string.restore_backup),
@@ -170,9 +136,9 @@ fun BackupScreen(
             .fillMaxSize()
             .nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            TopAppBar(title = {
+            LargeTopAppBar(title = {
                 Text(
-                    text = stringResource(id = R.string.backup_and_restore),
+                    text = stringResource(id = R.string.cloud_backups),
                     fontWeight = FontWeight.Medium,
                     letterSpacing = TITLE_LETTER_SPACING
                 )
@@ -190,114 +156,14 @@ fun BackupScreen(
             contentPadding = it + PaddingValues(vertical = 16.dp),
             modifier = Modifier.fillMaxSize()
         ) {
-            item {
-                Text(
-                    text = stringResource(id = R.string.local),
-                    style = MaterialTheme.typography.labelSmall.copy(
-                        color = MaterialTheme.colorScheme.primary
-                    ),
-                    modifier = Modifier.padding(start = 56.dp)
-                )
-                ListItem(
-                    headlineContent = { Text(text = stringResource(id = R.string.backup_to_local)) },
-                    leadingContent = {
-                        Icon(
-                            imageVector = Icons.Outlined.Backup,
-                            contentDescription = null
-                        )
-                    }, trailingContent = {
-                        if (state.isLocalBackupLoading) CircularProgressIndicator()
-                    },
-                    modifier = Modifier.clickable {
-                        backupCreator.launch("Word_Diary_${System.currentTimeMillis()}.zip")
+            if (state.showLoading) {
+                item {
+                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                        CircularProgressIndicator()
                     }
-                )
-                ListItem(
-                    headlineContent = { Text(text = stringResource(id = R.string.restore_from_local)) },
-                    leadingContent = {
-                        Icon(
-                            imageVector = Icons.Outlined.Restore,
-                            contentDescription = null
-                        )
-                    },
-                    modifier = Modifier.clickable {
-                        viewModel.setDialog(BackupDialog.RestoreBackup)
-                    }
-                )
+                }
             }
 
-            item {
-                Text(
-                    text = stringResource(id = R.string.google_drive),
-                    style = MaterialTheme.typography.labelSmall.copy(
-                        color = MaterialTheme.colorScheme.primary
-                    ),
-                    modifier = Modifier.padding(start = 56.dp)
-                )
-                ListItem(
-                    headlineContent = {
-                        if (state.userData.displayName != null) {
-                            Text(text = state.userData.displayName)
-                        } else {
-                            Text(text = stringResource(id = R.string.google_drive_backup))
-                        }
-                    }, supportingContent = {
-                        if (state.userData.email != null) {
-                            Text(text = state.userData.email)
-                        } else {
-                            Text(text = stringResource(id = R.string.login_to_backup))
-                        }
-                    }, leadingContent = {
-                        Image(
-                            painter = painterResource(id = R.drawable.ic_google_drive),
-                            contentDescription = null
-                        )
-                    }, trailingContent = {
-                        if (state.userData.email == null) {
-                            TextButton(onClick = { googleLoginLauncher.launch(1881) }) {
-                                Text(text = stringResource(id = R.string.sign_in))
-                            }
-                        } else {
-                            IconButton(onClick = { viewModel.logOut() }) {
-                                Icon(imageVector = Icons.Outlined.Logout, contentDescription = null)
-                            }
-                        }
-                    }
-                )
-                ListItem(
-                    headlineContent = {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Text(text = stringResource(id = R.string.cloud_backups))
-                            AnimatedVisibility(visible = state.isDriveBackupsLoading) {
-                                CircularProgressIndicator(
-                                    modifier = Modifier
-                                        .size(24.dp)
-                                        .padding(start = 8.dp),
-                                    strokeWidth = 2.dp
-                                )
-                            }
-                        }
-                    },
-                    trailingContent = {
-                        TextButton(onClick = {
-                            if (WordDiaryApp.hasPremium) viewModel.createDriveBackup()
-                            else navigator.navigate(PaywallScreenDestination)
-                        }) {
-                            Row(verticalAlignment = Alignment.CenterVertically) {
-                                Text(text = stringResource(id = R.string.create_backup))
-                                AnimatedVisibility(visible = state.isDriveBackingUp) {
-                                    CircularProgressIndicator(
-                                        modifier = Modifier
-                                            .size(24.dp)
-                                            .padding(start = 8.dp),
-                                        strokeWidth = 2.dp
-                                    )
-                                }
-                            }
-                        }
-                    }
-                )
-            }
             state.driveBackups.forEach { driveBackup ->
                 item(key = driveBackup.id) {
                     ListItem(

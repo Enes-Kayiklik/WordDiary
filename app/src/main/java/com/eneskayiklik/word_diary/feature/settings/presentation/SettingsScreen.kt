@@ -264,7 +264,8 @@ fun SettingsScreen(
 
                     SettingsPage.SyncData -> CloudSyncPage(
                         modifier = Modifier.fillMaxSize(),
-                        userPrefs = { state.userPrefs },
+                        userData = { state.userData },
+                        isDriveBackingUp = { state.isDriveBackingUp },
                         onEvent = viewModel::onEvent,
                         navigator = navigator
                     )
