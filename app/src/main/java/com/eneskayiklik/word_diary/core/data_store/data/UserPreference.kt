@@ -26,7 +26,8 @@ data class UserPreference(
 @Serializable
 data class NotificationSettings(
     val isNotificationEnabled: Boolean = false,
-    val notificationTime: String = "10:20"
+    val notificationTime: String = "10:20",
+    val notificationFrequency: NotificationFrequency = NotificationFrequency.OnceADay
 )
 
 @Serializable
@@ -119,6 +120,12 @@ enum class ColorStyle(val title: String) {
     Monochrome(""),
     Fidelity("Fidelity"),
     Content("Content")
+}
+
+enum class NotificationFrequency(@StringRes val title: Int) {
+    OnceADay(R.string.once_a_day),
+    OneInThreeDays(R.string.one_in_three_day),
+    OnceAWeek(R.string.once_a_week)
 }
 
 enum class FontFamilyStyle(val title: String, val family: FontFamily) {

@@ -37,7 +37,11 @@ enum class SettingsDialog {
     SelectTheme,
     SelectPrimaryColor,
     SelectFont,
-    SelectPaletteStyle
+    SelectPaletteStyle,
+    NotificationFrequency,
+    RemindingTime,
+    RestoreBackup,
+    RestartApp
 }
 
 enum class SettingsPage(

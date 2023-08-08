@@ -10,6 +10,9 @@ import com.eneskayiklik.word_diary.R
 import com.eneskayiklik.word_diary.core.ui.MainActivity
 import com.eneskayiklik.word_diary.di.HiltBroadcastReceiver
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -34,7 +37,9 @@ class AlarmReceiver : HiltBroadcastReceiver() {
 
         // Reschedule the notification
         intent?.getStringExtra(ReminderManager.ALARM_TIME_EXTRA)?.let { time ->
-            reminderManager.enableReminder(time)
+            CoroutineScope(Dispatchers.IO).launch {
+                reminderManager.enableReminder(time)
+            }
         }
     }
 

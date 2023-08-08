@@ -1,7 +1,7 @@
 <resources>
     <string name="empty_string" translatable="false" />
 
-    <string name="app_name">Word Diary</string>
+    <string name="app_name">Wordbook</string>
     <string name="developer_name">Enes Kayıklık</string>
 
     <!-- Common strings -->
@@ -52,7 +52,7 @@
     <string name="choose_engine_desc">Kindly open settings by clicking the button below and choose Google\'s text-to-speech engine to optimize functionality</string>
     <string name="open_play_store">Open Play Store</string>
     <string name="open_settings">Open settings</string>
-    <string name="setup_notification">Setup Notification</string>
+    <string name="setup_notification">Notifications</string>
     <string name="setup_notification_desc">Get notification to stay consistent, manage your time effectively, and stay motivated on your language learning journey</string>
     <string name="notify_me">Notify me</string>
     <string name="notify_me_at">at %s</string>
@@ -255,6 +255,13 @@
     <string name="user_language">Mother language</string>
     <string name="user_language_desc">Change your preferred language</string>
 
+    <!-- Settings Notification -->
+    <string name="notification_time">Reminding time</string>
+    <string name="notification_frequency">Notification frequency</string>
+    <string name="once_a_day">Once a day</string>
+    <string name="one_in_three_day">One in three days</string>
+    <string name="once_a_week">Once a week</string>
+
     <!-- Settings General -->
     <string name="general">General</string>
     <string name="general_desc">Manage app settings and preferences</string>
@@ -311,14 +318,19 @@
     <string name="restart_needed">Restart needed</string>
     <string name="restart_needed_desc">To take effect this action, you must restart the application</string>
     <string name="local">LOCAL</string>
-    <string name="backup_to_local">Backup to local</string>
-    <string name="restore_from_local">Restore from local</string>
+    <string name="backup_to_local">Create backup</string>
+    <string name="restore_from_local">Restore backup</string>
     <string name="google_drive">GOOGLE DRIVE</string>
     <string name="login_to_backup">You have to login to backup</string>
     <string name="sign_in">Sign in</string>
     <string name="cloud_backups">Cloud backups</string>
     <string name="create_backup">Create backup</string>
     <string name="back_up_success">Backup file created</string>
+
+    <!-- Premium -->
+    <string name="premium_feature">Premium Feature</string>
+    <string name="premium_feature_desc">To enable this feature you have to buy one of our subscriptions</string>
+    <string name="enable_premium_feature">Start free trial</string>
 
     <!-- Settings Personalize -->
     <string name="personalize">Personalize</string>

@@ -1,9 +1,10 @@
 package com.eneskayiklik.word_diary.feature.settings.presentation
 
 import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -12,6 +13,7 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.outlined.RestartAlt
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -41,19 +43,25 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.eneskayiklik.word_diary.R
+import com.eneskayiklik.word_diary.core.ui.components.BasicDialog
 import com.eneskayiklik.word_diary.core.util.ScreensAnim
 import com.eneskayiklik.word_diary.core.util.UiEvent
+import com.eneskayiklik.word_diary.core.util.components.ClockPicker
 import com.eneskayiklik.word_diary.feature.settings.presentation.component.AppLanguageDialog
 import com.eneskayiklik.word_diary.feature.settings.presentation.component.MotherLanguageDialog
 import com.eneskayiklik.word_diary.feature.settings.presentation.component.ColorPickerDialog
 import com.eneskayiklik.word_diary.feature.settings.presentation.component.ColorStylePickerDialog
 import com.eneskayiklik.word_diary.feature.settings.presentation.component.FontFamilyPickerDialog
+import com.eneskayiklik.word_diary.feature.settings.presentation.component.NotificationFrequencyDialog
 import com.eneskayiklik.word_diary.feature.settings.presentation.component.ThemePickerDialog
 import com.eneskayiklik.word_diary.feature.settings.presentation.pages.AboutPage
 import com.eneskayiklik.word_diary.feature.settings.presentation.pages.CloudSyncPage
 import com.eneskayiklik.word_diary.feature.settings.presentation.pages.GeneralPage
+import com.eneskayiklik.word_diary.feature.settings.presentation.pages.NotificationPage
 import com.eneskayiklik.word_diary.feature.settings.presentation.pages.ThemingPage
 import com.eneskayiklik.word_diary.util.TITLE_LETTER_SPACING
+import com.eneskayiklik.word_diary.util.extensions.restartApp
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.flow.collectLatest
@@ -75,6 +83,11 @@ fun SettingsScreen(
 
     val pagerState = rememberPagerState(pageCount = { state.pages.size })
     var selectedPage by remember { mutableIntStateOf(0) }
+
+    val backupSelector = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.OpenDocument(),
+        onResult = { viewModel.onEvent(SettingsEvent.RestoreBackup(it)) }
+    )
 
     LaunchedEffect(key1 = Unit) {
         viewModel.event.collectLatest {
@@ -142,6 +155,34 @@ fun SettingsScreen(
                 activeStyle = state.userPrefs.themePrefs.fontFamily,
                 onSelected = { viewModel.onEvent(SettingsEvent.PickFontFamily(it)) },
                 onDismiss = { viewModel.onEvent(SettingsEvent.ShowDialog(SettingsDialog.None)) }
+            )
+
+            SettingsDialog.RemindingTime -> ClockPicker(
+                selectTime = { viewModel.onEvent(SettingsEvent.SelectTime(it)) },
+                closePicker = { viewModel.onEvent(SettingsEvent.ShowDialog(SettingsDialog.None)) }
+            )
+
+            SettingsDialog.NotificationFrequency -> NotificationFrequencyDialog(
+                activeFrequency = state.userPrefs.notification.notificationFrequency,
+                onSelected = { viewModel.onEvent(SettingsEvent.PickNotificationFrequency(it)) },
+                onDismiss = { viewModel.onEvent(SettingsEvent.ShowDialog(SettingsDialog.None)) }
+            )
+
+            SettingsDialog.RestoreBackup -> BasicDialog(
+                onDismiss = { viewModel.onEvent(SettingsEvent.ShowDialog(SettingsDialog.None)) },
+                onConfirm = { backupSelector.launch(arrayOf("application/zip")) },
+                title = stringResource(id = R.string.restore_backup),
+                description = stringResource(id = R.string.restore_backup_desc),
+                confirmText = stringResource(id = R.string.dialog_continue),
+                dismissText = stringResource(id = R.string.dialog_cancel)
+            )
+
+            SettingsDialog.RestartApp -> BasicDialog(
+                onDismiss = { context.restartApp() },
+                title = stringResource(id = R.string.restart_needed),
+                description = stringResource(id = R.string.restart_needed_desc),
+                dismissText = stringResource(id = R.string.dialog_restart),
+                icon = Icons.Outlined.RestartAlt
             )
 
             else -> Unit
@@ -221,9 +262,23 @@ fun SettingsScreen(
                         onEvent = viewModel::onEvent
                     )
 
-                    SettingsPage.SyncData -> CloudSyncPage(modifier = Modifier.fillMaxSize())
-                    SettingsPage.Notification -> Box(modifier = Modifier.fillMaxSize())
-                    SettingsPage.About -> AboutPage(modifier = Modifier.fillMaxSize())
+                    SettingsPage.SyncData -> CloudSyncPage(
+                        modifier = Modifier.fillMaxSize(),
+                        userPrefs = { state.userPrefs },
+                        onEvent = viewModel::onEvent,
+                        navigator = navigator
+                    )
+
+                    SettingsPage.Notification -> NotificationPage(
+                        modifier = Modifier.fillMaxSize(),
+                        userPrefs = { state.userPrefs },
+                        onEvent = viewModel::onEvent
+                    )
+
+                    SettingsPage.About -> AboutPage(
+                        modifier = Modifier.fillMaxSize(),
+                        navigator = navigator
+                    )
                 }
             }
         }

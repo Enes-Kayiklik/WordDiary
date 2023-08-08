@@ -7,6 +7,7 @@ import com.eneskayiklik.word_diary.core.data_store.data.AppLanguage
 import com.eneskayiklik.word_diary.core.data_store.data.AppTheme
 import com.eneskayiklik.word_diary.core.data_store.data.ColorStyle
 import com.eneskayiklik.word_diary.core.data_store.data.FontFamilyStyle
+import com.eneskayiklik.word_diary.core.data_store.data.NotificationFrequency
 import com.eneskayiklik.word_diary.core.data_store.data.SwipeAction
 import com.eneskayiklik.word_diary.core.data_store.data.UserLanguage
 import com.eneskayiklik.word_diary.core.data_store.data.UserPreference
@@ -55,4 +56,6 @@ interface UserPreferenceRepository {
     suspend fun enableAlarm(enable: Boolean)
 
     suspend fun setAlarm(time: LocalTime)
+
+    suspend fun setNotificationFrequency(frequency: NotificationFrequency)
 }

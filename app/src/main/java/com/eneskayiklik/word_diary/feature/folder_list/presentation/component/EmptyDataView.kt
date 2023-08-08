@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 fun EmptyDataView(
     modifier: Modifier = Modifier,
     icon: ImageVector,
+    actionIcon: ImageVector = Icons.Outlined.Add,
     title: String,
     subtitle: String,
     actionText: String,
@@ -59,7 +60,7 @@ fun EmptyDataView(
         ) {
             ExtendedFloatingActionButton(
                 onClick = onAction,
-                icon = { Icon(imageVector = Icons.Outlined.Add, contentDescription = null) },
+                icon = { Icon(imageVector = actionIcon, contentDescription = null) },
                 text = { Text(text = actionText) }
             )
         }
