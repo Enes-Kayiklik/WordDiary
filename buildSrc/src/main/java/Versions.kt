@@ -49,4 +49,6 @@ object Versions {
     const val kotlinXDateTime = "0.4.0"
 
     const val monet = "2023.7.1"
+
+    const val cloudy = "0.1.2"
 }

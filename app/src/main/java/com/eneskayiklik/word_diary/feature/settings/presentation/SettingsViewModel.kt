@@ -11,8 +11,12 @@ import com.eneskayiklik.word_diary.core.data_store.domain.UserPreferenceReposito
 import com.eneskayiklik.word_diary.core.util.UiEvent
 import com.eneskayiklik.word_diary.feature.backup.domain.repository.BackupRepository
 import com.eneskayiklik.word_diary.feature.backup.presentation.BackupDialog
+import com.eneskayiklik.word_diary.feature.folder_list.presentation.UserData
 import com.eneskayiklik.word_diary.feature.paywall.domain.PaywallRepository
 import com.eneskayiklik.word_diary.feature.paywall.presentation.PaywallDialog
+import com.eneskayiklik.word_diary.util.extensions.googleLoginClient
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -26,6 +30,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.math.log
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
@@ -42,6 +47,7 @@ class SettingsViewModel @Inject constructor(
     val event = _event.asSharedFlow()
 
     init {
+        getLastGoogleUser()
         preferenceRepo.userData.onEach { prefs ->
             _state.update { it.copy(userPrefs = prefs) }
         }.launchIn(viewModelScope)
@@ -74,6 +80,9 @@ class SettingsViewModel @Inject constructor(
 
             is SettingsEvent.RestoreBackup -> restoreBackup(event.uri)
             is SettingsEvent.CreateBackup -> createBackup(event.uri)
+            is SettingsEvent.OnGoogleLogin -> onGoogleLogin(event.account)
+            SettingsEvent.CreateDriveBackup -> createDriveBackup()
+            SettingsEvent.OnGoogleLogout -> logOut()
         }
     }
 
@@ -130,6 +139,49 @@ class SettingsViewModel @Inject constructor(
                         )
                     }
                 }
+            }
+        }
+    }
+
+    private fun createDriveBackup() = viewModelScope.launch {
+        if (_state.value.isDriveBackingUp) return@launch
+
+        backupRepository.backupToDrive(app).collectLatest { result ->
+            when (result) {
+                Result.Loading -> _state.update { it.copy(isDriveBackingUp = true) }
+                is Result.Error -> {
+                    _state.update { it.copy(isDriveBackingUp = false) }
+                    _event.emit(UiEvent.ShowToast(textRes = R.string.uncaught_error))
+                }
+
+                is Result.Success -> {
+                    _state.update { it.copy(isDriveBackingUp = false) }
+                    onEvent(UiEvent.ShowToast(textRes = R.string.back_up_success))
+                }
+            }
+        }
+    }
+
+    private fun getLastGoogleUser() = viewModelScope.launch(Dispatchers.IO) {
+        onGoogleLogin(GoogleSignIn.getLastSignedInAccount(app) ?: return@launch)
+    }
+
+    private fun onGoogleLogin(account: GoogleSignInAccount) = viewModelScope.launch {
+        _state.update {
+            it.copy(
+                userData = it.userData.copy(
+                    photoUrl = account.photoUrl,
+                    displayName = account.displayName,
+                    email = account.email
+                )
+            )
+        }
+    }
+
+    private fun logOut() = viewModelScope.launch {
+        app.googleLoginClient().signOut().addOnSuccessListener {
+            _state.update {
+                it.copy(userData = UserData())
             }
         }
     }

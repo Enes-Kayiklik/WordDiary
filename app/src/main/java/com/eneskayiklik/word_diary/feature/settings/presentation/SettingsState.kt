@@ -16,6 +16,7 @@ import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.eneskayiklik.word_diary.R
 import com.eneskayiklik.word_diary.core.data_store.data.UserPreference
+import com.eneskayiklik.word_diary.feature.folder_list.presentation.UserData
 
 data class SettingsState(
     val pages: List<SettingsPage> = listOf(
@@ -27,7 +28,9 @@ data class SettingsState(
     ),
     val userPrefs: UserPreference = UserPreference(),
     val dialogType: SettingsDialog = SettingsDialog.None,
-    val themeColors: List<Int> = generateThemeColors()
+    val themeColors: List<Int> = generateThemeColors(),
+    val userData: UserData = UserData(),
+    val isDriveBackingUp: Boolean = false
 )
 
 enum class SettingsDialog {

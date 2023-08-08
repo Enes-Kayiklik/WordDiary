@@ -185,7 +185,7 @@
     <string name="subscription_renews_automatically">Abonelik otomatik olarak yenilenir, istediğiniz zaman iptal edebilirsiniz</string>
     <string name="by_selecting_continue">"Devam" ile devam etmeyi seçtiğinizde, ödemeniz Google Play hesabınızdan çekilecek ve Google Play Store ayarları aracılığıyla iptal edilmediği sürece abonelik aynı süre ve ücret için otomatik olarak yenilenecektir. Devam\'ı seçtiğinizde Şartlarımızı kabul ettiğiniz onaylanmış olur.</string>
     <string name="paywall_continue">Devam</string>
-    <string name="start_free_trial">Ücretsiz denemeye başla</string>
+    <string name="start_free_trial">Ücretsiz deneme başlat</string>
     <string name="purchase_dialog_title">Satın Alma Başarılı!</string>
     <string name="purchase_dialog_desc">Premium paketimize yükseltme yaptığınız için teşekkür ederiz. Artık hizmetimizle ilgili deneyiminizi geliştirecek özel özelliklere ve avantajlara erişiminiz var. Uygulamamızı kullanmanın keyfini çıkarın.</string>
     <string name="purchase_dialog_dismiss">Kullanmaya başla</string>
@@ -322,14 +322,17 @@
     <string name="google_drive">GOOGLE DRIVE</string>
     <string name="login_to_backup">Yedekleme için giriş yapmalısınız</string>
     <string name="sign_in">Giriş yap</string>
+    <string name="sign_out">Çıkış yap</string>
     <string name="cloud_backups">Bulut yedekleri</string>
     <string name="create_backup">Yedek oluştur</string>
     <string name="back_up_success">Yedek dosyası oluşturuldu</string>
+    <string name="backup_to_drive">Google Drive\'a kaydet</string>
+    <string name="backup_to_drive_desc">Kelimeleri, istatistikleri ve ilerlemeleri Google heasbınıza kaydedin</string>
 
     <!-- Premium -->
     <string name="premium_feature">Premium Özellik</string>
     <string name="premium_feature_desc">Bu özelliği etkinleştirmek için aboneliklerimizden birini satın almanız gerekir</string>
-    <string name="enable_premium_feature">Deneme sürümünü başlat</string>
+    <string name="enable_premium_feature">Ücretsiz denemeye başla</string>
 
     <!-- Settings Personalize -->
     <string name="personalize">Kişiselleştir</string>
