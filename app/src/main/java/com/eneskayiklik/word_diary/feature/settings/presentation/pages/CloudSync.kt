@@ -5,6 +5,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -25,6 +26,7 @@ import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -137,9 +139,9 @@ fun CloudSyncPage(
                             )
                             .padding(16.dp),
                         onAction = {
-                            if (WordDiaryApp.hasPremium && userData().email.isNullOrEmpty()
-                                    .not()
-                            ) onEvent(SettingsEvent.CreateDriveBackup)
+                            if (WordDiaryApp.hasPremium.not()) return@DriveConfigView
+
+                            if (userData().email.isNullOrEmpty().not()) onEvent(SettingsEvent.CreateDriveBackup)
                             else googleLoginLauncher.launch(1881)
                         }, isSignedIn = userData().email.isNullOrEmpty().not(),
                         isDriveBackingUp = isDriveBackingUp
@@ -155,6 +157,7 @@ fun CloudSyncPage(
                                 )
                             },
                             modifier = Modifier.clickable {
+                                if (WordDiaryApp.hasPremium.not()) return@clickable
                                 navigator.navigate(BackupScreenDestination)
                             }
                         )
@@ -170,6 +173,8 @@ fun CloudSyncPage(
                                 Text(text = userData().email ?: "")
                             },
                             modifier = Modifier.clickable {
+                                if (WordDiaryApp.hasPremium.not()) return@clickable
+
                                 onEvent(SettingsEvent.OnGoogleLogout)
                             }
                         )
