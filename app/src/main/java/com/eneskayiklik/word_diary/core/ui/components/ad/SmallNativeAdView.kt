@@ -4,6 +4,7 @@ import android.content.res.ColorStateList
 import android.view.View
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.sp
@@ -15,6 +16,7 @@ import com.google.android.gms.ads.nativead.NativeAd
 fun SmallNativeAdView(
     modifier: Modifier = Modifier,
     nativeAd: NativeAd,
+    onAdShownOnScreen: () -> Unit,
     showActionButton: Boolean = false
 ) {
     val colorScheme = MaterialTheme.colorScheme
@@ -93,5 +95,9 @@ fun SmallNativeAdView(
         }
         adIndicator.setTextColor(colorScheme.onSurfaceVariant.toArgb())
         root.setNativeAd(nativeAd)
+    }
+
+    LaunchedEffect(key1 = Unit) {
+        onAdShownOnScreen()
     }
 }

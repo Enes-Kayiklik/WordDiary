@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.ImageView
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.stringResource
@@ -18,6 +19,7 @@ import com.google.android.gms.ads.nativead.NativeAd
 fun MediumNativeAdView(
     modifier: Modifier = Modifier,
     onRemoveAds: () -> Unit,
+    onVisibleOnScreen: () -> Unit,
     nativeAd: NativeAd
 ) {
     val colorScheme = MaterialTheme.colorScheme
@@ -106,4 +108,6 @@ fun MediumNativeAdView(
         adIndicator.setTextColor(colorScheme.onSurfaceVariant.toArgb())
         root.setNativeAd(nativeAd)
     }
+
+    LaunchedEffect(key1 = Unit) { onVisibleOnScreen() }
 }

@@ -1,21 +1,21 @@
 package com.eneskayiklik.word_diary.feature.paywall.presentation
 
 import android.widget.Toast
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.outlined.AddToDrive
@@ -26,8 +26,6 @@ import androidx.compose.material.icons.outlined.Diamond
 import androidx.compose.material.icons.outlined.StarOutline
 import androidx.compose.material.icons.outlined.Translate
 import androidx.compose.material.icons.outlined.WorkspacePremium
-import androidx.compose.material3.Button
-import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -40,10 +38,12 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
@@ -51,20 +51,26 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.eneskayiklik.word_diary.R
 import com.eneskayiklik.word_diary.core.ui.components.BasicDialog
 import com.eneskayiklik.word_diary.core.ui.components.LottieAnimation
+import com.eneskayiklik.word_diary.core.ui.components.PageIndicator
 import com.eneskayiklik.word_diary.core.util.ScreensAnim
 import com.eneskayiklik.word_diary.core.util.UiEvent
+import com.eneskayiklik.word_diary.core.util.getDefaultAnimationSpec
 import com.eneskayiklik.word_diary.feature.paywall.presentation.component.BenefitView
-import com.eneskayiklik.word_diary.feature.paywall.presentation.component.ProductView
+import com.eneskayiklik.word_diary.feature.paywall.presentation.component.UpgradePremiumButton
 import com.eneskayiklik.word_diary.util.TITLE_LETTER_SPACING
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.flow.collectLatest
 
-@OptIn(ExperimentalAnimationApi::class, ExperimentalMaterial3Api::class)
+@OptIn(
+    ExperimentalAnimationApi::class, ExperimentalMaterial3Api::class,
+    ExperimentalFoundationApi::class
+)
 @Composable
 @Destination(style = ScreensAnim::class)
 fun PaywallScreen(
@@ -74,6 +80,15 @@ fun PaywallScreen(
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     val state = viewModel.state.collectAsState().value
     val context = LocalContext.current
+
+    val productsPagerState =
+        rememberPagerState(initialPage = 1, pageCount = { state.products.size })
+
+    val scaleAnim by animateFloatAsState(
+        targetValue = if (state.products.isNotEmpty()) 1F else 0F,
+        label = "products_anim",
+        animationSpec = getDefaultAnimationSpec()
+    )
 
     LaunchedEffect(key1 = Unit) {
         viewModel.event.collectLatest {
@@ -119,7 +134,8 @@ fun PaywallScreen(
                 Text(
                     text = stringResource(id = R.string.premium),
                     fontWeight = FontWeight.Medium,
-                    letterSpacing = TITLE_LETTER_SPACING
+                    letterSpacing = TITLE_LETTER_SPACING,
+                    fontSize = 20.sp
                 )
             }, actions = {
                 TextButton(onClick = { viewModel.onEvent(PaywallEvent.OnRestore) }) {
@@ -138,7 +154,7 @@ fun PaywallScreen(
                     .fillMaxSize()
                     .align(Alignment.BottomCenter)
                     .alpha(.5F),
-                rawRes = R.raw.bubble_anim
+                rawRes = R.raw.snow_anim
             )
 
             Icon(
@@ -147,7 +163,7 @@ fun PaywallScreen(
                 modifier = Modifier
                     .graphicsLayer {
                         translationX = 96.dp.toPx()
-                        translationY = 96.dp.toPx()
+                        translationY = 48.dp.toPx()
                     }
                     .alpha(.1F)
                     .align(Alignment.TopEnd)
@@ -193,81 +209,111 @@ fun PaywallScreen(
                 modifier = Modifier.padding(horizontal = 16.dp)
             )
 
-            Spacer(modifier = Modifier)
-
-            BenefitView(
-                startIcon = Icons.Outlined.Translate,
-                text = stringResource(id = R.string.unlimited_auto_translation),
+            Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-            )
-            BenefitView(
-                startIcon = Icons.Outlined.AddToDrive,
-                text = stringResource(id = R.string.google_drive_backup),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-            )
-            BenefitView(
-                startIcon = Icons.Outlined.Book,
-                text = stringResource(id = R.string.more_study_option),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-            )
-            BenefitView(
-                startIcon = Icons.Outlined.Block,
-                text = stringResource(id = R.string.remove_ads),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-            )
-            BenefitView(
-                startIcon = Icons.Outlined.Code,
-                text = stringResource(id = R.string.support_development),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-            )
+                    .padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(2.dp)
+            ) {
+                BenefitView(
+                    startIcon = Icons.Outlined.Translate,
+                    text = stringResource(id = R.string.unlimited_auto_translation),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(
+                            MaterialTheme.shapes.extraSmall.copy(
+                                topStart = MaterialTheme.shapes.medium.topStart,
+                                topEnd = MaterialTheme.shapes.medium.topEnd
+                            )
+                        )
+                        .background(MaterialTheme.colorScheme.surfaceVariant)
+                        .padding(vertical = 12.dp, horizontal = 16.dp)
+                )
+                BenefitView(
+                    startIcon = Icons.Outlined.AddToDrive,
+                    text = stringResource(id = R.string.google_drive_backup),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(MaterialTheme.shapes.extraSmall)
+                        .background(MaterialTheme.colorScheme.surfaceVariant)
+                        .padding(vertical = 12.dp, horizontal = 16.dp)
+                )
+                BenefitView(
+                    startIcon = Icons.Outlined.Book,
+                    text = stringResource(id = R.string.more_study_option),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(MaterialTheme.shapes.extraSmall)
+                        .background(MaterialTheme.colorScheme.surfaceVariant)
+                        .padding(vertical = 12.dp, horizontal = 16.dp)
+                )
+                BenefitView(
+                    startIcon = Icons.Outlined.Block,
+                    text = stringResource(id = R.string.remove_ads),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(MaterialTheme.shapes.extraSmall)
+                        .background(MaterialTheme.colorScheme.surfaceVariant)
+                        .padding(vertical = 12.dp, horizontal = 16.dp)
+                )
+                BenefitView(
+                    startIcon = Icons.Outlined.Code,
+                    text = stringResource(id = R.string.support_development),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(
+                            MaterialTheme.shapes.extraSmall.copy(
+                                bottomStart = MaterialTheme.shapes.medium.bottomStart,
+                                bottomEnd = MaterialTheme.shapes.medium.bottomEnd
+                            )
+                        )
+                        .background(MaterialTheme.colorScheme.surfaceVariant)
+                        .padding(vertical = 12.dp, horizontal = 16.dp)
+                )
+            }
 
             Spacer(modifier = Modifier.weight(1F))
 
-            AnimatedVisibility(visible = state.products.isNotEmpty()) {
+            if (state.products.isNotEmpty()) {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                        .scale(scaleX = scaleAnim, scaleY = 1F),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .heightIn(max = 172.dp),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        state.products.forEach { product ->
-                            ProductView(
-                                isSelected = product == state.selectedProduct,
-                                product = product,
-                                modifier = Modifier
-                                    .weight(1F)
-                                    .clickable(
-                                        interactionSource = remember { MutableInteractionSource() },
-                                        indication = null,
-                                        onClick = {
-                                            viewModel.onEvent(PaywallEvent.OnSelectProduct(product))
-                                        }
+                    HorizontalPager(
+                        state = productsPagerState
+                    ) { currentPage ->
+                        val currentItem = state.products[currentPage]
+
+                        UpgradePremiumButton(
+                            modifier = Modifier
+                                .padding(horizontal = 16.dp)
+                                .border(
+                                    width = 1.dp,
+                                    color = MaterialTheme.colorScheme.outline,
+                                    shape = MaterialTheme.shapes.medium
+                                )
+                                .padding(vertical = 4.dp),
+                            selectedPriceText = currentItem.readableWeek,
+                            titleText = currentItem.period,
+                            buttonText = currentItem.continueButtonTitle,
+                            onClick = {
+                                viewModel.onEvent(
+                                    PaywallEvent.OnMakePurchase(
+                                        context,
+                                        currentItem
                                     )
-                            )
-                        }
+                                )
+                            }
+                        )
                     }
-                    Button(
-                        onClick = { viewModel.onEvent(PaywallEvent.OnMakePurchase(context)) },
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Text(text = stringResource(id = state.continueButtonTitle))
-                    }
+
+                    PageIndicator(
+                        numberOfPages = state.products.size,
+                        selectedPage = productsPagerState.currentPage,
+                        modifier = Modifier.align(Alignment.CenterHorizontally)
+                    )
                 }
             }
 
@@ -276,8 +322,6 @@ fun PaywallScreen(
                     .fillMaxWidth()
                     .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
             ) {
-                Divider(modifier = Modifier.fillMaxWidth())
-                Spacer(modifier = Modifier.height(16.dp))
                 Text(
                     text = stringResource(id = R.string.subscription_renews_automatically),
                     modifier = Modifier.fillMaxWidth(),

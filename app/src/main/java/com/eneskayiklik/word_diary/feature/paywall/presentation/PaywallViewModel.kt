@@ -43,17 +43,9 @@ class PaywallViewModel @Inject constructor(
     fun onEvent(event: PaywallEvent) = viewModelScope.launch {
         when (event) {
             PaywallEvent.OnRestore -> restorePurchase()
-            is PaywallEvent.OnMakePurchase -> makePurchase(event.context)
-            is PaywallEvent.OnSelectProduct -> selectProduct(event.product)
+            PaywallEvent.OnSeeOtherOptions -> _state.update { it.copy(isOtherOptionsVisible = true) }
+            is PaywallEvent.OnMakePurchase -> makePurchase(event.context, event.product)
             is PaywallEvent.OnShowDialog -> _state.update { it.copy(dialogType = event.type) }
-        }
-    }
-
-    private fun selectProduct(product: WordDiaryProduct) = viewModelScope.launch {
-        _state.update {
-            it.copy(
-                selectedProduct = product
-            )
         }
     }
 
@@ -67,8 +59,7 @@ class PaywallViewModel @Inject constructor(
                     _state.update {
                         it.copy(
                             isLoading = false,
-                            products = result.result,
-                            selectedProduct = result.result.firstOrNull()
+                            products = result.result
                         )
                     }
                 }
@@ -76,9 +67,7 @@ class PaywallViewModel @Inject constructor(
         }
     }
 
-    private fun makePurchase(context: Context) = viewModelScope.launch(Dispatchers.IO) {
-        val product = _state.value.selectedProduct ?: return@launch
-
+    private fun makePurchase(context: Context, product: WordDiaryProduct) = viewModelScope.launch(Dispatchers.IO) {
         val result = try {
             paywallRepository.makePurchase(context.findActivity(), product.adaptyProduct)
         } catch (e: Exception) {

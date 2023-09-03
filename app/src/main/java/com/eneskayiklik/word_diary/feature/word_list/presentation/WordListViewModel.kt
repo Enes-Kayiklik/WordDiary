@@ -6,17 +6,17 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.eneskayiklik.word_diary.R
+import com.eneskayiklik.word_diary.core.ad_manager.AdManager
 import com.eneskayiklik.word_diary.core.data_store.data.SwipeAction
 import com.eneskayiklik.word_diary.core.data_store.domain.UserPreferenceRepository
 import com.eneskayiklik.word_diary.core.database.entity.WordEntity
 import com.eneskayiklik.word_diary.core.database.model.FolderWithWords
-import com.eneskayiklik.word_diary.core.helper.ad.AdLoaderHelper
 import com.eneskayiklik.word_diary.core.tts.WordToSpeech
 import com.eneskayiklik.word_diary.feature.folder_list.domain.FolderRepository
 import com.eneskayiklik.word_diary.core.util.UiEvent
 import com.eneskayiklik.word_diary.feature.create_word.presentation.DeletedSnackbar
 import com.eneskayiklik.word_diary.feature.destinations.CreateWordScreenDestination
-import com.eneskayiklik.word_diary.feature.folder_list.presentation.ListsViewModel
+import com.eneskayiklik.word_diary.util.extensions.takeRandom
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -26,6 +26,8 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -36,7 +38,6 @@ class WordListViewModel @Inject constructor(
     private val folderRepo: FolderRepository,
     private val tts: WordToSpeech,
     private val app: Application,
-    private val adLoader: AdLoaderHelper,
     prefsRepo: UserPreferenceRepository,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
@@ -79,8 +80,7 @@ class WordListViewModel @Inject constructor(
     private val _event = MutableSharedFlow<UiEvent>()
     val event = _event.asSharedFlow()
 
-    private var _isAdActive: Boolean = false
-    private var _isScreenVisible = false
+    private var _isVisibleOnScreen = false
 
     init {
         val folderId = savedStateHandle.get<Int>("folderId")
@@ -124,7 +124,9 @@ class WordListViewModel @Inject constructor(
     }
 
     fun onEvent(event: UiEvent) = viewModelScope.launch {
-        _event.emit(event)
+        if (event is UiEvent.OnAdShown) {
+            AdManager.increaseSeenCount(event.adId)
+        } else _event.emit(event)
     }
 
     private fun updateFavoriteState(wordId: Int) = viewModelScope.launch(Dispatchers.IO) {
@@ -259,27 +261,32 @@ class WordListViewModel @Inject constructor(
         }
     }
 
-    private fun onAdEvent(isStart: Boolean) = viewModelScope.launch {
-        _isScreenVisible = isStart
-        if (isStart) {
-            if (_isAdActive.not()) startGetAd()
-        }
+    private fun onAdEvent(isStart: Boolean) = viewModelScope.launch(Dispatchers.IO) {
+        _isVisibleOnScreen = isStart
+        if (isStart.not()) {
+            _state.update { st ->
+                AdManager.borrowOrRelease(st.nativeAd?.id, false)
+                delay(500)
+                st.copy(nativeAd = null)
+            }
+        } else collectAds()
     }
 
-    private fun startGetAd() = viewModelScope.launch(Dispatchers.IO) {
-        _isAdActive = true
-        while (_isScreenVisible) {
-            if (_state.value.words.isNotEmpty()) {
-                val ad = adLoader.getNativeAd(1)
-                _state.value.nativeAd?.destroy()
-                _state.update { it.copy(nativeAd = ad) }
+    private fun collectAds() {
+        AdManager.activeAds.onEach {
+            if (it.isNotEmpty() && _isVisibleOnScreen) {
+                val nativeAd = it.lastOrNull()
+
+                _state.update { st ->
+                    if (st.nativeAd == null) {
+                        AdManager.borrowOrRelease(nativeAd?.id, true)
+
+                        st.copy(
+                            nativeAd = nativeAd
+                        )
+                    } else st
+                }
             }
-            if (_state.value.nativeAd != null) {
-                delay(ListsViewModel.AD_RELOAD_INTERVAL)
-            } else {
-                delay(5000)
-            }
-        }
-        _isAdActive = false
+        }.launchIn(viewModelScope)
     }
 }

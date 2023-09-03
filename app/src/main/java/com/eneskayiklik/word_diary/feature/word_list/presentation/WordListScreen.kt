@@ -14,9 +14,11 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -69,10 +71,12 @@ import com.eneskayiklik.word_diary.R
 import com.eneskayiklik.word_diary.core.ui.OnLifecycleEvent
 import com.eneskayiklik.word_diary.core.ui.components.BasicDialog
 import com.eneskayiklik.word_diary.core.ui.components.ad.SmallNativeAdView
+import com.eneskayiklik.word_diary.core.ui.components.clipToMaterialShape
 import com.eneskayiklik.word_diary.core.util.ScreensAnim
 import com.eneskayiklik.word_diary.feature.folder_list.presentation.component.EmptyDataView
 import com.eneskayiklik.word_diary.util.TITLE_LETTER_SPACING
 import com.eneskayiklik.word_diary.core.util.UiEvent
+import com.eneskayiklik.word_diary.core.util.getDefaultAnimationSpec
 import com.eneskayiklik.word_diary.feature.destinations.StudyScreenDestination
 import com.eneskayiklik.word_diary.feature.word_list.domain.StudyType
 import com.eneskayiklik.word_diary.feature.word_list.presentation.component.FilterMenu
@@ -102,7 +106,9 @@ fun WordListScreen(
     val state = viewModel.state.collectAsState().value
     val context = LocalContext.current
     val itemsScale by animateFloatAsState(
-        targetValue = if (state.isWordQueueVisible) 0F else 1F
+        targetValue = if (state.isWordQueueVisible) 0F else 1F,
+        label = "scale_anim",
+        animationSpec = getDefaultAnimationSpec()
     )
 
     var isStudyListVisible by remember { mutableStateOf(false) }
@@ -140,7 +146,7 @@ fun WordListScreen(
 
     OnLifecycleEvent { _, event ->
         when (event) {
-            Lifecycle.Event.ON_RESUME -> viewModel.onEvent(WordListEvent.OnAdEvent(true))
+            Lifecycle.Event.ON_START -> viewModel.onEvent(WordListEvent.OnAdEvent(true))
             Lifecycle.Event.ON_PAUSE -> viewModel.onEvent(WordListEvent.OnAdEvent(false))
             else -> Unit
         }
@@ -268,7 +274,7 @@ fun WordListScreen(
             else -> LazyColumn(
                 contentPadding = padding + PaddingValues(vertical = 24.dp, horizontal = 16.dp),
                 modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.spacedBy(12.dp),
+                verticalArrangement = Arrangement.spacedBy(2.dp),
                 state = lazyListState
             ) {
                 item("simple_statistics") {
@@ -280,6 +286,7 @@ fun WordListScreen(
                             .padding(bottom = 8.dp),
                         onStudyClick = { isStudyListVisible = true }
                     )
+                    Spacer(modifier = Modifier.height(8.dp))
                 }
                 state.words.forEachIndexed { index, word ->
                     item(key = word.wordId) {
@@ -288,8 +295,12 @@ fun WordListScreen(
                             modifier = Modifier
                                 .animateItemPlacement()
                                 .fillMaxWidth()
-                                .clip(MaterialTheme.shapes.medium)
-                                .background(MaterialTheme.colorScheme.surfaceColorAtElevation(12.dp)),
+                                .clipToMaterialShape(
+                                    index = index,
+                                    lastIndex = state.words.lastIndex,
+                                    smallShape = MaterialTheme.shapes.extraSmall,
+                                    largeShape = MaterialTheme.shapes.medium
+                                )                                .background(MaterialTheme.colorScheme.surfaceColorAtElevation(12.dp)),
                             onAction = { action ->
                                 viewModel.onEvent(
                                     WordListEvent.OnWordAction(
@@ -311,13 +322,20 @@ fun WordListScreen(
                     if (index == 0 && state.nativeAd != null) {
                         item(key = "ad_view") {
                             SmallNativeAdView(
-                                nativeAd = state.nativeAd,
+                                nativeAd = state.nativeAd.nativeAd,
                                 showActionButton = true,
+                                onAdShownOnScreen = {
+                                    viewModel.onEvent(UiEvent.OnAdShown(state.nativeAd.id))
+                                },
                                 modifier = Modifier
                                     .animateItemPlacement()
                                     .fillMaxWidth()
-                                    .clip(MaterialTheme.shapes.medium)
-                                    .background(MaterialTheme.colorScheme.surfaceColorAtElevation(12.dp))
+                                    .clipToMaterialShape(
+                                        index = 1,
+                                        lastIndex = state.words.lastIndex + 1,
+                                        smallShape = MaterialTheme.shapes.extraSmall,
+                                        largeShape = MaterialTheme.shapes.medium
+                                    )                                    .background(MaterialTheme.colorScheme.surfaceColorAtElevation(12.dp))
                                     .padding(8.dp)
                             )
                         }
@@ -328,8 +346,8 @@ fun WordListScreen(
 
         AnimatedVisibility(
             visible = state.isWordQueueVisible,
-            enter = slideInHorizontally { it },
-            exit = slideOutHorizontally { it }
+            enter = slideInHorizontally(animationSpec = getDefaultAnimationSpec()) { it },
+            exit = slideOutHorizontally(animationSpec = getDefaultAnimationSpec()) { it }
         ) {
             WordQueueView(
                 startIndex = state.initialWordIndex,

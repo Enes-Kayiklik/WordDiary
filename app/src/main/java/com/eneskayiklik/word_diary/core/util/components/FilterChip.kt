@@ -2,7 +2,6 @@ package com.eneskayiklik.word_diary.core.util.components
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -30,6 +29,7 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
+import com.eneskayiklik.word_diary.core.util.getDefaultAnimationSpec
 import com.eneskayiklik.word_diary.util.extensions.pxToDp
 
 @Composable
@@ -53,9 +53,12 @@ fun FilterChip(
     }
     val startAnim by animateFloatAsState(
         targetValue = if (isSelected) parentSize.width.pxToDp(context) * 2 else 0F,
-        animationSpec = tween(300)
+        animationSpec = getDefaultAnimationSpec(), label = "filter_chip_anim"
     )
-    val borderAnim by animateColorAsState(targetValue = if (isSelected) Color.Transparent else MaterialTheme.colorScheme.outline)
+    val borderAnim by animateColorAsState(
+        targetValue = if (isSelected) Color.Transparent else MaterialTheme.colorScheme.outline,
+        animationSpec = getDefaultAnimationSpec(), label = "filter_chip_border_anim"
+    )
 
     Box(
         modifier = modifier

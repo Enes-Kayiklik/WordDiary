@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.eneskayiklik.word_diary.core.ad_manager.AdManager
 import com.eneskayiklik.word_diary.core.ui.components.MainScaffold
 import com.eneskayiklik.word_diary.core.ui.theme.MainViewModel
 import com.eneskayiklik.word_diary.core.ui.theme.WordDiaryTheme
@@ -71,6 +72,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onDestroy() {
         tts.shutdown()
+        AdManager.release()
         super.onDestroy()
     }
 }

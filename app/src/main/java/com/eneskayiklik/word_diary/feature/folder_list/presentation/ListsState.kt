@@ -1,14 +1,15 @@
 package com.eneskayiklik.word_diary.feature.folder_list.presentation
 
 import android.net.Uri
+import com.eneskayiklik.word_diary.core.ad_manager.WordbookAd
 import com.eneskayiklik.word_diary.core.database.model.FolderWithWordCount
 import com.google.android.gms.ads.nativead.NativeAd
 
 data class ListsState(
     val folders: List<FolderWithWordCount> = emptyList(),
     val searchResult: List<FolderWithWordCount> = emptyList(),
-    val nativeAd: NativeAd? = null,
-    val searchAd: NativeAd? = null,
+    val nativeAd: WordbookAd? = null,
+    val searchAd: WordbookAd? = null,
     val isLoading: Boolean = true,
     val dialogType: ListsDialogType = ListsDialogType.NONE,
     val userData: UserData = UserData()

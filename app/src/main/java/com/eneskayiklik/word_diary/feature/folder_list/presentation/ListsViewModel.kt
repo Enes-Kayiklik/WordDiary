@@ -4,9 +4,9 @@ import android.app.Application
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.eneskayiklik.word_diary.core.ad_manager.AdManager
 import com.eneskayiklik.word_diary.core.data_store.data.UserLanguage
 import com.eneskayiklik.word_diary.core.data_store.domain.UserPreferenceRepository
-import com.eneskayiklik.word_diary.core.helper.ad.AdLoaderHelper
 import com.eneskayiklik.word_diary.core.util.UiEvent
 import com.eneskayiklik.word_diary.feature.destinations.CreateFolderScreenDestination
 import com.eneskayiklik.word_diary.feature.destinations.CreateWordScreenDestination
@@ -21,6 +21,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -28,7 +30,6 @@ import javax.inject.Inject
 @HiltViewModel
 class ListsViewModel @Inject constructor(
     private val folderRepo: FolderRepository,
-    private val adLoader: AdLoaderHelper,
     private val app: Application,
     userPrefs: UserPreferenceRepository,
 ) : ViewModel() {
@@ -40,55 +41,47 @@ class ListsViewModel @Inject constructor(
     private val _event = MutableSharedFlow<UiEvent>()
     val event = _event.asSharedFlow()
 
-    private var _isScreenVisible = false
-
-    private var _isFeedAdActive: Boolean = false
-    private var _isSearchAdActive: Boolean = false
+    private var _isVisibleOnScreen: Boolean = false
 
     init {
         collectUserLang()
         getLastGoogleUser()
     }
 
-    private fun onAdEvent(isStart: Boolean) = viewModelScope.launch {
-        _isScreenVisible = isStart
-        if (isStart) {
-            if (_isFeedAdActive.not()) startGetFeedAd()
-            if (_isSearchAdActive.not()) startGetSearchAd()
-        }
+    private fun onAdEvent(isStart: Boolean) = viewModelScope.launch(Dispatchers.IO) {
+        _isVisibleOnScreen = isStart
+        if (isStart.not()) {
+            _state.update { st ->
+                AdManager.borrowOrRelease(st.searchAd?.id, false)
+                AdManager.borrowOrRelease(st.nativeAd?.id, false)
+                delay(500)
+                st.copy(
+                    searchAd = null,
+                    nativeAd = null
+                )
+            }
+        } else collectAds()
     }
 
-    private fun startGetSearchAd() = viewModelScope.launch(Dispatchers.IO) {
-        _isFeedAdActive = true
-        while (_isScreenVisible) {
-            val ad = adLoader.getNativeAd(1)
-            _state.value.searchAd?.destroy()
-            _state.update { it.copy(searchAd = ad) }
-            if (_state.value.searchAd != null) {
-                delay(AD_RELOAD_INTERVAL * 2)
-            } else {
-                delay(5000)
-            }
-        }
-        _isFeedAdActive = false
-    }
+    private fun collectAds() {
+        AdManager.activeAds.onEach {
+            if (it.isNotEmpty() && _isVisibleOnScreen) {
+                val searchAd = it.getOrNull(0)
+                val nativeAd = it.getOrNull(1)
 
-    private fun startGetFeedAd() = viewModelScope.launch(Dispatchers.IO) {
-        _isFeedAdActive = true
-        while (_isScreenVisible) {
-            val folderSize = _state.value.folders.size
-            if (folderSize != 0) {
-                val ad = adLoader.getNativeAd(1)
-                _state.value.nativeAd?.destroy()
-                _state.update { it.copy(nativeAd = ad) }
+                _state.update { st ->
+                    if (st.searchAd == null || st.nativeAd == null) {
+                        AdManager.borrowOrRelease(searchAd?.id, true)
+                        AdManager.borrowOrRelease(nativeAd?.id, true)
+
+                        st.copy(
+                            searchAd = searchAd,
+                            nativeAd = nativeAd
+                        )
+                    } else st
+                }
             }
-            if (_state.value.nativeAd != null) {
-                delay(AD_RELOAD_INTERVAL)
-            } else {
-                delay(5000)
-            }
-        }
-        _isFeedAdActive = false
+        }.launchIn(viewModelScope)
     }
 
     @OptIn(ExperimentalAnimationApi::class)
@@ -117,7 +110,9 @@ class ListsViewModel @Inject constructor(
     }
 
     fun onEvent(event: UiEvent) = viewModelScope.launch {
-        _event.emit(event)
+        if (event is UiEvent.OnAdShown) {
+            AdManager.increaseSeenCount(event.adId)
+        } else _event.emit(event)
     }
 
     private fun removeCollection(folderId: Int) = viewModelScope.launch(Dispatchers.IO) {
@@ -176,17 +171,5 @@ class ListsViewModel @Inject constructor(
                 GoogleSignIn.getLastSignedInAccount(app) ?: return@launch
             )
         )
-    }
-
-    companion object {
-        const val AD_RELOAD_INTERVAL = 61_293L
-    }
-
-    override fun onCleared() {
-        _state.value.apply {
-            nativeAd?.destroy()
-            searchAd?.destroy()
-        }
-        super.onCleared()
     }
 }

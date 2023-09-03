@@ -3,7 +3,6 @@ package com.eneskayiklik.word_diary.feature.create_folder.presentation
 import android.widget.Toast
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.animateContentSize
-import androidx.compose.animation.core.tween
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.background
@@ -43,7 +42,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
@@ -61,6 +59,7 @@ import com.eneskayiklik.word_diary.feature.create_folder.presentation.component.
 import com.eneskayiklik.word_diary.feature.create_folder.presentation.component.SelectedIndicator
 import com.eneskayiklik.word_diary.util.TITLE_LETTER_SPACING
 import com.eneskayiklik.word_diary.core.util.UiEvent
+import com.eneskayiklik.word_diary.core.util.getDefaultAnimationSpec
 import com.eneskayiklik.word_diary.util.extensions.plus
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -76,7 +75,7 @@ data class CreateFolderScreenArgs(
 )
 
 @OptIn(
-    ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class,
+    ExperimentalMaterial3Api::class,
     ExperimentalAnimationApi::class, ExperimentalLayoutApi::class
 )
 @Destination(
@@ -239,8 +238,8 @@ fun CreateFolderScreen(
                         ) {
                             androidx.compose.animation.AnimatedVisibility(
                                 visible = state.selectedColorIndex == index,
-                                enter = scaleIn(tween(100), initialScale = .4F),
-                                exit = scaleOut(tween(100), targetScale = .4F)
+                                enter = scaleIn(getDefaultAnimationSpec(500)),
+                                exit = scaleOut(getDefaultAnimationSpec(500))
                             ) {
                                 SelectedIndicator(
                                     modifier = Modifier

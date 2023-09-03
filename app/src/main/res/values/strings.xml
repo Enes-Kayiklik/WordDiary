@@ -36,7 +36,7 @@
     <string name="hour_format">%s h</string>
     <string name="day_format">%s d</string>
 
-    <string name="week">week</string>
+    <string name="week">Week</string>
 
     <!-- Onboarding -->
     <string name="previous">Previous</string>
@@ -63,7 +63,7 @@
     <string name="collection_word_count_plural">%d words</string>
     <string name="empty_collection">Collection is empty</string>
     <string name="add_word">Add word</string>
-    <string name="practise">Practise</string>
+    <string name="practise">Practice</string>
     <string name="search_collections">Search collections</string>
     <string name="select_collection_language_warning">You have to select collection language</string>
     <string name="empty_collection_desc">You don\'t have any collection. Create new list and start studying.</string>
@@ -177,7 +177,8 @@
     <string name="empty_study_session">It looks like you don\'t have any study session at this day</string>
 
     <!-- Paywall -->
-    <string name="premium">Premium</string>
+    <string name="premium">Upgrade to Premium</string>
+    <string name="unlock_all_features">Unlock all features</string>
     <string name="paywall_title">Uncover the full potential of Word Diary by choosing a subscription plan</string>
     <string name="unlimited_auto_translation">Unlimited auto translation</string>
     <string name="google_drive_backup">Google Drive backup</string>
@@ -186,7 +187,7 @@
     <string name="subscription_renews_automatically">Subscription renews automatically, you can cancel anytime</string>
     <string name="by_selecting_continue">By choosing to proceed with "Continue," your payment will be debited from your Google Play account, and the subscription will automatically renew for the same duration and cost, unless cancelled through the Google Play Store settings. Your acceptance of our Terms is confirmed upon selecting Continue.</string>
     <string name="paywall_continue">Continue</string>
-    <string name="start_free_trial">Start free trial</string>
+    <string name="paywall_free_trial">Free trial</string>
     <string name="purchase_dialog_title">Purchase Successful!</string>
     <string name="purchase_dialog_desc">Thank you for upgrading to our premium package. You now have access to exclusive features and benefits that will enhance your experience with our service. Enjoy using our app.</string>
     <string name="purchase_dialog_dismiss">Start using</string>
@@ -357,8 +358,8 @@
 
     <string name="theme">THEME</string>
     <string name="app_theme">App theme</string>
-    <string name="darker_than_night">Darker than night</string>
-    <string name="brighter_than_sun">Brighter than sun</string>
+    <string name="dark_mode">Dark</string>
+    <string name="light_mode">Light</string>
     <string name="follow_system">Follow system</string>
     <string name="amoled_black">Pure black</string>
     <string name="amoled_black_desc">Use black color on background in dark mode</string>

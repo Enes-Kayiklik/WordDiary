@@ -11,8 +11,6 @@ sealed class FolderListEvent {
     data class OnFavorite(val id: Int, val isFavorite: Boolean) : FolderListEvent()
     data class OnShowDialog(val type: ListsDialogType) : FolderListEvent()
     data class AddWordToFolder(val id: Int) : FolderListEvent()
-
     data class OnAdEvent(val startAd: Boolean) : FolderListEvent()
-
     data class OnGoogleLogin(val account: GoogleSignInAccount) : FolderListEvent()
 }

@@ -2,12 +2,8 @@ package com.eneskayiklik.word_diary.core.ui.components
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.animateColorAsState
-import androidx.compose.animation.core.CubicBezierEasing
 import androidx.compose.animation.core.FastOutLinearInEasing
-import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.spring
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
@@ -31,8 +27,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SearchBarColors
@@ -66,6 +62,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.util.lerp
 import androidx.compose.ui.zIndex
+import com.eneskayiklik.word_diary.core.util.getDefaultAnimationSpec
 import kotlin.math.max
 import kotlin.math.min
 
@@ -93,10 +90,7 @@ fun StatusSearchBar(
 ) {
     val animationProgress: Float by animateFloatAsState(
         targetValue = if (active) 1f else 0f,
-        animationSpec = tween(
-            durationMillis = 400,
-            easing = CubicBezierEasing(0.4f, 0.0f, 0.2f, 1.0f),
-        )
+        animationSpec = getDefaultAnimationSpec(500), label = "search_bar_animation"
     )
 
     val defaultInputFieldShape = SearchBarDefaults.inputFieldShape
@@ -150,7 +144,8 @@ fun StatusSearchBar(
             MaterialTheme.colorScheme.surfaceColorAtElevation(3.dp),
             FastOutLinearInEasing.transform(fraction)
         ),
-        animationSpec = spring(stiffness = Spring.StiffnessMediumLow)
+        animationSpec = getDefaultAnimationSpec(500),
+        label = "search_bar_color_animation"
     )
 
     BoxWithConstraints(
@@ -209,7 +204,7 @@ fun StatusSearchBar(
 
                 if (animationProgress > 0) {
                     Column(Modifier.alpha(animationProgress)) {
-                        Divider(color = colors.dividerColor)
+                        HorizontalDivider(color = colors.dividerColor)
                         content()
                     }
                 }
@@ -263,7 +258,7 @@ private fun SearchBarInputField(
         cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
         interactionSource = interactionSource,
         decorationBox = @Composable { innerTextField ->
-            TextFieldDefaults.TextFieldDecorationBox(
+            TextFieldDefaults.DecorationBox(
                 value = query,
                 innerTextField = innerTextField,
                 enabled = enabled,
@@ -283,7 +278,7 @@ private fun SearchBarInputField(
                 },
                 shape = SearchBarDefaults.inputFieldShape,
                 colors = colors,
-                contentPadding = TextFieldDefaults.textFieldWithoutLabelPadding(),
+                contentPadding = TextFieldDefaults.contentPaddingWithoutLabel(),
                 container = {},
             )
         }

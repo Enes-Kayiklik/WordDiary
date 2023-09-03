@@ -7,6 +7,7 @@ import android.os.Build
 import androidx.core.content.ContextCompat
 import com.adapty.Adapty
 import com.adapty.utils.AdaptyResult
+import com.eneskayiklik.word_diary.core.ad_manager.AdManager
 import com.eneskayiklik.word_diary.core.alarm_manager.AlarmReceiver
 import com.google.android.gms.ads.MobileAds
 import com.google.firebase.analytics.ktx.analytics
@@ -34,10 +35,13 @@ class WordDiaryApp : Application() {
             when (result) {
                 is AdaptyResult.Success -> {
                     hasPremium = result.value.accessLevels["premium"]?.isActive == true
+                    AdManager.createAdManager(this)
                 }
 
                 is AdaptyResult.Error -> Unit
             }
+        } else {
+            AdManager.createAdManager(this)
         }
     }
 
@@ -59,6 +63,6 @@ class WordDiaryApp : Application() {
     }
 
     companion object {
-        var hasPremium: Boolean = BuildConfig.DEBUG
+        var hasPremium: Boolean = false
     }
 }

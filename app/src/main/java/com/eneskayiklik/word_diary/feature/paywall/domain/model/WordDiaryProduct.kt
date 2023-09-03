@@ -1,11 +1,14 @@
 package com.eneskayiklik.word_diary.feature.paywall.domain.model
 
+import androidx.annotation.StringRes
 import com.adapty.models.AdaptyPaywallProduct
 import com.adapty.models.AdaptyPeriodUnit
+import com.eneskayiklik.word_diary.R
 import java.math.BigDecimal
 
 data class WordDiaryProduct(
     val currencySymbol: String,
+    val currencyCode: String,
     val periodUnit: AdaptyPeriodUnit,
     val numberOfUnits: Int,
     val period: String,
@@ -23,6 +26,13 @@ data class WordDiaryProduct(
 
     val readablePrice = "$currencySymbol${price}"
     val readablePerWeek = "$currencySymbol${perWeek}"
+
+    val readableWeek = "$currencyCode $perWeek"
+
+    @StringRes
+    val continueButtonTitle =
+        if (periodUnit == AdaptyPeriodUnit.MONTH && numberOfUnits == 1) R.string.paywall_continue
+        else R.string.paywall_free_trial
 }
 
 fun AdaptyPaywallProduct.toWordDiaryProduct() = WordDiaryProduct(
@@ -32,5 +42,6 @@ fun AdaptyPaywallProduct.toWordDiaryProduct() = WordDiaryProduct(
     numberOfUnits = subscriptionPeriod?.numberOfUnits ?: 0,
     freeTrialPeriod = freeTrialPeriod?.unit ?: AdaptyPeriodUnit.UNKNOWN,
     currencySymbol = currencySymbol,
+    currencyCode = currencyCode,
     adaptyProduct = this
 )
