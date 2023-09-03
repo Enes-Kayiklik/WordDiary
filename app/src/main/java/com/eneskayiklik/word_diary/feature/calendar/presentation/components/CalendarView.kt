@@ -1,6 +1,7 @@
 package com.eneskayiklik.word_diary.feature.calendar.presentation.components
 
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -8,6 +9,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -21,8 +23,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.eneskayiklik.word_diary.core.util.getDefaultAnimationSpec
 import com.kizitonwose.calendar.compose.CalendarState
 import com.kizitonwose.calendar.compose.HorizontalCalendar
 import com.kizitonwose.calendar.compose.rememberCalendarState
@@ -71,20 +75,20 @@ fun CalendarView(
                         day == today -> MaterialTheme.colorScheme.primary
                         day.position == DayPosition.MonthDate -> MaterialTheme.colorScheme.onSurface
                         else -> MaterialTheme.colorScheme.onSurface.copy(.3F)
-                    }
+                    }, label = "calendar_text_color",
+                    animationSpec = getDefaultAnimationSpec()
                 )
 
-                val backgroundColor by animateColorAsState(
-                    targetValue = if (day == selectedDay()) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.primary.copy(
-                        0F
-                    )
+                val scaleAnim by animateFloatAsState(
+                    targetValue = if (day == selectedDay()) 1F else 0F,
+                    label = "calendar_background_color",
+                    animationSpec = getDefaultAnimationSpec()
                 )
 
                 Box(modifier = Modifier
                     .align(Alignment.Center)
                     .size(36.dp)
                     .clip(MaterialTheme.shapes.medium)
-                    .background(backgroundColor)
                     .clickable(
                         day.position == DayPosition.MonthDate,
                         onClick = {
@@ -92,6 +96,13 @@ fun CalendarView(
                         }
                     ), contentAlignment = Alignment.Center)
                 {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .clip(MaterialTheme.shapes.medium)
+                            .scale(scaleAnim)
+                            .background(MaterialTheme.colorScheme.primary)
+                    )
                     Text(
                         text = "${day.date.dayOfMonth}",
                         textAlign = TextAlign.Center,

@@ -78,7 +78,7 @@ fun StatisticsScreen(
 
     OnLifecycleEvent { _, event ->
         when (event) {
-            Lifecycle.Event.ON_RESUME -> viewModel.onAdEvent(true)
+            Lifecycle.Event.ON_START -> viewModel.onAdEvent(true)
             Lifecycle.Event.ON_PAUSE -> viewModel.onAdEvent(false)
             else -> Unit
         }
@@ -192,7 +192,10 @@ fun StatisticsScreen(
                                 MaterialTheme.colorScheme
                                     .surfaceColorAtElevation(12.dp)
                             ),
-                        nativeAd = state.nativeAd,
+                        nativeAd = state.nativeAd.nativeAd,
+                        onVisibleOnScreen = {
+                            viewModel.onAdShown(state.nativeAd.id)
+                        },
                         onRemoveAds = {
                             navigator.navigate(PaywallScreenDestination)
                         }

@@ -16,7 +16,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 @Composable
 fun SelectedIndicator(
     modifier: Modifier = Modifier,
-    backgroundColor: Color = MaterialTheme.colorScheme.primary,
+    backgroundColor: Color = MaterialTheme.colorScheme.surfaceContainerHigh,
     icon: ImageVector = Icons.Outlined.Done
 ) {
     Box(modifier = modifier.background(backgroundColor), contentAlignment = Alignment.Center) {

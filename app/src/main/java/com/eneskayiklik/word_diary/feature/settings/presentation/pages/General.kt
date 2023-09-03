@@ -84,7 +84,8 @@ fun GeneralPage(
                 headlineContent = {
                     Text(text = stringResource(id = R.string.app_language))
                 }, supportingContent = {
-                    Text(text = prefs.appLanguage.readable)
+                    val textRes = prefs.appLanguage.stringRes
+                    Text(text = if (textRes != null) stringResource(id = textRes) else prefs.appLanguage.readable)
                 }, leadingContent = {
                     Icon(
                         imageVector = Icons.Outlined.Language,

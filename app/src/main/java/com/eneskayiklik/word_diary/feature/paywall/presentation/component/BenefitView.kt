@@ -25,8 +25,12 @@ fun BenefitView(
         Icon(
             imageVector = startIcon,
             contentDescription = null,
-            tint = MaterialTheme.colorScheme.primary
+            tint = MaterialTheme.colorScheme.onSurfaceVariant
         )
-        Text(text = text, style = MaterialTheme.typography.titleSmall)
+        Text(
+            text = text,
+            style = MaterialTheme.typography.titleSmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
     }
 }

@@ -17,7 +17,7 @@
     <string name="dialog_continue">Devam et</string>
     <string name="dialog_save">Kaydet</string>
     <string name="delete_confirm">Sil</string>
-    <string name="dialog_ok">TAMAM</string>
+    <string name="dialog_ok">Tamam</string>
     <string name="close">Kapat</string>
     <string name="dialog_grant_permission">İzin ver</string>
     <string name="dialog_pick">Seç</string>
@@ -34,7 +34,7 @@
     <string name="hour_format">%s sa</string>
     <string name="day_format">%s gün</string>
 
-    <string name="week">hafta</string>
+    <string name="week">Hafta</string>
 
     <!-- Onboarding -->
     <string name="previous">Önceki</string>
@@ -176,7 +176,8 @@
     <string name="empty_study_session">Görünüşe göre bugün herhangi bir çalışma oturumunuz yok</string>
 
     <!-- Paywall -->
-    <string name="premium">Premium</string>
+    <string name="premium">Premium\'a Yükselt</string>
+    <string name="unlock_all_features">Tüm özellikleri aç</string>
     <string name="paywall_title">Bir abonelik planı seçerek Word Diary\'nin tüm potansiyelini ortaya çıkarın</string>
     <string name="unlimited_auto_translation">Sınırsız otomatik çeviri</string>
     <string name="google_drive_backup">Google Drive yedekleme</string>
@@ -185,7 +186,7 @@
     <string name="subscription_renews_automatically">Abonelik otomatik olarak yenilenir, istediğiniz zaman iptal edebilirsiniz</string>
     <string name="by_selecting_continue">"Devam" ile devam etmeyi seçtiğinizde, ödemeniz Google Play hesabınızdan çekilecek ve Google Play Store ayarları aracılığıyla iptal edilmediği sürece abonelik aynı süre ve ücret için otomatik olarak yenilenecektir. Devam\'ı seçtiğinizde Şartlarımızı kabul ettiğiniz onaylanmış olur.</string>
     <string name="paywall_continue">Devam</string>
-    <string name="start_free_trial">Ücretsiz deneme başlat</string>
+    <string name="paywall_free_trial">Ücretsiz dene</string>
     <string name="purchase_dialog_title">Satın Alma Başarılı!</string>
     <string name="purchase_dialog_desc">Premium paketimize yükseltme yaptığınız için teşekkür ederiz. Artık hizmetimizle ilgili deneyiminizi geliştirecek özel özelliklere ve avantajlara erişiminiz var. Uygulamamızı kullanmanın keyfini çıkarın.</string>
     <string name="purchase_dialog_dismiss">Kullanmaya başla</string>
@@ -356,8 +357,8 @@
 
     <string name="theme">TEMA</string>
     <string name="app_theme">Uygulama teması</string>
-    <string name="darker_than_night">Geceden daha karanlık</string>
-    <string name="brighter_than_sun">Güneşten daha parlak</string>
+    <string name="dark_mode">Karanlık</string>
+    <string name="light_mode">Aydınlık</string>
     <string name="follow_system">Sistemi takip et</string>
     <string name="amoled_black">Sadece siyah</string>
     <string name="amoled_black_desc">Karanlık modda siyah arkaplan</string>

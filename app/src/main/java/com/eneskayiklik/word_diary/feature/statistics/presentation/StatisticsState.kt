@@ -3,12 +3,12 @@ package com.eneskayiklik.word_diary.feature.statistics.presentation
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Stable
 import com.eneskayiklik.word_diary.R
+import com.eneskayiklik.word_diary.core.ad_manager.WordbookAd
 import com.github.mikephil.charting.data.BarEntry
-import com.google.android.gms.ads.nativead.NativeAd
 
 @Stable
 data class StatisticsState(
-    val nativeAd: NativeAd? = null,
+    val nativeAd: WordbookAd? = null,
     val todayNewWordCount: Int = 0,
     val todayStudyTime: String = "",
     @StringRes val todayStudyTimeFormatter: Int = R.string.minute_format,

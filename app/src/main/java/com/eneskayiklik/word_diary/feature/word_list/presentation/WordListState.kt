@@ -2,10 +2,10 @@ package com.eneskayiklik.word_diary.feature.word_list.presentation
 
 import androidx.annotation.StringRes
 import com.eneskayiklik.word_diary.R
+import com.eneskayiklik.word_diary.core.ad_manager.WordbookAd
 import com.eneskayiklik.word_diary.core.data_store.data.SwipeAction
 import com.eneskayiklik.word_diary.core.database.model.FolderWithWords
 import com.eneskayiklik.word_diary.util.extensions.filterIf
-import com.google.android.gms.ads.nativead.NativeAd
 
 data class WordListState(
     val folder: FolderWithWords? = null,
@@ -22,7 +22,7 @@ data class WordListState(
     val sortDirection: WordListSortDirection = WordListSortDirection.Desc,
     val swipeAction: SwipeAction = SwipeAction.SPEECH_LOUD,
     val dialogType: WordListDialogType = WordListDialogType.NONE,
-    val nativeAd: NativeAd? = null
+    val nativeAd: WordbookAd? = null
 ) {
     val showEmptyLayout = folder?.words.isNullOrEmpty()
     val isLoading = folder == null

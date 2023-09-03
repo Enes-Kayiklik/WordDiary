@@ -12,7 +12,6 @@
             android:layout_width="match_parent"
             android:layout_height="176dp"
             app:cardBackgroundColor="#00FFFFFF"
-            app:cardCornerRadius="12dp"
             app:cardElevation="0dp">
 
             <com.google.android.gms.ads.nativead.MediaView

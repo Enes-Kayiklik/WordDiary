@@ -6,7 +6,7 @@ import com.eneskayiklik.word_diary.feature.paywall.domain.model.WordDiaryProduct
 sealed class PaywallEvent {
 
     data class OnShowDialog(val type: PaywallDialog) : PaywallEvent()
-    data class OnMakePurchase(val context: Context) : PaywallEvent()
-    data class OnSelectProduct(val product: WordDiaryProduct) : PaywallEvent()
+    data class OnMakePurchase(val context: Context, val product: WordDiaryProduct) : PaywallEvent()
     object OnRestore : PaywallEvent()
+    object OnSeeOtherOptions : PaywallEvent()
 }

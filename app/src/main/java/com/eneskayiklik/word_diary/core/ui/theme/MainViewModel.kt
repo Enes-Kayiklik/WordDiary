@@ -1,17 +1,18 @@
 package com.eneskayiklik.word_diary.core.ui.theme
 
 import android.app.Application
-import android.os.Build
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.eneskayiklik.word_diary.BuildConfig
+import com.eneskayiklik.word_diary.core.ad_manager.AdManager
 import com.eneskayiklik.word_diary.core.data.Result
 import com.eneskayiklik.word_diary.core.data_store.data.UserLanguage
 import com.eneskayiklik.word_diary.core.data_store.domain.UserPreferenceRepository
 import com.eneskayiklik.word_diary.core.domain.use_case.InitUseCase
 import com.eneskayiklik.word_diary.core.util.UiEvent
 import com.eneskayiklik.word_diary.feature.destinations.OnboardingScreenDestination
+import com.eneskayiklik.word_diary.feature.destinations.PaywallScreenDestination
 import com.eneskayiklik.word_diary.feature.destinations.UpdateScreenDestination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -48,14 +49,10 @@ class MainViewModel @Inject constructor(
     private fun waitForInitialData() = viewModelScope.launch {
         val data = userPreferenceRepository.userData.first()
 
-        /*if (data.themePrefs.extractWallpaperColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) userPreferenceRepository.setColorFromWallpaper(
-            app
-        )*/
-        //else if (data.themePrefs.randomColor) userPreferenceRepository.setRandomColor()
-
-        if (data.userLanguage == UserLanguage.NOT_SPECIFIED || data.showOnboarding) _event.emit(
-            UiEvent.OnNavigate(OnboardingScreenDestination)
-        )
+        if (data.userLanguage == UserLanguage.NOT_SPECIFIED || data.showOnboarding) {
+            _event.emit(UiEvent.OnNavigate(PaywallScreenDestination))
+            _event.emit(UiEvent.OnNavigate(OnboardingScreenDestination))
+        }
 
         getConfig()
     }

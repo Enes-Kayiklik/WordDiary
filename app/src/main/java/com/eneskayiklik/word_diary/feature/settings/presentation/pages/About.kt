@@ -6,6 +6,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
@@ -94,11 +95,13 @@ fun AboutPage(
                         )
                     }
                 },
-                modifier = Modifier.border(
-                    width = 1.dp,
-                    color = MaterialTheme.colorScheme.outline,
-                    shape = MaterialTheme.shapes.medium
-                ).padding(vertical = 4.dp)
+                modifier = Modifier
+                    .border(
+                        width = 1.dp,
+                        color = MaterialTheme.colorScheme.outline,
+                        shape = MaterialTheme.shapes.medium
+                    )
+                    .padding(vertical = 4.dp)
             )
         }
 
@@ -172,78 +175,89 @@ fun AboutPage(
         }
 
         item {
-            ListItem(
-                headlineContent = {
-                    Text(text = stringResource(id = R.string.destination_licenses))
-                },
-                leadingContent = {
-                    Icon(
-                        imageVector = Icons.Outlined.LocalLibrary,
-                        contentDescription = null,
-                    )
-                }, trailingContent = {
-                    Icon(
-                        imageVector = Icons.Outlined.ChevronRight,
-                        contentDescription = null,
-                    )
-                }, colors = ListItemDefaults.colors(
-                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = .5F),
-                    headlineColor = MaterialTheme.colorScheme.onSurface,
-                    supportingColor = MaterialTheme.colorScheme.onSurface
-                ), modifier = Modifier
-                    .clip(MaterialTheme.shapes.medium)
-                    .clickable { navigator.navigate(LicensesScreenDestination) }
-            )
-        }
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(2.dp)
+            ) {
+                ListItem(
+                    headlineContent = {
+                        Text(text = stringResource(id = R.string.destination_licenses))
+                    },
+                    leadingContent = {
+                        Icon(
+                            imageVector = Icons.Outlined.LocalLibrary,
+                            contentDescription = null,
+                        )
+                    }, trailingContent = {
+                        Icon(
+                            imageVector = Icons.Outlined.ChevronRight,
+                            contentDescription = null,
+                        )
+                    }, colors = ListItemDefaults.colors(
+                        containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = .5F),
+                        headlineColor = MaterialTheme.colorScheme.onSurface,
+                        supportingColor = MaterialTheme.colorScheme.onSurface
+                    ), modifier = Modifier
+                        .clip(
+                            MaterialTheme.shapes.medium.copy(
+                                bottomStart = MaterialTheme.shapes.extraSmall.bottomStart,
+                                bottomEnd = MaterialTheme.shapes.extraSmall.bottomEnd
+                            )
+                        )
+                        .clickable { navigator.navigate(LicensesScreenDestination) }
+                )
 
-        item {
-            ListItem(
-                headlineContent = {
-                    Text(text = stringResource(id = R.string.privacy_policy))
-                }, leadingContent = {
-                    Icon(
-                        imageVector = Icons.Outlined.Policy,
-                        contentDescription = null,
-                    )
-                }, trailingContent = {
-                    Icon(
-                        imageVector = Icons.Outlined.ChevronRight,
-                        contentDescription = null,
-                    )
-                }, colors = ListItemDefaults.colors(
-                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = .5F),
-                    headlineColor = MaterialTheme.colorScheme.onSurface,
-                    supportingColor = MaterialTheme.colorScheme.onSurface
-                ), modifier = Modifier
-                    .clip(MaterialTheme.shapes.medium)
-                    .clickable {
-                        context.openLink(PRIVACY)
-                    }
-            )
-        }
+                ListItem(
+                    headlineContent = {
+                        Text(text = stringResource(id = R.string.privacy_policy))
+                    }, leadingContent = {
+                        Icon(
+                            imageVector = Icons.Outlined.Policy,
+                            contentDescription = null,
+                        )
+                    }, trailingContent = {
+                        Icon(
+                            imageVector = Icons.Outlined.ChevronRight,
+                            contentDescription = null,
+                        )
+                    }, colors = ListItemDefaults.colors(
+                        containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = .5F),
+                        headlineColor = MaterialTheme.colorScheme.onSurface,
+                        supportingColor = MaterialTheme.colorScheme.onSurface
+                    ), modifier = Modifier
+                        .clip(MaterialTheme.shapes.extraSmall)
+                        .clickable {
+                            context.openLink(PRIVACY)
+                        }
+                )
 
-        item {
-            ListItem(
-                headlineContent = {
-                    Text(text = stringResource(id = R.string.terms_conditions))
-                }, leadingContent = {
-                    Icon(
-                        imageVector = Icons.Outlined.Description,
-                        contentDescription = null,
-                    )
-                }, trailingContent = {
-                    Icon(
-                        imageVector = Icons.Outlined.ChevronRight,
-                        contentDescription = null,
-                    )
-                }, colors = ListItemDefaults.colors(
-                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = .5F),
-                    headlineColor = MaterialTheme.colorScheme.onSurface,
-                    supportingColor = MaterialTheme.colorScheme.onSurface
-                ), modifier = Modifier
-                    .clip(MaterialTheme.shapes.medium)
-                    .clickable { context.openLink(TERMS) }
-            )
+                ListItem(
+                    headlineContent = {
+                        Text(text = stringResource(id = R.string.terms_conditions))
+                    }, leadingContent = {
+                        Icon(
+                            imageVector = Icons.Outlined.Description,
+                            contentDescription = null,
+                        )
+                    }, trailingContent = {
+                        Icon(
+                            imageVector = Icons.Outlined.ChevronRight,
+                            contentDescription = null,
+                        )
+                    }, colors = ListItemDefaults.colors(
+                        containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = .5F),
+                        headlineColor = MaterialTheme.colorScheme.onSurface,
+                        supportingColor = MaterialTheme.colorScheme.onSurface
+                    ), modifier = Modifier
+                        .clip(
+                            MaterialTheme.shapes.medium.copy(
+                                topStart = MaterialTheme.shapes.extraSmall.topStart,
+                                topEnd = MaterialTheme.shapes.extraSmall.topEnd
+                            )
+                        )
+                        .clickable { context.openLink(TERMS) }
+                )
+            }
         }
 
         item {

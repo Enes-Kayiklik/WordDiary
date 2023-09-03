@@ -18,6 +18,8 @@ import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.CornerSize
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.ArrowBack
@@ -69,6 +71,7 @@ import com.eneskayiklik.word_diary.feature.folder_list.presentation.component.Em
 import com.eneskayiklik.word_diary.feature.destinations.WordListScreenDestination
 import com.eneskayiklik.word_diary.core.ui.components.ad.MediumNativeAdView
 import com.eneskayiklik.word_diary.core.ui.components.ad.SmallNativeAdView
+import com.eneskayiklik.word_diary.core.ui.components.clipToMaterialShape
 import com.eneskayiklik.word_diary.feature.destinations.PaywallScreenDestination
 import com.eneskayiklik.word_diary.feature.destinations.SettingsScreenDestination
 import com.eneskayiklik.word_diary.feature.folder_list.presentation.component.SingleFolderRow
@@ -112,7 +115,7 @@ fun ListsScreen(
 
     OnLifecycleEvent { _, event ->
         when (event) {
-            Lifecycle.Event.ON_RESUME -> viewModel.onEvent(FolderListEvent.OnAdEvent(true))
+            Lifecycle.Event.ON_START -> viewModel.onEvent(FolderListEvent.OnAdEvent(true))
             Lifecycle.Event.ON_PAUSE -> viewModel.onEvent(FolderListEvent.OnAdEvent(false))
             else -> Unit
         }
@@ -248,7 +251,8 @@ fun ListsScreen(
                             key = "search_ad"
                         ) {
                             SmallNativeAdView(
-                                nativeAd = state.searchAd,
+                                nativeAd = state.searchAd.nativeAd,
+                                onAdShownOnScreen = { viewModel.onEvent(UiEvent.OnAdShown(state.searchAd.id)) },
                                 modifier = Modifier.fillMaxWidth()
                             )
                             HorizontalDivider(modifier = Modifier.padding(top = 16.dp))
@@ -321,7 +325,7 @@ fun ListsScreen(
                     end = 16.dp,
                     top = 8.dp
                 ) + WindowInsets.navigationBars.asPaddingValues(),
-                verticalArrangement = Arrangement.spacedBy(12.dp),
+                verticalArrangement = Arrangement.spacedBy(2.dp),
                 modifier = Modifier.fillMaxSize(),
                 state = lazyListState
             ) {
@@ -330,7 +334,12 @@ fun ListsScreen(
                         SingleFolderRow(folderWithCount = folder, modifier = Modifier
                             .animateItemPlacement()
                             .fillMaxWidth()
-                            .clip(MaterialTheme.shapes.medium)
+                            .clipToMaterialShape(
+                                index = index,
+                                lastIndex = state.folders.lastIndex,
+                                smallShape = MaterialTheme.shapes.extraSmall,
+                                largeShape = MaterialTheme.shapes.medium
+                            )
                             .background(
                                 MaterialTheme.colorScheme
                                     .surfaceColorAtElevation(12.dp)
@@ -374,12 +383,20 @@ fun ListsScreen(
                             MediumNativeAdView(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .clip(MaterialTheme.shapes.medium)
+                                    .clipToMaterialShape(
+                                        index = 1,
+                                        lastIndex = state.folders.lastIndex + 1,
+                                        smallShape = MaterialTheme.shapes.extraSmall,
+                                        largeShape = MaterialTheme.shapes.medium
+                                    )
                                     .background(
                                         MaterialTheme.colorScheme
                                             .surfaceColorAtElevation(12.dp)
                                     ),
-                                nativeAd = state.nativeAd,
+                                nativeAd = state.nativeAd.nativeAd,
+                                onVisibleOnScreen = {
+                                    viewModel.onEvent(UiEvent.OnAdShown(state.nativeAd.id))
+                                },
                                 onRemoveAds = {
                                     viewModel.onEvent(UiEvent.OnNavigate(PaywallScreenDestination))
                                 }

@@ -5,6 +5,8 @@ import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -19,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.eneskayiklik.word_diary.core.util.getDefaultAnimationSpec
 
 @Composable
 fun EmptyDataView(
@@ -34,7 +37,7 @@ fun EmptyDataView(
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically)
+        verticalArrangement = Arrangement.Center
     ) {
         Icon(
             imageVector = icon,
@@ -42,21 +45,24 @@ fun EmptyDataView(
             modifier = Modifier.size(96.dp),
             tint = MaterialTheme.colorScheme.primary
         )
+        Spacer(modifier = Modifier.height(16.dp))
         Text(
             text = title,
             style = MaterialTheme.typography.headlineMedium,
             textAlign = TextAlign.Center
         )
+        Spacer(modifier = Modifier.height(16.dp))
         Text(
             text = subtitle,
             style = MaterialTheme.typography.bodyMedium,
             textAlign = TextAlign.Center,
-            modifier = Modifier.padding(horizontal = 16.dp).padding(bottom = 16.dp)
+            modifier = Modifier.padding(horizontal = 16.dp)
         )
+        Spacer(modifier = Modifier.height(16.dp))
         AnimatedVisibility(
             visible = showAction,
-            enter = expandVertically(),
-            exit = shrinkVertically()
+            enter = expandVertically(getDefaultAnimationSpec()),
+            exit = shrinkVertically(getDefaultAnimationSpec())
         ) {
             ExtendedFloatingActionButton(
                 onClick = onAction,

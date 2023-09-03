@@ -86,8 +86,8 @@ enum class AppLanguage(
 }
 
 enum class AppTheme(@StringRes val title: Int) {
-    DARK(R.string.darker_than_night),
-    LIGHT(R.string.brighter_than_sun),
+    DARK(R.string.dark_mode),
+    LIGHT(R.string.light_mode),
     FOLLOW_SYSTEM(R.string.follow_system)
 }
 
