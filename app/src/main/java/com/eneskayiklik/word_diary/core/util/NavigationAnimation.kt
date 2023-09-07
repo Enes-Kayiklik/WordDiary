@@ -20,7 +20,7 @@ import com.eneskayiklik.word_diary.feature.destinations.ListsScreenDestination
 import com.eneskayiklik.word_diary.feature.destinations.StatisticsScreenDestination
 import com.ramcosta.composedestinations.spec.DestinationStyle
 
-private const val SLIDE_ANIM_DIVIDE_OFFSET = 8
+private const val SLIDE_ANIM_DIVIDE_OFFSET = 3
 
 fun <T> getDefaultAnimationSpec(duration: Int = 300): TweenSpec<T> {
     return tween(
@@ -31,14 +31,14 @@ fun <T> getDefaultAnimationSpec(duration: Int = 300): TweenSpec<T> {
 
 fun <T> getDefaultEnterAnim(duration: Int = 400): TweenSpec<T> {
     return tween(
-        easing = CubicBezierEasing(.05f, .7f, .1f, 1f),
+        easing = CubicBezierEasing(.05F, .7F, .1F, 1F),
         durationMillis = duration
     )
 }
 
-fun <T> getDefaultExitAnim(duration: Int = 200): TweenSpec<T> {
+fun <T> getDefaultExitAnim(duration: Int = 300): TweenSpec<T> {
     return tween(
-        easing = CubicBezierEasing(.3f, 0f, .8f, .15f),
+        easing = CubicBezierEasing(.3F, 0F, .8F, .15F),
         durationMillis = duration
     )
 }
@@ -98,12 +98,18 @@ fun popSlideOutAnim(): ExitTransition = defaultFadeOutAnim() + slideOutHorizonta
     animationSpec = getDefaultExitAnim()
 ) { it.getPosition() }
 
-fun defaultFadeInAnim(): EnterTransition = fadeIn(
-    animationSpec = getDefaultEnterAnim(150)
+fun defaultFadeInAnim(duration: Int = 250): EnterTransition = fadeIn(
+    animationSpec = tween(
+        durationMillis = duration,
+        easing = CubicBezierEasing(.4f, 0f, .2f, 1f)
+    )
 )
 
-fun defaultFadeOutAnim(): ExitTransition = fadeOut(
-    animationSpec = getDefaultExitAnim(150)
+fun defaultFadeOutAnim(duration: Int = 250): ExitTransition = fadeOut(
+    animationSpec = tween(
+        durationMillis = duration,
+        easing = CubicBezierEasing(.4f, 0f, .2f, 1f)
+    )
 )
 
 private fun Int.getPosition() = div(SLIDE_ANIM_DIVIDE_OFFSET)
